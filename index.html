@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AidBio — AI & Data Science for Life Sciences and Agritech</title>
+  <meta name="description" content="AidBio delivers end-to-end data science, machine learning, and agentic AI workflows for life sciences, biotech, and agritech teams. Led by Cleverson Matiolli, PhD." />
+
+  <!-- Fonts: DM Serif Display (headlines) + DM Sans (body) -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet" />
+
+  <style>
+    /* ─── TOKENS ─────────────────────────────────────────────── */
+    :root {
+      --bg:          #f4f3ef;
+      --bg-alt:      #eceae4;
+      --surface:     #ffffff;
+      --ink:         #161410;
+      --ink-mid:     #3d3b36;
+      --ink-soft:    #7a7670;
+      --line:        #d9d6ce;
+
+      --hero-bg:     #0e1e18;
+      --hero-mid:    #142c22;
+      --hero-rim:    #1e4030;
+
+      --teal:        #0fada8;
+      --teal-dark:   #0a8580;
+      --green:       #2dba72;
+
+      --radius-sm:   10px;
+      --radius-md:   18px;
+      --radius-lg:   28px;
+      --radius-xl:   40px;
+
+      --shadow-card: 0 2px 12px rgba(20,18,14,0.07), 0 8px 28px rgba(20,18,14,0.05);
+      --shadow-lift: 0 4px 20px rgba(20,18,14,0.1), 0 16px 40px rgba(20,18,14,0.07);
+
+      --maxw: 1160px;
+      --nav-h: 68px;
+
+      --ease: cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    /* ─── RESET ──────────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: "DM Sans", system-ui, sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.65;
+      -webkit-font-smoothing: antialiased;
+    }
+    img { max-width: 100%; display: block; }
+    a { color: inherit; text-decoration: none; }
+
+    /* ─── LAYOUT ─────────────────────────────────────────────── */
+    .wrap {
+      width: min(calc(100% - 2.4rem), var(--maxw));
+      margin-inline: auto;
+    }
+
+    /* ─── SKIP LINK ──────────────────────────────────────────── */
+    .skip {
+      position: absolute;
+      left: -9999px;
+      top: 1rem;
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 0.6rem 1rem;
+      font-size: 0.9rem;
+      z-index: 200;
+    }
+    .skip:focus { left: 1rem; }
+
+    /* ─── NAV ────────────────────────────────────────────────── */
+    .nav-bar {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      height: var(--nav-h);
+      display: flex;
+      align-items: center;
+      background: rgba(244, 243, 239, 0.88);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+      width: 100%;
+    }
+
+    .brand {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: "DM Serif Display", serif;
+      font-size: 1.25rem;
+      letter-spacing: -0.01em;
+      color: var(--ink);
+    }
+
+    .brand-icon {
+      width: 34px;
+      height: 34px;
+      border-radius: var(--radius-sm);
+      background: var(--hero-bg);
+      display: grid;
+      place-items: center;
+      overflow: hidden;
+      flex-shrink: 0;
+    }
+
+    .brand-icon img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+    }
+
+    /* SVG fallback shown if image fails / not yet placed */
+    .brand-mark {
+      width: 18px;
+      height: 18px;
+      fill: none;
+      stroke: var(--teal);
+      stroke-width: 1.8;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 0.2rem;
+      list-style: none;
+    }
+
+    .nav-links a {
+      padding: 0.45rem 0.85rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.93rem;
+      font-weight: 500;
+      color: var(--ink-mid);
+      transition: color 0.18s, background 0.18s;
+    }
+
+    .nav-links a:hover {
+      color: var(--ink);
+      background: var(--bg-alt);
+    }
+
+    .nav-cta {
+      padding: 0.55rem 1.1rem !important;
+      background: var(--ink) !important;
+      color: #fff !important;
+      border-radius: var(--radius-sm) !important;
+      font-weight: 600 !important;
+      transition: background 0.2s, transform 0.2s !important;
+    }
+
+    .nav-cta:hover {
+      background: var(--hero-rim) !important;
+      transform: translateY(-1px);
+    }
+
+    /* Mobile burger */
+    .nav-toggle {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      width: 28px;
+      cursor: pointer;
+      background: none;
+      border: none;
+      padding: 4px;
+      border-radius: 6px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      height: 2px;
+      background: var(--ink);
+      border-radius: 2px;
+      transition: transform 0.3s var(--ease), opacity 0.3s;
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+    /* ─── HERO ───────────────────────────────────────────────── */
+    .hero {
+      padding: 3.5rem 0 2.5rem;
+    }
+
+    .hero-shell {
+      background:
+        radial-gradient(ellipse 70% 60% at 80% 20%, rgba(15,173,168,0.13) 0%, transparent 55%),
+        radial-gradient(ellipse 50% 50% at 15% 85%, rgba(45,186,114,0.10) 0%, transparent 50%),
+        linear-gradient(155deg, var(--hero-bg) 0%, var(--hero-mid) 55%, var(--hero-rim) 100%);
+      border-radius: var(--radius-xl);
+      padding: clamp(2rem, 4vw, 3.5rem) clamp(1.5rem, 4vw, 3.5rem);
+      color: #f0f7f4;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* subtle grid texture overlay */
+    .hero-shell::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+      background-size: 32px 32px;
+      pointer-events: none;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1fr 420px;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+    }
+
+    .hero-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.38rem 0.75rem;
+      border-radius: 999px;
+      border: 1px solid rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.08);
+      font-size: 0.82rem;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: rgba(240,247,244,0.8);
+      margin-bottom: 1.5rem;
+      backdrop-filter: blur(6px);
+    }
+
+    .hero-label::before {
+      content: "";
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--green);
+      flex-shrink: 0;
+    }
+
+    .hero h1 {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(2.6rem, 5.5vw, 4.8rem);
+      line-height: 1.0;
+      letter-spacing: -0.025em;
+      color: #f0f7f4;
+      margin-bottom: 1.35rem;
+    }
+
+    .hero h1 em {
+      font-style: italic;
+      color: var(--teal);
+    }
+
+    .hero-desc {
+      font-size: 1.05rem;
+      color: rgba(240,247,244,0.72);
+      max-width: 52ch;
+      line-height: 1.7;
+      margin-bottom: 2rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 0.85rem;
+      flex-wrap: wrap;
+      margin-bottom: 2.2rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.82rem 1.35rem;
+      border-radius: var(--radius-sm);
+      font-size: 0.95rem;
+      font-weight: 600;
+      transition: transform 0.2s var(--ease), box-shadow 0.2s var(--ease), background 0.2s;
+      border: none;
+      cursor: pointer;
+    }
+
+    .btn:hover { transform: translateY(-2px); }
+
+    .btn-primary {
+      background: var(--teal);
+      color: #fff;
+      box-shadow: 0 6px 20px rgba(15,173,168,0.28);
+    }
+
+    .btn-primary:hover {
+      background: var(--teal-dark);
+      box-shadow: 0 10px 28px rgba(15,173,168,0.36);
+    }
+
+    .btn-ghost {
+      background: rgba(255,255,255,0.1);
+      color: rgba(240,247,244,0.88);
+      border: 1px solid rgba(255,255,255,0.18);
+    }
+
+    .btn-ghost:hover { background: rgba(255,255,255,0.16); }
+
+    .hero-proof {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.65rem;
+    }
+
+    .proof-chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      padding: 0.32rem 0.7rem;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.13);
+      border-radius: 999px;
+      font-size: 0.82rem;
+      color: rgba(240,247,244,0.7);
+    }
+
+    /* Hero right panel */
+    .hero-panel {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: var(--radius-lg);
+      backdrop-filter: blur(10px);
+      padding: 1.5rem;
+      display: grid;
+      gap: 0.75rem;
+    }
+
+    .panel-stat {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      padding: 1rem 1.15rem;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius-md);
+      transition: background 0.2s;
+    }
+
+    .panel-stat:hover { background: rgba(255,255,255,0.09); }
+
+    .stat-icon {
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-sm);
+      background: rgba(15,173,168,0.18);
+      display: grid;
+      place-items: center;
+      flex-shrink: 0;
+      font-size: 1.2rem;
+    }
+
+    .stat-text strong {
+      display: block;
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #f0f7f4;
+      letter-spacing: -0.01em;
+    }
+
+    .stat-text span {
+      font-size: 0.83rem;
+      color: rgba(240,247,244,0.55);
+    }
+
+    .panel-label {
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      color: rgba(240,247,244,0.38);
+      padding: 0 0.25rem;
+    }
+
+    /* ─── SECTION COMMONS ────────────────────────────────────── */
+    section { padding: 5rem 0; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.78rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--teal-dark);
+      margin-bottom: 0.9rem;
+    }
+
+    .section-h {
+      font-family: "DM Serif Display", serif;
+      font-size: clamp(2rem, 3.5vw, 3rem);
+      line-height: 1.1;
+      letter-spacing: -0.025em;
+      color: var(--ink);
+      margin-bottom: 1rem;
+    }
+
+    .section-sub {
+      font-size: 1.03rem;
+      color: var(--ink-soft);
+      max-width: 62ch;
+      line-height: 1.7;
+    }
+
+    .section-head {
+      margin-bottom: 3rem;
+    }
+
+    /* ─── SERVICES ───────────────────────────────────────────── */
+    #services {
+      background: var(--bg);
+    }
+
+    .services-layout {
+      display: grid;
+      grid-template-columns: 280px 1fr;
+      gap: 3rem;
+      align-items: start;
+    }
+
+    .services-sticky {
+      position: sticky;
+      top: calc(var(--nav-h) + 2rem);
+    }
+
+    .services-grid {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .svc-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1.6rem 1.8rem;
+      box-shadow: var(--shadow-card);
+      transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease), border-color 0.25s;
+    }
+
+    .svc-card:hover {
+      box-shadow: var(--shadow-lift);
+      transform: translateY(-3px);
+      border-color: rgba(15,173,168,0.25);
+    }
+
+    .svc-num {
+      font-family: "DM Serif Display", serif;
+      font-size: 2.4rem;
+      color: var(--line);
+      line-height: 1;
+      margin-bottom: 0.75rem;
+      letter-spacing: -0.04em;
+    }
+
+    .svc-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.55rem;
+    }
+
+    .svc-card p {
+      font-size: 0.95rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    .svc-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+      margin-top: 1rem;
+    }
+
+    .tag {
+      padding: 0.28rem 0.65rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 600;
+      color: var(--ink-mid);
+    }
+
+    /* ─── WORK ───────────────────────────────────────────────── */
+    #work {
+      background: var(--bg-alt);
+    }
+
+    .work-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1.2rem;
+    }
+
+    .work-card {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      padding: 1.6rem 1.8rem;
+      box-shadow: var(--shadow-card);
+      display: flex;
+      flex-direction: column;
+      gap: 0.85rem;
+      transition: box-shadow 0.25s var(--ease), transform 0.25s var(--ease);
+    }
+
+    .work-card:hover {
+      box-shadow: var(--shadow-lift);
+      transform: translateY(-3px);
+    }
+
+    .work-domain {
+      display: inline-block;
+      padding: 0.28rem 0.65rem;
+      background: rgba(15,173,168,0.08);
+      border: 1px solid rgba(15,173,168,0.18);
+      border-radius: 999px;
+      font-size: 0.78rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+      align-self: flex-start;
+    }
+
+    .work-card h3 {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: var(--ink);
+      line-height: 1.3;
+    }
+
+    .work-card p {
+      font-size: 0.94rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      flex: 1;
+    }
+
+    /* ─── PROCESS ────────────────────────────────────────────── */
+    #process {
+      background: var(--bg);
+    }
+
+    .process-grid {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 1px;
+      background: var(--line);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      overflow: hidden;
+      margin-top: 3rem;
+    }
+
+    .process-step {
+      background: var(--surface);
+      padding: 2rem 1.6rem;
+      transition: background 0.2s;
+    }
+
+    .process-step:hover { background: #fafaf8; }
+
+    .step-num {
+      font-family: "DM Serif Display", serif;
+      font-size: 3rem;
+      color: var(--teal);
+      opacity: 0.25;
+      line-height: 1;
+      margin-bottom: 1rem;
+      letter-spacing: -0.04em;
+    }
+
+    .process-step h3 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: 0.55rem;
+      line-height: 1.3;
+    }
+
+    .process-step p {
+      font-size: 0.9rem;
+      color: var(--ink-soft);
+      line-height: 1.6;
+    }
+
+    /* ─── ABOUT / FOUNDER ────────────────────────────────────── */
+    #about {
+      background: var(--hero-bg);
+      color: #f0f7f4;
+      position: relative;
+      overflow: hidden;
+    }
+
+    #about::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(ellipse 60% 60% at 90% 50%, rgba(15,173,168,0.1) 0%, transparent 55%),
+        radial-gradient(ellipse 40% 40% at 10% 80%, rgba(45,186,114,0.07) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 4rem;
+      align-items: center;
+      position: relative;
+    }
+
+    #about .eyebrow { color: var(--teal); }
+
+    #about .section-h {
+      color: #f0f7f4;
+    }
+
+    .about-bio {
+      font-size: 1.05rem;
+      color: rgba(240,247,244,0.72);
+      line-height: 1.75;
+      margin-bottom: 1.5rem;
+    }
+
+    .about-bio strong { color: #f0f7f4; }
+
+    .pub-link {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.72rem 1.25rem;
+      border: 1px solid rgba(255,255,255,0.18);
+      border-radius: var(--radius-sm);
+      font-size: 0.92rem;
+      font-weight: 600;
+      color: rgba(240,247,244,0.85);
+      transition: background 0.2s, border-color 0.2s;
+    }
+
+    .pub-link:hover {
+      background: rgba(255,255,255,0.07);
+      border-color: rgba(255,255,255,0.28);
+    }
+
+    .stack-panel {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-lg);
+      padding: 2rem;
+      backdrop-filter: blur(8px);
+    }
+
+    .stack-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: rgba(240,247,244,0.38);
+      margin-bottom: 1.2rem;
+    }
+
+    .stack-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.5rem;
+    }
+
+    .stack-chip {
+      padding: 0.42rem 0.8rem;
+      background: rgba(255,255,255,0.07);
+      border: 1px solid rgba(255,255,255,0.12);
+      border-radius: 999px;
+      font-size: 0.85rem;
+      font-weight: 500;
+      color: rgba(240,247,244,0.75);
+      transition: background 0.18s, border-color 0.18s;
+    }
+
+    .stack-chip:hover {
+      background: rgba(255,255,255,0.12);
+      border-color: rgba(255,255,255,0.22);
+    }
+
+    .links-row {
+      margin-top: 1.8rem;
+      display: grid;
+      gap: 0.6rem;
+    }
+
+    .ext-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0.85rem 1.1rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.09);
+      border-radius: var(--radius-sm);
+      font-size: 0.9rem;
+      color: rgba(240,247,244,0.75);
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .ext-link:hover {
+      background: rgba(255,255,255,0.08);
+      color: #f0f7f4;
+    }
+
+    .ext-link-arrow {
+      font-size: 0.82rem;
+      color: var(--teal);
+      flex-shrink: 0;
+    }
+
+    /* ─── CONTACT ────────────────────────────────────────────── */
+    #contact {
+      background: var(--bg);
+    }
+
+    .contact-shell {
+      background: var(--surface);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-xl);
+      padding: clamp(2.5rem, 5vw, 4rem);
+      box-shadow: var(--shadow-card);
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+
+    .contact-entry-list {
+      list-style: none;
+      margin-top: 1.5rem;
+      display: grid;
+      gap: 0.55rem;
+    }
+
+    .contact-entry-list li {
+      display: flex;
+      align-items: flex-start;
+      gap: 0.65rem;
+      font-size: 0.95rem;
+      color: var(--ink-mid);
+    }
+
+    .contact-entry-list li::before {
+      content: "→";
+      color: var(--teal-dark);
+      flex-shrink: 0;
+      margin-top: 0.05em;
+    }
+
+    .contact-cta {
+      margin-top: 2rem;
+    }
+
+    .btn-dark {
+      background: var(--ink);
+      color: #fff;
+      box-shadow: 0 4px 14px rgba(20,18,14,0.18);
+    }
+
+    .btn-dark:hover {
+      background: #2a2822;
+      box-shadow: 0 8px 24px rgba(20,18,14,0.24);
+    }
+
+    .contact-links-label {
+      font-size: 0.8rem;
+      font-weight: 700;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--ink-soft);
+      margin-bottom: 1.2rem;
+    }
+
+    .contact-link-row {
+      display: flex;
+      flex-direction: column;
+      gap: 0.7rem;
+    }
+
+    .c-link {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.15rem;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-md);
+      font-size: 0.92rem;
+      color: var(--ink-mid);
+      font-weight: 500;
+      transition: background 0.2s, border-color 0.2s, color 0.2s;
+    }
+
+    .c-link:hover {
+      background: var(--bg-alt);
+      border-color: rgba(15,173,168,0.3);
+      color: var(--ink);
+    }
+
+    .c-link-action {
+      font-size: 0.82rem;
+      font-weight: 700;
+      color: var(--teal-dark);
+    }
+
+    /* ─── FOOTER ─────────────────────────────────────────────── */
+    footer {
+      background: var(--ink);
+      color: rgba(240,247,244,0.55);
+      padding: 2.4rem 0 3rem;
+      font-size: 0.9rem;
+    }
+
+    .footer-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: "DM Serif Display", serif;
+      font-size: 1.05rem;
+      color: rgba(240,247,244,0.7);
+    }
+
+    .footer-brand-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: var(--teal);
+      flex-shrink: 0;
+    }
+
+    .footer-nav {
+      display: flex;
+      gap: 1.5rem;
+      flex-wrap: wrap;
+    }
+
+    .footer-nav a {
+      color: rgba(240,247,244,0.45);
+      transition: color 0.18s;
+    }
+
+    .footer-nav a:hover { color: rgba(240,247,244,0.8); }
+
+    /* ─── SCROLL REVEAL ──────────────────────────────────────── */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.65s var(--ease), transform 0.65s var(--ease);
+      will-change: opacity, transform;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .reveal[data-d="1"] { transition-delay: 0.07s; }
+    .reveal[data-d="2"] { transition-delay: 0.14s; }
+    .reveal[data-d="3"] { transition-delay: 0.21s; }
+    .reveal[data-d="4"] { transition-delay: 0.28s; }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .reveal, .reveal.visible { opacity: 1; transform: none; transition: none; }
+      .btn, .svc-card, .work-card, .panel-stat, .c-link { transition: none; }
+    }
+
+    /* ─── RESPONSIVE ─────────────────────────────────────────── */
+    @media (max-width: 1024px) {
+      .hero-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .hero-panel { display: grid; grid-template-columns: repeat(2, 1fr); }
+      .panel-label { grid-column: 1/-1; }
+      .services-layout { grid-template-columns: 1fr; }
+      .services-sticky { position: static; }
+      .process-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .contact-shell { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; flex-direction: column; gap: 0.25rem; }
+      .nav-links.open {
+        display: flex;
+        position: absolute;
+        top: var(--nav-h);
+        left: 0; right: 0;
+        background: rgba(244,243,239,0.97);
+        backdrop-filter: blur(16px);
+        padding: 1rem 1.2rem 1.5rem;
+        border-bottom: 1px solid var(--line);
+        z-index: 99;
+      }
+      .nav-links.open a { padding: 0.7rem 0.6rem; width: 100%; border-radius: var(--radius-sm); }
+      .nav-toggle { display: flex; }
+      .hero { padding: 2rem 0 1.5rem; }
+      .hero-shell { border-radius: var(--radius-lg); }
+      .hero h1 { font-size: clamp(2.2rem, 8vw, 3.2rem); }
+      .hero-panel { grid-template-columns: 1fr; }
+      .work-grid { grid-template-columns: 1fr; }
+      .process-grid { grid-template-columns: 1fr; }
+      section { padding: 3.5rem 0; }
+    }
+  </style>
+</head>
+<body>
+  <a href="#main" class="skip">Skip to main content</a>
+
+  <!-- ─── NAV ──────────────────────────────────────────────── -->
+  <header class="nav-bar" role="banner">
+    <div class="wrap nav-inner">
+      <a href="#" class="brand" aria-label="AidBio home">
+        <div class="brand-icon">
+          <img src="assets/logo/aidbio_icon.png" alt="" aria-hidden="true" onerror="this.style.display='none'" />
+          <!-- SVG fallback visible only if img fails -->
+          <svg class="brand-mark" viewBox="0 0 24 24" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.8">
+            <circle cx="12" cy="12" r="3"/>
+            <path d="M12 2v3M12 19v3M2 12h3M19 12h3"/>
+            <path d="M5.6 5.6l2.1 2.1M16.3 16.3l2.1 2.1M5.6 18.4l2.1-2.1M16.3 7.7l2.1-2.1"/>
+          </svg>
+        </div>
+        AidBio
+      </a>
+
+      <button class="nav-toggle" aria-label="Toggle navigation" aria-expanded="false" aria-controls="nav-menu">
+        <span></span><span></span><span></span>
+      </button>
+
+      <ul class="nav-links" id="nav-menu" role="list">
+        <li><a href="#services">Services</a></li>
+        <li><a href="#work">Work</a></li>
+        <li><a href="#about">About</a></li>
+        <li><a href="papers.html">Publications</a></li>
+        <li><a href="#contact" class="nav-cta">Get in touch</a></li>
+      </ul>
+    </div>
+  </header>
+
+  <main id="main">
+
+    <!-- ─── HERO ──────────────────────────────────────────────── -->
+    <section class="hero" aria-label="Introduction">
+      <div class="wrap">
+        <div class="hero-shell reveal">
+          <div class="hero-grid">
+
+            <div class="hero-copy">
+              <div class="hero-label">Data Science · Machine Learning · Agentic AI</div>
+
+              <h1>From complex data to<br /><em>decisions that hold</em></h1>
+
+              <p class="hero-desc">
+                AidBio is a focused consultancy led by <strong>Cleverson Matiolli, PhD</strong>.
+                We build end-to-end analytics pipelines, ML models, and intelligent workflows
+                for agro-biotech, life sciences, and applied R&amp;D teams.
+              </p>
+
+              <div class="hero-actions">
+                <a href="#contact" class="btn btn-primary">Start a project</a>
+                <a href="#work" class="btn btn-ghost">See selected work</a>
+              </div>
+
+              <div class="hero-proof">
+                <span class="proof-chip">15+ peer-reviewed papers</span>
+                <span class="proof-chip">10+ years research &amp; industry</span>
+                <span class="proof-chip">EDA → models → deliverables</span>
+              </div>
+            </div>
+
+            <div class="hero-panel" aria-label="Capability snapshot">
+              <div class="panel-label">What AidBio delivers</div>
+
+              <div class="panel-stat">
+                <div class="stat-icon" aria-hidden="true">🌾</div>
+                <div class="stat-text">
+                  <strong>Agritech &amp; Climate Analytics</strong>
+                  <span>Geospatial · Crop modeling · Trials</span>
+                </div>
+              </div>
+
+              <div class="panel-stat">
+                <div class="stat-icon" aria-hidden="true">🧬</div>
+                <div class="stat-text">
+                  <strong>Omics &amp; Biomedical ML</strong>
+                  <span>Multi-omics · Biomarker discovery</span>
+                </div>
+              </div>
+
+              <div class="panel-stat">
+                <div class="stat-icon" aria-hidden="true">⚙️</div>
+                <div class="stat-text">
+                  <strong>Agentic AI Workflows</strong>
+                  <span>Automation · LLM pipelines · RAG</span>
+                </div>
+              </div>
+
+              <div class="panel-stat">
+                <div class="stat-icon" aria-hidden="true">📐</div>
+                <div class="stat-text">
+                  <strong>Biomaterial Design</strong>
+                  <span>3D-printing · Mechanical optimization</span>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── SERVICES ──────────────────────────────────────────── -->
+    <section id="services" aria-labelledby="svc-heading">
+      <div class="wrap">
+        <div class="services-layout">
+
+          <div class="services-sticky section-head">
+            <div class="reveal">
+              <span class="eyebrow">Services</span>
+              <h2 class="section-h" id="svc-heading">Signal from noise.<br />Results you can act on.</h2>
+              <p class="section-sub">
+                AidBio bridges quantitative biology, machine learning, and scientific software
+                to help small teams extract meaning from hard data — and ship it.
+              </p>
+            </div>
+          </div>
+
+          <div class="services-grid">
+            <article class="svc-card reveal">
+              <div class="svc-num">01</div>
+              <h3>Data Processing &amp; Analytics</h3>
+              <p>
+                Exploratory analysis, feature engineering, data cleaning, and scientific
+                visualization for messy experimental, omics, or agronomic datasets.
+                Reproducible notebooks and clear reporting included.
+              </p>
+              <div class="svc-tags">
+                <span class="tag">Python</span>
+                <span class="tag">Pandas</span>
+                <span class="tag">EDA</span>
+                <span class="tag">Visualization</span>
+                <span class="tag">Reproducibility</span>
+              </div>
+            </article>
+
+            <article class="svc-card reveal" data-d="1">
+              <div class="svc-num">02</div>
+              <h3>Machine Learning &amp; Predictive Modeling</h3>
+              <p>
+                Supervised and deep learning pipelines for agriculture, biotechnology, and
+                precision medicine. Emphasis on interpretability, cross-validation rigor,
+                and outputs your team can actually use downstream.
+              </p>
+              <div class="svc-tags">
+                <span class="tag">scikit-learn</span>
+                <span class="tag">PyTorch</span>
+                <span class="tag">GNN</span>
+                <span class="tag">Bioinformatics</span>
+              </div>
+            </article>
+
+            <article class="svc-card reveal" data-d="2">
+              <div class="svc-num">03</div>
+              <h3>Agentic AI &amp; Workflow Automation</h3>
+              <p>
+                Lightweight automation, domain-aware AI assistants, RAG systems, and
+                reproducible pipelines that augment small research teams — without
+                heavy infrastructure or long deployment cycles.
+              </p>
+              <div class="svc-tags">
+                <span class="tag">LLM Pipelines</span>
+                <span class="tag">RAG</span>
+                <span class="tag">Automation</span>
+                <span class="tag">Docker</span>
+              </div>
+            </article>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── FEATURED WORK ─────────────────────────────────────── -->
+    <section id="work" aria-labelledby="work-heading">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">Featured Work</span>
+          <h2 class="section-h" id="work-heading">Applied across agro-biotech<br />and scientific R&amp;D</h2>
+          <p class="section-sub">
+            A selection of project types aligned with real consulting engagements.
+            Each engagement is scoped, documented, and built to be handed off cleanly.
+          </p>
+        </div>
+
+        <div class="work-grid">
+          <article class="work-card reveal">
+            <span class="work-domain">Agrilyzer</span>
+            <h3>Climate-aware analytics for agricultural systems</h3>
+            <p>
+              Geospatial and weather-linked pipelines for crop planning, environmental
+              monitoring, and scenario analysis using structured scientific data workflows.
+            </p>
+          </article>
+
+          <article class="work-card reveal" data-d="1">
+            <span class="work-domain">Yield Optimization</span>
+            <h3>Field trial analytics and decision support</h3>
+            <p>
+              End-to-end exploratory analysis and modeling across plant trials, weather signals,
+              and management variables to support yield-oriented decision making.
+            </p>
+          </article>
+
+          <article class="work-card reveal" data-d="2">
+            <span class="work-domain">Biomaterials</span>
+            <h3>Data-driven optimization for 3D-printed implants</h3>
+            <p>
+              Modeling of mechanical strength, biocompatibility trade-offs, and design space
+              exploration to support better biomaterial and implant development.
+            </p>
+          </article>
+
+          <article class="work-card reveal" data-d="3">
+            <span class="work-domain">Precision Medicine</span>
+            <h3>Omics interpretation and patient stratification</h3>
+            <p>
+              Integration of biological datasets and predictive approaches for translational
+              research, biomarker exploration, and clinically meaningful insights.
+            </p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── PROCESS ───────────────────────────────────────────── -->
+    <section id="process" aria-labelledby="process-heading">
+      <div class="wrap">
+        <div class="section-head reveal">
+          <span class="eyebrow">How we work</span>
+          <h2 class="section-h" id="process-heading">Clear process.<br />No ambiguity overhead.</h2>
+          <p class="section-sub">
+            Engagements are scoped tightly so research teams spend time on science,
+            not on coordinating opaque deliverables.
+          </p>
+        </div>
+
+        <div class="process-grid reveal" data-d="1">
+          <div class="process-step">
+            <div class="step-num">1</div>
+            <h3>Define the problem</h3>
+            <p>Align on the dataset, objective, and decision context before touching code.</p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-num">2</div>
+            <h3>Structure and interrogate</h3>
+            <p>Clean, standardize, and explore the data to isolate signal from noise.</p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-num">3</div>
+            <h3>Build reproducible workflows</h3>
+            <p>Implement practical pipelines for prediction, interpretation, or automation.</p>
+          </div>
+
+          <div class="process-step">
+            <div class="step-num">4</div>
+            <h3>Deliver and hand off</h3>
+            <p>Documented code, dashboards, summaries, and next-step guidance your team can own.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── ABOUT ──────────────────────────────────────────────── -->
+    <section id="about" aria-labelledby="about-heading">
+      <div class="wrap">
+        <div class="about-grid">
+
+          <div class="reveal">
+            <span class="eyebrow">About AidBio</span>
+            <h2 class="section-h" id="about-heading">Scientific depth.<br />Practical implementation.</h2>
+            <p class="about-bio">
+              AidBio is led by <strong>Cleverson Matiolli, PhD</strong> — a quantitative
+              biologist and ML practitioner with over a decade across academic research
+              and applied industry projects.
+            </p>
+            <p class="about-bio">
+              The consulting profile spans agro-biotech, life sciences, precision medicine,
+              and computational design — built around reproducibility, honest modeling,
+              and deliverables that survive contact with real decisions.
+            </p>
+            <div style="display:flex; gap:0.75rem; flex-wrap:wrap; margin-top:1.8rem;">
+              <a href="papers.html" class="pub-link">
+                <span>15+ peer-reviewed publications</span>
+                <span>→</span>
+              </a>
+              <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener" class="pub-link">
+                LinkedIn
+                <span style="font-size:0.85rem; opacity:0.6;">↗</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal" data-d="1">
+            <div class="stack-panel">
+              <div class="stack-label">Core Stack</div>
+              <div class="stack-chips">
+                <span class="stack-chip">Python</span>
+                <span class="stack-chip">PyTorch</span>
+                <span class="stack-chip">scikit-learn</span>
+                <span class="stack-chip">PyG</span>
+                <span class="stack-chip">Pandas / NumPy</span>
+                <span class="stack-chip">Matplotlib / Seaborn</span>
+                <span class="stack-chip">Docker</span>
+                <span class="stack-chip">Git / GitHub</span>
+                <span class="stack-chip">LLM APIs</span>
+                <span class="stack-chip">RAG Pipelines</span>
+                <span class="stack-chip">Agentic AI</span>
+              </div>
+
+              <div class="links-row">
+                <a href="https://github.com/matiollipt" target="_blank" rel="noopener" class="ext-link">
+                  <span>github.com/matiollipt</span>
+                  <span class="ext-link-arrow">↗</span>
+                </a>
+                <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener" class="ext-link">
+                  <span>linkedin.com/in/cleversonmatiolli</span>
+                  <span class="ext-link-arrow">↗</span>
+                </a>
+                <a href="papers.html" class="ext-link">
+                  <span>Peer-reviewed publications</span>
+                  <span class="ext-link-arrow">→</span>
+                </a>
+                <a href="prompt_buider.html" class="ext-link">
+                  <span>Tools &amp; experiments</span>
+                  <span class="ext-link-arrow">→</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ─── CONTACT ───────────────────────────────────────────── -->
+    <section id="contact" aria-labelledby="contact-heading">
+      <div class="wrap">
+        <div class="contact-shell reveal">
+
+          <div>
+            <span class="eyebrow">Contact</span>
+            <h2 class="section-h" id="contact-heading">Start with a focused conversation.</h2>
+            <p class="section-sub">
+              AidBio works well in fixed-scope engagements and milestone-based projects.
+              Good entry points:
+            </p>
+            <ul class="contact-entry-list" aria-label="Engagement types">
+              <li>Agricultural trial analytics and field data pipelines</li>
+              <li>Omics interpretation and bioinformatics workflows</li>
+              <li>ML pipeline design for experimental datasets</li>
+              <li>Agentic AI and lightweight automation for research teams</li>
+              <li>Biomaterial design optimization and simulation</li>
+            </ul>
+            <div class="contact-cta">
+              <a href="mailto:contact@aidbio.com" class="btn btn-dark">
+                Email AidBio
+                <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+
+          <div>
+            <div class="contact-links-label">Connect</div>
+            <div class="contact-link-row">
+              <a href="mailto:contact@aidbio.com" class="c-link">
+                <span>contact@aidbio.com</span>
+                <span class="c-link-action">Email</span>
+              </a>
+              <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener" class="c-link">
+                <span>LinkedIn / cleversonmatiolli</span>
+                <span class="c-link-action">Connect ↗</span>
+              </a>
+              <a href="https://github.com/matiollipt" target="_blank" rel="noopener" class="c-link">
+                <span>GitHub / matiollipt</span>
+                <span class="c-link-action">View code ↗</span>
+              </a>
+              <a href="papers.html" class="c-link">
+                <span>Peer-reviewed publications</span>
+                <span class="c-link-action">Read →</span>
+              </a>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ─── FOOTER ────────────────────────────────────────────── -->
+  <footer role="contentinfo">
+    <div class="wrap footer-inner">
+      <div class="footer-brand">
+        <div class="footer-brand-dot"></div>
+        AidBio — Data Intelligence for Life Sciences
+      </div>
+      <nav class="footer-nav" aria-label="Footer navigation">
+        <a href="#services">Services</a>
+        <a href="#work">Work</a>
+        <a href="papers.html">Publications</a>
+        <a href="prompt_buider.html">Tools</a>
+        <a href="#contact">Contact</a>
+      </nav>
+      <div>© 2026 AidBio</div>
+    </div>
+  </footer>
+
+  <!-- ─── JS: MOBILE NAV + SCROLL REVEAL ──────────────────── -->
+  <script>
+    // Mobile nav toggle
+    const toggle = document.querySelector('.nav-toggle');
+    const menu   = document.getElementById('nav-menu');
+
+    toggle.addEventListener('click', () => {
+      const open = menu.classList.toggle('open');
+      toggle.classList.toggle('open', open);
+      toggle.setAttribute('aria-expanded', String(open));
+    });
+
+    // Close on nav link click (mobile)
+    menu.querySelectorAll('a').forEach(a => {
+      a.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Scroll reveal
+    const observer = new IntersectionObserver(
+      entries => entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } }),
+      { threshold: 0.12 }
+    );
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+  </script>
+</body>
+</html>
