@@ -7,13 +7,14 @@
   <title>AidBio | AI & Data Science for Life Sciences and Agritech</title>
   <meta name="description"
     content="AidBio delivers end-to-end data science, machine learning, and agentic AI workflows for life sciences, biotech, and agritech teams." />
-  <meta name="theme-color" content="#f6f7fb" />
+  <meta name="theme-color" content="#FBFCFE" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
 
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" />
 
   <script>
@@ -46,7 +47,7 @@
         root.setAttribute("data-theme-preference", preference);
 
         if (metaTheme) {
-          metaTheme.setAttribute("content", resolved === "dark" ? "#081018" : "#f6f7fb");
+          metaTheme.setAttribute("content", resolved === "dark" ? "#0E1219" : "#FBFCFE");
         }
       }
 
@@ -64,70 +65,165 @@
   </script>
 
   <style>
+    /* ============================================================
+       AidBio Design System tokens
+       Source: aidbio-design-system/project/tokens/*.css
+       ============================================================ */
     :root {
       color-scheme: light dark;
 
-      --aidbio-blue: #324ad7;
-      --aidbio-orange: #ec7a30;
-      --aidbio-ink: #25364b;
-      --aidbio-soft: #ecebf1;
+      /* Core brand accents */
+      --brand-blue: #2E4BDF;
+      --brand-orange: #E8772E;
+      --brand-ink: #28303F;
+      --brand-cloud: #F4F6FA;
+      --brand-blue-press: #2138C2;
+      --brand-blue-tint: #EAEDFC;
+      --brand-orange-press: #CF6320;
+      --brand-orange-tint: #FCEEE2;
 
-      --bg-primary: #f6f7fb;
-      --bg-secondary: rgba(255, 255, 255, 0.82);
-      --bg-elevated: #ffffff;
-      --bg-nav: rgba(246, 247, 251, 0.72);
+      /* Synesthetic data spectrum */
+      --spectrum-indigo: #2E4BDF;
+      --spectrum-violet: #6E47D4;
+      --spectrum-magenta: #C13E9D;
+      --spectrum-coral: #E8772E;
+      --spectrum-amber: #EFA63A;
+      --spectrum-lime: #8DB23C;
+      --spectrum-emerald: #1FA07C;
+      --spectrum-teal: #1F95C4;
 
-      --text-main: #16202b;
-      --text-strong: #0d1620;
-      --text-muted: #5e6b7c;
+      /* Neutral ink ramp */
+      --ink-950: #12161F;
+      --ink-900: #1B2230;
+      --ink-800: #28303F;
+      --ink-700: #3A4355;
+      --ink-500: #6B7588;
+      --ink-400: #8E97A8;
+      --ink-300: #B4BCC9;
+      --ink-200: #D6DBE3;
+      --ink-100: #E9ECF1;
+      --ink-50: #F4F6FA;
 
-      --border-subtle: rgba(22, 32, 43, 0.10);
-      --border-strong: rgba(37, 54, 75, 0.16);
+      /* Semantic aliases · light */
+      --surface-base: #FBFCFE;
+      --surface-card: #FFFFFF;
+      --surface-sunken: #F4F6FA;
+      --surface-nav: rgba(251, 252, 254, 0.82);
 
-      --shadow-soft: 0 12px 30px rgba(24, 41, 66, 0.08);
-      --shadow-card: 0 20px 50px rgba(24, 41, 66, 0.10);
-      --shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.15), 0 20px 60px rgba(50, 74, 215, 0.12);
+      --text-strong: var(--ink-900);
+      --text-body: var(--ink-700);
+      --text-muted: var(--ink-500);
+      --text-faint: var(--ink-400);
+      --text-on-accent: #FFFFFF;
 
-      --accent-primary: var(--aidbio-blue);
-      --accent-secondary: var(--aidbio-orange);
-      --accent-surface: rgba(50, 74, 215, 0.08);
-      --accent-surface-strong: rgba(50, 74, 215, 0.14);
+      --border-subtle: var(--ink-100);
+      --border-default: var(--ink-200);
+      --border-strong: var(--ink-300);
 
-      --radius-sm: 10px;
-      --radius-md: 18px;
-      --radius-lg: 28px;
-      --radius-pill: 999px;
+      --accent: var(--brand-blue);
+      --accent-press: var(--brand-blue-press);
+      --accent-tint: var(--brand-blue-tint);
+      --accent-warm: var(--brand-orange);
+      --accent-warm-press: var(--brand-orange-press);
+      --accent-warm-tint: var(--brand-orange-tint);
 
-      --max-w: 1140px;
-      --nav-h: 78px;
+      --focus-ring: 0 0 0 3px rgba(46, 75, 223, 0.32);
 
-      --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
-      --trans-fast: 180ms var(--ease-out);
-      --trans-mid: 260ms var(--ease-out);
-      --trans-slow: 620ms var(--ease-out);
+      /* Typography */
+      --font-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
+      --font-ui: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-data: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+      /* Fibonacci spacing */
+      --space-1: 4px;
+      --space-2: 8px;
+      --space-3: 13px;
+      --space-4: 21px;
+      --space-5: 34px;
+      --space-6: 55px;
+      --space-7: 89px;
+      --space-8: 144px;
+
+      /* Radii */
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 18px;
+      --radius-xl: 28px;
+      --radius-full: 999px;
+
+      /* Elevation — soft, graphite-tinted */
+      --shadow-sm: 0 1px 2px rgba(40, 48, 63, 0.06), 0 1px 3px rgba(40, 48, 63, 0.08);
+      --shadow-md: 0 2px 4px rgba(40, 48, 63, 0.05), 0 6px 16px rgba(40, 48, 63, 0.09);
+      --shadow-lg: 0 4px 8px rgba(40, 48, 63, 0.06), 0 14px 36px rgba(40, 48, 63, 0.12);
+      --shadow-xl: 0 8px 16px rgba(40, 48, 63, 0.08), 0 28px 64px rgba(40, 48, 63, 0.16);
+      --glow-blue: 0 8px 28px rgba(46, 75, 223, 0.28);
+      --glow-orange: 0 8px 28px rgba(232, 119, 46, 0.28);
+
+      /* Signature gradients */
+      --gradient-dawn: linear-gradient(120deg, #2E4BDF 0%, #6E47D4 48%, #E8772E 100%);
+      --gradient-flora: linear-gradient(120deg, #1FA07C 0%, #1F95C4 52%, #6E47D4 100%);
+      --gradient-aurora: linear-gradient(135deg, #2E4BDF 0%, #1F95C4 40%, #1FA07C 72%, #8DB23C 100%);
+      --gradient-iris: linear-gradient(135deg, #6E47D4 0%, #C13E9D 100%);
+      --gradient-spectrum: linear-gradient(90deg,
+          #2E4BDF, #6E47D4, #C13E9D, #E8772E, #EFA63A, #8DB23C, #1FA07C, #1F95C4);
+
+      /* Motion */
+      --ease-out: cubic-bezier(0.22, 0.8, 0.28, 1);
+      --ease-spring: cubic-bezier(0.34, 1.45, 0.5, 1);
+      --dur-fast: 150ms;
+      --dur-base: 240ms;
+      --dur-slow: 400ms;
+      --dur-slower: 680ms;
+
+      /* Layout */
+      --max-w: 1200px;
+      --nav-h: 76px;
+
+      /* Theme-swapped imagery */
+      --network-img: url("assets/network-light.webp");
     }
 
     html[data-theme="dark"] {
-      --bg-primary: #081018;
-      --bg-secondary: rgba(14, 22, 33, 0.78);
-      --bg-elevated: #0f1722;
-      --bg-nav: rgba(8, 16, 24, 0.72);
+      --surface-base: #0E1219;
+      --surface-card: #181E29;
+      --surface-sunken: #12161F;
+      --surface-nav: rgba(14, 18, 25, 0.82);
 
-      --text-main: #edf2f7;
-      --text-strong: #ffffff;
-      --text-muted: #9ba9bb;
+      --text-strong: #F4F6FA;
+      --text-body: #C4CCD9;
+      --text-muted: #8E97A8;
+      --text-faint: #6B7588;
 
-      --border-subtle: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.12);
+      --border-subtle: #232B39;
+      --border-default: #2C3545;
+      --border-strong: #3A4557;
 
-      --shadow-soft: 0 18px 34px rgba(0, 0, 0, 0.22);
-      --shadow-card: 0 24px 60px rgba(0, 0, 0, 0.24);
-      --shadow-glow: 0 0 0 1px rgba(255, 255, 255, 0.06), 0 24px 80px rgba(50, 74, 215, 0.14);
+      --accent: #5C74EC;
+      --accent-press: #485FE0;
+      --accent-tint: #1C2540;
+      --accent-warm: #F08A45;
+      --accent-warm-tint: #34261C;
 
-      --accent-surface: rgba(50, 74, 215, 0.14);
-      --accent-surface-strong: rgba(50, 74, 215, 0.22);
+      --focus-ring: 0 0 0 3px rgba(92, 116, 236, 0.40);
+
+      --spectrum-indigo: #5C74EC;
+      --spectrum-violet: #8E6CEA;
+      --spectrum-magenta: #DB64B6;
+      --spectrum-coral: #F08A45;
+      --spectrum-amber: #F2B658;
+      --spectrum-lime: #A6C957;
+      --spectrum-emerald: #34BC95;
+      --spectrum-teal: #41AEDB;
+
+      --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.32), 0 1px 3px rgba(0, 0, 0, 0.36);
+      --shadow-md: 0 2px 6px rgba(0, 0, 0, 0.40), 0 8px 20px rgba(0, 0, 0, 0.44);
+      --shadow-lg: 0 6px 14px rgba(0, 0, 0, 0.44), 0 18px 44px rgba(0, 0, 0, 0.52);
+      --shadow-xl: 0 10px 22px rgba(0, 0, 0, 0.48), 0 32px 72px rgba(0, 0, 0, 0.58);
+
+      --network-img: url("assets/network-dark.webp");
     }
 
+    /* ============================================================ Base */
     * {
       box-sizing: border-box;
     }
@@ -139,19 +235,14 @@
 
     body {
       margin: 0;
-      font-family: "Inter", system-ui, sans-serif;
-      background:
-        radial-gradient(circle at 85% 12%, rgba(236, 122, 48, 0.12), transparent 26%),
-        radial-gradient(circle at 15% 24%, rgba(50, 74, 215, 0.10), transparent 28%),
-        var(--bg-primary);
-      color: var(--text-main);
+      font-family: var(--font-ui);
+      background: var(--surface-base);
+      color: var(--text-body);
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
       text-rendering: optimizeLegibility;
       overflow-x: hidden;
-      transition:
-        background-color var(--trans-mid),
-        color var(--trans-fast);
+      transition: background-color var(--dur-base) var(--ease-out), color var(--dur-fast) var(--ease-out);
     }
 
     img,
@@ -163,7 +254,7 @@
     a {
       color: inherit;
       text-decoration: none;
-      transition: color var(--trans-fast), opacity var(--trans-fast);
+      transition: color var(--dur-fast) var(--ease-out), opacity var(--dur-fast) var(--ease-out);
     }
 
     button,
@@ -181,242 +272,271 @@
       padding: 0;
     }
 
+    :focus-visible {
+      outline: none;
+      box-shadow: var(--focus-ring);
+      border-radius: var(--radius-sm);
+    }
+
     .container {
-      width: min(calc(100% - 2rem), var(--max-w));
+      width: min(calc(100% - 2 * var(--space-4)), var(--max-w));
       margin-inline: auto;
     }
 
+    /* Theme-paired logo images */
+    .mark-dark {
+      display: none;
+    }
+
+    html[data-theme="dark"] .mark-light {
+      display: none;
+    }
+
+    html[data-theme="dark"] .mark-dark {
+      display: block;
+    }
+
+    /* ============================================================ Type */
     .eyebrow {
       display: inline-flex;
       align-items: center;
-      gap: 0.55rem;
-      margin-bottom: 1.05rem;
-      font-size: 0.77rem;
-      font-weight: 700;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+      font-size: 12px;
+      font-weight: 600;
       letter-spacing: 0.12em;
       text-transform: uppercase;
-      color: var(--accent-primary);
+      color: var(--accent);
+    }
+
+    .eyebrow.warm {
+      color: var(--accent-warm);
     }
 
     .eyebrow::before {
       content: "";
-      width: 1.1rem;
-      height: 1px;
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
       background: currentColor;
-      opacity: 0.75;
     }
 
     .heading-lg {
       margin: 0;
-      font-family: "Playfair Display", serif;
-      font-size: clamp(2.8rem, 6vw, 5rem);
-      line-height: 1.02;
-      letter-spacing: -0.03em;
+      font-family: var(--font-display);
+      font-size: clamp(38px, 6vw, 76px);
+      font-weight: 500;
+      line-height: 1.04;
+      letter-spacing: -0.02em;
       color: var(--text-strong);
-      max-width: 12ch;
+      max-width: 15ch;
     }
 
     .heading-md {
-      margin: 0 0 1rem;
-      font-family: "Playfair Display", serif;
-      font-size: clamp(2rem, 4vw, 3rem);
-      line-height: 1.08;
-      letter-spacing: -0.02em;
+      margin: 0 0 var(--space-3);
+      font-family: var(--font-display);
+      font-size: clamp(28px, 4vw, 40px);
+      font-weight: 500;
+      line-height: 1.1;
+      letter-spacing: -0.01em;
       color: var(--text-strong);
     }
 
+    .accent-italic {
+      font-style: italic;
+      color: var(--accent);
+    }
+
     .text-lead {
-      max-width: 64ch;
-      font-size: 1.06rem;
+      max-width: 62ch;
+      font-size: 17px;
+      line-height: 1.6;
       color: var(--text-muted);
     }
 
+    .mono {
+      font-family: var(--font-data);
+    }
+
+    /* ============================================================ Buttons */
     .btn {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      gap: 0.55rem;
-      padding: 0.88rem 1.3rem;
-      border-radius: var(--radius-pill);
+      gap: var(--space-2);
+      padding: 12px 22px;
+      border-radius: var(--radius-full);
       border: 1px solid transparent;
-      font-size: 0.95rem;
+      font-size: 15px;
       font-weight: 600;
-      transition:
-        transform var(--trans-fast),
-        background-color var(--trans-fast),
-        border-color var(--trans-fast),
-        color var(--trans-fast),
-        box-shadow var(--trans-fast);
       white-space: nowrap;
+      transition:
+        transform var(--dur-base) var(--ease-spring),
+        background-color var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out);
     }
 
     .btn:hover {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
     }
 
     .btn-primary {
-      background: linear-gradient(135deg, var(--aidbio-blue), #4661f0);
-      color: #ffffff;
-      box-shadow: 0 14px 30px rgba(50, 74, 215, 0.24);
+      background: var(--brand-blue);
+      color: var(--text-on-accent);
     }
 
     .btn-primary:hover {
-      box-shadow: 0 18px 36px rgba(50, 74, 215, 0.28);
+      background: var(--brand-blue-press);
+      box-shadow: var(--glow-blue);
     }
 
-    .btn-outline {
-      background: transparent;
-      border-color: var(--border-strong);
+    .btn-warm {
+      background: var(--brand-orange);
+      color: var(--text-on-accent);
+    }
+
+    .btn-warm:hover {
+      background: var(--brand-orange-press);
+      box-shadow: var(--glow-orange);
+    }
+
+    .btn-secondary {
+      background: var(--surface-card);
+      border-color: var(--border-default);
       color: var(--text-strong);
     }
 
-    .btn-outline:hover {
-      background: var(--bg-elevated);
-      border-color: rgba(50, 74, 215, 0.22);
+    .btn-secondary:hover {
+      border-color: var(--border-strong);
+      box-shadow: var(--shadow-md);
     }
 
     .section {
-      padding: 6rem 0;
+      padding: var(--space-7) 0;
     }
 
+    /* ============================================================ Nav */
     .nav {
       position: fixed;
       inset: 0 0 auto 0;
       z-index: 1000;
       height: var(--nav-h);
-      background: var(--bg-nav);
+      background: var(--surface-nav);
       border-bottom: 1px solid var(--border-subtle);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       transition:
-        background-color var(--trans-fast),
-        border-color var(--trans-fast),
-        box-shadow var(--trans-fast);
+        background-color var(--dur-fast) var(--ease-out),
+        border-color var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out);
+    }
+
+    /* Spectrum hairline — the brand's synesthetic accent */
+    .nav::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 3px;
+      background: var(--gradient-spectrum);
     }
 
     .nav.scrolled {
-      box-shadow: var(--shadow-soft);
+      box-shadow: var(--shadow-md);
     }
 
     .nav-inner {
       display: flex;
       align-items: center;
       justify-content: space-between;
-      gap: 1rem;
+      gap: var(--space-3);
       height: 100%;
     }
 
     .brand {
       display: inline-flex;
       align-items: center;
-      gap: 0.85rem;
+      gap: var(--space-2);
       min-width: 0;
     }
 
-    .brand-icon-wrap {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      width: 2.35rem;
-      height: 2.35rem;
-      border-radius: 0.82rem;
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.8), rgba(255, 255, 255, 0.32)),
-        var(--bg-elevated);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
+    .brand-mark {
+      height: 30px;
+      width: auto;
       flex: 0 0 auto;
     }
 
-    html[data-theme="dark"] .brand-icon-wrap {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02)),
-        var(--bg-elevated);
-    }
-
-    .brand-icon {
-      width: 1.34rem;
-      height: 1.34rem;
-      object-fit: contain;
-    }
-
-    .brand-wordmark {
-      display: flex;
-      align-items: baseline;
-      gap: 0.02em;
-      font-size: 1.18rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-      line-height: 1;
-    }
-
-    .brand-wordmark .word-aid {
-      color: var(--aidbio-blue);
-    }
-
-    .brand-wordmark .word-bio {
-      color: var(--text-strong);
-    }
-
-    .brand-subtext {
-      display: block;
-      margin-top: 0.15rem;
-      font-size: 0.72rem;
+    .brand-word {
+      font-family: var(--font-display);
+      font-size: 22px;
       font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--text-muted);
+      letter-spacing: -0.01em;
+      color: var(--text-strong);
+      line-height: 1;
     }
 
     .nav-actions {
       display: flex;
       align-items: center;
-      gap: 1rem;
+      gap: var(--space-3);
       min-width: 0;
     }
 
     .nav-links {
       display: flex;
       align-items: center;
-      gap: 1.5rem;
+      gap: var(--space-1);
     }
 
     .nav-links a {
-      font-size: 0.92rem;
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
+      font-size: 14px;
       font-weight: 500;
-      color: var(--text-muted);
+      color: var(--text-body);
     }
 
     .nav-links a:hover {
-      color: var(--text-strong);
+      color: var(--accent);
+      background: var(--accent-tint);
+    }
+
+    .nav-links a.nav-cta {
+      margin-left: var(--space-2);
+      background: var(--brand-blue);
+      color: var(--text-on-accent);
+      font-weight: 600;
+    }
+
+    .nav-links a.nav-cta:hover {
+      background: var(--brand-blue-press);
+      color: var(--text-on-accent);
     }
 
     .theme-switcher {
       display: inline-flex;
       align-items: center;
-      padding: 0.22rem;
-      border-radius: var(--radius-pill);
+      padding: 3px;
+      border-radius: var(--radius-full);
       border: 1px solid var(--border-subtle);
-      background: var(--bg-elevated);
-      box-shadow: var(--shadow-soft);
-      gap: 0.14rem;
+      background: var(--surface-card);
+      box-shadow: var(--shadow-sm);
+      gap: 2px;
       flex-wrap: nowrap;
     }
 
     .theme-option {
-      position: relative;
       border: 0;
       background: transparent;
       color: var(--text-muted);
-      padding: 0.48rem 0.82rem;
-      border-radius: var(--radius-pill);
-      font-size: 0.83rem;
-      font-weight: 600;
-      letter-spacing: 0.01em;
+      padding: 6px 12px;
+      border-radius: var(--radius-full);
+      font-size: 13px;
+      font-weight: 500;
       transition:
-        background-color var(--trans-fast),
-        color var(--trans-fast),
-        transform var(--trans-fast);
+        background-color var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out);
     }
 
     .theme-option:hover {
@@ -424,204 +544,278 @@
     }
 
     .theme-option[aria-pressed="true"] {
-      color: var(--text-strong);
-      background: var(--accent-surface);
+      color: var(--accent);
+      background: var(--accent-tint);
+      font-weight: 600;
     }
 
+    .menu-toggle {
+      display: none;
+      border: 1px solid var(--border-subtle);
+      background: var(--surface-card);
+      color: var(--text-strong);
+      width: 40px;
+      height: 40px;
+      border-radius: var(--radius-md);
+      align-items: center;
+      justify-content: center;
+      flex: 0 0 auto;
+    }
+
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: var(--nav-h);
+      left: 0;
+      right: 0;
+      z-index: 999;
+      background: var(--surface-nav);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-lg);
+      padding: var(--space-3) var(--space-4) var(--space-4);
+    }
+
+    .mobile-menu.open {
+      display: block;
+    }
+
+    .mobile-menu a {
+      display: block;
+      padding: 12px var(--space-2);
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text-strong);
+      border-bottom: 1px solid var(--border-subtle);
+    }
+
+    .mobile-menu a:last-child {
+      border-bottom: 0;
+      margin-top: var(--space-2);
+      text-align: center;
+    }
+
+    /* ============================================================ Hero */
     .hero {
       position: relative;
-      padding: calc(var(--nav-h) + 3.8rem) 0 6.5rem;
+      padding: calc(var(--nav-h) + var(--space-6)) 0 var(--space-6);
       overflow: clip;
     }
 
     .hero::before {
       content: "";
       position: absolute;
-      right: -10rem;
-      top: -8rem;
-      width: 34rem;
-      height: 34rem;
+      right: -12rem;
+      top: -10rem;
+      width: 38rem;
+      height: 38rem;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(236, 122, 48, 0.13), transparent 68%);
+      background: radial-gradient(circle, rgba(232, 119, 46, 0.10), transparent 66%);
       pointer-events: none;
     }
 
     .hero::after {
       content: "";
       position: absolute;
-      left: -8rem;
-      bottom: -10rem;
-      width: 32rem;
-      height: 32rem;
+      left: -10rem;
+      bottom: -12rem;
+      width: 36rem;
+      height: 36rem;
       border-radius: 50%;
-      background: radial-gradient(circle, rgba(50, 74, 215, 0.14), transparent 70%);
+      background: radial-gradient(circle, rgba(46, 75, 223, 0.10), transparent 68%);
       pointer-events: none;
     }
 
     .hero-grid {
       display: grid;
-      grid-template-columns: minmax(0, 1.08fr) minmax(260px, 0.92fr);
-      align-items: flex-start;
-      gap: 2.2rem;
+      grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+      align-items: center;
+      gap: var(--space-6);
       position: relative;
       z-index: 1;
     }
 
-    .hero-copy {
-      max-width: 720px;
-    }
-
-    .hero-logo-wrap {
-      display: flex;
-      align-items: center;
-      justify-content: flex-end;
-      margin-bottom: 0.85rem;
-      padding: 0;
-      border-radius: 0;
-      background: transparent;
-      border: none;
-      box-shadow: none;
-      width: 100%;
-    }
-
-    html[data-theme="dark"] .hero-logo-wrap {
-      background: transparent;
-    }
-
-    .hero-logo {
-      width: min(100%, 460px);
-      min-width: 180px;
-      height: auto;
-      object-fit: contain;
-      will-change: transform, opacity;
-      transition: transform var(--trans-mid), opacity var(--trans-mid);
-    }
-
     .hero-desc {
-      margin: 1.55rem 0 2.2rem;
-      max-width: 58ch;
-      font-size: 1.13rem;
+      margin: var(--space-4) 0 var(--space-5);
+      max-width: 56ch;
+      font-size: 18px;
+      line-height: 1.6;
       color: var(--text-muted);
     }
 
     .hero-actions {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.9rem;
+      gap: var(--space-3);
       align-items: center;
     }
 
     .hero-proof {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.7rem;
-      margin-top: 1.35rem;
+      gap: var(--space-2);
+      margin-top: var(--space-5);
     }
 
     .proof-pill {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.52rem 0.86rem;
-      border-radius: var(--radius-pill);
+      gap: var(--space-2);
+      padding: 8px 14px;
+      border-radius: var(--radius-full);
       border: 1px solid var(--border-subtle);
-      background: var(--bg-elevated);
+      background: var(--surface-card);
       color: var(--text-muted);
-      font-size: 0.84rem;
-      font-weight: 600;
-      box-shadow: var(--shadow-soft);
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: var(--shadow-sm);
     }
 
     .proof-dot {
-      width: 0.46rem;
-      height: 0.46rem;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
-      background: linear-gradient(135deg, var(--aidbio-blue), var(--aidbio-orange));
       flex: 0 0 auto;
     }
 
-    .hero-panel {
+    /* Hero mark — the infinity logomark over the network motif */
+    .hero-visual {
       position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 300px;
     }
 
-    .signal-card {
-      position: relative;
-      padding: 1.4rem;
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.22)),
-        var(--bg-secondary);
-      box-shadow: var(--shadow-card);
-      overflow: hidden;
-    }
-
-    html[data-theme="dark"] .signal-card {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.05), rgba(255, 255, 255, 0.015)),
-        var(--bg-secondary);
-    }
-
-    .signal-card::before {
+    .hero-visual::before {
       content: "";
       position: absolute;
-      inset: auto auto -4rem -4rem;
-      width: 12rem;
-      height: 12rem;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(50, 74, 215, 0.18), transparent 68%);
+      inset: -8% -6%;
+      background-image: var(--network-img);
+      background-size: contain;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.55;
       pointer-events: none;
     }
 
-    .signal-topline {
+    .hero-mark {
+      position: relative;
+      width: min(100%, 440px);
+      height: auto;
+      animation: mark-float 9s var(--ease-out) infinite alternate;
+      will-change: transform;
+    }
+
+    @keyframes mark-float {
+      from {
+        transform: translateY(-8px);
+      }
+
+      to {
+        transform: translateY(10px);
+      }
+    }
+
+    .hero-stats {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-6);
+      padding-top: var(--space-5);
+      border-top: 1px solid var(--border-subtle);
+      position: relative;
+      z-index: 1;
+    }
+
+    .stat-val {
+      display: block;
+      margin-bottom: var(--space-1);
+      font-family: var(--font-data);
+      color: var(--text-strong);
+      font-size: 24px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
+    }
+
+    .stat-label {
+      color: var(--text-muted);
+      font-size: 14px;
+    }
+
+    /* ============================================================ Signal band */
+    .signal-band {
+      border-top: 1px solid var(--border-subtle);
+      border-bottom: 1px solid var(--border-subtle);
+      background: var(--surface-sunken);
+      padding: var(--space-6) 0;
+    }
+
+    .signal-head {
       display: flex;
+      align-items: baseline;
       justify-content: space-between;
-      gap: 1rem;
-      align-items: center;
-      margin-bottom: 1.1rem;
+      gap: var(--space-4);
+      flex-wrap: wrap;
+      margin-bottom: var(--space-4);
     }
 
     .signal-badge {
       display: inline-flex;
       align-items: center;
-      gap: 0.5rem;
-      padding: 0.45rem 0.72rem;
-      border-radius: var(--radius-pill);
-      background: var(--accent-surface);
-      color: var(--accent-primary);
-      font-size: 0.78rem;
-      font-weight: 700;
-      letter-spacing: 0.04em;
+      gap: var(--space-2);
+      padding: 7px 13px;
+      border-radius: var(--radius-full);
+      background: var(--accent-tint);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.06em;
       text-transform: uppercase;
     }
 
     .signal-badge::before {
       content: "";
-      width: 0.42rem;
-      height: 0.42rem;
+      width: 7px;
+      height: 7px;
       border-radius: 50%;
       background: currentColor;
     }
 
+    .signal-tagline {
+      color: var(--text-muted);
+      font-size: 14px;
+      font-weight: 500;
+    }
+
+    .signal-lead {
+      margin: 0 0 var(--space-4);
+      max-width: 72ch;
+      color: var(--text-muted);
+      font-size: 16px;
+    }
+
     .signal-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 0.9rem;
-      margin-top: 1rem;
+      grid-template-columns: repeat(4, minmax(0, 1fr));
+      gap: var(--space-3);
     }
 
     .mini-card {
-      padding: 1rem;
+      padding: var(--space-4);
       border-radius: var(--radius-md);
-      background: var(--bg-elevated);
+      background: var(--surface-card);
       border: 1px solid var(--border-subtle);
+      border-top: 3px solid var(--mini-accent, var(--accent));
+      box-shadow: var(--shadow-sm);
     }
 
     .mini-label {
       display: block;
-      margin-bottom: 0.35rem;
+      margin-bottom: var(--space-1);
       color: var(--text-muted);
-      font-size: 0.77rem;
+      font-size: 12px;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.06em;
@@ -629,107 +823,69 @@
 
     .mini-value {
       color: var(--text-strong);
-      font-size: 1.3rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
+      font-family: var(--font-data);
+      font-size: 20px;
+      font-weight: 600;
+      letter-spacing: -0.02em;
     }
 
     .mini-note {
-      margin-top: 0.35rem;
+      margin-top: var(--space-1);
       color: var(--text-muted);
-      font-size: 0.85rem;
+      font-size: 13.5px;
     }
 
-    .sparkline {
-      margin-top: 1rem;
-      height: 94px;
-      width: 100%;
-    }
-
-    .sparkline path.line {
-      fill: none;
-      stroke: var(--aidbio-blue);
-      stroke-width: 3;
-      stroke-linecap: round;
-      stroke-linejoin: round;
-    }
-
-    .sparkline path.area {
-      fill: rgba(50, 74, 215, 0.14);
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 1rem;
-      margin-top: 4rem;
-      padding-top: 1.6rem;
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .stat {
-      padding: 1rem 0.35rem 0 0;
-    }
-
-    .stat-val {
-      display: block;
-      margin-bottom: 0.28rem;
-      color: var(--text-strong);
-      font-size: 1.18rem;
-      font-weight: 700;
-      letter-spacing: -0.03em;
-    }
-
-    .stat-label {
-      color: var(--text-muted);
-      font-size: 0.9rem;
-    }
-
+    /* ============================================================ Solutions */
     .bento-grid {
       display: grid;
       grid-template-columns: repeat(12, 1fr);
-      gap: 1rem;
-      margin-top: 3rem;
+      gap: var(--space-4);
+      margin-top: var(--space-5);
     }
 
     .bento-card {
       position: relative;
-      padding: 2rem;
-      border-radius: var(--radius-md);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.18)),
-        var(--bg-secondary);
+      padding: var(--space-5);
+      border-radius: var(--radius-lg);
+      background: var(--surface-card);
       border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-soft);
+      box-shadow: var(--shadow-sm);
       transition:
-        transform var(--trans-fast),
-        border-color var(--trans-fast),
-        box-shadow var(--trans-fast);
-    }
-
-    html[data-theme="dark"] .bento-card {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
-        var(--bg-secondary);
+        transform var(--dur-base) var(--ease-spring),
+        border-color var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out);
     }
 
     .bento-card:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--shadow-card);
-      border-color: rgba(50, 74, 215, 0.16);
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border-default);
     }
 
     .bento-card h3 {
-      margin: 0 0 0.78rem;
-      font-size: 1.12rem;
+      margin: 0 0 var(--space-2);
+      font-family: var(--font-display);
+      font-size: 22px;
+      font-weight: 600;
       line-height: 1.25;
       color: var(--text-strong);
     }
 
     .bento-card p {
       margin: 0;
-      color: var(--text-muted);
-      font-size: 0.96rem;
+      color: var(--text-body);
+      font-size: 14.5px;
+    }
+
+    .card-icon {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: var(--radius-md);
+      color: #fff;
+      margin-bottom: var(--space-4);
     }
 
     .card-wide {
@@ -743,94 +899,88 @@
     .tech-tags {
       display: flex;
       flex-wrap: wrap;
-      gap: 0.55rem;
-      margin-top: 1.25rem;
+      gap: var(--space-2);
+      margin-top: var(--space-4);
     }
 
     .tag {
       display: inline-flex;
       align-items: center;
-      padding: 0.34rem 0.68rem;
-      border-radius: var(--radius-pill);
+      padding: 5px 11px;
+      border-radius: var(--radius-full);
       border: 1px solid var(--border-subtle);
-      background: var(--bg-elevated);
+      background: var(--surface-sunken);
       color: var(--text-muted);
-      font-size: 0.76rem;
-      font-weight: 600;
+      font-family: var(--font-data);
+      font-size: 12px;
+      font-weight: 500;
       white-space: nowrap;
     }
 
+    /* ============================================================ Process */
     .process-section {
       border-top: 1px solid var(--border-subtle);
       border-bottom: 1px solid var(--border-subtle);
-      background:
-        linear-gradient(180deg, rgba(50, 74, 215, 0.03), rgba(236, 122, 48, 0.02)),
-        transparent;
+      background: var(--surface-sunken);
     }
 
     .workflow-list {
-      margin-top: 3rem;
+      margin-top: var(--space-5);
       display: grid;
       grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: 1.15rem;
+      gap: var(--space-4);
     }
 
     .step {
-      padding: 1.4rem;
+      padding: var(--space-4);
       border-radius: var(--radius-md);
       border: 1px solid var(--border-subtle);
-      background: var(--bg-elevated);
-      box-shadow: var(--shadow-soft);
+      border-top: 3px solid var(--step-accent, var(--accent));
+      background: var(--surface-card);
+      box-shadow: var(--shadow-sm);
     }
 
     .step-num {
-      margin-bottom: 0.85rem;
-      font-family: "Playfair Display", serif;
-      font-size: 2.2rem;
-      line-height: 1;
-      letter-spacing: -0.03em;
-      color: rgba(50, 74, 215, 0.42);
+      margin-bottom: var(--space-3);
+      font-family: var(--font-data);
+      font-size: 15px;
+      font-weight: 600;
+      letter-spacing: 0.04em;
+      color: var(--step-accent, var(--accent));
     }
 
     .step h4 {
-      margin: 0 0 0.55rem;
-      font-size: 1rem;
+      margin: 0 0 var(--space-2);
+      font-family: var(--font-display);
+      font-size: 18px;
+      font-weight: 600;
       color: var(--text-strong);
     }
 
     .step p {
       margin: 0;
-      color: var(--text-muted);
-      font-size: 0.92rem;
+      color: var(--text-body);
+      font-size: 14px;
     }
 
+    /* ============================================================ Founder */
     .about-shell {
-      margin-top: 2rem;
-      padding: 0;
-      border-radius: var(--radius-lg);
+      margin-top: var(--space-5);
+      border-radius: var(--radius-xl);
       overflow: hidden;
       border: 1px solid var(--border-subtle);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.55), rgba(255, 255, 255, 0.18)),
-        var(--bg-secondary);
-      box-shadow: var(--shadow-card);
-    }
-
-    html[data-theme="dark"] .about-shell {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
-        var(--bg-secondary);
+      background: var(--surface-card);
+      box-shadow: var(--shadow-lg);
     }
 
     .about-section {
       display: grid;
       grid-template-columns: 1.15fr 0.85fr;
-      gap: 0;
     }
 
     .about-main,
     .about-side {
-      padding: 3rem;
+      padding: var(--space-6);
     }
 
     .about-main {
@@ -840,34 +990,43 @@
     .founder-links {
       display: flex;
       flex-direction: column;
-      gap: 0.9rem;
-      margin-top: 1.5rem;
+      gap: var(--space-3);
+      margin-top: var(--space-4);
     }
 
     .f-link {
       display: flex;
       justify-content: space-between;
-      gap: 1rem;
+      gap: var(--space-3);
       align-items: center;
-      padding: 1rem 1.05rem;
+      padding: var(--space-3) var(--space-4);
       border-radius: var(--radius-md);
       border: 1px solid var(--border-subtle);
-      background: var(--bg-elevated);
-      color: var(--text-muted);
+      background: var(--surface-sunken);
+      color: var(--text-body);
+      font-weight: 500;
+      font-size: 15px;
       transition:
-        transform var(--trans-fast),
-        border-color var(--trans-fast),
-        color var(--trans-fast);
+        transform var(--dur-base) var(--ease-spring),
+        border-color var(--dur-fast) var(--ease-out),
+        color var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out);
     }
 
     .f-link:hover {
-      transform: translateY(-1px);
+      transform: translateY(-2px);
       color: var(--text-strong);
-      border-color: rgba(50, 74, 215, 0.18);
+      border-color: var(--border-default);
+      box-shadow: var(--shadow-md);
+    }
+
+    .f-link .f-ico {
+      color: var(--accent);
+      flex: 0 0 auto;
     }
 
     .about-metric {
-      padding: 1rem 0;
+      padding: var(--space-3) 0;
       border-bottom: 1px solid var(--border-subtle);
     }
 
@@ -878,74 +1037,137 @@
     .about-metric-label {
       display: block;
       color: var(--text-muted);
-      font-size: 0.78rem;
-      font-weight: 700;
+      font-size: 12px;
+      font-weight: 600;
       letter-spacing: 0.08em;
       text-transform: uppercase;
-      margin-bottom: 0.3rem;
+      margin-bottom: var(--space-1);
     }
 
     .about-metric-value {
       color: var(--text-strong);
-      font-size: 1.15rem;
-      font-weight: 700;
-      letter-spacing: -0.02em;
+      font-size: 16px;
+      font-weight: 600;
+      letter-spacing: -0.01em;
     }
 
+    /* ============================================================ Contact */
     .contact-section {
       text-align: center;
     }
 
     .contact-card {
-      padding: 3rem 2rem;
-      border-radius: var(--radius-lg);
+      position: relative;
+      overflow: hidden;
+      padding: var(--space-6) var(--space-5);
+      border-radius: var(--radius-xl);
       border: 1px solid var(--border-subtle);
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.58), rgba(255, 255, 255, 0.18)),
-        var(--bg-secondary);
-      box-shadow: var(--shadow-card);
+      background: var(--surface-card);
+      box-shadow: var(--shadow-lg);
     }
 
-    html[data-theme="dark"] .contact-card {
-      background:
-        linear-gradient(180deg, rgba(255, 255, 255, 0.04), rgba(255, 255, 255, 0.015)),
-        var(--bg-secondary);
+    .contact-card::before {
+      content: "";
+      position: absolute;
+      inset: 0 0 auto 0;
+      height: 4px;
+      background: var(--gradient-spectrum);
     }
 
+    .contact-card::after {
+      content: "";
+      position: absolute;
+      inset: auto auto -6rem -6rem;
+      width: 18rem;
+      height: 18rem;
+      border-radius: 50%;
+      background: radial-gradient(circle, rgba(46, 75, 223, 0.08), transparent 68%);
+      pointer-events: none;
+    }
+
+    /* ============================================================ Footer */
     .footer {
-      padding: 3rem 0 2rem;
-      border-top: 1px solid var(--border-subtle);
-      color: var(--text-muted);
-      font-size: 0.9rem;
+      background: var(--ink-950);
+      color: var(--ink-300);
+      font-size: 14px;
+      padding: var(--space-6) 0 var(--space-4);
     }
 
-    .footer-inner {
+    .footer-top {
       display: flex;
       justify-content: space-between;
-      align-items: center;
-      gap: 1rem;
+      gap: var(--space-5);
       flex-wrap: wrap;
+      padding-bottom: var(--space-5);
     }
 
     .footer-brand {
-      display: inline-flex;
+      display: flex;
       align-items: center;
-      gap: 0.7rem;
-      color: var(--text-muted);
-      font-weight: 600;
+      gap: var(--space-2);
+      margin-bottom: var(--space-3);
     }
 
     .footer-brand img {
-      width: 1.05rem;
-      height: 1.05rem;
+      height: 26px;
+      width: auto;
     }
 
+    .footer-brand .brand-word {
+      color: #fff;
+      font-size: 20px;
+    }
+
+    .footer-blurb {
+      margin: 0;
+      max-width: 34ch;
+      font-size: 13.5px;
+      line-height: 1.6;
+      color: var(--ink-400);
+    }
+
+    .footer-col {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-2);
+    }
+
+    .footer-col-h {
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--ink-500);
+      font-weight: 600;
+      margin-bottom: var(--space-1);
+    }
+
+    .footer-col a {
+      font-size: 13.5px;
+      color: var(--ink-300);
+    }
+
+    .footer-col a:hover {
+      color: #fff;
+    }
+
+    .footer-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: var(--space-3);
+      flex-wrap: wrap;
+      padding-top: var(--space-4);
+      border-top: 1px solid var(--ink-900);
+      font-size: 12.5px;
+      color: var(--ink-500);
+    }
+
+    /* ============================================================ Reveal */
     .reveal {
       opacity: 0;
       transform: translateY(18px);
       transition:
-        opacity var(--trans-slow),
-        transform var(--trans-slow);
+        opacity var(--dur-slower) var(--ease-out),
+        transform var(--dur-slower) var(--ease-out);
     }
 
     .reveal.visible {
@@ -961,14 +1183,24 @@
       transition-delay: 160ms;
     }
 
+    /* ============================================================ Responsive */
     @media (max-width: 1024px) {
       .hero-grid {
         grid-template-columns: 1fr;
-        gap: 2.2rem;
+        gap: var(--space-5);
       }
 
-      .hero-panel {
-        max-width: 620px;
+      .hero-visual {
+        order: -1;
+        min-height: 0;
+      }
+
+      .hero-mark {
+        width: min(70%, 360px);
+      }
+
+      .signal-grid {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
       }
 
       .workflow-list {
@@ -985,36 +1217,24 @@
       }
     }
 
-    @media (max-width: 780px) {
+    @media (max-width: 880px) {
       .nav-links {
         display: none;
       }
 
-      .nav-inner {
-        gap: 0.8rem;
+      .menu-toggle {
+        display: inline-flex;
       }
+    }
 
-      .brand-subtext {
-        display: none;
-      }
-
-      .theme-switcher {
-        transform: scale(0.96);
-        transform-origin: right center;
-      }
-
+    @media (max-width: 780px) {
       .hero {
-        padding-top: calc(var(--nav-h) + 4.5rem);
-      }
-
-      .hero-logo {
-        width: min(100%, 360px);
-        min-width: 220px;
+        padding-top: calc(var(--nav-h) + var(--space-5));
       }
 
       .hero-stats {
         grid-template-columns: 1fr;
-        gap: 0.6rem;
+        gap: var(--space-3);
       }
 
       .bento-grid {
@@ -1029,35 +1249,35 @@
 
     @media (max-width: 560px) {
       :root {
-        --nav-h: 72px;
+        --nav-h: 68px;
+      }
+
+      .brand-word {
+        font-size: 19px;
       }
 
       .theme-option {
-        padding: 0.46rem 0.7rem;
-        font-size: 0.78rem;
+        padding: 5px 9px;
+        font-size: 12px;
       }
 
-      .brand-wordmark {
-        font-size: 1.06rem;
-      }
-
-      .heading-lg {
-        max-width: 13ch;
-      }
-
+      .signal-grid,
       .workflow-list {
         grid-template-columns: 1fr;
       }
 
       .about-main,
-      .about-side,
-      .contact-card {
-        padding: 2rem 1.35rem;
+      .about-side {
+        padding: var(--space-5) var(--space-4);
       }
 
-      .footer-inner {
+      .contact-card {
+        padding: var(--space-5) var(--space-4);
+      }
+
+      .footer-top {
         flex-direction: column;
-        align-items: flex-start;
+        gap: var(--space-4);
       }
     }
 
@@ -1074,6 +1294,10 @@
         transition-delay: 0ms !important;
       }
 
+      .hero-mark {
+        animation: none !important;
+      }
+
       .reveal {
         opacity: 1;
         transform: none;
@@ -1086,15 +1310,9 @@
   <nav class="nav" id="site-nav">
     <div class="container nav-inner">
       <a href="#" class="brand" aria-label="AidBio home">
-        <span class="brand-icon-wrap" aria-hidden="true">
-          <img src="assets/favicon.png" alt="" class="brand-icon" />
-        </span>
-        <span>
-          <span class="brand-wordmark">
-            <span class="word-aid">Aid</span><span class="word-bio">Bio</span>
-          </span>
-          <span class="brand-subtext">AI data science for agritech & life sciences</span>
-        </span>
+        <img src="assets/aidbio-mark-light.webp" alt="" class="brand-mark mark-light" width="63" height="30" />
+        <img src="assets/aidbio-mark-dark.webp" alt="" class="brand-mark mark-dark" width="62" height="30" />
+        <span class="brand-word">AidBio</span>
       </a>
 
       <div class="nav-actions">
@@ -1102,28 +1320,42 @@
           <li><a href="#solutions">Solutions</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#founder">Founder</a></li>
-          <li><a href="#contact" class="btn btn-primary" style="padding: 0.64rem 1rem;">Start a Project</a></li>
+          <li><a href="#contact" class="nav-cta">Start a project</a></li>
         </ul>
 
         <div class="theme-switcher" role="group" aria-label="Theme preference">
-          <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">System</button>
+          <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
           <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
           <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
         </div>
+
+        <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu"
+          aria-label="Open menu">
+          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+            stroke-linecap="round" aria-hidden="true">
+            <line x1="4" y1="7" x2="20" y2="7" />
+            <line x1="4" y1="12" x2="20" y2="12" />
+            <line x1="4" y1="17" x2="20" y2="17" />
+          </svg>
+        </button>
       </div>
     </div>
   </nav>
+
+  <div class="mobile-menu" id="mobile-menu">
+    <a href="#solutions">Solutions</a>
+    <a href="#process">Process</a>
+    <a href="#founder">Founder</a>
+    <a href="#contact" class="btn btn-primary">Start a project</a>
+  </div>
 
   <header class="hero">
     <div class="container">
       <div class="hero-grid">
         <div class="hero-copy reveal">
-          <div class="hero-logo-wrap">
-            <img src="assets/aidbio_logo.svg" alt="AidBio logo" class="hero-logo" />
-          </div>
-
           <span class="eyebrow">Data intelligence for life sciences</span>
-          <h1 class="heading-lg">Transforming biological complexity into decisive action.</h1>
+          <h1 class="heading-lg">Transforming biological complexity into <span class="accent-italic">decisive
+              action.</span></h1>
           <p class="hero-desc">
             AidBio builds rigorous data pipelines, predictive machine-learning systems, and agentic AI workflows for
             agritech, biotech, and applied R&D teams that need signal, speed, and scientific credibility.
@@ -1131,82 +1363,80 @@
 
           <div class="hero-actions">
             <a href="#contact" class="btn btn-primary">Engage AidBio</a>
-            <a href="#solutions" class="btn btn-outline">Explore Capabilities</a>
+            <a href="#solutions" class="btn btn-secondary">Explore capabilities</a>
           </div>
 
           <div class="hero-proof" aria-label="Capabilities summary">
-            <span class="proof-pill"><span class="proof-dot"></span> AI workflows grounded in real data</span>
-            <span class="proof-pill"><span class="proof-dot"></span> Agritech and omics fluency</span>
-            <span class="proof-pill"><span class="proof-dot"></span> Reproducible, production-ready delivery</span>
-          </div>
-
-          <div class="hero-stats reveal delay-1">
-            <div class="stat">
-              <span class="stat-val">10+ Years</span>
-              <span class="stat-label">Academic and industry R&amp;D experience</span>
-            </div>
-            <div class="stat">
-              <span class="stat-val">15+ Papers</span>
-              <span class="stat-label">Peer-reviewed scientific publications</span>
-            </div>
-            <div class="stat">
-              <span class="stat-val">End-to-End</span>
-              <span class="stat-label">From interrogation to deployment</span>
-            </div>
+            <span class="proof-pill"><span class="proof-dot" style="background: var(--spectrum-indigo);"></span> AI
+              workflows grounded in real data</span>
+            <span class="proof-pill"><span class="proof-dot" style="background: var(--spectrum-emerald);"></span>
+              Agritech and omics fluency</span>
+            <span class="proof-pill"><span class="proof-dot" style="background: var(--spectrum-coral);"></span>
+              Reproducible, production-ready delivery</span>
           </div>
         </div>
 
-        <aside class="hero-panel reveal delay-2" aria-label="Example signal card">
-          <div class="signal-card">
-            <div class="signal-topline">
-              <span class="signal-badge">Applied intelligence</span>
-              <span style="color: var(--text-muted); font-size: 0.84rem; font-weight: 600;">Small teams. Serious
-                output.</span>
-            </div>
+        <div class="hero-visual reveal delay-1" aria-hidden="true">
+          <img src="assets/aidbio-mark-light.webp" alt="" class="hero-mark mark-light" width="920" height="441" />
+          <img src="assets/aidbio-mark-dark.webp" alt="" class="hero-mark mark-dark" width="920" height="446" />
+        </div>
+      </div>
 
-            <p style="margin: 0; color: var(--text-muted); font-size: 0.96rem;">
-              From field trials and climate-linked agronomic signal to omics interpretation and scientific reporting,
-              AidBio emphasizes delivery that survives real operational use.
-            </p>
-
-            <svg class="sparkline" viewBox="0 0 320 94" aria-hidden="true">
-              <path class="area"
-                d="M8,78 C36,72 48,58 72,50 C95,42 112,46 132,36 C154,24 176,18 198,26 C220,34 232,46 252,40 C274,33 286,18 312,12 L312,94 L8,94 Z">
-              </path>
-              <path class="line"
-                d="M8,78 C36,72 48,58 72,50 C95,42 112,46 132,36 C154,24 176,18 198,26 C220,34 232,46 252,40 C274,33 286,18 312,12">
-              </path>
-            </svg>
-
-            <div class="signal-grid">
-              <div class="mini-card">
-                <span class="mini-label">Pipeline focus</span>
-                <div class="mini-value">ML + AI</div>
-                <div class="mini-note">Prediction, automation, and reporting workflows</div>
-              </div>
-              <div class="mini-card">
-                <span class="mini-label">Domain fit</span>
-                <div class="mini-value">Agri + Bio</div>
-                <div class="mini-note">Agritech, biotech, omics, translational analysis</div>
-              </div>
-              <div class="mini-card">
-                <span class="mini-label">Delivery mode</span>
-                <div class="mini-value">Scoped</div>
-                <div class="mini-note">Clear milestones and maintainable code hand-off</div>
-              </div>
-              <div class="mini-card">
-                <span class="mini-label">Philosophy</span>
-                <div class="mini-value">Rigorous</div>
-                <div class="mini-note">No black-box hype without scientific accountability</div>
-              </div>
-            </div>
-          </div>
-        </aside>
+      <div class="hero-stats reveal delay-2">
+        <div class="stat">
+          <span class="stat-val">10+ years</span>
+          <span class="stat-label">Academic and industry R&amp;D experience</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">15+ papers</span>
+          <span class="stat-label">Peer-reviewed scientific publications</span>
+        </div>
+        <div class="stat">
+          <span class="stat-val">End-to-end</span>
+          <span class="stat-label">From interrogation to deployment</span>
+        </div>
       </div>
     </div>
   </header>
 
   <main>
+    <section class="signal-band">
+      <div class="container reveal">
+        <div class="signal-head">
+          <span class="signal-badge">Applied intelligence</span>
+          <span class="signal-tagline">Small teams. Serious output.</span>
+        </div>
+
+        <p class="signal-lead">
+          From field trials and climate-linked agronomic signal to omics interpretation and scientific reporting,
+          AidBio emphasizes delivery that survives real operational use.
+        </p>
+
+        <div class="signal-grid">
+          <div class="mini-card" style="--mini-accent: var(--spectrum-indigo);">
+            <span class="mini-label">Pipeline focus</span>
+            <div class="mini-value">ML + AI</div>
+            <div class="mini-note">Prediction, automation, and reporting workflows</div>
+          </div>
+          <div class="mini-card" style="--mini-accent: var(--spectrum-emerald);">
+            <span class="mini-label">Domain fit</span>
+            <div class="mini-value">Agri + Bio</div>
+            <div class="mini-note">Agritech, biotech, omics, translational analysis</div>
+          </div>
+          <div class="mini-card" style="--mini-accent: var(--spectrum-teal);">
+            <span class="mini-label">Delivery mode</span>
+            <div class="mini-value">Scoped</div>
+            <div class="mini-note">Clear milestones and maintainable code hand-off</div>
+          </div>
+          <div class="mini-card" style="--mini-accent: var(--spectrum-coral);">
+            <span class="mini-label">Philosophy</span>
+            <div class="mini-value">Rigorous</div>
+            <div class="mini-note">No black-box hype without scientific accountability</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section id="solutions" class="section">
       <div class="container">
         <div class="reveal">
@@ -1220,6 +1450,14 @@
 
         <div class="bento-grid">
           <article class="bento-card card-wide reveal delay-1">
+            <div class="card-icon" style="background: var(--gradient-dawn);" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M5 16.5l4.4-5.3 3.6 2.6 4.6-6.1" />
+                <circle cx="5" cy="16.5" r="1.7" fill="none" />
+                <circle cx="19" cy="6.5" r="1.7" fill="none" />
+              </svg>
+            </div>
             <h3>Machine Learning &amp; Predictive Modeling</h3>
             <p>
               Supervised learning, model selection, validation, and interpretation for field, laboratory, and
@@ -1235,6 +1473,14 @@
           </article>
 
           <article class="bento-card card-square reveal delay-2">
+            <div class="card-icon" style="background: var(--gradient-iris);" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M11 4l1.7 5.1 5.1 1.7-5.1 1.7L11 17.6l-1.7-5.1L4.2 10.8l5.1-1.7L11 4z" />
+                <circle cx="18.5" cy="17.5" r="1.7" fill="none" />
+                <path d="M15.4 15.2l1.7 1.1" />
+              </svg>
+            </div>
             <h3>Agentic AI Workflows</h3>
             <p>
               Domain-aware assistants, structured reporting flows, retrieval pipelines, and lightweight automation that
@@ -1248,6 +1494,14 @@
           </article>
 
           <article class="bento-card card-square reveal">
+            <div class="card-icon" style="background: var(--gradient-aurora);" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 20A8 8 0 0 1 10.6 6.4C16 5.4 17.5 4.5 19.4 2.5c.9 1.9 1.8 4 1.8 7.5 0 5.2-4.3 10-9.2 10z" />
+                <path d="M4.5 21c.5-3 2.5-5 5.5-6.5" />
+                <circle cx="4.5" cy="21" r="1.5" fill="none" />
+              </svg>
+            </div>
             <h3>Agritech &amp; Climate Analytics</h3>
             <p>
               Crop-linked and geospatial analytics for field trials, yield-oriented investigation, environmental signal
@@ -1256,6 +1510,15 @@
           </article>
 
           <article class="bento-card card-wide reveal delay-1">
+            <div class="card-icon" style="background: var(--gradient-flora);" aria-hidden="true">
+              <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+                stroke-linecap="round" stroke-linejoin="round">
+                <path d="M8.5 3.5c0 4.5 7 4.5 7 8.5s-7 4-7 8.5" />
+                <path d="M15.5 3.5c0 4.5-7 4.5-7 8.5s7 4 7 8.5" />
+                <path d="M9.9 7h4.2" />
+                <path d="M9.9 17h4.2" />
+              </svg>
+            </div>
             <h3>Omics, Bioinformatics &amp; Scientific Data Systems</h3>
             <p>
               Support for multi-omics interpretation, biomarker-oriented workflows, experimental data consolidation, and
@@ -1275,7 +1538,7 @@
     <section id="process" class="section process-section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">Engagement model</span>
+          <span class="eyebrow warm">Engagement model</span>
           <h2 class="heading-md">Rigorous process. Zero ambiguity.</h2>
           <p class="text-lead">
             Engagements are scoped tightly so teams spend time on science and decisions instead of deciphering vague
@@ -1284,25 +1547,25 @@
         </div>
 
         <div class="workflow-list reveal delay-1">
-          <div class="step">
+          <div class="step" style="--step-accent: var(--spectrum-indigo);">
             <div class="step-num">01</div>
             <h4>Define &amp; Align</h4>
             <p>Clarify the business question, scientific constraints, dataset realities, and decision context before
               implementation starts.</p>
           </div>
-          <div class="step">
+          <div class="step" style="--step-accent: var(--spectrum-teal);">
             <div class="step-num">02</div>
             <h4>Interrogate Data</h4>
             <p>Standardize, clean, audit, and explore the data to isolate signal from experimental and operational
               noise.</p>
           </div>
-          <div class="step">
+          <div class="step" style="--step-accent: var(--spectrum-emerald);">
             <div class="step-num">03</div>
             <h4>Build &amp; Validate</h4>
             <p>Develop reproducible, maintainable pipelines for prediction, interpretation, or structured automation.
             </p>
           </div>
-          <div class="step">
+          <div class="step" style="--step-accent: var(--spectrum-coral);">
             <div class="step-num">04</div>
             <h4>Ship &amp; Transfer</h4>
             <p>Deliver documented code, practical outputs, and a hand-off your internal team can actually own.</p>
@@ -1334,15 +1597,16 @@
               <div class="founder-links">
                 <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener" class="f-link">
                   <span>Connect on LinkedIn</span>
-                  <span aria-hidden="true">↗</span>
+                  <span class="f-ico" aria-hidden="true">↗</span>
                 </a>
                 <a href="https://github.com/matiollipt" target="_blank" rel="noopener" class="f-link">
                   <span>View GitHub repositories</span>
-                  <span aria-hidden="true">↗</span>
+                  <span class="f-ico" aria-hidden="true">↗</span>
                 </a>
-                <a href="papers.html" class="f-link">
+                <a href="https://scholar.google.com/scholar?q=%22Cleverson+Matiolli%22" target="_blank" rel="noopener"
+                  class="f-link">
                   <span>Read peer-reviewed papers</span>
-                  <span aria-hidden="true">→</span>
+                  <span class="f-ico" aria-hidden="true">↗</span>
                 </a>
               </div>
             </div>
@@ -1370,30 +1634,51 @@
       <div class="container">
         <div class="contact-card reveal">
           <h2 class="heading-md">Ready to extract signal from your data?</h2>
-          <p class="text-lead" style="margin: 0 auto 2rem;">
+          <p class="text-lead" style="margin: 0 auto var(--space-5);">
             AidBio engages through well-scoped projects designed to move from messy data to clear operational or
             scientific decisions.
           </p>
-          <a href="mailto:contact@aidbio.com" class="btn btn-primary">contact@aidbio.com</a>
+          <a href="mailto:contact@aidbio.com" class="btn btn-warm">contact@aidbio.com</a>
         </div>
       </div>
     </section>
   </main>
 
   <footer class="footer">
-    <div class="container footer-inner">
-      <div class="footer-brand">
-        <img src="assets/favicon.png" alt="" aria-hidden="true" />
-        <span>AidBio — AI &amp; Data Science for Life Sciences and Agritech</span>
+    <div class="container">
+      <div class="footer-top">
+        <div>
+          <div class="footer-brand">
+            <img src="assets/aidbio-mark-dark.webp" alt="" aria-hidden="true" />
+            <span class="brand-word">AidBio</span>
+          </div>
+          <p class="footer-blurb">AI &amp; data science for agritech and life sciences. Where biology, intelligence,
+            and mathematics meet the spectrum.</p>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-h">Explore</span>
+          <a href="#solutions">Solutions</a>
+          <a href="#process">Process</a>
+          <a href="#founder">Founder</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <div class="footer-col">
+          <span class="footer-col-h">Connect</span>
+          <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
+          <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
+          <a href="mailto:contact@aidbio.com">contact@aidbio.com</a>
+        </div>
       </div>
-      <p style="margin: 0;">&copy; 2026 AidBio. Built for the future of scientific decision-making.</p>
+      <div class="footer-bar">
+        <span>&copy; 2026 AidBio. Built for the future of scientific decision-making.</span>
+        <span>AI &amp; Data Science for Life Sciences and Agritech</span>
+      </div>
     </div>
   </footer>
 
   <script>
     (function () {
       const themeApi = window.__aidbioTheme;
-      const root = document.documentElement;
       const buttons = Array.from(document.querySelectorAll(".theme-option"));
       const nav = document.getElementById("site-nav");
       const STORAGE_KEY = themeApi.key;
@@ -1434,24 +1719,34 @@
 
       syncThemeButtons(getPreference());
 
-      function onScroll() {
-        const scrolled = window.scrollY > 12;
-        nav.classList.toggle("scrolled", scrolled);
+      // Mobile menu
+      const menuToggle = document.getElementById("menu-toggle");
+      const mobileMenu = document.getElementById("mobile-menu");
 
-        // Dynamic hero logo resize
-        const heroLogo = document.querySelector(".hero-logo");
-        if (heroLogo) {
-          const scrollPct = Math.min(window.scrollY / 400, 1);
-          const scale = 1 - (scrollPct * 0.12);
-          const opacity = 1 - (scrollPct * 0.45);
-          const translateY = window.scrollY * 0.15;
-          heroLogo.style.transform = `scale(${scale}) translateY(${translateY}px)`;
-          heroLogo.style.opacity = opacity;
-        }
+      function closeMenu() {
+        mobileMenu.classList.remove("open");
+        menuToggle.setAttribute("aria-expanded", "false");
+        menuToggle.setAttribute("aria-label", "Open menu");
+      }
+
+      menuToggle.addEventListener("click", () => {
+        const open = mobileMenu.classList.toggle("open");
+        menuToggle.setAttribute("aria-expanded", String(open));
+        menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+      });
+
+      mobileMenu.querySelectorAll("a").forEach((link) => {
+        link.addEventListener("click", closeMenu);
+      });
+
+      // Nav shadow on scroll
+      function onScroll() {
+        nav.classList.toggle("scrolled", window.scrollY > 12);
       }
       onScroll();
       window.addEventListener("scroll", onScroll, { passive: true });
 
+      // Scroll reveal
       const observer = new IntersectionObserver(
         (entries, obs) => {
           entries.forEach((entry) => {
