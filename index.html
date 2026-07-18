@@ -917,6 +917,112 @@
       white-space: nowrap;
     }
 
+    /* ============================================================ Projects */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: var(--space-4);
+      margin-top: var(--space-5);
+    }
+
+    .project-card {
+      display: flex;
+      flex-direction: column;
+      border-radius: var(--radius-lg);
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      box-shadow: var(--shadow-sm);
+      overflow: hidden;
+      transition:
+        transform var(--dur-base) var(--ease-spring),
+        border-color var(--dur-fast) var(--ease-out),
+        box-shadow var(--dur-fast) var(--ease-out);
+    }
+
+    .project-card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-lg);
+      border-color: var(--border-default);
+    }
+
+    .project-banner {
+      position: relative;
+      height: 132px;
+      display: flex;
+      align-items: flex-end;
+      padding: var(--space-4);
+      color: #fff;
+      overflow: hidden;
+    }
+
+    .project-banner::after {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(120% 90% at 85% 10%, rgba(255, 255, 255, 0.22), transparent 60%),
+        linear-gradient(180deg, transparent 40%, rgba(0, 0, 0, 0.22));
+      pointer-events: none;
+    }
+
+    .project-kind {
+      position: relative;
+      z-index: 1;
+      display: inline-flex;
+      align-items: center;
+      gap: var(--space-2);
+      padding: 5px 12px;
+      border-radius: var(--radius-full);
+      background: rgba(0, 0, 0, 0.28);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .project-body {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      padding: var(--space-5);
+    }
+
+    .project-body h3 {
+      margin: 0 0 var(--space-2);
+      font-family: var(--font-display);
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.2;
+      color: var(--text-strong);
+    }
+
+    .project-body p {
+      margin: 0 0 var(--space-4);
+      color: var(--text-body);
+      font-size: 14.5px;
+    }
+
+    .project-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-bottom: var(--space-4);
+    }
+
+    .project-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: var(--space-2);
+      margin-top: auto;
+    }
+
+    .project-actions .btn {
+      padding: 10px 18px;
+      font-size: 14px;
+    }
+
     /* ============================================================ Process */
     .process-section {
       border-top: 1px solid var(--border-subtle);
@@ -1318,6 +1424,7 @@
       <div class="nav-actions">
         <ul class="nav-links" aria-label="Primary">
           <li><a href="#solutions">Solutions</a></li>
+          <li><a href="#projects">Projects</a></li>
           <li><a href="#process">Process</a></li>
           <li><a href="#founder">Founder</a></li>
           <li><a href="#contact" class="nav-cta">Start a project</a></li>
@@ -1344,6 +1451,7 @@
 
   <div class="mobile-menu" id="mobile-menu">
     <a href="#solutions">Solutions</a>
+    <a href="#projects">Projects</a>
     <a href="#process">Process</a>
     <a href="#founder">Founder</a>
     <a href="#contact" class="btn btn-primary">Start a project</a>
@@ -1535,6 +1643,76 @@
       </div>
     </section>
 
+    <section id="projects" class="section">
+      <div class="container">
+        <div class="reveal">
+          <span class="eyebrow">Projects &amp; open tools</span>
+          <h2 class="heading-md">Things we build in the open.</h2>
+          <p class="text-lead">
+            Alongside client work, AidBio ships tools and experiments — from practical data libraries to explorations
+            of how perception and data meet. A couple are open to try right now.
+          </p>
+        </div>
+
+        <div class="projects-grid">
+          <article class="project-card reveal delay-1">
+            <div class="project-banner" style="background: var(--gradient-flora);">
+              <span class="project-kind">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <path d="M17 18a4 4 0 0 0-.9-7.9A6 6 0 1 0 6 15" /><path d="M8 18h9" />
+                </svg>
+                Open-source library
+              </span>
+            </div>
+            <div class="project-body">
+              <h3>AidWeather</h3>
+              <p>
+                A Python library and CLI that turns NASA POWER weather and solar-radiation data into clean,
+                cached, analysis-ready tables — for a single point, a transect, or a whole region.
+              </p>
+              <div class="project-tags">
+                <span class="tag">NASA POWER</span>
+                <span class="tag">Python + CLI</span>
+                <span class="tag">Agroclimatic</span>
+                <span class="tag">Solar</span>
+              </div>
+              <div class="project-actions">
+                <a href="aidweather.html" class="btn btn-primary">Explore AidWeather</a>
+                <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary">GitHub ↗</a>
+              </div>
+            </div>
+          </article>
+
+          <article class="project-card reveal delay-2">
+            <div class="project-banner" style="background: var(--gradient-iris);">
+              <span class="project-kind">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <circle cx="12" cy="12" r="9" /><path d="M12 3a9 9 0 0 0 0 18" /><circle cx="12" cy="12" r="2.4" />
+                </svg>
+                Interactive experiment
+              </span>
+            </div>
+            <div class="project-body">
+              <h3>SynViz</h3>
+              <p>
+                A synesthetic photism visualizer — a browser experiment that turns live or ambient sound into a
+                located, organic percept, layered with a small predictive-perception model. Playable right in the page.
+              </p>
+              <div class="project-tags">
+                <span class="tag">WebGL / Canvas</span>
+                <span class="tag">Audio</span>
+                <span class="tag">Synesthesia</span>
+                <span class="tag">Perception</span>
+              </div>
+              <div class="project-actions">
+                <a href="synviz.html" class="btn btn-warm">Launch SynViz</a>
+              </div>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
     <section id="process" class="section process-section">
       <div class="container">
         <div class="reveal">
@@ -1658,6 +1836,8 @@
         <div class="footer-col">
           <span class="footer-col-h">Explore</span>
           <a href="#solutions">Solutions</a>
+          <a href="#projects">Projects</a>
+          <a href="aidweather.html">AidWeather</a>
           <a href="#process">Process</a>
           <a href="#founder">Founder</a>
           <a href="#contact">Contact</a>
