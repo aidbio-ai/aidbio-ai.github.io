@@ -32,7 +32,6 @@ android {
     }
 }
 
-dependencies {
-    implementation("androidx.core:core:1.13.1")
-    implementation("androidx.activity:activity:1.9.2")
-}
+// No dependencies: the app uses only framework APIs (WebView, runtime
+// permissions, immersive mode), which keeps the build dependency-free.
+

@@ -1,8 +1,8 @@
 package ai.aidbio.synviz;
 
 import android.Manifest;
+import android.app.Activity;
 import android.content.pm.PackageManager;
-import android.os.Build;
 import android.os.Bundle;
 import android.view.View;
 import android.view.WindowManager;
@@ -13,14 +13,6 @@ import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import android.widget.Toast;
 
-import androidx.activity.ComponentActivity;
-import androidx.annotation.NonNull;
-import androidx.core.app.ActivityCompat;
-import androidx.core.content.ContextCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
-import androidx.core.view.WindowInsetsControllerCompat;
-
 /**
  * Hosts the Synesthetic Photism Visualizer (a self-contained WebGL + Web Audio
  * page bundled in assets/index.html) inside a full-screen WebView.
@@ -29,8 +21,12 @@ import androidx.core.view.WindowInsetsControllerCompat;
  * WebChromeClient permission request, which we can only grant once the OS-level
  * RECORD_AUDIO permission is held. We therefore ask for RECORD_AUDIO up front
  * and keep any pending WebView request until the user answers.
+ *
+ * Deliberately depends only on framework APIs (no AndroidX): minSdk 26 already
+ * provides runtime-permission and immersive-mode APIs, so the app ships with no
+ * external dependencies at all.
  */
-public class MainActivity extends ComponentActivity {
+public class MainActivity extends Activity {
 
     private static final int REQ_RECORD_AUDIO = 1001;
 
@@ -42,8 +38,6 @@ public class MainActivity extends ComponentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        // Draw behind the system bars for an immersive canvas.
-        WindowCompat.setDecorFitsSystemWindows(getWindow(), false);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
 
         webView = new WebView(this);
@@ -71,15 +65,14 @@ public class MainActivity extends ComponentActivity {
 
         // Ask for the mic before the page needs it so the getUserMedia grant is instant.
         if (!hasAudioPermission()) {
-            ActivityCompat.requestPermissions(
-                    this, new String[]{Manifest.permission.RECORD_AUDIO}, REQ_RECORD_AUDIO);
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, REQ_RECORD_AUDIO);
         }
 
         webView.loadUrl("file:///android_asset/index.html");
     }
 
     private boolean hasAudioPermission() {
-        return ContextCompat.checkSelfPermission(this, Manifest.permission.RECORD_AUDIO)
+        return checkSelfPermission(Manifest.permission.RECORD_AUDIO)
                 == PackageManager.PERMISSION_GRANTED;
     }
 
@@ -102,14 +95,13 @@ public class MainActivity extends ComponentActivity {
         } else {
             // Hold the WebView request until the OS dialog is answered.
             pendingWebRequest = request;
-            ActivityCompat.requestPermissions(
-                    this, new String[]{Manifest.permission.RECORD_AUDIO}, REQ_RECORD_AUDIO);
+            requestPermissions(new String[]{Manifest.permission.RECORD_AUDIO}, REQ_RECORD_AUDIO);
         }
     }
 
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions,
-                                           @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions,
+                                           int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         if (requestCode != REQ_RECORD_AUDIO) {
             return;
@@ -136,11 +128,14 @@ public class MainActivity extends ComponentActivity {
     }
 
     private void applyImmersiveMode() {
-        WindowInsetsControllerCompat controller =
-                WindowCompat.getInsetsController(getWindow(), getWindow().getDecorView());
-        controller.setSystemBarsBehavior(
-                WindowInsetsControllerCompat.BEHAVIOR_SHOW_TRANSIENT_BARS_BY_SWIPE);
-        controller.hide(WindowInsetsCompat.Type.systemBars());
+        View decor = getWindow().getDecorView();
+        decor.setSystemUiVisibility(
+                View.SYSTEM_UI_FLAG_LAYOUT_STABLE
+                        | View.SYSTEM_UI_FLAG_LAYOUT_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
+                        | View.SYSTEM_UI_FLAG_FULLSCREEN
+                        | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY);
     }
 
     @Override
