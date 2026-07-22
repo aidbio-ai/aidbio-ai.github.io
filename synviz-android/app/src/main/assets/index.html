@@ -1,0 +1,3618 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Synesthetic Photism Visualizer — v8 Safe Integration</title>
+  <style>
+    :root { --app-vh: 100dvh; --safe-top: env(safe-area-inset-top, 0px); --safe-bottom: env(safe-area-inset-bottom, 0px); }
+    body, html {
+      margin: 0; padding: 0;
+      width: 100%; height: 100%; min-height: 100dvh;
+      background-color: #030305;
+      color: #fff;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      overflow: hidden;
+      touch-action: none;
+      overscroll-behavior: none;
+    }
+    #glcanvas {
+      display: block;
+      position: fixed;
+      inset: 0;
+      z-index: 1;
+      width: 100vw;
+      height: var(--app-vh, 100dvh);
+    }
+
+    #ui-wrapper {
+      position: fixed; top: calc(var(--safe-top) + 15px); left: 15px;
+      z-index: 20; display: flex; flex-direction: column; gap: 10px;
+      pointer-events: auto;
+    }
+    #btn-settings {
+      background: rgba(8,8,14,0.72); border: 1px solid rgba(255,255,255,0.18);
+      backdrop-filter: blur(10px); padding: 8px 15px; border-radius: 20px;
+      color: #ddd; font-size: 11px; letter-spacing: 2px;
+      text-transform: uppercase; cursor: pointer; transition: all 0.3s; width: max-content;
+    }
+    #btn-settings:hover { background: rgba(255,255,255,0.1); }
+    #ui-layer { display: flex; flex-direction: column; gap: 10px; transition: opacity 0.3s, transform 0.3s; }
+    #ui-layer.hidden { opacity: 0; transform: translateY(-8px); pointer-events: none; }
+
+    .panel {
+      background: rgba(8,8,14,0.72); border: 1px solid rgba(255,255,255,0.1);
+      backdrop-filter: blur(10px); padding: 13px; border-radius: 8px;
+      font-size: 12px; width: 335px; max-width: calc(100vw - 30px);
+    }
+    .panel-title {
+      font-size: 9px; letter-spacing: 3px; text-transform: uppercase;
+      color: rgba(255,255,255,0.3); margin: 0 0 12px; border-bottom: 1px solid rgba(255,255,255,0.07);
+      padding-bottom: 6px;
+    }
+    .control-group { margin-bottom: 11px; }
+    .control-group:last-child { margin-bottom: 0; }
+    label {
+      display: flex; justify-content: space-between; margin-bottom: 5px;
+      color: #999; text-transform: uppercase; letter-spacing: 1px; font-size: 10px;
+    }
+    input[type="range"], select {
+      width: 100%; background: rgba(255,255,255,0.04);
+      color: #fff; border: 1px solid #383838; padding: 4px; border-radius: 4px;
+      box-sizing: border-box;
+    }
+    option { background: #111; color: #fff; }
+    .toggle-btn {
+      background: #1a1a24; border: 1px solid #3a3a4a; color: #bbb;
+      padding: 4px 10px; cursor: pointer; font-size: 10px; border-radius: 4px;
+      letter-spacing: 1px; text-transform: uppercase;
+    }
+    .toggle-btn.active { background: rgba(120,80,200,0.3); border-color: #7a50c8; color: #cba8ff; }
+    .button-row { display: flex; gap: 10px; align-items: center; justify-content: center; flex-wrap: wrap; }
+    button.secondary {
+      padding: 12px 24px; background: rgba(255,255,255,0.035); color: rgba(255,255,255,0.62);
+      border: 1px solid rgba(255,255,255,0.18); border-radius: 30px;
+      font-size: 11px; letter-spacing: 2px; text-transform: uppercase;
+      cursor: pointer; transition: all 0.35s;
+    }
+    button.secondary:hover { background: rgba(255,255,255,0.07); color: rgba(255,255,255,0.82); }
+    #mic-status { color: rgba(255,255,255,0.42); }
+    #error-overlay {
+      position: fixed; left: 50%; bottom: calc(var(--safe-bottom) + 20px); transform: translateX(-50%);
+      z-index: 60; display: none; max-width: min(720px, 90vw);
+      background: rgba(30,6,12,0.88); border: 1px solid rgba(255,110,140,0.35);
+      color: rgba(255,220,228,0.92); padding: 10px 14px; border-radius: 8px;
+      font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+      font-size: 11px; line-height: 1.5; white-space: pre-wrap;
+    }
+
+
+    #debug-overlay {
+      position: fixed; top: calc(var(--safe-top) + 15px); right: 15px; z-index: 20;
+      background: rgba(0,0,0,0.85); border: 1px solid #252530;
+      padding: 14px; border-radius: 8px; font-family: monospace;
+      font-size: 11px; color: #4af; display: none; pointer-events: none; min-width: 190px;
+    }
+
+    #start-screen {
+      position: fixed; inset: 0; width: 100vw; height: var(--app-vh, 100dvh);
+      background: #020206; display: flex; flex-direction: column;
+      justify-content: center; align-items: center; z-index: 50;
+      transition: opacity 0.8s;
+    }
+    #start-screen.hidden { opacity: 0; pointer-events: none; }
+    .start-title {
+      font-weight: 200; letter-spacing: 10px; font-size: 22px;
+      color: rgba(255,255,255,0.88); text-align: center; margin-bottom: 10px;
+      line-height: 1.6;
+    }
+    .start-sub {
+      font-size: 10px; letter-spacing: 4px; text-transform: uppercase;
+      color: rgba(255,255,255,0.25); margin-bottom: 40px; text-align: center;
+    }
+    button.primary {
+      padding: 14px 40px; background: transparent; color: rgba(255,255,255,0.8);
+      border: 1px solid rgba(255,255,255,0.35); border-radius: 30px;
+      font-size: 12px; letter-spacing: 3px; text-transform: uppercase;
+      cursor: pointer; transition: all 0.35s;
+    }
+    button.primary:hover { background: rgba(255,255,255,0.07); border-color: rgba(255,255,255,0.6); }
+    #status {
+      margin-top: 22px; color: rgba(255,255,255,0.3); font-size: 10px;
+      letter-spacing: 2px; text-transform: uppercase; max-width: 320px;
+      line-height: 2; text-align: center;
+    }
+    .start-source {
+      width: min(360px, 86vw); margin-top: 18px; color: rgba(255,255,255,0.36);
+      font-size: 9px; letter-spacing: 2px; text-transform: uppercase; text-align: left;
+    }
+    .start-source select { margin-top: 7px; padding: 8px; }
+
+
+    .microcopy {
+      font-size: 9px; line-height: 1.55; color: rgba(255,255,255,0.36);
+      letter-spacing: 0.8px; margin-top: 6px;
+    }
+    .mind-meter { display: grid; grid-template-columns: 78px 1fr 34px; align-items: center; gap: 8px; }
+    .mind-meter .mm-lab { color: rgba(255,255,255,0.55); }
+    .mind-meter .mm-track { height: 7px; border-radius: 4px; background: rgba(255,255,255,0.08); overflow: hidden; }
+    .mind-meter .mm-fill { display: block; height: 100%; width: 0%; border-radius: 4px; transition: width 90ms linear; }
+    .mind-meter .mm-val { text-align: right; color: rgba(255,255,255,0.75); font-variant-numeric: tabular-nums; }
+    .mind-meter.mm-flash .mm-track { box-shadow: 0 0 8px 1px rgba(255,122,122,0.8); }
+    .legend-chip {
+      display: inline-flex; align-items: center; gap: 6px; margin-top: 6px;
+      color: rgba(255,255,255,0.42); font-size: 9px; letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+    .legend-dot { width: 7px; height: 7px; border-radius: 50%; background: rgba(180,150,255,0.65); }
+
+
+
+    #plot-overlay {
+      position: fixed; right: 18px; bottom: calc(var(--safe-bottom) + 18px); z-index: 30;
+      width: min(58vw, 860px); max-height: min(74vh, 760px);
+      background: rgba(4,4,9,0.78); border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(14px); border-radius: 12px; padding: 12px;
+      box-shadow: 0 18px 55px rgba(0,0,0,0.55);
+      opacity: 1; transform: translateY(0); transition: opacity 0.25s, transform 0.25s;
+      pointer-events: auto;
+    }
+    #plot-overlay.hidden { opacity: 0; transform: translateY(10px); pointer-events: none; }
+    .plot-head { display: flex; align-items: center; justify-content: space-between; gap: 12px;
+      color: rgba(255,255,255,0.72); font-size: 10px; letter-spacing: 2px; text-transform: uppercase; margin-bottom: 8px; }
+    #plot-title { color: rgba(255,255,255,0.86); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+    #plot-image { display: block; width: 100%; max-height: calc(min(74vh, 760px) - 72px); object-fit: contain; border-radius: 8px; background: rgba(255,255,255,0.02); }
+    .plot-controls { display:flex; gap: 8px; align-items:center; }
+    .plot-nav { background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.16); color: rgba(255,255,255,0.74); border-radius: 999px; padding: 3px 8px; cursor: pointer; font-size: 10px; letter-spacing: 1px; }
+    .plot-nav:hover { background: rgba(255,255,255,0.12); }
+
+
+
+    .control-tabs {
+      display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
+      margin-bottom: 12px;
+    }
+    .tab-btn {
+      background: rgba(255,255,255,0.035); border: 1px solid rgba(255,255,255,0.11);
+      color: rgba(255,255,255,0.52); border-radius: 8px; padding: 8px 6px;
+      font-size: 9px; letter-spacing: 1.4px; text-transform: uppercase; cursor: pointer;
+    }
+    .tab-btn.active {
+      background: rgba(120,80,200,0.22); border-color: rgba(168,128,255,0.44);
+      color: rgba(226,216,255,0.90);
+    }
+    .controls-page { display: none; max-height: min(64dvh, 650px); overflow-y: auto; padding-right: 4px; }
+    .controls-page.active { display: block; }
+    .controls-page::-webkit-scrollbar { width: 6px; }
+    .controls-page::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.13); border-radius: 999px; }
+    .control-subtitle {
+      margin: -3px 0 12px; font-size: 9px; line-height: 1.55;
+      color: rgba(255,255,255,0.34); letter-spacing: 0.8px;
+    }
+    .compact-toggle-row {
+      display: flex; align-items: center; justify-content: space-between; gap: 10px;
+      margin-bottom: 10px;
+    }
+    .compact-toggle-row label { margin: 0; }
+    .science-master {
+      border: 1px solid rgba(160,130,255,0.16); border-radius: 8px;
+      padding: 10px; background: rgba(120,80,200,0.055); margin-bottom: 11px;
+    }
+    @media (max-width: 620px) {
+      #ui-wrapper { top: 10px; left: 10px; }
+      .panel { width: min(360px, calc(100vw - 24px)); max-height: calc(var(--app-vh, 100dvh) - 78px); overflow: hidden; }
+      .control-tabs { grid-template-columns: repeat(2, 1fr); }
+      #plot-overlay { width: calc(100vw - 24px); right: 12px; bottom: calc(var(--safe-bottom) + 12px); }
+    }
+
+    .section-divider {
+      border: none; border-top: 1px solid rgba(255,255,255,0.07);
+      margin: 8px 0;
+    }
+
+    .tone-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px;
+    }
+    .tone-cell {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      margin: 0; color: rgba(255,255,255,0.62); text-transform: none;
+      letter-spacing: 1px; font-size: 11px;
+    }
+    .tone-cell input[type="color"] {
+      width: 100%; height: 34px; padding: 0; border-radius: 6px;
+      border: 1px solid rgba(255,255,255,0.14); background: transparent;
+      cursor: pointer;
+    }
+    .tone-cell input[type="color"]::-webkit-color-swatch-wrapper { padding: 2px; }
+    .tone-cell input[type="color"]::-webkit-color-swatch { border: none; border-radius: 4px; }
+  </style>
+</head>
+<body>
+
+<div id="start-screen">
+  <div class="start-title">SYNESTHETIC<br>PROJECTION</div>
+  <div class="start-sub">A located, consistent, organic percept — not a light show</div>
+  <div class="button-row">
+    <button class="primary" id="btn-start">Open Audio & Start</button>
+    <button class="secondary" id="btn-ambient-start">Start Ambient Mode</button>
+  </div>
+  <div class="start-source">
+    Audio Source
+    <select id="ctrl-start-audio-source" aria-label="Startup audio source">
+      <option value="mic">Microphone</option>
+      <option value="system">Device output / system audio</option>
+      <option value="both">Microphone + device output</option>
+    </select>
+  </div>
+  <div id="status">Choose microphone, device output, or both. Device output uses screen/system-audio capture for cleaner frequency analysis when your OS exposes loopback audio.</div>
+</div>
+
+<div id="ui-wrapper">
+  <button id="btn-settings">⚙ Settings</button>
+  <div id="ui-layer" class="hidden">
+    <div class="panel">
+      <div class="control-tabs" role="tablist" aria-label="Visualizer controls">
+        <button class="tab-btn active" data-tab="signal" type="button">Signal</button>
+        <button class="tab-btn" data-tab="tone" type="button">Tone</button>
+        <button class="tab-btn" data-tab="layers" type="button">Layers</button>
+        <button class="tab-btn" data-tab="science" type="button">Science</button>
+        <button class="tab-btn" data-tab="mind" type="button">Mind</button>
+        <button class="tab-btn" data-tab="figures" type="button">Figures</button>
+      </div>
+
+      <div class="controls-page active" data-page="signal">
+        <div class="panel-title">Signal / Input</div>
+        <div class="control-subtitle">Microphone access is explicit. Closing the mic returns the app to ambient simulation.</div>
+        <div class="control-group">
+          <label>Messiaen Palette</label>
+          <select id="ctrl-palette">
+            <option value="mode2_t1">Mode 2 / T1 — Violet Mystère</option>
+            <option value="mode2_t2">Mode 2 / T2 — Or et Brun</option>
+            <option value="mode2_t3">Mode 2 / T3 — Vert Argenté</option>
+            <option value="soma">Soma — Touch & Heat</option>
+          </select>
+        </div>
+        <div class="control-group">
+          <label><span>Sensitivity</span><span id="val-sens">1.0</span></label>
+          <input type="range" id="ctrl-sens" min="0.1" max="3" step="0.1" value="1.0">
+        </div>
+        <div class="control-group">
+          <label><span>Visual Decay</span><span id="val-decay">0.05</span></label>
+          <input type="range" id="ctrl-decay" min="0.01" max="0.2" step="0.01" value="0.05">
+        </div>
+        <div class="control-group">
+          <label>Audio Source</label>
+          <select id="ctrl-audio-source" aria-label="Audio source">
+            <option value="mic">Microphone</option>
+            <option value="system">Device output / system audio</option>
+            <option value="both">Microphone + device output</option>
+          </select>
+          <div class="microcopy">Device output captures the computer's playback stream when Chromium/Electron and your OS expose loopback audio. For system audio, choose a screen/window and enable Share audio when prompted.</div>
+        </div>
+        <div class="control-group">
+          <label style="margin-bottom:8px;"><span>Audio Capture</span><button class="toggle-btn" id="btn-mic">Open Audio</button></label>
+          <div class="microcopy" id="mic-status">Audio closed — ambient simulation active.</div>
+        </div>
+        <hr class="section-divider">
+        <div class="control-group">
+          <label style="margin-bottom:8px;"><span>FFT Wave Blending</span><button class="toggle-btn" id="btn-spectral-blend">Off</button></label>
+          <div class="microcopy">Adds a stateful spectral-wave mixer on top of the current mapping. Low, mid, and high FFT bands are blended with temporal memory and then modulate the existing visual fields without replacing them.</div>
+        </div>
+        <div class="control-group">
+          <label><span>Blend Strength</span><span id="val-spectral-strength">0.35</span></label>
+          <input type="range" id="ctrl-spectral-strength" min="0.00" max="1.00" step="0.01" value="0.35">
+        </div>
+        <div class="control-group">
+          <label><span>Temporal Memory</span><span id="val-spectral-memory">0.82</span></label>
+          <input type="range" id="ctrl-spectral-memory" min="0.50" max="0.98" step="0.01" value="0.82">
+          <div class="microcopy">Higher memory makes the spectral state more recurrent and persistent; lower memory makes it more immediate and reactive.</div>
+        </div>
+        <div class="control-group">
+          <label style="margin-bottom:8px;"><span>Advanced Void Model</span><button class="toggle-btn active" id="btn-void-model">On</button></label>
+          <label><span>Void Coherence Strength</span><span id="val-void-strength">0.83</span></label>
+          <input type="range" id="ctrl-void-strength" min="0.00" max="1.00" step="0.01" value="0.83">
+          <div class="microcopy">Combines FFT spectral blend, harmonicity, predictive stability, and inverse toroidal curvature to control the central void size. It only becomes active when FFT Wave Blending is enabled.</div>
+        </div>
+        <div class="control-group">
+          <label style="margin-bottom:8px;"><span>Cortical Form Field</span><button class="toggle-btn active" id="btn-form-field">On</button></label>
+          <label><span>Form Strength</span><span id="val-form-strength">0.35</span></label>
+          <input type="range" id="ctrl-form-strength" min="0.00" max="1.00" step="0.01" value="0.35">
+          <div class="microcopy">Bressloff–Cowan retino-cortical map: a faint enveloping tunnel drifting around the void, kept subtle so it integrates with the photisms rather than covering them. It spins with the rhythm — faster onsets, faster spin — and inner and outer rings turn at different rates, so the flow drags the rings into spirals and reverses as notes start and stop.</div>
+        </div>
+        <hr class="section-divider">
+        <div class="control-group" style="display:flex;justify-content:space-between;align-items:center;">
+          <label style="margin:0;">Debug</label>
+          <button class="toggle-btn" id="btn-debug">Show</button>
+        </div>
+      </div>
+
+      <div class="controls-page" data-page="tone">
+        <div class="panel-title">Tone → Colour Map</div>
+        <div class="control-subtitle">Your synesthetic pairings. Each pitch class maps to one stable colour — the same note is always the same colour, the way real synesthesia is. Play a tone and tune its swatch until it matches what you see. Saved to this browser.</div>
+        <div id="tone-swatches" class="tone-grid"></div>
+        <div class="button-row" style="margin-top:12px;">
+          <button class="toggle-btn" id="btn-tone-reset" type="button">Reset to defaults</button>
+        </div>
+        <div class="microcopy" style="margin-top:8px;">Register still shades each tone — higher notes lighten, lower notes darken — but the hue itself never changes or randomises.</div>
+      </div>
+
+      <div class="controls-page" data-page="layers">
+        <div class="panel-title">Perceptual Layers</div>
+        <div class="control-subtitle">These are the original visual layers. Defaults preserve the previous behavior.</div>
+        <div class="control-group">
+          <label><span>Bg Nebula</span><span id="val-bg-bright">0.03</span></label>
+          <input type="range" id="ctrl-bg-bright" min="0.00" max="1.00" step="0.01" value="0.03">
+        </div>
+        <div class="control-group">
+          <label><span>Photisms</span><span id="val-fg-bright">0.75</span></label>
+          <input type="range" id="ctrl-fg-bright" min="0.05" max="1.00" step="0.01" value="0.75">
+        </div>
+        <div class="control-group">
+          <label><span>Toroidal Flow</span><span id="val-flow">1.35</span></label>
+          <input type="range" id="ctrl-flow" min="0.0" max="1.5" step="0.05" value="1.35">
+        </div>
+        <div class="control-group">
+          <label><span>Soma Field</span><span id="val-soma">0.52</span></label>
+          <input type="range" id="ctrl-soma" min="0.0" max="1.00" step="0.01" value="0.52">
+        </div>
+        <div class="control-group">
+          <label><span>Spiral Pull</span><span id="val-spiral">0.68</span></label>
+          <input type="range" id="ctrl-spiral" min="0.0" max="1.00" step="0.01" value="0.68">
+        </div>
+        <div class="control-group">
+          <label><span>Void Focal Distance</span><span id="val-void-focal">0.40</span></label>
+          <input type="range" id="ctrl-void-focal" min="0.00" max="0.75" step="0.01" value="0.40">
+          <div class="microcopy">Controls the distance between the ellipse focal points. At 0 the void becomes circular; low values keep it close to a circle.</div>
+        </div>
+      </div>
+
+      <div class="controls-page" data-page="science">
+        <div class="panel-title">Animated Scientific Details</div>
+        <div class="science-master">
+          <div class="compact-toggle-row">
+            <label><span>Scientific Overlay</span></label>
+            <button class="toggle-btn active" id="btn-science-overlay">On</button>
+          </div>
+          <div class="microcopy">Toggles the animated grid lattice, module rulers, phase torus, manifold trajectory, and distortion legend drawn on top of the perceptual simulation.</div>
+        </div>
+        <div class="control-group">
+          <label><span>Grid Lattice</span><span id="val-grid">0.12</span></label>
+          <input type="range" id="ctrl-grid" min="0.00" max="1.00" step="0.01" value="0.12">
+          <div class="microcopy">Hexagonal firing fields: pitch shifts phase; energy expands the grid.</div>
+        </div>
+        <div class="control-group">
+          <label><span>Phase Torus</span><span id="val-phase">0.54</span></label>
+          <input type="range" id="ctrl-phase" min="0.00" max="1.00" step="0.01" value="0.54">
+        </div>
+        <div class="control-group">
+          <label><span>Manifold Trace</span><span id="val-manifold">0.70</span></label>
+          <input type="range" id="ctrl-manifold" min="0.00" max="1.00" step="0.01" value="0.70">
+        </div>
+        <div class="control-group">
+          <label><span>Modules</span><span id="val-modules">0.45</span></label>
+          <input type="range" id="ctrl-modules" min="0.00" max="1.00" step="0.01" value="0.45">
+          <div class="legend-chip"><span class="legend-dot"></span>fine / medium / coarse phase rulers</div>
+        </div>
+        <hr class="section-divider">
+        <div class="control-group">
+          <label style="margin-bottom:8px;"><span>Neural Field Distortion</span><button class="toggle-btn active" id="btn-distortion">On</button></label>
+          <select id="ctrl-distortion-band">
+            <option value="delta">Delta 1–4 Hz — slow broad deformation</option>
+            <option value="theta" selected>Theta 4–8 Hz — navigation rhythm</option>
+            <option value="alpha">Alpha 8–12 Hz — moderate cortical warp</option>
+            <option value="beta">Beta 13–30 Hz — tighter recurrent ripple</option>
+            <option value="gamma">Gamma 30–80 Hz — fine local deformation</option>
+            <option value="highGamma">High gamma 80–140 Hz — micro-shimmer</option>
+          </select>
+          <label style="margin-top:8px;"><span>Distortion Amount</span><span id="val-distortion">0.35</span></label>
+          <input type="range" id="ctrl-distortion" min="0.00" max="1.00" step="0.01" value="0.35">
+          <div class="microcopy">Applies frequency-band-specific warping to the scientific neural field overlays only when enabled.</div>
+        </div>
+      </div>
+
+      <div class="controls-page" data-page="mind">
+        <div class="panel-title">Predictive Mind &amp; Generative Sound</div>
+        <div class="control-subtitle">A small perceiving-and-imagining layer. It listens, predicts what comes next, lets several feature "columns" vote on a percept, remembers short motifs, and can voice them back — quietly, and only when you turn sound on.</div>
+        <div class="control-group" id="mind-live-readout" style="background:rgba(255,255,255,0.04); border-radius:6px; padding:10px 12px;">
+          <div style="font-size:9px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,0.35);margin-bottom:8px;">Live — updates every frame</div>
+          <div class="mind-meters" style="display:flex;flex-direction:column;gap:7px;font-size:11px;">
+            <div class="mind-meter" data-k="surprise"><span class="mm-lab">Surprise</span><span class="mm-track"><span class="mm-fill" style="background:#ff7a7a;"></span></span><span class="mm-val" id="live-surprise">0.00</span></div>
+            <div class="mind-meter" data-k="consensus"><span class="mm-lab">Consensus</span><span class="mm-track"><span class="mm-fill" style="background:#7ad0ff;"></span></span><span class="mm-val" id="live-consensus">0.00</span></div>
+            <div class="mind-meter" data-k="dmn"><span class="mm-lab">Default-mode</span><span class="mm-track"><span class="mm-fill" style="background:#b48cff;"></span></span><span class="mm-val" id="live-dmn">0.00</span></div>
+            <div class="mind-meter" data-k="recall"><span class="mm-lab">Recall</span><span class="mm-track"><span class="mm-fill" style="background:#ffcf7a;"></span></span><span class="mm-val" id="live-recall">0.00</span></div>
+            <div class="mind-meter" data-k="synth"><span class="mm-lab">Audible out</span><span class="mm-track"><span class="mm-fill" style="background:#7affb0;"></span></span><span class="mm-val" id="live-synth">0.00</span></div>
+          </div>
+          <div style="margin-top:8px;font-size:12px;">Voicing note: <span id="live-note" style="color:#fc8;">—</span></div>
+        </div>
+        <div class="control-group">
+          <label style="margin-bottom:8px;"><span>Demo: oddball stimulus</span><button class="toggle-btn" id="btn-demo">Off</button></label>
+          <div class="microcopy">Plays a regular 4-note motif to the model with an out-of-key deviant every 7th note — no mic needed. Watch <strong>Surprise</strong> settle low as the pattern repeats, then spike on each deviant. That spike is the predictive-coding mismatch response; if it moves, the model is working.</div>
+        </div>
+        <div class="control-group">
+          <label style="margin-bottom:8px;"><span>Predictive model</span><button class="toggle-btn active" id="btn-cognition">On</button></label>
+          <div class="microcopy">Runs the predictive-coding + column-voting + memory model. Silent on its own; it only nudges the visuals by the amount below. Watch the numbers above move — that's proof it's running even before you turn on sound.</div>
+        </div>
+        <div class="control-group">
+          <label><span>Influence on visuals</span><span id="val-cog-influence">0.45</span></label>
+          <input type="range" id="ctrl-cog-influence" min="0.00" max="1.00" step="0.01" value="0.45">
+          <div class="microcopy">How much prediction error (surprise) and default-mode drift feed the onset, gamma and ambient fields. Zero leaves the original look untouched.</div>
+        </div>
+        <div class="control-group">
+          <label><span>Attention / precision</span><span id="val-precision">0.55</span></label>
+          <input type="range" id="ctrl-precision" min="0.00" max="1.00" step="0.01" value="0.55">
+          <div class="microcopy">Precision-weighting of prediction error: higher makes the model trust clear, tonal input more sharply, so surprise spikes harder on real changes.</div>
+        </div>
+        <hr class="section-divider">
+        <div class="control-group">
+          <label style="margin-bottom:8px;"><span>Generative sound</span><button class="toggle-btn" id="btn-synth">Off</button></label>
+          <div class="microcopy" id="synth-status">Off. Turning this on starts an audio voice that harmonises with what you play and, in the quiet, drifts through remembered motifs (default-mode). Use headphones if your mic is open.</div>
+        </div>
+        <div class="control-group">
+          <label style="margin-bottom:0;">Not sure it's making sound?</label>
+          <button class="toggle-btn" id="btn-test-tone" type="button" style="margin-top:8px;">🔊 Play test tone</button>
+          <div class="microcopy">Plays one loud, unmistakable chord immediately — bypasses all prediction/memory logic. If you hear this but nothing else, the audio engine is fine and the rest is just being quiet (see below).</div>
+        </div>
+        <div class="control-group">
+          <label><span>Intrinsic volume</span><span id="val-synth-volume">0.35</span></label>
+          <input type="range" id="ctrl-synth-volume" min="0.00" max="1.00" step="0.01" value="0.35">
+        </div>
+        <div class="control-group">
+          <label><span>Memory replay</span><span id="val-memory-replay">0.55</span></label>
+          <input type="range" id="ctrl-memory-replay" min="0.00" max="1.00" step="0.01" value="0.55">
+          <div class="microcopy">How strongly recalled motifs are replayed (time-compressed, sharp-wave-ripple style) when the default-mode drive is high. This only has something to replay <strong>after</strong> you've opened the mic and hummed/played a short repeating phrase, then gone quiet for ~2 seconds — that's when a motif gets filed away and can come back.</div>
+        </div>
+        <div class="control-group">
+          <label style="margin-bottom:8px;"><span>Active-inference loop</span><button class="toggle-btn active" id="btn-active-inference">On</button></label>
+          <div class="microcopy">In quiet, lets the model hear its own output, so imagined sequences stay coherent instead of drifting randomly.</div>
+        </div>
+      </div>
+
+      <div class="controls-page" data-page="figures">
+        <div class="panel-title">Static Explanatory Figures</div>
+        <div class="control-subtitle">Separate from the animated scientific overlay. These show the generated reference plots as a gallery.</div>
+        <div class="control-group">
+          <label style="margin-bottom:8px;"><span>Plot Gallery</span><button class="toggle-btn" id="btn-plots">Show</button></label>
+          <select id="ctrl-plot-select"></select>
+          <div class="microcopy">Shows the generated explanatory neuroscience figures as an overlay. Rendering remains unchanged.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="debug-overlay">
+  <div>FPS: <span id="dbg-fps">0</span></div>
+  <div>Pitch: <span id="dbg-pitch">—</span> Hz</div>
+  <div>MIDI: <span id="dbg-midi">—</span></div>
+  <div>RMS: <span id="dbg-rms">0.000</span></div>
+  <div>Centroid: <span id="dbg-centroid">0</span> Hz</div>
+  <div>Photisms: <span id="dbg-photisms">0</span>/50</div>
+  <div>Flow P.: <span id="dbg-particles">0</span></div>
+  <div>Spiral φ: <span id="dbg-spiral">0.000</span></div>
+  <div>Grid φx: <span id="dbg-phix">0.000</span></div>
+  <div>Grid φy: <span id="dbg-phiy">0.000</span></div>
+  <div>FFT L/M/H: <span id="dbg-blend">0.00 / 0.00 / 0.00</span></div>
+  <div>Void B/H/S/K/F: <span id="dbg-void">0.00 / 0.00 / 0.00 / 1.00 / 1.00</span></div>
+  <div>Surp/DMN/Cons/Prec: <span id="dbg-cog">0.00 / 0.00 / 0.00 / 0.50</span></div>
+  <div>Recall/Voice: <span id="dbg-cog2">0.00 / —</span></div>
+</div>
+
+
+<div id="plot-overlay" class="hidden">
+  <div class="plot-head">
+    <span id="plot-title">Reference plot</span>
+    <div class="plot-controls">
+      <button class="plot-nav" id="btn-plot-prev">Prev</button>
+      <span id="plot-index">1/9</span>
+      <button class="plot-nav" id="btn-plot-next">Next</button>
+    </div>
+  </div>
+  <img id="plot-image" alt="Neuroscience reference plot">
+</div>
+
+<div id="error-overlay"></div>
+
+<canvas id="glcanvas"></canvas>
+
+<script>
+// SAFE INTEGRATION BUILD
+// Baseline: exact v8 visual/audio-response engine.
+// Added: latest tone editor, predictive cognition, demo, generative sound,
+// Android lifecycle/UI work. These additions are isolated from v8 rendering.
+const TAU = Math.PI * 2;
+const PHI = (1 + Math.sqrt(5)) / 2;
+
+const CONFIG = {
+  lowMidi: 36, highMidi: 96,
+  maxPhotisms: 50,
+  baseRadius: 80,
+  flowParticles: 12000,
+  bgParticles: 200,
+  somaParticles: 140,
+  minSpawnRMS: 0.012,
+  photismCooldown: 0.045,
+  highPitchLightening: 0.34,
+  torusMajorR: 0.38,
+  torusMinorR: 0.22,
+  gridSpacing: 120,
+  gridRows: 9,
+  gridCols: 11,
+  manifoldTrail: 420
+};
+
+const STATE = {
+  sensitivity: 1.0,
+  decay: 0.05,
+  palette: 'mode2_t1',
+  debug: false,
+  uiVisible: false,
+  audioReady: false,
+  ambientMode: false,
+  audioInputMode: 'mic',
+  bgBrightness: 0.03,
+  fgBrightness: 0.75,
+  flowBrightness: 1.35,
+  somaBrightness: 0.52,
+  spiralPull: 0.68,
+  voidFocalDistance: 0.40,
+  gridLattice: 0.12,
+  phaseTorus: 0.54,
+  manifoldTrace: 0.70,
+  moduleOverlay: 0.45,
+  scientificDetails: true,
+  plotsVisible: false,
+  activePlot: 0,
+  neuralDistortion: true,
+  distortionBand: 'theta',
+  distortionAmount: 0.35,
+  spectralBlend: false,
+  spectralBlendStrength: 0.35,
+  spectralBlendMemory: 0.82,
+  advancedVoidModel: true,
+  advancedVoidStrength: 0.83,
+  // ── Bressloff–Cowan retino-cortical form-constant field (Klüver forms) ──
+  formField: true,            // render the cortical form-constant substrate
+  formStrength: 0.35,         // compressed ~15× internally → integrated, not overlay
+  // ── Predictive-cognition + generative-sound layer (v9) ──
+  cognitionOn: true,          // run the predictive/column/memory model (silent unless synth on)
+  cognitionInfluence: 0.45,   // how much cognition scalars modulate the existing visuals
+  synthOn: false,             // audible generative sound — OFF until the user opts in (needs a gesture)
+  synthVolume: 0.35,          // intrinsic (default-mode) voice loudness
+  precisionGain: 0.55,        // attention: how sharply prediction error is precision-weighted
+  memoryReplay: 0.55,         // how strongly recalled motifs drive the intrinsic voice
+  activeInference: true,      // feed the synth's own output back into perception (closes the loop)
+  phaseX: 0,
+  phaseY: 0
+};
+
+const PLOT_LIBRARY = [
+  { title: "1 — Grid-cell hexagonal lattice", src: "grid_cell_firing_across_space.png" },
+  { title: "2 — Phase-shifted grid cells", src: "grid_cell_phase_and_lattice_shifts.png" },
+  { title: "3 — Two phases define a torus", src: "two_periodic_phases_form_a_torus.png" },
+  { title: "4 — Continuous attractor bump", src: "continuous_attractor_dynamics_in_activity_bumps.png" },
+  { title: "5 — Population toroidal manifold", src: "population_activity_on_a_toroidal_manifold.png" },
+  { title: "6 — Path integration on the torus", src: "path_integration_on_the_torus.png" },
+  { title: "7 — Multiple grid modules", src: "multiple_grid_modules_and_spatial_coding.png" },
+  { title: "8 — Geometry versus topology", src: "geometry_and_topology_in_grids.png" },
+  { title: "9 — Mechanistic interpretations", src: "mechanisms_of_toroidal_population_coding.png" }
+];
+
+const NEURAL_BANDS = {
+  delta: { label: "Delta 1–4 Hz", hz: 2.5, amp: 0.070, scale: 0.85, speed: 0.35 },
+  theta: { label: "Theta 4–8 Hz", hz: 6.0, amp: 0.052, scale: 0.62, speed: 0.60 },
+  alpha: { label: "Alpha 8–12 Hz", hz: 10.0, amp: 0.040, scale: 0.46, speed: 0.85 },
+  beta: { label: "Beta 13–30 Hz", hz: 20.0, amp: 0.030, scale: 0.32, speed: 1.10 },
+  gamma: { label: "Gamma 30–80 Hz", hz: 55.0, amp: 0.020, scale: 0.22, speed: 1.45 },
+  highGamma: { label: "High gamma 80–140 Hz", hz: 110.0, amp: 0.014, scale: 0.16, speed: 1.85 }
+};
+
+const PALETTES = {
+  mode2_t1: {
+    name: "Violet Mystère",
+    dominant: ["#2e1f7a","#1c2f8f","#101d4f","#5a2ca0"],
+    accents:  ["#9a7627","#9b111e","#b784d7","#6d5f87","#050509"],
+    somaWarm: [60, 30, 120], somaCool: [140, 80, 220]
+  },
+  mode2_t2: {
+    name: "Or et Brun",
+    dominant: ["#9a7627","#6b6760","#5a2e1f","#7a3b24"],
+    accents:  ["#8b0000","#f0d27a","#7a6342"],
+    somaWarm: [130, 60, 10], somaCool: [180, 140, 60]
+  },
+  mode2_t3: {
+    name: "Vert Argenté",
+    dominant: ["#5f8d53","#4f9d55","#5d8a52","#336b45"],
+    accents:  ["#396d87","#6b6760","#d95f32"],
+    somaWarm: [40, 100, 50], somaCool: [60, 160, 120]
+  },
+  soma: {
+    name: "Soma — Touch & Heat",
+    dominant: ["#7a2020","#9b4420","#4a1f40","#1f304a"],
+    accents:  ["#3a2860","#7a1b3a","#c87030","#4060a0"],
+    somaWarm: [180, 60, 20], somaCool: [30, 80, 200]
+  }
+};
+
+// ─────────────────────────────────────────────
+// Deterministic tone → colour map (the synesthetic core)
+// One stable pigment per pitch class, index = round(midi) % 12 (0 = C).
+// Editable in the UI and persisted to localStorage so it becomes the
+// user's OWN pairings, not a designer's guess. This is what makes the
+// concurrent consistent — the defining property of real synesthesia.
+// ─────────────────────────────────────────────
+const TONE_NOTE_NAMES = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+const TONE_COLORS_DEFAULT = Object.freeze([
+  "#4b3f8a", // C  — indigo
+  "#8a4a3a", // C# — rust
+  "#b08a3c", // D  — ochre
+  "#6f7a3a", // D# — olive
+  "#3f8a6a", // E  — viridian
+  "#3a6f8a", // F  — teal
+  "#4a5a9a", // F# — slate blue
+  "#7a4a8a", // G  — plum
+  "#9a4a6a", // G# — mulberry
+  "#b0603a", // A  — terracotta
+  "#7a6a3a", // A# — bronze
+  "#5a8a8a"  // B  — sea grey-green
+]);
+const TONE_STORE_KEY = "synview.toneColors.v1";
+function loadToneColors() {
+  try {
+    const raw = localStorage.getItem(TONE_STORE_KEY);
+    if (raw) {
+      const arr = JSON.parse(raw);
+      if (Array.isArray(arr) && arr.length === 12 && arr.every(h => /^#[0-9a-fA-F]{6}$/.test(h))) {
+        return arr.slice();
+      }
+    }
+  } catch (e) { /* localStorage unavailable — fall through to defaults */ }
+  return TONE_COLORS_DEFAULT.slice();
+}
+function saveToneColors() {
+  try { localStorage.setItem(TONE_STORE_KEY, JSON.stringify(TONE_COLORS)); } catch (e) { /* ignore */ }
+}
+let TONE_COLORS = loadToneColors();
+
+const NEUTRAL_SPECTRAL = Object.freeze({
+  sub: 0, bass: 0, lowMid: 0, mid: 0, highMid: 0, presence: 0, brilliance: 0,
+  low: 0, midBand: 0, high: 0,
+  lowWave: 0, midWave: 0, highWave: 0,
+  flux: 0, depth: 0, shimmer: 0, pulse: 0,
+  photismGain: 0, flowBoost: 0, centroidLift: 0, pitchBend: 0,
+  spiralBias: 0, warp: 0,
+  harmonicity: 0, predictiveStability: 0, coherentBlend: 0
+});
+let ACTIVE_SPECTRAL = { ...NEUTRAL_SPECTRAL };
+const NEUTRAL_VOID_STATE = Object.freeze({
+  active: false,
+  blend: 0,
+  harmonicity: 0,
+  stability: 0,
+  inverseCurvature: 1,
+  composite: 0,
+  sizeFactor: 1,
+  rimBoost: 1,
+  wobbleBoost: 1
+});
+let LAST_VOID_STATE = { ...NEUTRAL_VOID_STATE };
+
+// Predictive-cognition output (populated each frame when cognitionOn).
+// surprise      — precision-weighted prediction error (bottom-up salience)
+// dmnActivation — intrinsic / default-mode drive (rises when input is predictable/absent)
+// consensus     — cross-column voting agreement (Thousand-Brains coherence)
+// precision     — current attentional gain on prediction error
+// recallStrength— how strongly episodic memory is currently pattern-completing a motif
+const NEUTRAL_COGNITION = Object.freeze({
+  surprise: 0, dmnActivation: 0, consensus: 0, precision: 0.5,
+  recallStrength: 0, expectedChroma: -1, voicedPitch: -1, harmony: 0,
+  synthLevel: 0
+});
+let COGNITION = { ...NEUTRAL_COGNITION };
+
+let time = 0;
+// Last resolved sounding pitch — lets ambient/flow elements borrow the
+// current note's deterministic tone instead of a random palette colour.
+let LAST_PITCH = -1;
+// Field energy envelope (0 = silence). Drives the ambient substrate toward
+// dark/still when nothing is inducing, so silence reads as empty.
+let FIELD_ENERGY = 0;
+// Silence gate (0 = true silence, 1 = sounding). Every time-driven layer that
+// previously animated on `time` alone is scaled by this, so with audio open
+// and the room silent the whole field settles to darkness and stillness in
+// about two seconds. Rises quickly on sound, falls slowly into quiet.
+let SILENCE_GATE = 1;
+let LAST_PITCH_AT = 0;
+function updateSilenceGate(dt) {
+  const target = smoothstep(0.02, 0.10, FIELD_ENERGY);
+  const tau = target > SILENCE_GATE ? 0.15 : 0.70;
+  SILENCE_GATE += (target - SILENCE_GATE) * Math.min(1, dt / tau);
+}
+
+// ─────────────────────────────────────────────
+// Organic neural-field dynamics
+// Adds stochastic attractor motion, theta-gated bump re-anchoring,
+// onset/offset traveling-wave direction, and theta-nested gamma packets.
+// These are deliberately lightweight so the single-file build remains fast.
+// ─────────────────────────────────────────────
+const ORGANIC_FIELD = {
+  signalEnv: 0,
+  prevSignalEnv: 0,
+  signalDerivative: 0,
+  thetaPhase: Math.random() * TAU,
+  gammaPhase: Math.random() * TAU,
+  thetaTick: false,
+  waveDirection: 1,
+  waveAngle: -Math.PI / 2,
+  onsetPulse: 0,
+  offsetPulse: 0,
+  phaseVX: 0,
+  phaseVY: 0,
+  phasePause: 0,
+  reformPulse: 0,
+  gammaPackets: [],
+  lastPacketAt: -999
+};
+
+function wrapTau(v) {
+  v = v % TAU;
+  return v < 0 ? v + TAU : v;
+}
+
+function smoothstep(edge0, edge1, x) {
+  const t = Math.max(0, Math.min(1, (x - edge0) / Math.max(1e-6, edge1 - edge0)));
+  return t * t * (3 - 2 * t);
+}
+
+function hashUnit2(a, b, seed = 0) {
+  const n = Math.sin((a * 127.1 + b * 311.7 + seed * 74.7) * 12.9898) * 43758.5453123;
+  return n - Math.floor(n);
+}
+
+function randn() {
+  const u = 1 - Math.random();
+  const v = 1 - Math.random();
+  return Math.sqrt(-2 * Math.log(u)) * Math.cos(TAU * v);
+}
+
+function updateOUScalar(value, mean, tau, sigma, dt) {
+  const decay = Math.exp(-dt / Math.max(0.001, tau));
+  const noise = sigma * Math.sqrt(Math.max(0, 1 - decay * decay)) * randn();
+  return mean + (value - mean) * decay + noise;
+}
+
+function ctAffectiveTuning(rms) {
+  // RMS is used as a perceptual proxy for a caress-like velocity channel.
+  // The curve is intentionally non-monotonic: vividness peaks at a preferred
+  // tactile sweet spot and drops for both near-silence and excessive energy.
+  const preferred = 0.045;
+  const bandwidth = 0.030;
+  const x = Math.max(0, Math.min(0.22, rms));
+  const z = (x - preferred) / bandwidth;
+  return Math.exp(-0.5 * z * z);
+}
+
+function thetaPhaseGate(preferred = 1.15, sharpness = 6) {
+  return Math.pow(Math.max(0, 0.5 + 0.5 * Math.cos(ORGANIC_FIELD.thetaPhase - preferred)), sharpness);
+}
+
+function spawnGammaPacket(W, H, strength = 1) {
+  if (time - ORGANIC_FIELD.lastPacketAt < 0.055) return;
+  ORGANIC_FIELD.lastPacketAt = time;
+  ORGANIC_FIELD.gammaPackets.push({
+    x: W * (0.22 + Math.random() * 0.56),
+    y: H * (0.18 + Math.random() * 0.64),
+    radius: Math.min(W, H) * (0.08 + Math.random() * 0.10),
+    life: 1,
+    seed: Math.random() * 1000,
+    strength: Math.max(0.25, Math.min(1.4, strength))
+  });
+  if (ORGANIC_FIELD.gammaPackets.length > 9) ORGANIC_FIELD.gammaPackets.shift();
+}
+
+function updateOrganicField(rms, centroid, dt, W, H) {
+  const targetEnv = Math.max(0, Math.min(1, rms * 7.5));
+  const envAlpha = 1 - Math.exp(-dt * 10.0);
+  const prev = ORGANIC_FIELD.signalEnv;
+  ORGANIC_FIELD.prevSignalEnv = prev;
+  ORGANIC_FIELD.signalEnv += (targetEnv - ORGANIC_FIELD.signalEnv) * envAlpha;
+  ORGANIC_FIELD.signalDerivative = (ORGANIC_FIELD.signalEnv - prev) / Math.max(1e-4, dt);
+
+  const thetaHz = 6.0;
+  const prevTheta = ORGANIC_FIELD.thetaPhase;
+  ORGANIC_FIELD.thetaPhase = wrapTau(ORGANIC_FIELD.thetaPhase + dt * TAU * thetaHz);
+  ORGANIC_FIELD.gammaPhase = wrapTau(ORGANIC_FIELD.gammaPhase + dt * TAU * 55.0);
+  ORGANIC_FIELD.thetaTick = ORGANIC_FIELD.thetaPhase < prevTheta;
+
+  const onset = ORGANIC_FIELD.signalDerivative > 1.25 && ORGANIC_FIELD.signalEnv > 0.045;
+  const offset = ORGANIC_FIELD.signalDerivative < -0.95 && ORGANIC_FIELD.signalEnv < 0.18;
+  if (onset) {
+    ORGANIC_FIELD.waveDirection = 1;       // top-down sweep after stimulus onset
+    ORGANIC_FIELD.waveAngle = -Math.PI / 2;
+    ORGANIC_FIELD.onsetPulse = 1;
+    spawnGammaPacket(W, H, 0.75 + ORGANIC_FIELD.signalEnv);
+  } else if (offset) {
+    ORGANIC_FIELD.waveDirection = -1;      // bottom-up sweep after stimulus offset
+    ORGANIC_FIELD.waveAngle = Math.PI / 2;
+    ORGANIC_FIELD.offsetPulse = 1;
+  }
+
+  // Sparse gamma packets are nested in a preferred theta phase rather than
+  // treated as an always-on independent field.
+  if (thetaPhaseGate(1.15, 10) > 0.86 && ORGANIC_FIELD.signalEnv > 0.10 && Math.random() < 0.15) {
+    spawnGammaPacket(W, H, 0.45 + ORGANIC_FIELD.signalEnv);
+  }
+
+  ORGANIC_FIELD.onsetPulse *= Math.exp(-dt / 0.18);
+  ORGANIC_FIELD.offsetPulse *= Math.exp(-dt / 0.22);
+  ORGANIC_FIELD.reformPulse *= Math.exp(-dt / 0.18);
+  ORGANIC_FIELD.phasePause = Math.max(0, ORGANIC_FIELD.phasePause - dt);
+  for (const p of ORGANIC_FIELD.gammaPackets) p.life -= dt / 0.18;
+  ORGANIC_FIELD.gammaPackets = ORGANIC_FIELD.gammaPackets.filter(p => p.life > 0);
+}
+
+// ─────────────────────────────────────────────
+// Bressloff–Cowan retino-cortical form-constant field
+// ---------------------------------------------------------------
+// The retino-cortical map is the complex logarithm: a visual-field point at
+// polar (r, θ) projects to cortical Cartesian (X, Y) = (ln r, θ). Spontaneous
+// symmetry-breaking in V1 produces roughly periodic plane-wave / lattice
+// activity on the cortical sheet; pulled back through the inverse map (exp)
+// it becomes the Klüver geometric form constants:
+//   • stripes varying along X = ln r  → concentric rings → TUNNELS / FUNNELS
+//   • stripes varying along Y = θ      → radial fans / spokes / COBWEBS
+//   • oblique stripes                  → logarithmic SPIRALS
+//   • superposed hexagonal lattice     → HONEYCOMB
+// The tunnel's central void falls out for free: ln r → −∞ as r → 0, so the
+// rings compress into a singular focus at the centre.
+// Every parameter is driven by the sound so the form stays a synesthetic
+// concurrent (same input → same geometry), consistent with the tone→colour core:
+//   pitch class → pattern orientation   (tunnel ↔ spiral ↔ radial fan)
+//   roughness   → lattice symmetry       (clean stripe ↔ honeycomb)
+//   brightness  → ring density           (cortical spatial frequency)
+//   loudness    → contrast               (a quiet room empties the tunnel)
+// Rendered into a small offscreen buffer and scaled up, so it stays cheap.
+// ─────────────────────────────────────────────
+const FORM_FIELD = {
+  phase: 0, phaseVel: 0.25,
+  kr: 4, contrast: 0,
+  tempo: 0, omega: 0, spinPhase: 0, drag: 0, shear: 0,   // rhythm-locked spin + swirl
+  lastOnsetT: -10, prevOnset: 0,
+  armsPrev: 1, armsCur: 1, armsBlend: 1,     // integer winding numbers + crossfade
+  hueA: [90, 105, 165],                      // ridge tint; troughs are pure black
+  buf: null, bctx: null, img: null, data: null, bw: 0, bh: 0
+};
+
+function ensureFormBuffer(W, H) {
+  // Long side ≈ 200 px, aspect preserved; rebuilt only when the size changes.
+  const target = 200;
+  const bw = W >= H ? target : Math.max(1, Math.round(target * W / H));
+  const bh = H >  W ? target : Math.max(1, Math.round(target * H / W));
+  if (FORM_FIELD.buf && FORM_FIELD.bw === bw && FORM_FIELD.bh === bh) return;
+  const c = document.createElement('canvas');
+  c.width = bw; c.height = bh;
+  FORM_FIELD.buf = c;
+  FORM_FIELD.bctx = c.getContext('2d');
+  FORM_FIELD.img = FORM_FIELD.bctx.createImageData(bw, bh);
+  FORM_FIELD.data = FORM_FIELD.img.data;
+  FORM_FIELD.bw = bw; FORM_FIELD.bh = bh;
+}
+
+function updateFormField(f, renderRMS, dt) {
+  const FF = FORM_FIELD;
+  const pitchAngle = f ? f.pitchAngle : -1;                 // 0..12 circular, -1 = none
+  const bright = f ? f.brightness : 0.5;
+  const loud   = f ? f.loudness : clamp01(Math.log1p(renderRMS * 40) / 3);
+
+  // Radial ring density from brightness.
+  FF.kr += (2.5 + bright * 6.0 - FF.kr) * Math.min(1, dt * 2.5);
+
+  // ── Rhythm → tempo (onset rate) ──────────────────────────────────────────
+  // The organic field already fires ORGANIC_FIELD.onsetPulse → 1 on each attack.
+  // Catch its rising edge, measure the inter-onset interval, and smooth 1/IOI
+  // into a tempo (Hz). A gap with no attacks eases the tempo back toward rest,
+  // so faster playing → higher tempo → faster spin, and silence slows it down.
+  const onset = ORGANIC_FIELD.onsetPulse;
+  if (onset > 0.6 && FF.prevOnset <= 0.6) {
+    const ioi = time - FF.lastOnsetT;
+    FF.lastOnsetT = time;
+    if (ioi > 0.14 && ioi < 2.6) FF.tempo += (1 / ioi - FF.tempo) * 0.5;
+    FF.drag += 0.9;                                          // each beat tugs the flow
+  }
+  FF.prevOnset = onset;
+  if (time - FF.lastOnsetT > 2.6) FF.tempo += (0 - FF.tempo) * Math.min(1, dt * 0.8);
+  FF.tempo = Math.max(0, Math.min(6, FF.tempo));
+
+  // ── Spin: steady speed from tempo, direction follows the flow ────────────
+  // waveDirection is +1 after an onset and −1 after an offset, so the rotation
+  // reverses as notes start and stop — an in/out breathing spin.
+  const omegaTarget = FF.tempo * 0.42 * ORGANIC_FIELD.waveDirection;
+  FF.omega += (omegaTarget - FF.omega) * Math.min(1, dt * 2.5);
+  FF.spinPhase += FF.omega * dt;
+
+  // ── Swirl: inner and outer turn at different rates (differential drag) ────
+  // A saturating sustained shear grows with spin speed (faster → tighter
+  // spirals); the per-beat transient drag smears on top and then relaxes.
+  // Both are bounded, so the winding is dragged but never runs away.
+  FF.drag += (0 - FF.drag) * Math.min(1, dt * 1.6);
+  FF.shear = Math.tanh(FF.omega * 0.9) * 2.0 + FF.drag * ORGANIC_FIELD.waveDirection * 0.8;
+
+  // Contrast from loudness — quiet empties it.
+  const cTarget = clamp01(loud * 1.5);
+  FF.contrast += (cTarget - FF.contrast) * Math.min(1, dt * (cTarget > FF.contrast ? 3.5 : 1.2));
+
+  // Winding number: keep ≥1 arm while it is moving, because a perfectly
+  // concentric ring is rotationally invariant — you cannot see it spin — so a
+  // gentle spiral is what makes the rhythm legible. Integer winding keeps the
+  // pattern seamless across θ = ±π even under the swirl warp; note changes
+  // crossfade over ~0.4 s.
+  if (pitchAngle >= 0) {
+    const pc = ((Math.round(pitchAngle) % 12) + 12) % 12;
+    const bias = 0.5 - 0.5 * Math.cos(pc / 12 * TAU);
+    const active = FF.contrast > 0.05 || Math.abs(FF.omega) > 0.05;
+    const mTarget = (active ? 1 : 0) + Math.min(1, Math.round(bias * 1.2)); // 0..2
+    if (mTarget !== FF.armsCur) { FF.armsPrev = FF.armsCur; FF.armsCur = mTarget; FF.armsBlend = 0; }
+  }
+  FF.armsBlend = Math.min(1, FF.armsBlend + dt * 2.5);
+
+  // Slow radial breathing on top of the rotation (gentle, organic).
+  FF.phaseVel = updateOUScalar(FF.phaseVel, 0.20 + FF.contrast * 0.6, 1.1, 0.08, dt);
+  FF.phase += dt * FF.phaseVel * ORGANIC_FIELD.waveDirection;
+
+  // Ridge tint from the current note's deterministic pigment.
+  let pc = (typeof COGNITION !== 'undefined' && COGNITION.voicedPitch >= 0) ? COGNITION.voicedPitch
+         : (pitchAngle >= 0 ? ((Math.round(pitchAngle) % 12) + 12) % 12 : -1);
+  if (pc >= 0 && TONE_COLORS[pc]) {
+    const rgb = SynestheticMapper.hexToRgb(TONE_COLORS[pc]);
+    const kA = Math.min(1, dt * 1.6);
+    FF.hueA[0] += (Math.min(200, rgb[0] * 0.9 + 18) - FF.hueA[0]) * kA;
+    FF.hueA[1] += (Math.min(200, rgb[1] * 0.9 + 18) - FF.hueA[1]) * kA;
+    FF.hueA[2] += (Math.min(215, rgb[2] * 0.9 + 26) - FF.hueA[2]) * kA;
+  }
+}
+
+function drawFormField(ctx, W, H) {
+  const FF = FORM_FIELD;
+  // Brightness is compressed ~15× so the slider's whole range stays subtle:
+  // the default (~0.35) lands near the integrated 0.05 look, max stays gentle.
+  const strength = STATE.formStrength * FF.contrast * 0.15;
+  if (strength <= 0.0015) return;                           // silence → nothing to draw
+  ensureFormBuffer(W, H);
+  const bw = FF.bw, bh = FF.bh, data = FF.data;
+  const cx = bw / 2, cy = bh / 2;
+  const scale = Math.min(bw, bh) * 0.5;                     // radius ≈ 1 at the short edge
+  const kr = FF.kr, phase = FF.phase, spin = FF.spinPhase, shear = FF.shear;
+  const mA = FF.armsPrev, mB = FF.armsCur, blend = FF.armsBlend;
+  const A = FF.hueA;
+  let idx = 0;
+  for (let py = 0; py < bh; py++) {
+    const dy = (py - cy) / scale;
+    for (let px = 0; px < bw; px++, idx += 4) {
+      const dx = (px - cx) / scale;
+      const r = Math.hypot(dx, dy);
+      // Outer-surround window: the whole centre stays clear so the photisms
+      // bloom in open space; the form is only a faint enveloping ring further out.
+      const win = smoothstep(0.34, 0.62, r) * (1 - smoothstep(0.98, 1.30, r));
+      if (win <= 0.001) { data[idx] = 0; data[idx + 1] = 0; data[idx + 2] = 0; data[idx + 3] = 255; continue; }
+      const X = Math.log(r + 1e-3);                         // cortical horizontal = ln r
+      // Swirl warp: rigid spin (same for every r) + differential shear that
+      // varies with r, so inner and outer rotate at different rates and the
+      // rings are dragged into spirals. Integer winding m keeps it seamless
+      // across θ = ±π no matter how the angle is warped.
+      const th = Math.atan2(dy, dx) + spin + shear * (r - 0.66);
+      const wa = Math.cos(kr * X + mA * th + phase);
+      const wb = Math.cos(kr * X + mB * th + phase);
+      let field = wa + (wb - wa) * blend;                  // -1..1
+      let m = field * 0.5 + 0.5;                            // 0..1
+      m = m * m * (3 - 2 * m);                              // sharpen ridges
+      const v = m * win;
+      data[idx]     = A[0] * v;                             // troughs are black → clean additive
+      data[idx + 1] = A[1] * v;
+      data[idx + 2] = A[2] * v;
+      data[idx + 3] = 255;
+    }
+  }
+  FF.bctx.putImageData(FF.img, 0, 0);
+  ctx.save();
+  ctx.globalCompositeOperation = "lighter";
+  ctx.globalAlpha = clamp01(strength);
+  ctx.imageSmoothingEnabled = true;
+  ctx.drawImage(FF.buf, 0, 0, bw, bh, 0, 0, W, H);
+  ctx.restore();
+}
+
+// ─────────────────────────────────────────────
+// Audio Analyzer (unchanged, solid impl)
+// ─────────────────────────────────────────────
+class AudioAnalyzer {
+  constructor() {
+    this.context = null; this.analyser = null;
+    this.sources = []; this.gains = [];
+    this.micStream = null; this.systemStream = null;
+    this.stream = null;
+    this.mode = 'mic';
+    this.timeData = null; this.freqData = null;
+    this.sampleRate = 44100;
+    this.currentPitch = -1; this.currentRMS = 0; this.currentCentroid = 0;
+  }
+
+  audioConstraints() {
+    return {
+      echoCancellation: false,
+      noiseSuppression: false,
+      autoGainControl: false,
+      channelCount: { ideal: 2 },
+      sampleRate: { ideal: 48000 },
+      sampleSize: { ideal: 24 }
+    };
+  }
+
+  async initialize({ mode = 'mic' } = {}) {
+    this.stop();
+    this.mode = ['mic', 'system', 'both'].includes(mode) ? mode : 'mic';
+    if (!navigator.mediaDevices || !navigator.mediaDevices.getUserMedia) {
+      throw new Error("Microphone/media capture API is unavailable in this browser/context.");
+    }
+    if ((this.mode === 'system' || this.mode === 'both') && !navigator.mediaDevices.getDisplayMedia) {
+      throw new Error("Device-output capture requires getDisplayMedia; this browser/Electron runtime does not expose it.");
+    }
+
+    this.context = new (window.AudioContext || window.webkitAudioContext)({ latencyHint: 'interactive', sampleRate: 48000 });
+    await this.context.resume();
+    this.sampleRate = this.context.sampleRate;
+    this.analyser = this.context.createAnalyser();
+    this.analyser.fftSize = 8192;
+    this.analyser.smoothingTimeConstant = 0.58;
+    this.analyser.minDecibels = -95;
+    this.analyser.maxDecibels = -8;
+
+    const requested = [];
+    if (this.mode === 'mic' || this.mode === 'both') requested.push(this.openMicStream());
+    if (this.mode === 'system' || this.mode === 'both') requested.push(this.openSystemAudioStream());
+    const streams = await Promise.all(requested);
+
+    let connected = 0;
+    for (const item of streams) {
+      if (!item || !item.stream || item.stream.getAudioTracks().length === 0) continue;
+      this.connectStream(item.stream, item.kind);
+      connected += 1;
+    }
+    if (connected === 0) {
+      this.stop();
+      throw new Error("No usable audio track was returned. For device output, enable 'Share audio' or use a loopback/monitor source.");
+    }
+
+    this.timeData = new Float32Array(this.analyser.fftSize);
+    this.freqData = new Uint8Array(this.analyser.frequencyBinCount);
+  }
+
+  async openMicStream() {
+    const stream = await navigator.mediaDevices.getUserMedia({
+      audio: this.audioConstraints(),
+      video: false
+    });
+    this.micStream = stream;
+    return { stream, kind: 'mic' };
+  }
+
+  async openSystemAudioStream() {
+    const stream = await navigator.mediaDevices.getDisplayMedia({
+      audio: this.audioConstraints(),
+      video: { width: { ideal: 2, max: 16 }, height: { ideal: 2, max: 16 }, frameRate: { ideal: 1, max: 5 } }
+    });
+    // We only need the loopback audio for spectral analysis. Stop video tracks
+    // immediately so Electron/browser is not wasting resources on screen frames.
+    for (const track of stream.getVideoTracks()) track.stop();
+    if (stream.getAudioTracks().length === 0) {
+      for (const track of stream.getTracks()) track.stop();
+      throw new Error("Device-output capture returned no audio track. Reopen it and enable Share audio/System audio in the picker.");
+    }
+    this.systemStream = stream;
+    return { stream, kind: 'system' };
+  }
+
+  connectStream(stream, kind) {
+    const source = this.context.createMediaStreamSource(stream);
+    const gain = this.context.createGain();
+    // Device output is already clean/digital; the mic is slightly reduced when
+    // mixed to avoid room noise dominating the combined spectrum.
+    gain.gain.value = kind === 'mic' && this.mode === 'both' ? 0.72 : 1.0;
+    source.connect(gain);
+    gain.connect(this.analyser);
+    this.sources.push(source);
+    this.gains.push(gain);
+    for (const track of stream.getAudioTracks()) {
+      track.addEventListener('ended', () => {
+        if (this.mode === 'system' || this.mode === 'both') {
+          const status = document.getElementById('mic-status');
+          if (status) status.textContent = "Device-output capture ended. Reopen Audio Capture to reconnect.";
+        }
+      }, { once: true });
+    }
+  }
+
+  stop() {
+    for (const source of this.sources) {
+      try { source.disconnect(); } catch (_) {}
+    }
+    for (const gain of this.gains) {
+      try { gain.disconnect(); } catch (_) {}
+    }
+    this.sources = []; this.gains = [];
+    for (const stream of [this.micStream, this.systemStream, this.stream]) {
+      if (!stream) continue;
+      for (const track of stream.getTracks()) {
+        try { track.stop(); } catch (_) {}
+      }
+    }
+    this.micStream = null; this.systemStream = null; this.stream = null;
+    if (this.context && this.context.state !== "closed") {
+      this.context.close().catch(() => {});
+    }
+    this.context = null; this.analyser = null;
+    this.timeData = null; this.freqData = null;
+    this.currentPitch = -1; this.currentRMS = 0; this.currentCentroid = 0;
+  }
+  update() {
+    if (!this.analyser) return;
+    this.analyser.getFloatTimeDomainData(this.timeData);
+    this.analyser.getByteFrequencyData(this.freqData);
+    let sq = 0;
+    for (let i = 0; i < this.timeData.length; i++) sq += this.timeData[i] * this.timeData[i];
+    this.currentRMS = Math.sqrt(sq / this.timeData.length);
+    this.currentPitch = this.autoCorrelate(this.timeData, this.sampleRate);
+    let num = 0, den = 0;
+    for (let i = 0; i < this.freqData.length; i++) {
+      const m = this.freqData[i]; num += i * m; den += m;
+    }
+    this.currentCentroid = den === 0 ? 0 : (num / den) * (this.sampleRate / this.analyser.fftSize);
+  }
+  autoCorrelate(buf, sr) {
+    const N = buf.length;
+    let rms = 0;
+    for (let i = 0; i < N; i++) rms += buf[i] * buf[i];
+    rms = Math.sqrt(rms / N);
+    if (rms < 0.01) return -1;
+    let r1 = 0, r2 = N - 1;
+    const thres = 0.2;
+    for (let i = 0; i < N / 2; i++) { if (Math.abs(buf[i]) < thres) { r1 = i; break; } }
+    for (let i = 1; i < N / 2; i++) { if (Math.abs(buf[N - i]) < thres) { r2 = N - i; break; } }
+    const cl = buf.slice(r1, r2); const SZ = cl.length;
+    if (SZ < 32) return -1;
+    const c = new Float32Array(SZ);
+    for (let i = 0; i < SZ; i++) { let s = 0; for (let j = 0; j < SZ - i; j++) s += cl[j] * cl[j + i]; c[i] = s; }
+    let d = 0; while (d < SZ - 2 && c[d] > c[d + 1]) d++;
+    let mv = -1, mp = -1;
+    for (let i = d; i < SZ; i++) { if (c[i] > mv) { mv = c[i]; mp = i; } }
+    let T0 = mp;
+    if (T0 <= 0 || T0 >= SZ - 1) return -1;
+    const x1 = c[T0 - 1], x2 = c[T0], x3 = c[T0 + 1];
+    const a = (x1 + x3 - 2 * x2) / 2, b = (x3 - x1) / 2;
+    if (a) T0 = T0 - b / (2 * a);
+    const freq = sr / T0;
+    if (!Number.isFinite(freq) || freq < 45 || freq > 2500) return -1;
+    return freq;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Stateful FFT spectral wave blending
+// Blends low / mid / high FFT-derived waves with recurrent memory
+// and provides additional modulation to the existing visualization.
+// ─────────────────────────────────────────────
+class SpectralWaveBlender {
+  constructor() {
+    this.bandDefs = [
+      { name: "sub",        min: 20,    max: 60,    rate: 0.08 },
+      { name: "bass",       min: 60,    max: 150,   rate: 0.12 },
+      { name: "lowMid",     min: 150,   max: 400,   rate: 0.18 },
+      { name: "mid",        min: 400,   max: 1200,  rate: 0.26 },
+      { name: "highMid",    min: 1200,  max: 2500,  rate: 0.38 },
+      { name: "presence",   min: 2500,  max: 5000,  rate: 0.58 },
+      { name: "brilliance", min: 5000,  max: 12000, rate: 0.86 }
+    ];
+    this.energy = {};
+    this.prevRaw = {};
+    this.flux = {};
+    this.phases = {};
+    this.harmonicity = 0.45;
+    this.predictiveStability = 0.55;
+    this.output = { ...NEUTRAL_SPECTRAL };
+    for (const band of this.bandDefs) {
+      this.energy[band.name] = 0;
+      this.prevRaw[band.name] = 0;
+      this.flux[band.name] = 0;
+      this.phases[band.name] = Math.random() * TAU;
+    }
+  }
+
+  reset() {
+    for (const band of this.bandDefs) {
+      this.energy[band.name] *= 0.92;
+      this.flux[band.name] *= 0.80;
+      this.phases[band.name] = (this.phases[band.name] + 0.01) % TAU;
+    }
+    this.output = { ...NEUTRAL_SPECTRAL };
+  }
+
+  updateFromFFT(freqData, sampleRate, fftSize, dt, pitch = -1) {
+    if (!freqData || !freqData.length || !sampleRate || !fftSize) {
+      this.reset();
+      return this.output;
+    }
+    const rawSums = {};
+    const rawCounts = {};
+    for (const band of this.bandDefs) {
+      rawSums[band.name] = 0;
+      rawCounts[band.name] = 0;
+    }
+    for (let i = 1; i < freqData.length; i++) {
+      const hz = i * sampleRate / fftSize;
+      const mag = Math.max(0, Math.min(1, freqData[i] / 255));
+      const weighted = Math.pow(mag, 1.25);
+      for (const band of this.bandDefs) {
+        if (hz >= band.min && hz < band.max) {
+          rawSums[band.name] += weighted;
+          rawCounts[band.name]++;
+          break;
+        }
+      }
+    }
+    const raw = {};
+    for (const band of this.bandDefs) {
+      const count = rawCounts[band.name] || 1;
+      raw[band.name] = Math.max(0, Math.min(1, Math.sqrt(rawSums[band.name] / count)));
+    }
+    this.harmonicity = this.estimateHarmonicity(freqData, sampleRate, fftSize, pitch, raw);
+    return this.integrate(raw, dt);
+  }
+
+  updateFromAmbient(ambient, dt) {
+    const t = time;
+    const rms = ambient && Number.isFinite(ambient.rms) ? ambient.rms : 0.02;
+    const freq = ambient && Number.isFinite(ambient.freq) ? ambient.freq : 220;
+    const centroid = ambient && Number.isFinite(ambient.centroid) ? ambient.centroid : 1400;
+    const normFreq = Math.max(0, Math.min(1, (Math.log2(Math.max(45, freq) / 45)) / 5.5));
+    const normCent = Math.max(0, Math.min(1, centroid / 5000));
+    const raw = {
+      sub:        0.12 + 0.07 * Math.sin(t * 0.31),
+      bass:       0.16 + 0.10 * Math.sin(t * 0.41 + 1.1) + rms * 1.6,
+      lowMid:     0.18 + 0.11 * Math.sin(t * 0.53 + 2.0) + normFreq * 0.15,
+      mid:        0.20 + 0.13 * Math.sin(t * 0.67 + 0.6) + normFreq * 0.18,
+      highMid:    0.13 + 0.10 * Math.sin(t * 0.81 + 1.9) + normCent * 0.12,
+      presence:   0.12 + 0.09 * Math.sin(t * 0.97 + 0.9) + normCent * 0.14,
+      brilliance: 0.10 + 0.08 * Math.sin(t * 1.21 + 1.7) + normCent * 0.10
+    };
+    for (const k of Object.keys(raw)) raw[k] = Math.max(0, Math.min(1, raw[k]));
+    this.harmonicity = Math.max(0, Math.min(1, 0.52 + 0.18 * Math.sin(t * 0.19 + normFreq * 2.1) + raw.mid * 0.18 - raw.brilliance * 0.10));
+    return this.integrate(raw, dt);
+  }
+
+  estimateHarmonicity(freqData, sampleRate, fftSize, pitch, raw) {
+    let total = 0;
+    for (let i = 1; i < freqData.length; i++) {
+      const hz = i * sampleRate / fftSize;
+      if (hz < 60 || hz > 5000) continue;
+      total += Math.max(0, Math.min(1, freqData[i] / 255));
+    }
+    if (total <= 1e-6) {
+      return Math.max(0, Math.min(1, 0.35 + (raw.mid || 0) * 0.25 + (raw.lowMid || 0) * 0.15 - (raw.brilliance || 0) * 0.10));
+    }
+
+    let aligned = 0;
+    if (pitch && pitch > 45 && pitch < 1600) {
+      const weights = [0.35, 0.7, 1.0, 0.7, 0.35];
+      let counted = 0;
+      for (let h = 1; h <= 8; h++) {
+        const targetHz = pitch * h;
+        if (targetHz > 5000) break;
+        const center = Math.round(targetHz * fftSize / sampleRate);
+        for (let o = -2; o <= 2; o++) {
+          const idx = center + o;
+          if (idx > 0 && idx < freqData.length) aligned += (freqData[idx] / 255) * weights[o + 2];
+        }
+        counted += 1;
+      }
+      if (counted > 0) aligned /= counted;
+      return Math.max(0, Math.min(1, aligned / (total * 0.22)));
+    }
+
+    let maxMag = 0;
+    let mean = 0;
+    let count = 0;
+    for (let i = 1; i < freqData.length; i++) {
+      const hz = i * sampleRate / fftSize;
+      if (hz < 60 || hz > 5000) continue;
+      const mag = freqData[i] / 255;
+      if (mag > maxMag) maxMag = mag;
+      mean += mag;
+      count += 1;
+    }
+    mean /= Math.max(1, count);
+    const peakiness = mean > 1e-6 ? maxMag / mean : 0;
+    return Math.max(0, Math.min(1, (peakiness - 1) / 3));
+  }
+
+  integrate(raw, dt) {
+    const memory = Math.max(0.50, Math.min(0.98, STATE.spectralBlendMemory));
+    const immediacy = 1 - memory;
+    let fluxAccum = 0;
+    for (const band of this.bandDefs) {
+      const name = band.name;
+      const prevState = this.energy[name] || 0;
+      const target = Math.max(0, Math.min(1, raw[name] || 0));
+      const attack = Math.min(1, Math.max(0.02, immediacy * 3.2));
+      const release = Math.min(1, Math.max(0.015, immediacy * 1.8));
+      const alpha = target >= prevState ? attack : release;
+      this.energy[name] = prevState + (target - prevState) * alpha;
+
+      const delta = target - (this.prevRaw[name] || 0);
+      this.prevRaw[name] = target;
+      this.flux[name] = this.flux[name] * 0.76 + delta * 0.92;
+      fluxAccum += Math.abs(this.flux[name]);
+
+      this.phases[name] = (this.phases[name] + dt * TAU * band.rate * (0.35 + this.energy[name] * 1.8)) % TAU;
+    }
+
+    const e = this.energy;
+    const low = 0.58 * e.sub + 0.42 * e.bass;
+    const midBand = 0.28 * e.lowMid + 0.44 * e.mid + 0.28 * e.highMid;
+    const high = 0.46 * e.presence + 0.54 * e.brilliance;
+    const lowWave = Math.sin(this.phases.sub) * e.sub * 0.62 + Math.sin(this.phases.bass) * e.bass * 0.38;
+    const midWave = Math.sin(this.phases.lowMid) * e.lowMid * 0.28 + Math.sin(this.phases.mid) * e.mid * 0.44 + Math.sin(this.phases.highMid) * e.highMid * 0.28;
+    const highWave = Math.sin(this.phases.presence) * e.presence * 0.45 + Math.sin(this.phases.brilliance) * e.brilliance * 0.55;
+    const flux = Math.max(0, Math.min(1, fluxAccum / this.bandDefs.length * 3.2));
+    this.predictiveStability = this.predictiveStability * 0.72 + (1 - flux * 0.92) * 0.28;
+    this.predictiveStability = Math.max(0, Math.min(1, this.predictiveStability));
+    const coherentBlend = Math.max(0, Math.min(1, 0.50 * low + 0.30 * midBand + 0.20 * (1 - high)));
+
+    this.output = {
+      sub: e.sub, bass: e.bass, lowMid: e.lowMid, mid: e.mid, highMid: e.highMid, presence: e.presence, brilliance: e.brilliance,
+      low, midBand, high,
+      lowWave, midWave, highWave,
+      flux,
+      depth: low,
+      shimmer: high,
+      pulse: Math.max(0, Math.min(1, midBand * 0.68 + flux * 0.45)),
+      photismGain: Math.max(0, Math.min(1, midBand * 0.52 + high * 0.20 + flux * 0.28)),
+      flowBoost: Math.max(0, Math.min(1, low * 0.20 + midBand * 0.45 + high * 0.15 + flux * 0.20)),
+      centroidLift: (high - low * 0.35),
+      pitchBend: (midWave * 0.18 + highWave * 0.08),
+      spiralBias: Math.max(0, Math.min(1, low * 0.22 + midBand * 0.50 + high * 0.28)),
+      warp: Math.max(0, Math.min(1, low * 0.45 + high * 0.35 + flux * 0.20)),
+      harmonicity: this.harmonicity,
+      predictiveStability: this.predictiveStability,
+      coherentBlend
+    };
+    return this.output;
+  }
+
+  getOutput() {
+    return this.output || { ...NEUTRAL_SPECTRAL };
+  }
+}
+
+function spectralBlendActive() {
+  return STATE.spectralBlend;
+}
+
+function spectralStrength() {
+  return Math.max(0, Math.min(1, STATE.spectralBlendStrength || 0));
+}
+
+function currentSpectral() {
+  return spectralBlendActive() ? ACTIVE_SPECTRAL : NEUTRAL_SPECTRAL;
+}
+
+function applySpectralBlend(signal) {
+  if (!spectralBlendActive()) return signal;
+  const s = spectralStrength();
+  const spec = currentSpectral();
+  const blendedRMS = signal.rms * (1 + s * (0.26 * spec.depth + 0.28 * spec.flowBoost + 0.16 * spec.pulse));
+  const blendedPitch = signal.pitch > 0 ? signal.pitch * (1 + s * spec.pitchBend * 0.18) : signal.pitch;
+  const blendedCentroid = Math.max(0, signal.centroid * (1 + s * spec.centroidLift * 0.18) + s * spec.highWave * 420);
+  return {
+    rms: blendedRMS,
+    pitch: blendedPitch,
+    centroid: blendedCentroid
+  };
+}
+
+function clampRange(v, lo, hi) {
+  return Math.max(lo, Math.min(hi, v));
+}
+
+function toroidalInverseCurvature() {
+  const ratio = Math.max(1.2, CONFIG.torusMajorR / Math.max(0.001, CONFIG.torusMinorR));
+  const c = Math.cos(STATE.phaseY);
+  const curvatureNorm = Math.abs(c) / (ratio + 0.85 + 0.25 * c);
+  return clampRange(1 / (0.72 + curvatureNorm), 0.62, 1.28);
+}
+
+function computeAdvancedVoidState() {
+  if (!STATE.advancedVoidModel || !spectralBlendActive()) {
+    LAST_VOID_STATE = { ...NEUTRAL_VOID_STATE };
+    return LAST_VOID_STATE;
+  }
+  const spec = currentSpectral();
+  const strength = clampRange(STATE.advancedVoidStrength || 0, 0, 1);
+  const blend = clampRange(spec.coherentBlend || 0, 0, 1);
+  const harmonicity = clampRange(spec.harmonicity || 0, 0, 1);
+  const stability = clampRange(spec.predictiveStability || 0, 0, 1);
+  const inverseCurvature = toroidalInverseCurvature();
+  const product = Math.max(0, blend * harmonicity * stability * inverseCurvature);
+  const composite = clampRange(Math.sqrt(product), 0, 1.2);
+  const sizeFactor = clampRange(1 + strength * ((composite - 0.34) * 0.95), 0.72, 1.36);
+  const rimBoost = 1 + strength * (0.20 * harmonicity + 0.16 * stability + 0.08 * spec.shimmer);
+  const wobbleBoost = 1 + strength * (0.10 * spec.lowWave + 0.06 * spec.midWave + 0.04 * spec.highWave);
+  LAST_VOID_STATE = {
+    active: true,
+    blend,
+    harmonicity,
+    stability,
+    inverseCurvature,
+    composite,
+    sizeFactor,
+    rimBoost,
+    wobbleBoost
+  };
+  return LAST_VOID_STATE;
+}
+
+// ═════════════════════════════════════════════════════════════════════
+// PREDICTIVE COGNITION + GENERATIVE SOUND (v9)
+//
+// A compact, single-file model that turns the visualizer from a purely
+// reactive analyser into a small perceiving/predicting/imagining agent.
+// The pieces map onto current systems-neuroscience ideas:
+//
+//   PerceptualFrontEnd  — psychoacoustics (chroma, A-weighted loudness,
+//                         Plomp–Levelt roughness, spectral flux).
+//   CorticalColumnField — Thousand-Brains modular voting: several columns,
+//                         each modelling one feature in its own reference
+//                         frame, that vote toward a consensus percept.
+//   PredictiveCore      — predictive coding / active inference: a slow
+//                         generative prior predicts the next state; the
+//                         precision-weighted prediction error is "surprise".
+//   EpisodicMemory      — hippocampal-style motif storage, pattern
+//                         completion, and (time-compressed) replay.
+//   DefaultModeSynth    — a generative Web-Audio voice that is suppressed
+//                         by surprising input and released during
+//                         predictable/quiet stretches (DMN ↔ task
+//                         anticorrelation), voiced by consensus when
+//                         attending and by memory replay when mind-wandering.
+//
+// It is intentionally lightweight and, unless the synth is switched on,
+// entirely silent — it only nudges the existing visual fields.
+// ═════════════════════════════════════════════════════════════════════
+
+function clamp01(v) { return v < 0 ? 0 : v > 1 ? 1 : v; }
+function sigmoid(x) { return 1 / (1 + Math.exp(-x)); }
+// MIDI octave convention: octave 4 → C4 = 261.63 Hz (midi = pc + 12*(octave+1)).
+function pcToFreq(pc, octave) { return 440 * Math.pow(2, ((pc + 12 * (octave + 1)) - 69) / 12); }
+function chromaCosine(a, b) {
+  let dot = 0, na = 0, nb = 0;
+  for (let i = 0; i < 12; i++) { dot += a[i] * b[i]; na += a[i] * a[i]; nb += b[i] * b[i]; }
+  if (na < 1e-9 || nb < 1e-9) return 0;
+  return dot / Math.sqrt(na * nb);
+}
+
+// ── Perceptual front end ─────────────────────────────────────────────
+class PerceptualFrontEnd {
+  constructor() {
+    this.chroma = new Float32Array(12);
+    this.prevMag = null;
+    this.features = {
+      chroma: this.chroma, loudness: 0, brightness: 0.5,
+      roughness: 0, flux: 0, clarity: 0, pitchAngle: -1
+    };
+  }
+  // Rough A-weighting so loud-but-inaudible sub/air bands don't dominate.
+  aWeight(f) {
+    const f2 = f * f;
+    const num = 12194 * 12194 * f2 * f2;
+    const den = (f2 + 20.6 * 20.6) *
+                Math.sqrt((f2 + 107.7 * 107.7) * (f2 + 737.9 * 737.9)) *
+                (f2 + 12194 * 12194);
+    return den > 0 ? num / den : 0;
+  }
+  extract(freqData, sampleRate, fftSize, pitch, rms, centroid) {
+    const c = this.chroma; c.fill(0);
+    if (!freqData || !freqData.length) {
+      this.features.loudness = clamp01((Math.log1p(rms * 40) / 3) * 0.85);
+      this.features.brightness = clamp01(Math.log2(Math.max(80, centroid) / 80) / 6);
+      this.features.flux = 0; this.features.roughness = 0;
+      if (pitch > 0) {
+        // Build a chroma vector from the single detected pitch so the tonal
+        // channel is meaningful even without a spectrum. Without this, chroma
+        // stays all-zeros and every pitch-only frame reads as maximally
+        // surprising — which flatlines the whole predictive layer.
+        const midi = SynestheticMapper.freqToMidi(pitch);
+        const pc = ((Math.round(midi) % 12) + 12) % 12;
+        c[pc] = 1;
+        c[(pc + 7) % 12] = 0.25;   // implied fifth, so related notes are near in chroma space
+        this.features.pitchAngle = pc;
+        this.features.clarity = clamp01(0.5 + this.features.loudness);
+      } else {
+        this.features.pitchAngle = -1;
+        this.features.clarity = 0;
+      }
+      return this.features;
+    }
+    const n = freqData.length;
+    let weighted = 0, wsum = 0, flux = 0;
+    const peaks = [];
+    for (let i = 1; i < n; i++) {
+      const hz = i * sampleRate / fftSize;
+      if (hz < 30 || hz > 12000) continue;
+      const mag = freqData[i] / 255;
+      const aw = this.aWeight(hz);
+      weighted += mag * aw; wsum += aw;
+      if (this.prevMag) { const d = mag - this.prevMag[i]; if (d > 0) flux += d; }
+      // chroma fold (only where pitch is meaningful)
+      if (hz >= 55 && hz <= 5000 && mag > 0.05) {
+        const midi = 69 + 12 * Math.log2(hz / 440);
+        const pc = ((Math.round(midi) % 12) + 12) % 12;
+        c[pc] += mag * mag;
+      }
+      // local peak for roughness
+      if (hz >= 80 && hz <= 5000 && mag > 0.14 &&
+          mag >= freqData[i - 1] / 255 && mag >= (freqData[i + 1] || 0) / 255) {
+        peaks.push({ hz, a: mag });
+      }
+    }
+    this.prevMag = Float32Array.from(freqData, v => v / 255);
+
+    // normalise chroma
+    let cmax = 1e-6; for (let i = 0; i < 12; i++) cmax = Math.max(cmax, c[i]);
+    for (let i = 0; i < 12; i++) c[i] /= cmax;
+
+    // Plomp–Levelt sensory dissonance across the strongest partials
+    peaks.sort((a, b) => b.a - a.a);
+    const K = Math.min(8, peaks.length);
+    let rough = 0, rmax = 1e-6;
+    for (let i = 0; i < K; i++) for (let j = i + 1; j < K; j++) {
+      const f1 = Math.min(peaks[i].hz, peaks[j].hz);
+      const f2 = Math.max(peaks[i].hz, peaks[j].hz);
+      const s = 0.24 / (0.0207 * f1 + 18.96);
+      const x = s * (f2 - f1);
+      const d = peaks[i].a * peaks[j].a * (Math.exp(-3.51 * x) - Math.exp(-5.75 * x));
+      rough += Math.max(0, d); rmax += peaks[i].a * peaks[j].a;
+    }
+
+    // circular pitch-class centroid (a continuous angle on the chroma ring)
+    let sx = 0, sy = 0, csum = 0;
+    for (let i = 0; i < 12; i++) { const ang = i / 12 * TAU; sx += c[i] * Math.cos(ang); sy += c[i] * Math.sin(ang); csum += c[i]; }
+    const pitchAngle = csum > 1e-4 ? (wrapTau(Math.atan2(sy, sx)) / TAU * 12) : -1;
+    const clarity = csum > 1e-4 ? clamp01(Math.hypot(sx, sy) / csum) : 0; // tonal focus vs. noise
+
+    // Loudness is anchored to RMS (a robust perceptual proxy); the A-weighted
+    // spectral sum only tilts it slightly toward the audible band.
+    const audibleTilt = wsum > 0 ? clamp01((weighted / wsum) * 6) : 0.5;
+    this.features.loudness = clamp01((Math.log1p(rms * 40) / 3) * (0.7 + 0.3 * audibleTilt));
+    this.features.brightness = clamp01(Math.log2(Math.max(80, centroid) / 80) / 6);
+    this.features.roughness = clamp01(rough / rmax * 3.2);
+    this.features.flux = clamp01(flux * 0.08);
+    this.features.clarity = clarity;
+    this.features.pitchAngle = pitchAngle;
+    return this.features;
+  }
+}
+
+// ── One cortical column: models a single feature in its own frame ────
+class CorticalColumn {
+  constructor(name, circular = false) {
+    this.name = name; this.circular = circular;
+    this.pred = circular ? 0 : 0.5; this.conf = 0.2; this.err = 0;
+  }
+  _delta(obs, pred) {
+    if (!this.circular) return obs - pred;
+    let d = (obs - pred) % 12; if (d > 6) d -= 12; if (d < -6) d += 12; return d / 6;
+  }
+  update(obs, precision, dt) {
+    if (obs < 0) { this.conf *= (1 - dt * 0.6); return; } // no evidence → confidence fades
+    const d = this._delta(obs, this.pred);
+    this.err = Math.abs(d);
+    const lr = (0.05 + 0.45 * precision) * Math.min(1, dt * 12);
+    if (this.circular) { this.pred = wrapTau((this.pred + d * 6 * lr) / 12 * TAU) / TAU * 12; }
+    else { this.pred += d * lr; }
+    // confidence tracks how well this column has been predicting. Integrated
+    // slowly (τ ≈ 0.6 s) so consensus reflects a settled percept rather than
+    // twitching frame-to-frame — this is what lets Consensus actually climb.
+    this.conf += ((1 - Math.min(1, this.err)) - this.conf) * Math.min(1, dt * 1.6);
+    this.conf = clamp01(this.conf);
+  }
+}
+
+class CorticalColumnField {
+  constructor() {
+    this.columns = {
+      pitch:      new CorticalColumn('pitch', true),
+      brightness: new CorticalColumn('brightness'),
+      loudness:   new CorticalColumn('loudness'),
+      roughness:  new CorticalColumn('roughness')
+    };
+    this.consensus = 0;
+  }
+  update(f, precision, dt) {
+    this.columns.pitch.update(f.pitchAngle, precision, dt);
+    this.columns.brightness.update(f.brightness, precision, dt);
+    this.columns.loudness.update(f.loudness, precision, dt);
+    this.columns.roughness.update(f.roughness, precision, dt);
+    // Thousand-Brains voting: consensus = confidence-weighted agreement,
+    // itself smoothed so the vote integrates over recent steps instead of
+    // reflecting only the current frame.
+    let num = 0, den = 0;
+    for (const k in this.columns) {
+      const col = this.columns[k];
+      num += col.conf * (1 - Math.min(1, col.err));
+      den += col.conf;
+    }
+    const instant = den > 1e-4 ? clamp01(num / den) : 0;
+    this.consensus += (instant - this.consensus) * Math.min(1, dt * 2.5);
+    this.consensus = clamp01(this.consensus);
+    return this.consensus;
+  }
+  votedPitchClass() {
+    // Strict evidence gating: with no recent pitch input the column's
+    // confidence decays, and its stale prediction must not be voiced.
+    // (pred is initialised to 0 and never becomes negative, so without this
+    // gate the synth would forever "hear" a phantom C in total silence.)
+    const col = this.columns.pitch;
+    if (col.conf < 0.15) return -1;
+    const p = col.pred;
+    return p < 0 ? -1 : ((Math.round(p) % 12) + 12) % 12;
+  }
+}
+
+// ── Predictive core: generative prior + precision-weighted error ─────
+class PredictiveCore {
+  constructor() {
+    this.priorChroma = new Float32Array(12).fill(1 / 12);
+    this.priorLoud = 0.1; this.priorBright = 0.5;
+    this.surprise = 0; this.precision = 0.5; this.dmn = 0.2;
+  }
+  step(f, dt) {
+    // precision (attention): reliable, tonal, present input earns high gain
+    const reliability = clamp01(0.35 * f.loudness + 0.5 * f.clarity + 0.15 * (1 - f.flux));
+    const targetPrecision = clamp01(0.15 + STATE.precisionGain * reliability);
+    this.precision += (targetPrecision - this.precision) * Math.min(1, dt * 4);
+
+    // prediction error between generative prior and observation.
+    // The tonal (chroma) channel only counts when there is real evidence for
+    // it — absent input carries little precision, so silence is not surprising.
+    const evidence = clamp01(f.loudness * 3 + f.clarity * 0.4);
+    const chromaErr = (1 - chromaCosine(this.priorChroma, f.chroma)) * evidence;
+    const loudErr = Math.abs(this.priorLoud - f.loudness);
+    const brightErr = Math.abs(this.priorBright - f.brightness) * evidence;
+    const rawPE = clamp01(0.6 * chromaErr + 0.25 * loudErr + 0.15 * brightErr);
+
+    // precision-weighted prediction error = surprise / salience
+    const targetSurprise = clamp01(this.precision * rawPE * 1.4);
+    this.surprise += (targetSurprise - this.surprise) * Math.min(1, dt * 6);
+
+    // learning: the prior moves toward what was observed, weighted by precision
+    const lr = (0.02 + 0.28 * this.precision) * Math.min(1, dt * 8) * (0.3 + f.loudness);
+    for (let i = 0; i < 12; i++) this.priorChroma[i] += (f.chroma[i] - this.priorChroma[i]) * lr;
+    this.priorLoud += (f.loudness - this.priorLoud) * lr;
+    this.priorBright += (f.brightness - this.priorBright) * lr;
+
+    // Default-mode ↔ task anticorrelation: intrinsic drive rises slowly when
+    // there is little to attend to, and is quenched by salient input.
+    const taskDrive = clamp01(0.7 * this.surprise + 0.6 * f.loudness);
+    const dmnTarget = clamp01(1 - taskDrive);
+    const tau = dmnTarget > this.dmn ? 2.6 : 0.5;       // ramps up slowly, drops fast
+    this.dmn += (dmnTarget - this.dmn) * Math.min(1, dt / tau);
+    return this;
+  }
+}
+
+// ── Episodic memory: motif capture, pattern completion, replay ───────
+class EpisodicMemory {
+  constructor() {
+    this.store = [];            // [{pcs:[...], weight}]
+    this.current = [];          // motif being written
+    this.lastPC = -1; this.sinceNote = 0;
+    this.cand = -1; this.candTime = 0;
+    this.cursor = 0; this.replayClock = 0; this.recallStrength = 0;
+    this.recalled = null; this.replayPC = -1;
+  }
+  observe(pc, salient, dt) {
+    this.sinceNote += dt;
+    // debounce: a pitch class must persist ~90 ms to count as a note, so brief
+    // transitions between notes aren't recorded as spurious pitches. Time-based
+    // (not frame-based) so the threshold is the same at any frame rate.
+    if (pc === this.cand) this.candTime += dt; else { this.cand = pc; this.candTime = dt; }
+    const stable = (pc >= 0 && this.candTime >= 0.09) ? pc : -1;
+    if (stable >= 0 && stable !== this.lastPC && salient) {
+      this.current.push(stable); this.lastPC = stable; this.sinceNote = 0;
+      if (this.current.length > 16) this.current.shift();
+    }
+    // close a motif after a gap and file it away
+    if (this.sinceNote > 1.4 && this.current.length >= 3) {
+      this.store.push({ pcs: this.current.slice(), weight: 1 });
+      if (this.store.length > 24) this.store.shift();
+      this.current = []; this.lastPC = -1;
+      this._complete();
+    }
+  }
+  // pattern completion: which stored motif best matches the recent cue?
+  _complete() {
+    const cue = this.current.length ? this.current : (this.store.length ? this.store[this.store.length - 1].pcs.slice(-3) : []);
+    if (!cue.length || !this.store.length) { this.recallStrength = 0; this.recalled = null; return; }
+    let best = null, bestScore = 0;
+    for (const m of this.store) {
+      let score = 0;
+      for (let i = 0; i < m.pcs.length; i++)
+        for (let j = 0; j < cue.length; j++)
+          if (m.pcs[i] === cue[j]) score += 1;
+      score = score / (m.pcs.length + cue.length);
+      if (score > bestScore) { bestScore = score; best = m; }
+    }
+    this.recalled = best; this.recallStrength = clamp01(bestScore * 1.6);
+  }
+  // time-compressed replay (sharp-wave-ripple-like) while mind-wandering
+  replay(dmn, dt) {
+    if (!this.recalled || this.recalled.pcs.length === 0) { this.replayPC = -1; return -1; }
+    const rate = 1.6 + dmn * 3.2;               // faster replay when DMN is strong
+    this.replayClock += dt * rate;
+    if (this.replayClock >= 1) {
+      this.replayClock = 0;
+      this.cursor = (this.cursor + 1) % this.recalled.pcs.length;
+      this.replayPC = this.recalled.pcs[this.cursor];
+    }
+    return this.replayPC;
+  }
+}
+
+// ── Default-mode generative synth (the audible improvement) ──────────
+class DefaultModeSynth {
+  constructor() { this.ctx = null; this.ready = false; this.selfChroma = new Float32Array(12); this.lastTrig = -1; this.trigCooldown = 0; this.level = 0; }
+  // Measured audible output (post-voice, pre-delay). The visuals are gated by
+  // this, so the field only "hears" the synth when a listener actually would.
+  measure() {
+    if (!this.ready) { this.level = 0; return 0; }
+    if (!this.timeBuf) this.timeBuf = new Uint8Array(this.analyser.fftSize);
+    this.analyser.getByteTimeDomainData(this.timeBuf);
+    let s = 0, m = 0; const n = this.timeBuf.length;
+    for (let i = 0; i < n; i += 4) { const v = (this.timeBuf[i] - 128) / 128; s += v * v; m++; }
+    this.level = Math.sqrt(s / Math.max(1, m));
+    return this.level;
+  }
+  async ensure() {
+    if (this.ready) { if (this.ctx.state === 'suspended') await this.ctx.resume(); return; }
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC) throw new Error('Web Audio is unavailable in this context.');
+    this.ctx = new AC({ latencyHint: 'interactive' });
+    await this.ctx.resume();
+    const ctx = this.ctx;
+    this.master = ctx.createGain(); this.master.gain.value = 0.0;
+    // gentle feedback delay as a cheap sense of space
+    this.delay = ctx.createDelay(1.0); this.delay.delayTime.value = 0.33;
+    this.fb = ctx.createGain(); this.fb.gain.value = 0.32;
+    this.tone = ctx.createBiquadFilter(); this.tone.type = 'lowpass'; this.tone.frequency.value = 1800;
+    this.master.connect(this.tone); this.tone.connect(ctx.destination);
+    this.tone.connect(this.delay); this.delay.connect(this.fb); this.fb.connect(this.delay); this.delay.connect(ctx.destination);
+    this.analyser = ctx.createAnalyser(); this.analyser.fftSize = 2048;
+    this.tone.connect(this.analyser);
+    this.freq = new Uint8Array(this.analyser.frequencyBinCount);
+    this.ready = true;
+  }
+  note(freq, gain, dur, detune) {
+    if (!this.ready) return;
+    const ctx = this.ctx, t = ctx.currentTime;
+    const osc = ctx.createOscillator(); osc.type = 'triangle'; osc.frequency.value = freq; osc.detune.value = detune || 0;
+    const osc2 = ctx.createOscillator(); osc2.type = 'sine'; osc2.frequency.value = freq; osc2.detune.value = (detune || 0) + 4;
+    const g = ctx.createGain();
+    g.gain.setValueAtTime(0.0001, t);
+    g.gain.exponentialRampToValueAtTime(Math.max(0.0002, gain), t + 0.04);
+    g.gain.exponentialRampToValueAtTime(0.0001, t + dur);
+    osc.connect(g); osc2.connect(g); g.connect(this.master);
+    osc.start(t); osc2.start(t); osc.stop(t + dur + 0.05); osc2.stop(t + dur + 0.05);
+  }
+  update(percept, dt) {
+    if (!this.ready) return;
+    // Browsers suspend AudioContexts on tab switch / mobile background and do
+    // not resume them for us; without this the synth would stay permanently
+    // silent after the first backgrounding.
+    if (this.ctx.state === 'suspended') { this.ctx.resume().catch(() => {}); return; }
+    const t = this.ctx.currentTime;
+    // master follows overall engagement; intrinsic voice keyed to DMN.
+    // Floor raised so "on" is unambiguously audible at default volume —
+    // the state modulates loudness, it no longer decides audibility.
+    const level = STATE.synthVolume * clamp01(0.5 + 0.5 * (percept.dmn * 0.7 + percept.consensus * 0.5));
+    this.master.gain.setTargetAtTime(level, t, 0.2);
+    this.tone.frequency.setTargetAtTime(500 + percept.brightness * 4200, t, 0.15);
+    this.trigCooldown -= dt;
+    // Imagined (self-voiced) chroma fades between triggers, so active
+    // inference stops perceiving a phantom chord once the voice goes quiet —
+    // otherwise the pitch column's confidence never releases after silence.
+    for (let i = 0; i < 12; i++) this.selfChroma[i] *= Math.exp(-dt / 2.5);
+
+    // Choose the voice source: task-positive (consensus pitch) vs. intrinsic
+    // (memory replay). DMN activation crossfades between them.
+    // Strict gating: the task voice requires real, current input evidence —
+    // in silence only the memory/DMN voice may sound, and only if a motif was
+    // actually captured. True silence in = silence out.
+    const taskEvidence = smoothstep(0.04, 0.12, percept.loudness || 0);
+    const taskPC = percept.votedPC;
+    const dmnPC = percept.replayPC;
+    let pc = -1, gain = 0, intrinsic = false;
+    if (percept.dmn > 0.5 && dmnPC >= 0) { pc = dmnPC; intrinsic = true; gain = STATE.memoryReplay * percept.dmn; }
+    else if (taskPC >= 0 && taskEvidence > 0.05) { pc = taskPC; gain = Math.max(0.2, 0.5 * percept.consensus) * taskEvidence; }
+    else if (dmnPC >= 0) { pc = dmnPC; intrinsic = true; gain = STATE.memoryReplay * percept.dmn * 0.7; }
+
+    // DMN/task anticorrelation: surprise ducks the intrinsic voice.
+    if (intrinsic) gain *= (1 - 0.8 * percept.surprise);
+
+    // The cooldown alone rate-limits triggering. (Previously a held note also
+    // had to differ from the last-triggered pitch class, which made sustained
+    // notes re-fire only every other period — a halting, gappy voice.)
+    const period = intrinsic ? (0.5 - 0.2 * percept.dmn) : 0.28;
+    if (pc >= 0 && gain > 0.03 && this.trigCooldown <= 0) {
+      const octave = intrinsic ? 4 : (percept.brightness > 0.55 ? 5 : 4);
+      const root = pcToFreq(pc, octave);
+      const detune = (1 - percept.harmony) * 22 * (Math.random() - 0.5); // roughness → detune
+      this.note(root, gain * 0.85, intrinsic ? 1.6 : 0.9, detune);
+      // consonant companion (a fifth) when the percept is harmonious
+      if (percept.harmony > 0.5) this.note(pcToFreq((pc + 7) % 12, octave), gain * 0.45 * percept.harmony, 1.3, detune);
+      this.lastTrig = pc; this.trigCooldown = period;
+      // remember what we are sounding, for the active-inference feedback
+      for (let i = 0; i < 12; i++) this.selfChroma[i] *= 0.6;
+      this.selfChroma[pc] = 1; this.selfChroma[(pc + 7) % 12] = Math.max(this.selfChroma[(pc + 7) % 12], percept.harmony * 0.6);
+    }
+  }
+  // one-hot-ish chroma of what the synth is currently sounding
+  getSelfChroma() { return this.selfChroma; }
+  stop() { if (this.ready && this.master) this.master.gain.setTargetAtTime(0, this.ctx.currentTime, 0.15); }
+}
+
+// ── Demo stimulus (oddball paradigm) ─────────────────────────────────
+// A regular repeating tone sequence with an occasional deviant note. This
+// is the classic way to *see* predictive coding at work: the model settles
+// into predicting the pattern (surprise falls), then surprise spikes sharply
+// on each deviant (mismatch response), then relaxes again. It feeds the same
+// pitch/loudness the model would get from a mic, so no microphone is needed.
+class DemoStimulus {
+  constructor() {
+    this.on = false;
+    this.clock = 0; this.period = 0.40; // seconds per note
+    this.standardPC = 0;   // repeated standard tone (C) — the model locks onto it
+    this.deviantPC = 6;    // deviant (F#, a tritone away) every 7th note
+    this.count = 0;
+  }
+  toggle(v) { this.on = (v === undefined) ? !this.on : v; this.clock = 0; this.count = 0; }
+  // Returns { pitch, rms, centroid, deviant } for this instant, or null when off.
+  sample(dt) {
+    if (!this.on) return null;
+    this.clock += dt;
+    // Classic oddball: the same standard note repeats so the prior settles and
+    // surprise falls near zero; every 7th note is a deviant that breaks the
+    // prediction, producing a sharp mismatch spike (matches the UI copy).
+    const deviant = (this.count > 0 && this.count % 7 === 0);
+    const pc = deviant ? this.deviantPC : this.standardPC;
+    const phase = (this.clock % this.period) / this.period;
+    if (this.clock >= this.period) { this.clock -= this.period; this.count++; }
+    const env = phase < 0.7 ? 1 : 0;     // sound then a brief gap
+    const rms = env * 0.20;
+    const centroid = 600 + pc * 90;
+    return { pitch: env ? pcToFreq(pc, 4) : 0, rms, centroid, deviant };
+  }
+}
+
+// ── Orchestrator ─────────────────────────────────────────────────────
+class PredictiveCognition {
+  constructor() {
+    this.front = new PerceptualFrontEnd();
+    this.columns = new CorticalColumnField();
+    this.core = new PredictiveCore();
+    this.memory = new EpisodicMemory();
+    this.synth = new DefaultModeSynth();
+    this.demo = new DemoStimulus();
+    this.synthArmed = false;
+  }
+  async enableSynth() { await this.synth.ensure(); this.synthArmed = true; }
+  disableSynth() { this.synthArmed = false; this.synth.stop(); }
+
+  update(freqData, sampleRate, fftSize, pitch, rms, centroid, dt) {
+    if (!STATE.cognitionOn) {
+      // Without this the synth's master gain stays frozen at its last level
+      // and no notes ever trigger again — sound dies silently and confusingly.
+      if (this.synthArmed) this.synth.stop();
+      COGNITION = { ...NEUTRAL_COGNITION };
+      return COGNITION;
+    }
+    const f = this.front.extract(freqData, sampleRate, fftSize, pitch, rms, centroid);
+
+    // Active inference: when little is coming in and the synth is sounding,
+    // let the model perceive its own output so imagined sequences cohere.
+    if (STATE.synthOn && STATE.activeInference && this.synthArmed && f.loudness < 0.14) {
+      const self = this.synth.getSelfChroma();
+      for (let i = 0; i < 12; i++) f.chroma[i] = Math.max(f.chroma[i], self[i] * 0.9);
+      if (f.pitchAngle < 0) {
+        let mi = 0, mv = 0; for (let i = 0; i < 12; i++) if (self[i] > mv) { mv = self[i]; mi = i; }
+        if (mv > 0.2) { f.pitchAngle = mi; f.clarity = Math.max(f.clarity, 0.4); }
+      }
+    }
+
+    this.core.step(f, dt);
+    const consensus = this.columns.update(f, this.core.precision, dt);
+    const votedPC = this.columns.votedPitchClass();
+    // Memory records the *observed* note (from the chroma ring), not the
+    // smoothed column prediction, so replayed motifs are the real notes.
+    const obsPC = (f.pitchAngle >= 0 && f.clarity > 0.4) ? ((Math.round(f.pitchAngle) % 12) + 12) % 12 : -1;
+    // A note is recordable when it is clear and actually sounding — NOT when
+    // it is surprising. (Gating on surprise meant the more predictable your
+    // hummed motif became, the less of it was recorded — exactly backwards —
+    // which starved memory replay and left the intrinsic voice silent.)
+    const salient = f.clarity > 0.4 && f.loudness > 0.08;
+    this.memory.observe(obsPC, salient, dt);
+    const replayPC = this.memory.replay(this.core.dmn, dt);
+    const harmony = clamp01(1 - this.columns.columns.roughness.pred);
+
+    const percept = {
+      surprise: this.core.surprise, dmn: this.core.dmn, consensus,
+      precision: this.core.precision, brightness: f.brightness,
+      loudness: f.loudness,
+      harmony, votedPC, replayPC
+    };
+
+    if (STATE.synthOn && this.synthArmed) this.synth.update(percept, dt);
+    else if (this.synthArmed) this.synth.stop();
+    const synthLevel = (STATE.synthOn && this.synthArmed) ? this.synth.measure() : 0;
+
+    COGNITION = {
+      synthLevel,
+      surprise: this.core.surprise,
+      dmnActivation: this.core.dmn,
+      consensus,
+      precision: this.core.precision,
+      recallStrength: this.memory.recallStrength,
+      expectedChroma: votedPC,
+      voicedPitch: replayPC >= 0 ? replayPC : votedPC,
+      harmony
+    };
+    return COGNITION;
+  }
+}
+
+// ─────────────────────────────────────────────
+// Synesthetic Mapper
+// ─────────────────────────────────────────────
+class SynestheticMapper {
+  static freqToMidi(f) { return f <= 0 ? 0 : 69 + 12 * Math.log2(f / 440); }
+  static pitchToY(f, H) {
+    const t = Math.max(0, Math.min(1, (this.freqToMidi(f) - CONFIG.lowMidi) / (CONFIG.highMidi - CONFIG.lowMidi)));
+    return H * (1 - t);
+  }
+  static hexToRgb(hex) {
+    const m = hex.match(/^#?([\da-f]{2})([\da-f]{2})([\da-f]{2})$/i);
+    return m ? [parseInt(m[1],16), parseInt(m[2],16), parseInt(m[3],16)] : [0,0,0];
+  }
+  static interpolateColor(hex, midi) {
+    const rgb = this.hexToRgb(hex); const mid = 60;
+    let tgt, mix;
+    if (midi > mid) { tgt = [145,112,120]; mix = Math.min(1,(midi-mid)/36)*CONFIG.highPitchLightening; }
+    else { tgt = [4,4,8]; mix = Math.min(1,(mid-midi)/36)*0.78; }
+    return [
+      Math.round(rgb[0]+(tgt[0]-rgb[0])*mix),
+      Math.round(rgb[1]+(tgt[1]-rgb[1])*mix),
+      Math.round(rgb[2]+(tgt[2]-rgb[2])*mix)
+    ];
+  }
+  // Deterministic: a pitch class always resolves to the same tone colour.
+  // Register only shades it (lighter high, darker low) — no random hue, ever.
+  static toneColorForMidi(midi) {
+    const nc = ((Math.round(midi) % 12) + 12) % 12;
+    return this.interpolateColor(TONE_COLORS[nc], midi);
+  }
+  static getNoteColor(pitch) {
+    if (pitch <= 0) return [26, 26, 34];
+    return this.toneColorForMidi(this.freqToMidi(pitch));
+  }
+  static currentPaletteRgb() {
+    const p = PALETTES[STATE.palette];
+    return p.dominant.concat(p.accents).map(h => this.hexToRgb(h));
+  }
+  // Flows borrow the currently sounding note's tone (consistent, not random);
+  // when nothing sounds they fall back to a dim, desaturated last tone.
+  static randomPaletteColor() {
+    if (LAST_PITCH > 0) {
+      const rgb = this.getNoteColor(LAST_PITCH);
+      return [rgb[0]*0.85 | 0, rgb[1]*0.85 | 0, rgb[2]*0.85 | 0];
+    }
+    return [28, 28, 38];
+  }
+  // Returns warm-body or cool-touch tint based on centroid
+  static somaColor(centroid, rms) {
+    const p = PALETTES[STATE.palette];
+    const warm = p.somaWarm, cool = p.somaCool;
+    const t = Math.min(1, centroid / 4000);
+    return [
+      Math.round(warm[0]*(1-t)+cool[0]*t),
+      Math.round(warm[1]*(1-t)+cool[1]*t),
+      Math.round(warm[2]*(1-t)+cool[2]*t)
+    ];
+  }
+}
+
+// ─────────────────────────────────────────────
+// Fibonacci Spiral State — the living attractor
+// Irregular golden spiral that grows/contracts with audio
+// ─────────────────────────────────────────────
+class FibonacciSpiral {
+  constructor() {
+    this.phase = 0;
+    this.armPhase = 0;
+    this.irregularity = new Array(8).fill(0).map((_,i) => ({
+      k: 1.5 + i * 0.7,
+      a: 0.04 + Math.random() * 0.08,
+      omega: 0.08 + Math.random() * 0.18,
+      phi: Math.random() * TAU
+    }));
+  }
+
+  // Returns radius at angle theta for the spiral, modulated by time/audio
+  // This is NOT a true Archimedean — it's a logarithmic golden spiral with
+  // turbulent angular perturbation, giving the irregular feeling.
+  radiusAt(theta, rms, scale) {
+    const logSpiral = scale * Math.pow(PHI, theta / (TAU / 4));
+    let perturbation = 1.0;
+    for (const c of this.irregularity) {
+      perturbation += c.a * Math.sin(c.k * theta + c.omega * time + c.phi);
+    }
+    return logSpiral * perturbation * (1 + rms * 1.2);
+  }
+
+  // Render the spiral as multiple overlapping arms with glowing traces
+  draw(ctx, cx, cy, rms, centroid, W, H) {
+    const spec = currentSpectral();
+    const scale = Math.min(W, H) * 0.018 * STATE.spiralPull * (1 + spectralStrength() * spec.spiralBias * 0.25);
+    if (scale < 0.5) return;
+
+    const sc = SynestheticMapper.somaColor(centroid, rms);
+    const palRgb = SynestheticMapper.currentPaletteRgb();
+
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+
+    // Draw 3 interleaved arms of the spiral (like phyllotaxis)
+    for (let arm = 0; arm < 3; arm++) {
+      const armOffset = arm * (TAU / 3);
+      const steps = 180;
+      const thetaMax = TAU * 3.5; // 3.5 revolutions
+
+      ctx.beginPath();
+      let first = true;
+      for (let i = 0; i <= steps; i++) {
+        const theta = (i / steps) * thetaMax + armOffset + time * 0.08;
+        const r = this.radiusAt(theta, rms, scale);
+        // Clamp so spiral doesn't go offscreen
+        if (r > Math.min(W, H) * 0.48) break;
+        const x = cx + Math.cos(theta) * r;
+        const y = cy + Math.sin(theta) * r;
+        if (first) { ctx.moveTo(x, y); first = false; }
+        else ctx.lineTo(x, y);
+      }
+
+      const progress = arm / 3;
+      const baseColor = palRgb[arm % palRgb.length];
+      const alpha = (0.06 + rms * 0.18) * STATE.spiralPull;
+      ctx.strokeStyle = `rgba(${baseColor[0]},${baseColor[1]},${baseColor[2]},${alpha})`;
+      ctx.lineWidth = 0.8 + rms * 2.5;
+      ctx.lineCap = "round";
+      ctx.stroke();
+    }
+
+    // Central Fibonacci node — luminous core seed
+    const coreR = 3 + rms * 18;
+    const cg = ctx.createRadialGradient(cx, cy, 0, cx, cy, coreR * 4);
+    const palc = palRgb[0];
+    cg.addColorStop(0, `rgba(${palc[0]+80},${palc[1]+60},${palc[2]+80},${0.5 * STATE.spiralPull})`);
+    cg.addColorStop(0.4, `rgba(${palc[0]},${palc[1]},${palc[2]},${0.2 * STATE.spiralPull})`);
+    cg.addColorStop(1, `rgba(0,0,0,0)`);
+    ctx.fillStyle = cg;
+    ctx.beginPath();
+    ctx.arc(cx, cy, coreR * 4, 0, TAU);
+    ctx.fill();
+
+    ctx.restore();
+  }
+}
+
+// ─────────────────────────────────────────────
+// Toroidal Flow Field — inside-of-torus perspective
+// Particles travel along geodesics of an implicit torus centered on screen
+// viewed from inside the tube, creating the "folding into center" sensation
+// ─────────────────────────────────────────────
+class ToroidalFlowParticle {
+  constructor() { this.active = false; this.FOV = 900; }
+
+  // Map 2D screen coordinates to toroidal angular parameters (u, v)
+  // u = angle around the big circle, v = angle around the tube
+  // Then integrate velocity in (u, v) space and project back
+  spawn(W, H) {
+    this.active = true;
+    // Start position: uniformly across screen, biased toward the torus ring
+    // The torus ring projects as an ellipse ~40% of screen width from center
+    const R = Math.min(W, H) * CONFIG.torusMajorR;
+    const r = Math.min(W, H) * CONFIG.torusMinorR;
+
+    // Pick a random position on the torus surface
+    this.u = Math.random() * TAU; // around major circle
+    this.v = Math.random() * TAU; // around tube
+
+    // Velocity in torus angular space — flows always "inward" along tube toward v=PI
+    // (inside of the tube faces the center), and slowly around u
+    this.du = (Math.random() - 0.5) * 0.4;  // drift around big circle
+    this.dv = 0.6 + Math.random() * 0.8;    // always flowing inward through tube
+
+    this.R = R + (Math.random() - 0.5) * R * 0.5;  // irregularity in major radius
+    this.r = r * (0.5 + Math.random() * 0.8);       // irregular tube radius
+
+    this.rgb = SynestheticMapper.randomPaletteColor();
+    this.targetRgb = [...this.rgb];
+    this.opacity = 0.04 + Math.random() * 0.12;
+    this.size = 0.4 + Math.random() * 1.2;
+    this.seed = Math.random() * 1000;
+    this.ouU = (Math.random() - 0.5) * 0.10;
+    this.ouV = (Math.random() - 0.5) * 0.10;
+    this.life = 1.0;
+    this.age = 0;
+
+    // Cache previous projected position
+    this._project(W, H);
+    this.px = this.sx; this.py = this.sy; this.plife = 1.0;
+  }
+
+  // Project torus surface (u, v) → 2D screen (sx, sy)
+  // We look "into" the torus from the inside, so the camera is at the center of the tube
+  // This creates the effect of the tube surface wrapping around the viewer
+  _project(W, H) {
+    const cx = W / 2, cy = H / 2;
+    // 3D position on torus
+    const px3 = (this.R + this.r * Math.cos(this.v)) * Math.cos(this.u);
+    const py3 = (this.R + this.r * Math.cos(this.v)) * Math.sin(this.u);
+    const pz3 = this.r * Math.sin(this.v);
+
+    // Camera at center of the tube (inside the torus)
+    // Shift so we look from inside: offset x by R
+    const rx = px3 - this.R;  // relative to inside
+    const ry = py3;
+    const rz = pz3;
+
+    // Perspective projection
+    const depth = this.FOV + rz;
+    if (depth < 1) { this.sx = cx; this.sy = cy; this.visible = false; return; }
+    const scale = this.FOV / depth;
+    this.sx = cx + rx * scale;
+    this.sy = cy + ry * scale;
+    this.scale = scale;
+    this.visible = depth > 10;
+  }
+
+  update(dt, rms, pitch, W, H) {
+    if (!this.active) return;
+    this.px = this.sx; this.py = this.sy; this.plife = this.life;
+
+    const speed = 1.0 + rms * STATE.sensitivity * 3.5;
+    this.age += dt;
+
+    // Toroidal geodesic motion with low-pass stochastic turbulence.
+    // This replaces clockwork sin/cos drift with irregular spike-train-like motion.
+    this.ouU = updateOUScalar(this.ouU || 0, 0, 0.85, 0.20 + rms * 0.18, dt);
+    this.ouV = updateOUScalar(this.ouV || 0, 0, 1.10, 0.16 + rms * 0.12, dt);
+    const thetaRide = 0.025 * Math.sin(ORGANIC_FIELD.thetaPhase + this.seed) * thetaPhaseGate(1.15, 4);
+    const turbU = this.ouU + thetaRide;
+    const turbV = this.ouV - thetaRide * 0.6;
+
+    this.u += (this.du + turbU) * dt * speed;
+    this.v += (this.dv + turbV) * dt * speed;
+
+    // Spiral pull: subtly attract u-angle toward screen center direction
+    // Corresponds to the toroidal "horizon" that spirals inward
+    this.u = this.u % TAU;
+    this.v = this.v % TAU;
+
+    // Color tracking
+    if (pitch > 0) this.targetRgb = SynestheticMapper.getNoteColor(pitch);
+    const lerpC = Math.min(1, dt * 4);
+    this.rgb[0] += (this.targetRgb[0] - this.rgb[0]) * lerpC;
+    this.rgb[1] += (this.targetRgb[1] - this.rgb[1]) * lerpC;
+    this.rgb[2] += (this.targetRgb[2] - this.rgb[2]) * lerpC;
+
+    this.life -= dt * (0.18 + rms * 0.4);
+    if (this.life <= 0 || this.age > 8) this.active = false;
+
+    this._project(W, H);
+  }
+
+  draw(ctx, W, H) {
+    if (!this.active || !this.visible) return;
+    // Skip if trail would be very short
+    const dx = this.sx - this.px, dy = this.sy - this.py;
+    if (dx*dx + dy*dy < 0.1) return;
+
+    const fade = Math.min(this.life, this.age * 2);
+    const op = this.opacity * fade * STATE.flowBrightness;
+    if (op < 0.005) return;
+
+    const r = Math.floor(this.rgb[0]), g = Math.floor(this.rgb[1]), b = Math.floor(this.rgb[2]);
+    ctx.beginPath();
+    ctx.moveTo(this.px, this.py);
+    ctx.lineTo(this.sx, this.sy);
+    ctx.strokeStyle = `rgba(${r},${g},${b},${op})`;
+    ctx.lineWidth = Math.max(0.3, this.size * this.scale);
+    ctx.lineCap = 'round';
+    ctx.stroke();
+  }
+}
+
+// ─────────────────────────────────────────────
+// Soma Field Particle — proprioceptive body layer
+// Slow, body-temperature wisps that map touch/heat sensation
+// They move as if through body tissue, not through space
+// ─────────────────────────────────────────────
+class SomaParticle {
+  constructor(W, H) { this.reset(W, H); }
+  reset(W, H) {
+    // Distributed along the vertical axis — maps to body height/posture.
+    this.x = W * (0.15 + Math.random() * 0.70);
+    this.y = H * (0.05 + Math.random() * 0.90);
+    this.vx = 0; this.vy = 0;
+    this.size = 60 + Math.random() * 200;
+    this.seed = Math.random() * 1000;
+    this.baseAlpha = 0.008 + Math.random() * 0.018;
+    this.warmth = Math.random(); // 0 = cool/blue touch, 1 = warm/red body heat
+    this.pulseRate = 0.05 + Math.random() * 0.15;
+    this.aspect = 0.3 + Math.random() * 1.4;
+    this.angle = Math.random() * TAU;
+    this.noiseAngle = Math.random() * TAU;
+    this.noiseTurn = 0;
+    this.coreAlpha = 0;
+    this.haloAlpha = 0;
+    this.coreRadius = this.size * (0.18 + Math.random() * 0.10);
+    this.haloRadius = this.size * (1.05 + Math.random() * 0.45);
+    this.W = W; this.H = H;
+  }
+
+  update(dt, rms, centroid, W, H) {
+    // CT-afferent inspired non-monotonic gain: a warm/touch-like sweet spot
+    // instead of volume-proportional speed.
+    const ctGain = ctAffectiveTuning(rms);
+    const env = ORGANIC_FIELD.signalEnv;
+
+    // Two-stage astrocyte-like wave kinetics: a fast proximal core and a
+    // slower ATP-like halo. Core rises in ~100–250 ms; halo lingers 1–3 s.
+    const coreTarget = Math.max(0, Math.min(1, (0.12 + rms * 7.5) * (0.28 + 0.92 * ctGain)));
+    const coreTau = coreTarget > this.coreAlpha ? 0.16 : 0.55;
+    this.coreAlpha += (coreTarget - this.coreAlpha) * (1 - Math.exp(-dt / coreTau));
+    this.haloAlpha += (this.coreAlpha - this.haloAlpha) * (1 - Math.exp(-dt / 1.85));
+
+    // Glissando-like drift: slow and tissue-bound rather than wind-like.
+    this.noiseTurn = updateOUScalar(this.noiseTurn || 0, 0, 2.4, 0.95, dt);
+    this.noiseAngle = wrapTau(this.noiseAngle + this.noiseTurn * dt + (centroid / 9000 - 0.18) * dt * 0.12);
+    const speed = 0.55 + 3.8 * ctGain + 1.1 * env;
+    this.x += Math.cos(this.noiseAngle) * speed * dt;
+    this.y += Math.sin(this.noiseAngle) * speed * dt;
+
+    // Warm core drifts slightly upward; cool component spreads laterally.
+    this.y -= this.warmth * (1.6 + 3.0 * ctGain) * dt;
+    this.x += (1 - this.warmth) * this.noiseTurn * 1.6 * dt;
+
+    // Gentle centroid tracking — centroid shifts warmth perception.
+    this.warmth += (centroid / 5000 - this.warmth) * dt * 0.15;
+    this.warmth = Math.max(0, Math.min(1, this.warmth));
+
+    if (this.x < -this.haloRadius) this.x += W + this.haloRadius * 2;
+    if (this.x > W + this.haloRadius) this.x -= W + this.haloRadius * 2;
+    if (this.y < -this.haloRadius) this.y += H + this.haloRadius * 2;
+    if (this.y > H + this.haloRadius) this.y -= H + this.haloRadius * 2;
+  }
+
+  draw(ctx, rms, centroid) {
+    const sc = SynestheticMapper.somaColor(centroid * this.warmth * 2, rms);
+    const r = sc[0], g = sc[1], b = sc[2];
+    const pulseNoise = 0.82 + 0.18 * this.haloAlpha;
+    const ctGain = ctAffectiveTuning(rms);
+    const base = this.baseAlpha * STATE.somaBrightness;
+    const coreAlpha = base * (0.25 + ctGain * 1.8) * this.coreAlpha * (1 + rms * 1.2);
+    const haloAlpha = base * (0.16 + ctGain * 0.85) * this.haloAlpha;
+
+    ctx.save();
+
+    // Slow diffusing halo: persistent, broad, and lower opacity.
+    if (haloAlpha > 0.0004) {
+      const haloR = this.haloRadius * (1 + 0.28 * this.haloAlpha);
+      const halo = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, haloR);
+      halo.addColorStop(0, `rgba(${r},${g},${b},${haloAlpha * 0.35})`);
+      halo.addColorStop(0.38, `rgba(${r},${g},${b},${haloAlpha * 0.42})`);
+      halo.addColorStop(0.76, `rgba(${r},${g},${b},${haloAlpha * 0.16})`);
+      halo.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      ctx.fillStyle = halo;
+      ctx.beginPath();
+      ctx.ellipse(this.x, this.y, haloR, haloR * this.aspect,
+        this.angle + this.noiseTurn * 0.08, 0, TAU);
+      ctx.fill();
+    }
+
+    // Fast proximal core: smaller, brighter, and quick to reform.
+    if (coreAlpha > 0.0004) {
+      const coreR = this.coreRadius * (1 + this.coreAlpha * 0.95) * pulseNoise;
+      const core = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, coreR);
+      core.addColorStop(0, `rgba(${Math.min(255, r + 45)},${Math.min(255, g + 28)},${Math.min(255, b + 20)},${coreAlpha})`);
+      core.addColorStop(0.45, `rgba(${r},${g},${b},${coreAlpha * 0.55})`);
+      core.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      ctx.fillStyle = core;
+      ctx.beginPath();
+      ctx.ellipse(this.x, this.y, coreR, coreR * Math.max(0.42, this.aspect * 0.72),
+        this.angle + this.noiseAngle * 0.09, 0, TAU);
+      ctx.fill();
+    }
+
+    ctx.restore();
+  }
+}
+
+// ─────────────────────────────────────────────
+// Diffuse Background Cloud (unchanged core, slight refinement)
+// ─────────────────────────────────────────────
+class DiffuseBackgroundParticle {
+  constructor(W, H) {
+    this.x = Math.random() * W; this.y = Math.random() * H;
+    this.size = 130 + Math.random() * 280;
+    this.seed = Math.random() * 1000;
+    this.baseAlpha = 0.012 + Math.random() * 0.025;
+    this.paletteIndex = Math.floor(Math.pow(Math.random(), 2) * 4);
+    this.aspect = 0.35 + Math.random() * 1.2;
+    this.angle = Math.random() * TAU;
+    this.turnNoise = 0;
+    this.speedNoise = 0;
+    this.pulseNoise = 0.5 + Math.random() * 0.3;
+  }
+  update(dt, rms, W, H) {
+    // Low-pass stochastic field instead of looping sine/cosine cloud motion.
+    this.turnNoise = updateOUScalar(this.turnNoise || 0, 0, 3.0, 0.75, dt);
+    this.speedNoise = updateOUScalar(this.speedNoise || 0, 0, 2.0, 0.55, dt);
+    this.pulseNoise = updateOUScalar(this.pulseNoise || 0.5, 0.5, 3.6, 0.18, dt);
+    this.angle = wrapTau(this.angle + this.turnNoise * dt + (hashUnit2(this.seed, 1) - 0.5) * dt * 0.06);
+    const speed = Math.max(0.7, 2.8 + rms * 14 + this.speedNoise * 2.4);
+    this.x += Math.cos(this.angle) * speed * dt;
+    this.y += Math.sin(this.angle) * speed * dt;
+    if (this.x < -this.size) this.x += W + this.size * 2;
+    if (this.x > W + this.size) this.x -= W + this.size * 2;
+    if (this.y < -this.size) this.y += H + this.size * 2;
+    if (this.y > H + this.size) this.y -= H + this.size * 2;
+  }
+  draw(ctx, colors) {
+    const rgb = colors[this.paletteIndex % colors.length];
+    const [r, g, b] = rgb;
+    const pulse = Math.max(0.48, Math.min(1.10, 0.72 + this.pulseNoise * 0.38));
+    const alpha = this.baseAlpha * STATE.bgBrightness * pulse;
+    const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, this.size);
+    grad.addColorStop(0, `rgba(${r},${g},${b},${alpha})`);
+    grad.addColorStop(0.3, `rgba(${r},${g},${b},${alpha * 0.65})`);
+    grad.addColorStop(0.7, `rgba(${r},${g},${b},${alpha * 0.18})`);
+    grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+    ctx.save();
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    ctx.ellipse(this.x, this.y, this.size, this.size * this.aspect,
+      this.angle * 0.22 + this.turnNoise * 0.16, 0, TAU);
+    ctx.fill();
+    ctx.restore();
+  }
+}
+
+// ─────────────────────────────────────────────
+// Photism — main synesthetic shape object
+// Enhanced: now has spiral attraction + toroidal drift
+// ─────────────────────────────────────────────
+// A photism is now a located volume of smoke, not a glow. It has a stable
+// home for its pitch (projector locus), body that occludes what's behind it
+// (source-over, never "lighter"), a crisp onset and a slow vaporous release.
+class Photism {
+  constructor() {
+    this.active = false;
+    this.lobes = [];
+    for (let i = 0; i < 5; i++) {
+      this.lobes.push({
+        angleOffset: Math.random() * TAU,
+        distRatio: Math.random() * 0.45,
+        sizeRatio: 0.5 + Math.random() * 0.6,
+        spinRate: (Math.random() - 0.5) * 1.5
+      });
+    }
+    // Toroidal drift vector — each photism follows a toroidal geodesic
+    this.torusDriftU = (Math.random() - 0.5) * 0.4;
+    this.torusDriftV = (Math.random() - 0.5) * 0.3;
+  }
+
+  spawn(freq, rms, centroid, W, H) {
+    this.active = true; this.freq = freq;
+    this.midi = SynestheticMapper.freqToMidi(freq);
+    this.x = (Math.random() * 0.62 + 0.19) * W;
+    this.y = SynestheticMapper.pitchToY(freq, H);
+    this.targetY = this.y;
+    // Drift has a slight inward toroidal component (toward center)
+    this.driftX = (Math.random() - 0.5) * 2.5 - (this.x / W - 0.5) * this.torusDriftU;
+    this.driftY = (Math.random() - 0.5) * 1.2 - (this.y / H - 0.5) * this.torusDriftV;
+    // Latest feature retained: stable, user-editable pitch-class colour.
+    // The v8 photism lifecycle/rendering below remains otherwise unchanged.
+    this.colorRGB = SynestheticMapper.getNoteColor(freq);
+    this.life = 1.0; this.radius = 0; this.rotation = Math.random() * TAU;
+    this.updateProperties(rms, centroid);
+  }
+
+  updateProperties(rms, centroid) {
+    this.targetRadius = CONFIG.baseRadius * (0.42 + Math.min(1.9, rms * STATE.sensitivity * 14));
+    this.alpha = Math.min(0.25, 0.035 + rms * STATE.sensitivity * 0.85);
+    this.blur = 40;
+  }
+
+  update(dt, audioRMS, centroid, W, H) {
+    if (!this.active) return;
+    this.life -= STATE.decay * dt * 8;
+    if (this.life <= 0) { this.active = false; return; }
+    this.targetY = SynestheticMapper.pitchToY(this.freq, H);
+    this.y += (this.targetY - this.y) * Math.min(1, dt * 5);
+    this.x += this.driftX * dt * 18;
+    this.y += this.driftY * dt * 9;
+    // Gentle pull toward spiral center (gravitational attraction from Fibonacci)
+    const cx = W / 2, cy = H / 2;
+    const pullStrength = STATE.spiralPull * 0.04;
+    this.x += (cx - this.x) * pullStrength * dt;
+    this.y += (cy - this.y) * pullStrength * dt;
+    this.radius += (this.targetRadius - this.radius) * 0.08 || 0;
+    this.rotation += dt * (0.25 + centroid / 9000);
+    this.alpha *= 0.993;
+    this.updateProperties(audioRMS, centroid);
+  }
+
+  draw(ctx) {
+    if (!this.active) return;
+    const [r, g, b] = this.colorRGB;
+    const radius = this.targetRadius || 40;
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    ctx.filter = `blur(${this.blur}px)`;
+    const grad = ctx.createRadialGradient(this.x, this.y, 0, this.x, this.y, radius);
+    grad.addColorStop(0, `rgba(${r},${g},${b},${this.alpha * 0.58 * this.life})`);
+    grad.addColorStop(0.42, `rgba(${r},${g},${b},${this.alpha * 0.24 * this.life})`);
+    grad.addColorStop(1, `rgba(${r},${g},${b},0)`);
+    ctx.fillStyle = grad;
+    ctx.beginPath();
+    const pts = 48;
+    for (let i = 0; i <= pts; i++) {
+      const a = (i / pts) * TAU;
+      const w = 1 + 0.18 * Math.sin(a*3+this.rotation) + 0.10 * Math.sin(a*7-this.rotation*1.7);
+      const rr = radius * w;
+      const x = this.x + Math.cos(a) * rr, y = this.y + Math.sin(a) * rr;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.closePath(); ctx.fill();
+    for (const lobe of this.lobes) {
+      const a = lobe.angleOffset + this.rotation * lobe.spinRate;
+      const lx = this.x + Math.cos(a) * radius * lobe.distRatio;
+      const ly = this.y + Math.sin(a) * radius * lobe.distRatio;
+      const lr = radius * lobe.sizeRatio;
+      const lg = ctx.createRadialGradient(lx,ly,0,lx,ly,lr);
+      lg.addColorStop(0, `rgba(${r},${g},${b},${this.alpha * 0.26 * this.life})`);
+      lg.addColorStop(1, `rgba(${r},${g},${b},0)`);
+      ctx.fillStyle = lg;
+      ctx.beginPath(); ctx.arc(lx, ly, lr, 0, TAU); ctx.fill();
+    }
+    ctx.restore();
+  }
+}
+
+// ─────────────────────────────────────────────
+// Central Toroidal Membrane — the perceptual surface
+// Renders the "inside of the torus" as a visible ring with inner glow
+// That the flow particles seem to emerge from / disappear into
+// ─────────────────────────────────────────────
+function drawToroidalMembrane(ctx, rms, centroid, W, H) {
+  const cx = W/2, cy = H/2;
+  const R = Math.min(W,H) * CONFIG.torusMajorR;
+  const r = Math.min(W,H) * CONFIG.torusMinorR;
+  const spec = currentSpectral();
+  const specStrength = spectralStrength();
+  const voidState = computeAdvancedVoidState();
+
+  ctx.save();
+  ctx.globalCompositeOperation = "source-over";
+
+  // Render the void from a near-circular ellipse first.
+  // The slider controls the focal separation; 0 gives a circle.
+  const baseWobble = (1 + 0.08 * Math.sin(time * 0.4) + 0.04 * Math.sin(time * 0.91 + 1.4)
+    + specStrength * (spec.depth * 0.06 + spec.highWave * 0.03)) * voidState.wobbleBoost;
+  const apertureBase = Math.min(W, H) * 0.18 * (0.96 + R * 0.08 / Math.max(1, Math.min(W, H))) * (1 + rms * 0.42) * voidState.sizeFactor;
+  const focalNorm = Math.max(0, Math.min(0.95, STATE.voidFocalDistance));
+  const aBase = apertureBase * baseWobble;
+  const c = aBase * focalNorm;
+  const bBase = Math.sqrt(Math.max(1, aBase * aBase - c * c));
+
+  // Subtle toroidal breathing without strongly flattening the void.
+  const n = 72;
+  ctx.beginPath();
+  for (let i = 0; i <= n; i++) {
+    const a = (i / n) * TAU;
+    const wobble =
+      1 + 0.08 * Math.sin(a * 2.0 + time * 0.5)
+        + 0.04 * Math.sin(a * 5.2 - time * 0.32)
+        + 0.025 * Math.sin(a * 9.4 + time * 0.85)
+        + rms * 0.10 * Math.sin(a * 3.0 + time * 2.0);
+    const rx = aBase * wobble;
+    const ry = bBase * wobble;
+    if (i === 0) ctx.moveTo(cx + Math.cos(a) * rx, cy + Math.sin(a) * ry);
+    else ctx.lineTo(cx + Math.cos(a) * rx, cy + Math.sin(a) * ry);
+  }
+  ctx.closePath();
+
+  // Dark inner void
+  ctx.filter = "blur(28px)";
+  ctx.fillStyle = "rgba(0,0,2,0.72)";
+  ctx.fill();
+  ctx.filter = "none";
+  ctx.fillStyle = "rgba(0,0,2,0.88)";
+  ctx.fill();
+
+  // Luminous border of the toroidal mouth
+  const palRgb = SynestheticMapper.currentPaletteRgb();
+  const p0 = palRgb[0];
+  const rimAlpha = (0.08 + rms * 0.22 + specStrength * (spec.shimmer * 0.08 + Math.abs(spec.highWave) * 0.05)) * voidState.rimBoost;
+  ctx.filter = "blur(6px)";
+  ctx.strokeStyle = `rgba(${p0[0]},${p0[1]},${p0[2]},${rimAlpha})`;
+  ctx.lineWidth = 2.5 + rms * 8;
+  ctx.stroke();
+  ctx.filter = "none";
+
+  ctx.restore();
+}
+
+
+
+// ─────────────────────────────────────────────
+// Grid-cell / toroidal manifold overlays
+// These layers translate the neuroscience model into the perceptual scene:
+// repeated hexagonal firing fields, circular phases, module scales, and a
+// population-state trajectory constrained to a torus-like latent surface.
+// ─────────────────────────────────────────────
+class NeuralManifoldTrace {
+  constructor(maxLen = CONFIG.manifoldTrail) {
+    this.maxLen = maxLen;
+    this.points = [];
+  }
+  update(phiX, phiY, rms, pitch) {
+    const energy = Math.min(1, rms * 10);
+    this.points.push({ phiX, phiY, energy, pitch, t: time });
+    if (this.points.length > this.maxLen) this.points.shift();
+  }
+  draw(ctx, W, H) {
+    const intensity = STATE.manifoldTrace;
+    if (intensity <= 0.01 || this.points.length < 4) return;
+    const w = Math.min(240, Math.max(132, W * 0.34)), h = Math.min(140, Math.max(84, H * 0.18));
+    const x0 = Math.max(10, W - w - 14), y0 = Math.max(10, H - h - 14);
+    const cx = x0 + w / 2, cy = y0 + h / 2;
+    const rx = w * 0.37, ry = h * 0.34;
+    ctx.save();
+    ctx.globalCompositeOperation = "lighter";
+    ctx.fillStyle = `rgba(4,5,10,${0.22 * intensity})`;
+    roundRect(ctx, x0, y0, w, h, 12); ctx.fill();
+    ctx.strokeStyle = `rgba(160,180,255,${0.16 * intensity})`;
+    ctx.lineWidth = 1;
+    roundRect(ctx, x0, y0, w, h, 12); ctx.stroke();
+
+    // Torus projection: product of two circular phases compressed to a readable inset.
+    ctx.beginPath();
+    for (let i = 0; i <= 120; i++) {
+      const a = (i / 120) * TAU;
+      const x = cx + Math.cos(a) * rx;
+      const y = cy + Math.sin(a) * ry * 0.72;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = `rgba(120,150,230,${0.18 * intensity})`;
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.ellipse(cx, cy, rx * 0.42, ry * 0.30, 0, 0, TAU);
+    ctx.strokeStyle = `rgba(120,150,230,${0.12 * intensity})`;
+    ctx.stroke();
+
+    for (let i = 1; i < this.points.length; i++) {
+      const a = this.points[i-1], b = this.points[i];
+      const pa = torusInsetProject(a.phiX, a.phiY, cx, cy, rx, ry);
+      const pb = torusInsetProject(b.phiX, b.phiY, cx, cy, rx, ry);
+      const age = i / this.points.length;
+      const alpha = age * age * 0.55 * intensity;
+      const col = SynestheticMapper.getNoteColor(b.pitch || 220);
+      ctx.beginPath(); ctx.moveTo(pa.x, pa.y); ctx.lineTo(pb.x, pb.y);
+      ctx.strokeStyle = `rgba(${col[0]},${col[1]},${col[2]},${alpha})`;
+      ctx.lineWidth = 0.8 + b.energy * 2.2;
+      ctx.stroke();
+    }
+
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = `rgba(220,225,255,${0.52 * intensity})`;
+    ctx.font = "9px Segoe UI, sans-serif";
+    ctx.letterSpacing = "1px";
+    ctx.fillText("POPULATION MANIFOLD  T²", x0 + 12, y0 + 18);
+    ctx.restore();
+  }
+}
+
+function roundRect(ctx, x, y, w, h, r) {
+  ctx.beginPath();
+  ctx.moveTo(x + r, y);
+  ctx.arcTo(x + w, y, x + w, y + h, r);
+  ctx.arcTo(x + w, y + h, x, y + h, r);
+  ctx.arcTo(x, y + h, x, y, r);
+  ctx.arcTo(x, y, x + w, y, r);
+  ctx.closePath();
+}
+
+function torusInsetProject(phiX, phiY, cx, cy, rx, ry) {
+  const tube = 0.42 + 0.18 * Math.cos(phiY);
+  return {
+    x: cx + Math.cos(phiX) * rx * tube,
+    y: cy + Math.sin(phiX) * ry * tube + Math.sin(phiY) * ry * 0.35
+  };
+}
+
+
+// The overlay stays visible until tapped (it used to be hidden again on the
+// very next animation frame, so errors flashed for ~16 ms and were unreadable).
+function showRuntimeError(message) {
+  const box = document.getElementById("error-overlay");
+  if (!box) return;
+  box.textContent = message + "\n\n(tap to dismiss)";
+  box.style.display = "block";
+  if (!box.dataset.dismissBound) {
+    box.dataset.dismissBound = "1";
+    box.style.cursor = "pointer";
+    box.addEventListener("click", hideRuntimeError);
+  }
+}
+
+function hideRuntimeError() {
+  const box = document.getElementById("error-overlay");
+  if (box) box.style.display = "none";
+}
+
+function activeNeuralBand() {
+  return NEURAL_BANDS[STATE.distortionBand] || NEURAL_BANDS.theta;
+}
+
+function gammaPacketDisplacement(x, y, W, H, amount) {
+  const thetaGate = thetaPhaseGate(1.15, 8);
+  if (thetaGate <= 0.01 || ORGANIC_FIELD.gammaPackets.length === 0) return { dx: 0, dy: 0, strength: 0 };
+  let dx = 0, dy = 0, strength = 0;
+  for (const packet of ORGANIC_FIELD.gammaPackets) {
+    const px = x - packet.x, py = y - packet.y;
+    const r2 = px * px + py * py;
+    const sigma = Math.max(10, packet.radius);
+    const local = Math.exp(-r2 / (2 * sigma * sigma)) * Math.max(0, packet.life) * thetaGate * packet.strength;
+    if (local <= 0.002) continue;
+    const radial = Math.sqrt(r2) / sigma;
+    const carrier = Math.sin(ORGANIC_FIELD.gammaPhase + packet.seed + radial * 11.0);
+    dx += amount * 0.38 * local * carrier * (-py / sigma + 0.18);
+    dy += amount * 0.38 * local * Math.cos(ORGANIC_FIELD.gammaPhase * 0.91 + packet.seed + radial * 8.0) * (px / sigma + 0.18);
+    strength += local;
+  }
+  return { dx, dy, strength: Math.min(1, strength) };
+}
+
+function distortNeuralFieldPoint(x, y, W, H, rms, centroid) {
+  if (!STATE.neuralDistortion || STATE.distortionAmount <= 0.001) return { x, y };
+  const band = activeNeuralBand();
+  const unit = Math.max(1, Math.min(W, H));
+  const cx = W / 2, cy = H / 2;
+  const nx = (x - cx) / unit;
+  const ny = (y - cy) / unit;
+  const energy = 0.45 + Math.min(1, rms * 9.0) * 0.95;
+  const centroidBias = Math.min(1.4, Math.max(0.65, centroid / 2200));
+  const amount = STATE.distortionAmount * band.amp * unit * energy;
+  const spatialScale = Math.max(0.08, band.scale) * centroidBias;
+
+  // Explicit traveling-wave vector: onset sweeps top-down; offset reverses.
+  const dir = ORGANIC_FIELD.waveDirection;
+  const dirX = Math.cos(ORGANIC_FIELD.waveAngle);
+  const dirY = Math.sin(ORGANIC_FIELD.waveAngle);
+  const travelCoord = (nx * dirX + ny * dirY) / spatialScale;
+  const crossCoord = (-nx * dirY + ny * dirX) / spatialScale;
+  const phase = time * TAU * band.speed + STATE.phaseX * 0.55 + STATE.phaseY * 0.37;
+  const wavePhase = phase - dir * travelCoord * 2.4;
+
+  // Broad theta/alpha waves carry direction; compact gamma packets ride a
+  // preferred theta phase rather than living as an independent always-on layer.
+  const waveA = Math.sin(wavePhase + 0.65 * Math.sin(crossCoord));
+  const waveB = Math.cos(wavePhase * 0.83 - crossCoord * 1.35);
+  const radial = Math.sqrt(nx * nx + ny * ny);
+  const swirl = Math.sin(radial / spatialScale * 3.0 - wavePhase * 0.62);
+  let dx = amount * (0.58 * waveA * dirX + 0.22 * waveB * -dirY + 0.30 * swirl * -ny);
+  let dy = amount * (0.58 * waveA * dirY + 0.22 * waveB * dirX + 0.30 * swirl * nx);
+
+  const gamma = gammaPacketDisplacement(x, y, W, H, amount * (STATE.distortionBand === 'gamma' || STATE.distortionBand === 'highGamma' ? 1.7 : 0.95));
+  dx += gamma.dx;
+  dy += gamma.dy;
+  return { x: x + dx, y: y + dy };
+}
+
+
+function drawNeuralDistortionLegend(ctx, W, H, rms) {
+  if (!STATE.neuralDistortion || STATE.distortionAmount <= 0.001) return;
+  const band = activeNeuralBand();
+  const x = 12, y = Math.max(12, H - 56), w = Math.min(330, W - 24), h = 38;
+  ctx.save();
+  ctx.globalCompositeOperation = "source-over";
+  ctx.fillStyle = "rgba(4,5,10,0.48)";
+  roundRect(ctx, x, y, w, h, 10); ctx.fill();
+  ctx.strokeStyle = "rgba(180,190,255,0.16)";
+  ctx.lineWidth = 1;
+  roundRect(ctx, x, y, w, h, 10); ctx.stroke();
+  ctx.fillStyle = "rgba(225,230,255,0.62)";
+  ctx.font = "9px Segoe UI, sans-serif";
+  ctx.fillText(`DISTORTION: ${band.label.toUpperCase()}`, x + 12, y + 15);
+  ctx.fillStyle = "rgba(180,190,255,0.42)";
+  const directionLabel = ORGANIC_FIELD.waveDirection > 0 ? "onset top-down" : "offset bottom-up";
+  ctx.fillText(`amount ${STATE.distortionAmount.toFixed(2)} · ${directionLabel} · θ-nested γ packets`, x + 12, y + 29);
+  ctx.restore();
+}
+
+window.addEventListener("error", (event) => {
+  showRuntimeError(`Runtime error: ${event.message}`);
+});
+window.addEventListener("unhandledrejection", (event) => {
+  const reason = event.reason && (event.reason.stack || event.reason.message || String(event.reason));
+  showRuntimeError(`Unhandled promise rejection: ${reason || "unknown"}`);
+});
+
+function updateGridPhases(pitch, rms, centroid, dt) {
+  const midi = pitch > 0 ? SynestheticMapper.freqToMidi(pitch) : 60;
+  const normPitch = Math.max(0, Math.min(1, (midi - CONFIG.lowMidi) / (CONFIG.highMidi - CONFIG.lowMidi)));
+  const spec = currentSpectral();
+  const specStrength = spectralStrength();
+  const speed = 0.18 + rms * STATE.sensitivity * 2.2 + specStrength * spec.pulse * 0.35;
+
+  // Deterministic acoustic drive defines the attractor's intended velocity.
+  const targetVX = speed * (0.65 + normPitch + specStrength * spec.lowWave * 0.22);
+  const targetVY = speed * (0.42 + centroid / 5000 + specStrength * spec.midWave * 0.18);
+
+  // Real continuous-attractor bumps do not glide as perfect ODE dots. Their
+  // velocity is smooth but noisy; OU noise preserves continuity while removing
+  // the mechanical lockstep of pure deterministic integration.
+  const jitter = 0.035 + Math.min(0.18, rms * 0.65) + specStrength * (spec.flux || 0) * 0.08;
+  ORGANIC_FIELD.phaseVX = updateOUScalar(ORGANIC_FIELD.phaseVX, targetVX, 0.46, jitter, dt);
+  ORGANIC_FIELD.phaseVY = updateOUScalar(ORGANIC_FIELD.phaseVY, targetVY, 0.52, jitter * 0.92, dt);
+
+  // Theta-gated reformation. At the end of a theta cycle, the bump can briefly
+  // pause and re-anchor instead of evolving continuously forever.
+  if (ORGANIC_FIELD.thetaTick) {
+    const flux = spec.flux || 0;
+    const reanchorProbability = Math.max(0.07, Math.min(0.42, 0.09 + flux * 0.22 + (ORGANIC_FIELD.signalEnv < 0.08 ? 0.13 : 0)));
+    if (Math.random() < reanchorProbability) {
+      ORGANIC_FIELD.phasePause = 0.035 + Math.random() * 0.070;
+      ORGANIC_FIELD.reformPulse = 1;
+      STATE.phaseX = wrapTau(STATE.phaseX + randn() * 0.020 * (1 + rms * 5));
+      STATE.phaseY = wrapTau(STATE.phaseY + randn() * 0.020 * (1 + rms * 5));
+    }
+  }
+
+  const pauseGate = ORGANIC_FIELD.phasePause > 0 ? 0.14 : 1.0;
+  STATE.phaseX = wrapTau(STATE.phaseX + dt * ORGANIC_FIELD.phaseVX * pauseGate);
+  STATE.phaseY = wrapTau(STATE.phaseY + dt * ORGANIC_FIELD.phaseVY * pauseGate);
+}
+
+
+function drawGridLattice(ctx, pitch, rms, centroid, W, H) {
+  const intensity = STATE.gridLattice;
+  if (intensity <= 0.01) return;
+  const midi = pitch > 0 ? SynestheticMapper.freqToMidi(pitch) : 60;
+  const tPitch = Math.max(0, Math.min(1, (midi - CONFIG.lowMidi) / (CONFIG.highMidi - CONFIG.lowMidi)));
+  const spec = currentSpectral();
+  const specStrength = spectralStrength();
+  const spacing = CONFIG.gridSpacing * (0.78 + 0.42 * (1 - tPitch)) * (1 + specStrength * spec.lowWave * 0.08);
+  const amp = Math.min(1, rms * 18);
+  const cx = W / 2, cy = H / 2;
+  const phaseShiftX = Math.cos(STATE.phaseX) * spacing + specStrength * spec.midWave * spacing * 0.12;
+  const phaseShiftY = Math.sin(STATE.phaseY) * spacing + specStrength * spec.highWave * spacing * 0.08;
+  const rgb = SynestheticMapper.getNoteColor(pitch || 220);
+
+  ctx.save();
+  ctx.globalCompositeOperation = "lighter";
+  const rows = Math.ceil(H / (spacing * 0.866)) + 4;
+  const cols = Math.ceil(W / spacing) + 4;
+  for (let j = -2; j < rows; j++) {
+    for (let i = -2; i < cols; i++) {
+      const baseX = i * spacing + (j % 2) * spacing * 0.5 + phaseShiftX % spacing;
+      const baseY = j * spacing * 0.866 + phaseShiftY % (spacing * 0.866);
+      const warped = distortNeuralFieldPoint(baseX, baseY, W, H, rms, centroid);
+      const x = warped.x, y = warped.y;
+      const dx = x - cx, dy = y - cy;
+      const d = Math.sqrt(dx*dx + dy*dy);
+      const horizon = Math.exp(-Math.pow((d - Math.min(W,H)*0.34) / (Math.min(W,H)*0.28), 2));
+
+      // Sparse spiking-CAN analogue: each vertex has a persistent phase offset;
+      // only a rotating subset crosses firing threshold on any frame.
+      const persistentPhase = hashUnit2(i, j, 13.7) * TAU;
+      const frontPhase = (i * 0.37 + j * 0.61) + ORGANIC_FIELD.thetaPhase * 0.22 + STATE.phaseX * 0.45 - STATE.phaseY * 0.31;
+      const carrier = 0.5 + 0.5 * Math.sin(frontPhase + persistentPhase);
+      const localFront = 0.5 + 0.5 * Math.sin((i - j) * 0.23 + time * 0.12 + persistentPhase * 0.7);
+      const threshold = 0.70 + 0.10 * hashUnit2(i, j, 91.2) - amp * 0.07;
+      const firing = smoothstep(threshold, 1.0, carrier * 0.78 + localFront * 0.22);
+      if (firing <= 0.012) continue;
+
+      const local = (0.02 + amp * 0.08 + horizon * 0.10 + specStrength * (spec.high * 0.05 + Math.abs(spec.highWave) * 0.04)) * firing;
+      const r = (7 + 9 * amp) * (0.55 + firing * 0.75);
+      const g = ctx.createRadialGradient(x, y, 0, x, y, r * 6);
+      g.addColorStop(0, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${local * intensity})`);
+      g.addColorStop(0.22, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},${local * 0.55 * intensity})`);
+      g.addColorStop(1, `rgba(${rgb[0]},${rgb[1]},${rgb[2]},0)`);
+      ctx.fillStyle = g;
+      ctx.beginPath(); ctx.arc(x, y, r * 6, 0, TAU); ctx.fill();
+    }
+  }
+  ctx.restore();
+}
+
+
+function drawModuleOverlay(ctx, pitch, rms, centroid, W, H) {
+  const intensity = STATE.moduleOverlay;
+  const spec = currentSpectral();
+  const specStrength = spectralStrength();
+  if (intensity <= 0.01) return;
+  const cx = W * 0.15, cy = H * 0.78;
+  const radii = [28, 40, 55];
+  const scales = [0.92, 1.45, 2.25];
+  const labels = ["fine", "medium", "coarse"];
+  const colors = [[220,160,70],[95,180,115],[95,145,230]];
+
+  ctx.save();
+  ctx.globalCompositeOperation = "lighter";
+  for (let m = 0; m < 3; m++) {
+    const y = cy - m * 46;
+    const col = colors[m];
+    ctx.strokeStyle = `rgba(${col[0]},${col[1]},${col[2]},${0.23 * intensity})`;
+    ctx.lineWidth = 1;
+    ctx.beginPath(); ctx.arc(cx, y, radii[m], 0, TAU); ctx.stroke();
+    const phase = (STATE.phaseX / scales[m] + m * 1.7 + specStrength * spec.lowWave * (m + 1) * 0.35) % TAU;
+    const phase2 = (STATE.phaseY / scales[m] + m * 0.9 + specStrength * spec.midWave * (m + 1) * 0.28) % TAU;
+    for (let k = 0; k < 6; k++) {
+      const a = phase + k * TAU / 6;
+      const baseX = cx + Math.cos(a) * radii[m] * 0.72;
+      const baseY = y + Math.sin(a + phase2 * 0.25) * radii[m] * 0.72;
+      const warped = distortNeuralFieldPoint(baseX, baseY, W, H, rms, centroid);
+      const x = warped.x, yy = warped.y;
+      ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${(0.16 + rms*0.8) * intensity})`;
+      ctx.beginPath(); ctx.arc(x, yy, 2.2 + rms*18, 0, TAU); ctx.fill();
+    }
+    ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${0.45 * intensity})`;
+    ctx.font = "9px Segoe UI, sans-serif";
+    ctx.fillText(labels[m], cx + radii[m] + 14, y + 3);
+  }
+  ctx.fillStyle = `rgba(220,225,255,${0.35 * intensity})`;
+  ctx.font = "9px Segoe UI, sans-serif";
+  ctx.fillText("GRID MODULES", cx - 30, cy + 48);
+  ctx.restore();
+}
+
+function drawPhaseTorusHUD(ctx, pitch, rms, W, H) {
+  const intensity = STATE.phaseTorus;
+  const spec = currentSpectral();
+  const specStrength = spectralStrength();
+  if (intensity <= 0.01) return;
+  const size = Math.min(132, Math.max(82, W * 0.22), Math.max(82, H * 0.18));
+  const x0 = Math.max(10, W - size - 14), y0 = 14;
+  const cx = x0 + size / 2, cy = y0 + size / 2;
+  const rx = size * 0.38, ry = size * 0.25;
+  const col = SynestheticMapper.getNoteColor(pitch || 220);
+  const p = torusInsetProject(STATE.phaseX, STATE.phaseY, cx, cy, rx, ry);
+
+  ctx.save();
+  ctx.globalCompositeOperation = "source-over";
+  ctx.fillStyle = `rgba(3,4,10,${0.32 * intensity})`;
+  roundRect(ctx, x0, y0, size, size * 0.82, 14); ctx.fill();
+  ctx.strokeStyle = `rgba(180,190,255,${0.18 * intensity})`; ctx.lineWidth = 1;
+  roundRect(ctx, x0, y0, size, size * 0.82, 14); ctx.stroke();
+
+  ctx.globalCompositeOperation = "lighter";
+  for (let band = 0; band < 5; band++) {
+    ctx.beginPath();
+    for (let i = 0; i <= 120; i++) {
+      const a = i / 120 * TAU;
+      const tube = 0.55 + 0.08 * Math.cos(a * 2 + band) + specStrength * spec.depth * 0.05;
+      const x = cx + Math.cos(a) * rx * (0.55 + band * 0.08);
+      const y = cy + Math.sin(a) * ry * tube;
+      if (i === 0) ctx.moveTo(x, y); else ctx.lineTo(x, y);
+    }
+    ctx.strokeStyle = `rgba(${col[0]},${col[1]},${col[2]},${0.05 * intensity})`;
+    ctx.stroke();
+  }
+  ctx.fillStyle = `rgba(${col[0]},${col[1]},${col[2]},${(0.45 + rms*2 + specStrength * spec.shimmer * 0.7) * intensity})`;
+  ctx.beginPath(); ctx.arc(p.x, p.y, 4 + rms*28, 0, TAU); ctx.fill();
+  ctx.globalCompositeOperation = "source-over";
+  ctx.fillStyle = `rgba(225,230,255,${0.48 * intensity})`;
+  ctx.font = "9px Segoe UI, sans-serif";
+  ctx.fillText("PHASE TORUS  S¹×S¹", x0 + 12, y0 + 18);
+  ctx.fillText(`φx ${(STATE.phaseX/TAU).toFixed(2)}  φy ${(STATE.phaseY/TAU).toFixed(2)}`, x0 + 12, y0 + size * 0.75);
+  ctx.restore();
+}
+
+// ─────────────────────────────────────────────
+// Main App
+// ─────────────────────────────────────────────
+class VisualizerApp {
+  constructor() {
+    this.canvas = document.getElementById("glcanvas");
+    this.ctx = this.canvas.getContext("2d", { alpha: false });
+    this.audio = new AudioAnalyzer();
+    this.width = 0; this.height = 0;
+    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+
+    this.diffuse = [];
+    this.soma = [];
+    this.flows = Array.from({ length: CONFIG.flowParticles }, () => new ToroidalFlowParticle());
+    this.photisms = Array.from({ length: CONFIG.maxPhotisms }, () => new Photism());
+    this.spiral = new FibonacciSpiral();
+    this.manifold = new NeuralManifoldTrace(CONFIG.manifoldTrail);
+    this.spectralBlend = new SpectralWaveBlender();
+    this.cognition = new PredictiveCognition();
+
+    this.last = performance.now(); this.fpsLast = this.last;
+    this.frames = 0; this.fps = 0; this.spawnTimer = 0;
+    this.lastPhotismPC = -1;
+
+    this.resize();
+    this.bindUI();
+    this.seedParticles();
+    requestAnimationFrame(this.loop.bind(this));
+  }
+
+  getViewportSize() {
+    // Android Chrome/content:// views can report a layout viewport that is taller
+    // than the actually visible viewport. visualViewport keeps the canvas aligned
+    // with the visible screen and prevents the render from being pushed/cropped.
+    const vv = window.visualViewport;
+    const width = Math.max(1, Math.floor((vv && vv.width) || window.innerWidth || document.documentElement.clientWidth || 1));
+    const height = Math.max(1, Math.floor((vv && vv.height) || window.innerHeight || document.documentElement.clientHeight || 1));
+    return { width, height };
+  }
+
+  resize() {
+    this.dpr = Math.min(window.devicePixelRatio || 1, 2);
+    const viewport = this.getViewportSize();
+    const oldW = this.width, oldH = this.height;
+    this.width = viewport.width; this.height = viewport.height;
+    document.documentElement.style.setProperty("--app-vh", this.height + "px");
+    this.canvas.width = Math.floor(this.width * this.dpr);
+    this.canvas.height = Math.floor(this.height * this.dpr);
+    this.canvas.style.width = this.width + "px";
+    this.canvas.style.height = this.height + "px";
+    this.ctx.setTransform(this.dpr, 0, 0, this.dpr, 0, 0);
+    if (Math.abs(oldW - this.width) > 2 || Math.abs(oldH - this.height) > 2) {
+      this.diffuse = []; this.soma = [];
+      this.seedParticles();
+    }
+  }
+
+  seedParticles() {
+    if (this.width === 0 || this.height === 0) return;
+    while (this.diffuse.length < CONFIG.bgParticles)
+      this.diffuse.push(new DiffuseBackgroundParticle(this.width, this.height));
+    while (this.soma.length < CONFIG.somaParticles)
+      this.soma.push(new SomaParticle(this.width, this.height));
+  }
+
+
+  setControlsTab(tabName) {
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.classList.toggle("active", btn.dataset.tab === tabName);
+    });
+    document.querySelectorAll(".controls-page").forEach(page => {
+      page.classList.toggle("active", page.dataset.page === tabName);
+    });
+  }
+
+  updateScienceOverlayUI() {
+    const btn = document.getElementById("btn-science-overlay");
+    if (!btn) return;
+    btn.classList.toggle("active", STATE.scientificDetails);
+    btn.textContent = STATE.scientificDetails ? "On" : "Off";
+  }
+
+
+  buildToneMap() {
+    const wrap = document.getElementById("tone-swatches");
+    if (!wrap) return;
+    wrap.innerHTML = "";
+    TONE_NOTE_NAMES.forEach((name, i) => {
+      const cell = document.createElement("label");
+      cell.className = "tone-cell";
+      const input = document.createElement("input");
+      input.type = "color";
+      input.value = TONE_COLORS[i];
+      input.setAttribute("aria-label", `Colour for ${name}`);
+      input.addEventListener("input", (e) => {
+        TONE_COLORS[i] = e.target.value;
+        saveToneColors();
+      });
+      const span = document.createElement("span");
+      span.textContent = name;
+      cell.appendChild(input);
+      cell.appendChild(span);
+      wrap.appendChild(cell);
+    });
+  }
+
+  populatePlotSelector() {
+    const sel = document.getElementById("ctrl-plot-select");
+    if (!sel) return;
+    sel.innerHTML = "";
+    PLOT_LIBRARY.forEach((plot, i) => {
+      const opt = document.createElement("option");
+      opt.value = String(i);
+      opt.textContent = plot.title;
+      sel.appendChild(opt);
+    });
+    this.updatePlotOverlay();
+  }
+
+  updatePlotOverlay() {
+    const overlay = document.getElementById("plot-overlay");
+    const img = document.getElementById("plot-image");
+    const title = document.getElementById("plot-title");
+    const idx = document.getElementById("plot-index");
+    const btn = document.getElementById("btn-plots");
+    const sel = document.getElementById("ctrl-plot-select");
+    if (!overlay || !img || !PLOT_LIBRARY.length) return;
+    const i = ((STATE.activePlot % PLOT_LIBRARY.length) + PLOT_LIBRARY.length) % PLOT_LIBRARY.length;
+    STATE.activePlot = i;
+    const plot = PLOT_LIBRARY[i];
+    // Lazy-load: only fetch the figure when the gallery is actually shown, so
+    // a missing/optional plot set doesn't produce load errors at boot.
+    if (STATE.plotsVisible && img.getAttribute("src") !== plot.src) img.src = plot.src;
+    title.textContent = plot.title;
+    idx.textContent = `${i + 1}/${PLOT_LIBRARY.length}`;
+    if (sel) sel.value = String(i);
+    overlay.classList.toggle("hidden", !STATE.plotsVisible);
+    if (btn) {
+      btn.classList.toggle("active", STATE.plotsVisible);
+      btn.textContent = STATE.plotsVisible ? "Hide" : "Show";
+    }
+  }
+
+
+  setStatus(message) {
+    const status = document.getElementById("status");
+    if (status) status.textContent = message;
+  }
+
+  audioModeLabel(mode = STATE.audioInputMode) {
+    if (mode === 'system') return 'device output';
+    if (mode === 'both') return 'microphone + device output';
+    return 'microphone';
+  }
+
+  syncAudioSourceSelectors() {
+    const ids = ["ctrl-audio-source", "ctrl-start-audio-source"];
+    for (const id of ids) {
+      const el = document.getElementById(id);
+      if (el && el.value !== STATE.audioInputMode) el.value = STATE.audioInputMode;
+    }
+  }
+
+  updateMicUI() {
+    const btn = document.getElementById("btn-mic");
+    const micStatus = document.getElementById("mic-status");
+    this.syncAudioSourceSelectors();
+    const label = this.audioModeLabel();
+    if (btn) {
+      btn.classList.toggle("active", STATE.audioReady);
+      btn.textContent = STATE.audioReady ? "Close Audio" : "Open Audio";
+    }
+    if (micStatus) {
+      if (STATE.audioReady) {
+        micStatus.textContent = `Audio open: ${label}. FFT size 8192, WebAudio processing only, browser noise suppression disabled.`;
+      } else if (STATE.audioInputMode === 'system') {
+        micStatus.textContent = "Audio closed — device-output mode is selected. Reopen and enable Share audio/System audio in the picker.";
+      } else if (STATE.audioInputMode === 'both') {
+        micStatus.textContent = "Audio closed — combined mic + device-output mode is selected.";
+      } else {
+        micStatus.textContent = "Audio closed — microphone mode is selected. Ambient simulation active.";
+      }
+    }
+  }
+
+  async openMicrophone({ hideStart = false } = {}) {
+    const label = this.audioModeLabel();
+    const needsSystem = STATE.audioInputMode === 'system' || STATE.audioInputMode === 'both';
+    this.setStatus(needsSystem
+      ? `Requesting ${label}. In the picker, choose a screen/window and enable Share audio/System audio.`
+      : "Requesting microphone permission from the browser...");
+    try {
+      await this.audio.initialize({ mode: STATE.audioInputMode });
+      STATE.audioReady = true; STATE.ambientMode = false;
+      this.setStatus(`Audio capture open: ${label}. Close it any time in Settings → Signal.`);
+      if (hideStart) document.getElementById("start-screen").classList.add("hidden");
+      this.updateMicUI();
+      return true;
+    } catch (err) {
+      STATE.audioReady = false; STATE.ambientMode = true;
+      this.updateMicUI();
+      this.setStatus(`Audio capture unavailable — ambient mode is active. ${err && err.message ? err.message : ""}`);
+      if (hideStart) document.getElementById("start-screen").classList.add("hidden");
+      return false;
+    }
+  }
+
+  closeMicrophone({ updateStatus = true } = {}) {
+    this.audio.stop();
+    STATE.audioReady = false; STATE.ambientMode = true;
+    if (!STATE.spectralBlend) ACTIVE_SPECTRAL = { ...NEUTRAL_SPECTRAL };
+    if (!STATE.advancedVoidModel || !STATE.spectralBlend) LAST_VOID_STATE = { ...NEUTRAL_VOID_STATE };
+    this.updateMicUI();
+    if (updateStatus) this.setStatus("Audio capture closed. Ambient simulation is active.");
+  }
+
+  startAmbientMode() {
+    this.closeMicrophone({ updateStatus: false });
+    STATE.ambientMode = true;
+    this.setStatus("Ambient mode active. Open audio capture later from Settings → Signal if needed.");
+    document.getElementById("start-screen").classList.add("hidden");
+  }
+
+  bindUI() {
+    window.addEventListener("resize", () => this.resize());
+    window.addEventListener("orientationchange", () => setTimeout(() => this.resize(), 120));
+    if (window.visualViewport) {
+      window.visualViewport.addEventListener("resize", () => this.resize());
+      window.visualViewport.addEventListener("scroll", () => this.resize());
+    }
+    this.populatePlotSelector();
+    this.buildToneMap();
+    this.updateScienceOverlayUI();
+    const distBtn = document.getElementById("btn-distortion");
+    if (distBtn) { distBtn.classList.toggle("active", STATE.neuralDistortion); distBtn.textContent = STATE.neuralDistortion ? "On" : "Off"; }
+    this.syncAudioSourceSelectors();
+    for (const id of ["ctrl-audio-source", "ctrl-start-audio-source"]) {
+      const select = document.getElementById(id);
+      if (!select) continue;
+      select.addEventListener("change", async (e) => {
+        STATE.audioInputMode = e.target.value;
+        this.syncAudioSourceSelectors();
+        this.updateMicUI();
+        if (STATE.audioReady) {
+          this.closeMicrophone({ updateStatus: false });
+          await this.openMicrophone({ hideStart: false });
+        } else {
+          this.setStatus(`Audio source set to ${this.audioModeLabel()}. Open Audio to start capture.`);
+        }
+      });
+    }
+    this.updateMicUI();
+    document.querySelectorAll(".tab-btn").forEach(btn => {
+      btn.addEventListener("click", () => this.setControlsTab(btn.dataset.tab));
+    });
+
+    document.getElementById("btn-start").addEventListener("click", async () => {
+      await this.openMicrophone({ hideStart: true });
+    });
+
+    document.getElementById("btn-ambient-start").addEventListener("click", () => {
+      this.startAmbientMode();
+    });
+
+    document.getElementById("btn-mic").addEventListener("click", async () => {
+      if (STATE.audioReady) this.closeMicrophone();
+      else await this.openMicrophone({ hideStart: false });
+    });
+
+    document.getElementById("btn-spectral-blend").addEventListener("click", () => {
+      STATE.spectralBlend = !STATE.spectralBlend;
+      const btn = document.getElementById("btn-spectral-blend");
+      btn.classList.toggle("active", STATE.spectralBlend);
+      btn.textContent = STATE.spectralBlend ? "On" : "Off";
+      if (!STATE.spectralBlend) {
+        ACTIVE_SPECTRAL = { ...NEUTRAL_SPECTRAL };
+        LAST_VOID_STATE = { ...NEUTRAL_VOID_STATE };
+      }
+    });
+
+    document.getElementById("btn-void-model").addEventListener("click", () => {
+      STATE.advancedVoidModel = !STATE.advancedVoidModel;
+      const btn = document.getElementById("btn-void-model");
+      btn.classList.toggle("active", STATE.advancedVoidModel);
+      btn.textContent = STATE.advancedVoidModel ? "On" : "Off";
+      if (!STATE.advancedVoidModel) LAST_VOID_STATE = { ...NEUTRAL_VOID_STATE };
+    });
+
+    document.getElementById("btn-cognition").addEventListener("click", () => {
+      STATE.cognitionOn = !STATE.cognitionOn;
+      const btn = document.getElementById("btn-cognition");
+      btn.classList.toggle("active", STATE.cognitionOn);
+      btn.textContent = STATE.cognitionOn ? "On" : "Off";
+      if (!STATE.cognitionOn) COGNITION = { ...NEUTRAL_COGNITION };
+    });
+
+    document.getElementById("btn-demo").addEventListener("click", () => {
+      const btn = document.getElementById("btn-demo");
+      this.cognition.demo.toggle();
+      const on = this.cognition.demo.on;
+      // Demo only makes sense with the model running.
+      if (on && !STATE.cognitionOn) {
+        STATE.cognitionOn = true;
+        const c = document.getElementById("btn-cognition");
+        c.classList.add("active"); c.textContent = "On";
+      }
+      btn.classList.toggle("active", on);
+      btn.textContent = on ? "On" : "Off";
+    });
+
+    document.getElementById("btn-active-inference").addEventListener("click", () => {
+      STATE.activeInference = !STATE.activeInference;
+      const btn = document.getElementById("btn-active-inference");
+      btn.classList.toggle("active", STATE.activeInference);
+      btn.textContent = STATE.activeInference ? "On" : "Off";
+    });
+
+    document.getElementById("btn-synth").addEventListener("click", async () => {
+      const btn = document.getElementById("btn-synth");
+      const status = document.getElementById("synth-status");
+      if (!STATE.synthOn) {
+        try {
+          await this.cognition.enableSynth();     // needs this user gesture to start audio
+          STATE.synthOn = true;
+          if (!STATE.cognitionOn) { STATE.cognitionOn = true; const c = document.getElementById("btn-cognition"); c.classList.add("active"); c.textContent = "On"; }
+          btn.classList.add("active"); btn.textContent = "On";
+          if (status) status.textContent = "On. The voice harmonises with input and, in the quiet, drifts through remembered motifs.";
+        } catch (e) {
+          if (status) status.textContent = "Couldn't start audio here: " + (e && e.message ? e.message : "Web Audio unavailable.");
+        }
+      } else {
+        STATE.synthOn = false;
+        this.cognition.disableSynth();
+        btn.classList.remove("active"); btn.textContent = "Off";
+        if (status) status.textContent = "Off. Turn on to hear the generative voice again.";
+      }
+    });
+
+    document.getElementById("btn-test-tone").addEventListener("click", async () => {
+      const status = document.getElementById("synth-status");
+      try {
+        // The click itself is the required user gesture — this works even if
+        // Generative Sound has never been turned on, so it isolates whether
+        // audio output works at all from whether the predictive layer has
+        // anything to say yet.
+        await this.cognition.synth.ensure();
+        this.cognition.synth.master.gain.setTargetAtTime(0.6, this.cognition.synth.ctx.currentTime, 0.01);
+        this.cognition.synth.note(261.63, 0.7, 0.9, 0);
+        this.cognition.synth.note(329.63, 0.55, 0.9, 0);
+        this.cognition.synth.note(392.0, 0.55, 0.9, 0);
+        setTimeout(() => {
+          if (!STATE.synthOn) this.cognition.synth.master.gain.setTargetAtTime(0, this.cognition.synth.ctx.currentTime, 0.3);
+        }, 1000);
+        if (status && !STATE.synthOn) status.textContent = "Test chord played. If you heard it, audio output works — turn on Generative sound above for the full behaviour.";
+      } catch (e) {
+        if (status) status.textContent = "Couldn't play test tone: " + (e && e.message ? e.message : "Web Audio unavailable.");
+      }
+    });
+
+    window.addEventListener("beforeunload", () => this.closeMicrophone({ updateStatus: false }));
+    window.addEventListener("pagehide", () => this.closeMicrophone({ updateStatus: false }));
+    document.addEventListener("visibilitychange", async () => {
+      if (document.visibilityState === "hidden") {
+        // Remember that capture was live so it can be restored on return —
+        // otherwise the user comes back to ambient simulation while believing
+        // the microphone is still open.
+        this.audioWasOpen = STATE.audioReady;
+        this.closeMicrophone({ updateStatus: false });
+      } else if (document.visibilityState === "visible") {
+        const synth = this.cognition.synth;
+        if (STATE.synthOn && synth.ready && synth.ctx && synth.ctx.state !== "running") {
+          synth.ctx.resume().catch(() => {});
+        }
+        if (this.audioWasOpen && !STATE.audioReady) {
+          this.audioWasOpen = false;
+          if (STATE.audioInputMode === "mic") {
+            // Permission is already granted, so this reopens without a prompt.
+            await this.openMicrophone({ hideStart: false });
+          } else {
+            // System/both capture needs the share picker again — don't pop it
+            // uninvited; tell the user instead.
+            this.setStatus("Capture was closed while the tab was hidden. Reopen Audio in Settings → Signal (device output needs the share picker again).");
+            this.updateMicUI();
+          }
+        }
+      }
+    });
+
+    document.getElementById("btn-settings").addEventListener("click", () => {
+      STATE.uiVisible = !STATE.uiVisible;
+      document.getElementById("ui-layer").classList.toggle("hidden", !STATE.uiVisible);
+    });
+
+
+    document.getElementById("btn-science-overlay").addEventListener("click", () => {
+      STATE.scientificDetails = !STATE.scientificDetails;
+      this.updateScienceOverlayUI();
+    });
+
+    document.getElementById("btn-plots").addEventListener("click", () => {
+      STATE.plotsVisible = !STATE.plotsVisible;
+      this.updatePlotOverlay();
+    });
+    document.getElementById("ctrl-plot-select").addEventListener("change", (e) => {
+      STATE.activePlot = parseInt(e.target.value, 10) || 0;
+      STATE.plotsVisible = true;
+      this.updatePlotOverlay();
+    });
+    document.getElementById("btn-plot-prev").addEventListener("click", () => {
+      STATE.activePlot = (STATE.activePlot - 1 + PLOT_LIBRARY.length) % PLOT_LIBRARY.length;
+      STATE.plotsVisible = true;
+      this.updatePlotOverlay();
+    });
+    document.getElementById("btn-plot-next").addEventListener("click", () => {
+      STATE.activePlot = (STATE.activePlot + 1) % PLOT_LIBRARY.length;
+      STATE.plotsVisible = true;
+      this.updatePlotOverlay();
+    });
+    document.getElementById("btn-distortion").addEventListener("click", () => {
+      STATE.neuralDistortion = !STATE.neuralDistortion;
+      const btn = document.getElementById("btn-distortion");
+      btn.classList.toggle("active", STATE.neuralDistortion);
+      btn.textContent = STATE.neuralDistortion ? "On" : "Off";
+    });
+    document.getElementById("ctrl-distortion-band").addEventListener("change", (e) => {
+      STATE.distortionBand = e.target.value;
+    });
+
+    document.getElementById("btn-form-field").addEventListener("click", () => {
+      STATE.formField = !STATE.formField;
+      const btn = document.getElementById("btn-form-field");
+      btn.classList.toggle("active", STATE.formField);
+      btn.textContent = STATE.formField ? "On" : "Off";
+    });
+
+    document.getElementById("btn-debug").addEventListener("click", () => {
+      STATE.debug = !STATE.debug;
+      document.getElementById("debug-overlay").style.display = STATE.debug ? "block" : "none";
+      document.getElementById("btn-debug").classList.toggle("active", STATE.debug);
+      document.getElementById("btn-debug").textContent = STATE.debug ? "Hide" : "Show";
+    });
+
+    const bind = (id, stateKey, valId, fmt) => {
+      document.getElementById(id).addEventListener("input", (e) => {
+        STATE[stateKey] = parseFloat(e.target.value);
+        document.getElementById(valId).textContent = fmt ? fmt(STATE[stateKey]) : STATE[stateKey].toFixed(2);
+      });
+    };
+
+    document.getElementById("ctrl-palette").addEventListener("change", (e) => {
+      STATE.palette = e.target.value;
+      this.soma.forEach(s => { s.warmth = Math.random(); });
+    });
+
+    const toneReset = document.getElementById("btn-tone-reset");
+    if (toneReset) toneReset.addEventListener("click", () => {
+      TONE_COLORS = TONE_COLORS_DEFAULT.slice();
+      saveToneColors();
+      this.buildToneMap();
+    });
+
+    bind("ctrl-sens",       "sensitivity",    "val-sens",   v => v.toFixed(1));
+    bind("ctrl-spectral-strength", "spectralBlendStrength", "val-spectral-strength");
+    bind("ctrl-spectral-memory",   "spectralBlendMemory",   "val-spectral-memory");
+    bind("ctrl-void-strength",     "advancedVoidStrength",  "val-void-strength");
+    bind("ctrl-form-strength",     "formStrength",          "val-form-strength");
+    bind("ctrl-decay",      "decay",          "val-decay",  v => v.toFixed(2));
+    bind("ctrl-bg-bright",  "bgBrightness",   "val-bg-bright");
+    bind("ctrl-fg-bright",  "fgBrightness",   "val-fg-bright");
+    bind("ctrl-flow",       "flowBrightness", "val-flow");
+    bind("ctrl-soma",       "somaBrightness", "val-soma");
+    bind("ctrl-spiral",     "spiralPull",     "val-spiral");
+    bind("ctrl-void-focal", "voidFocalDistance", "val-void-focal");
+    bind("ctrl-grid",       "gridLattice",    "val-grid");
+    bind("ctrl-phase",      "phaseTorus",     "val-phase");
+    bind("ctrl-manifold",   "manifoldTrace",  "val-manifold");
+    bind("ctrl-modules",    "moduleOverlay",  "val-modules");
+    bind("ctrl-distortion", "distortionAmount", "val-distortion");
+    bind("ctrl-cog-influence", "cognitionInfluence", "val-cog-influence");
+    bind("ctrl-precision",     "precisionGain",      "val-precision");
+    bind("ctrl-synth-volume",  "synthVolume",        "val-synth-volume");
+    bind("ctrl-memory-replay", "memoryReplay",       "val-memory-replay");
+  }
+
+  ambientSignal() {
+    const rms = 0.015 + 0.012 * (0.5 + 0.5 * Math.sin(time * 0.7));
+    const freq = 140 + 360 * (0.5 + 0.5 * Math.sin(time * 0.22));
+    const centroid = 900 + 2400 * (0.5 + 0.5 * Math.sin(time * 0.53 + 2));
+    return { rms, freq, centroid };
+  }
+
+  spawnPhotism(freq, rms, centroid) {
+    const p = this.photisms.find(x => !x.active);
+    if (!p) return;
+    p.spawn(freq, rms, centroid, this.width, this.height);
+  }
+
+  spawnFlows(dt, rms) {
+    // Ensure a minimum density of active toroidal flow particles
+    let active = 0;
+    for (const p of this.flows) if (p.active) active++;
+    const target = Math.min(CONFIG.flowParticles, 3600 + Math.floor(rms * STATE.sensitivity * 6000));
+    if (active < target) {
+      let spawned = 0;
+      for (const p of this.flows) {
+        if (!p.active && spawned < 160) { p.spawn(this.width, this.height); spawned++; }
+      }
+    }
+  }
+
+  updateDebug(rms, pitch, centroid) {
+    if (!STATE.debug) return;
+    const midi = pitch > 0 ? SynestheticMapper.freqToMidi(pitch) : 0;
+    document.getElementById("dbg-fps").textContent = this.fps.toFixed(0);
+    document.getElementById("dbg-pitch").textContent = pitch > 0 ? pitch.toFixed(1) : "—";
+    document.getElementById("dbg-midi").textContent = midi > 0 ? midi.toFixed(1) : "—";
+    document.getElementById("dbg-rms").textContent = rms.toFixed(3);
+    document.getElementById("dbg-centroid").textContent = centroid.toFixed(0);
+    document.getElementById("dbg-photisms").textContent = this.photisms.filter(p => p.active).length;
+    document.getElementById("dbg-particles").textContent = this.flows.filter(p => p.active).length;
+    document.getElementById("dbg-spiral").textContent = (STATE.spiralPull).toFixed(3);
+    document.getElementById("dbg-phix").textContent = (STATE.phaseX / TAU).toFixed(3);
+    document.getElementById("dbg-phiy").textContent = (STATE.phaseY / TAU).toFixed(3);
+    document.getElementById("dbg-blend").textContent = `${currentSpectral().low.toFixed(2)} / ${currentSpectral().midBand.toFixed(2)} / ${currentSpectral().high.toFixed(2)}`;
+    document.getElementById("dbg-void").textContent = `${LAST_VOID_STATE.blend.toFixed(2)} / ${LAST_VOID_STATE.harmonicity.toFixed(2)} / ${LAST_VOID_STATE.stability.toFixed(2)} / ${LAST_VOID_STATE.inverseCurvature.toFixed(2)} / ${LAST_VOID_STATE.sizeFactor.toFixed(2)}`;
+    const NOTE = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+    document.getElementById("dbg-cog").textContent = `${COGNITION.surprise.toFixed(2)} / ${COGNITION.dmnActivation.toFixed(2)} / ${COGNITION.consensus.toFixed(2)} / ${COGNITION.precision.toFixed(2)}`;
+    document.getElementById("dbg-cog2").textContent = `${COGNITION.recallStrength.toFixed(2)} / ${COGNITION.voicedPitch >= 0 ? NOTE[COGNITION.voicedPitch] : "—"}`;
+  }
+
+  // Runs every frame regardless of the (hidden-by-default) debug HUD, so the
+  // Mind tab always shows proof-of-life for the predictive/cognition layer.
+  updateMindReadout() {
+    const liveEl = document.getElementById("live-surprise");
+    if (!liveEl) return;
+    const NOTE = ["C","C#","D","D#","E","F","F#","G","G#","A","A#","B"];
+    const set = (id, v) => {
+      const valEl = document.getElementById(id);
+      if (valEl) valEl.textContent = v.toFixed(2);
+      const row = valEl && valEl.closest(".mind-meter");
+      const fill = row && row.querySelector(".mm-fill");
+      if (fill) fill.style.width = (clamp01(v) * 100).toFixed(0) + "%";
+    };
+    set("live-surprise", COGNITION.surprise);
+    set("live-consensus", COGNITION.consensus);
+    set("live-dmn", COGNITION.dmnActivation);
+    set("live-recall", COGNITION.recallStrength);
+    set("live-synth", COGNITION.synthLevel || 0);
+    // Flash the surprise row on a mismatch spike so deviants are unmistakable.
+    const sRow = liveEl.closest(".mind-meter");
+    if (sRow) sRow.classList.toggle("mm-flash", COGNITION.surprise > 0.45);
+    document.getElementById("live-note").textContent = COGNITION.voicedPitch >= 0 ? NOTE[COGNITION.voicedPitch] : "—";
+  }
+
+  loop(now) {
+    const dt = Math.min(0.05, (now - this.last) / 1000);
+    this.last = now; time += dt;
+    this.frames++;
+    if (now - this.fpsLast > 500) {
+      this.fps = this.frames * 1000 / (now - this.fpsLast);
+      this.frames = 0; this.fpsLast = now;
+    }
+
+    if (STATE.audioReady) this.audio.update();
+    const ambient = this.ambientSignal();
+    const rms = STATE.audioReady ? this.audio.currentRMS : ambient.rms;
+    const pitch = STATE.audioReady ? this.audio.currentPitch : ambient.freq;
+    const centroid = STATE.audioReady ? this.audio.currentCentroid : ambient.centroid;
+    const eRMS = rms * STATE.sensitivity;
+
+    if (STATE.spectralBlend) {
+      ACTIVE_SPECTRAL = STATE.audioReady
+        ? this.spectralBlend.updateFromFFT(this.audio.freqData, this.audio.sampleRate, this.audio.analyser ? this.audio.analyser.fftSize : 4096, dt, pitch)
+        : this.spectralBlend.updateFromAmbient(ambient, dt);
+    } else {
+      this.spectralBlend.reset();
+      ACTIVE_SPECTRAL = { ...NEUTRAL_SPECTRAL };
+      LAST_VOID_STATE = { ...NEUTRAL_VOID_STATE };
+    }
+
+    const blendedSignal = applySpectralBlend({ rms: eRMS, pitch, centroid });
+    const renderRMS = blendedSignal.rms;
+    const renderPitch = blendedSignal.pitch;
+    const renderCentroid = blendedSignal.centroid;
+
+    // Newer predictive/generative features run beside the visual engine.
+    // They may listen, learn, demonstrate, and synthesize, but they do not
+    // suppress, gate, recolour, or otherwise rewrite v8's working response.
+    const demoSig = this.cognition.demo.sample(dt);
+    const cogPitch = demoSig ? demoSig.pitch : renderPitch;
+    const cogRMS = demoSig ? demoSig.rms : renderRMS;
+    const cogCentroid = demoSig ? demoSig.centroid : renderCentroid;
+    this.cognition.update(
+      demoSig ? null : (STATE.audioReady ? this.audio.freqData : null),
+      STATE.audioReady ? this.audio.sampleRate : 48000,
+      STATE.audioReady && this.audio.analyser ? this.audio.analyser.fftSize : 4096,
+      cogPitch, cogRMS, cogCentroid, dt
+    );
+
+    updateOrganicField(renderRMS, renderCentroid, dt, this.width, this.height);
+    updateFormField(this.cognition && this.cognition.front ? this.cognition.front.features : null, renderRMS, dt);
+    updateGridPhases(renderPitch, renderRMS, renderCentroid, dt);
+    this.manifold.update(STATE.phaseX, STATE.phaseY, renderRMS, renderPitch);
+
+    const ctx = this.ctx;
+    const W = this.width, H = this.height;
+
+    // ── 1. Base decay layer
+    ctx.globalCompositeOperation = "source-over";
+    ctx.fillStyle = `rgba(1,1,3,${STATE.decay})`;
+    ctx.fillRect(0, 0, W, H);
+
+    // ── 1.5 Cortical form-constant field (deep tunnel substrate, additive)
+    if (STATE.formField) drawFormField(ctx, W, H);
+
+    // ── 2. Soma field — proprioceptive body layer (behind everything)
+    ctx.globalCompositeOperation = "source-over";
+    for (const p of this.soma) {
+      p.update(dt, renderRMS, renderCentroid, W, H);
+      p.draw(ctx, renderRMS, renderCentroid);
+    }
+
+    // ── 3. Diffuse nebula clouds
+    const colors = SynestheticMapper.currentPaletteRgb();
+    for (const p of this.diffuse) {
+      p.update(dt, renderRMS, W, H);
+      p.draw(ctx, colors);
+    }
+
+    // ── 4. Optional animated scientific overlays: grid-cell phase lattice and module rulers
+    if (STATE.scientificDetails) {
+      drawGridLattice(ctx, renderPitch, renderRMS, renderCentroid, W, H);
+      drawModuleOverlay(ctx, renderPitch, renderRMS, renderCentroid, W, H);
+      drawNeuralDistortionLegend(ctx, W, H, renderRMS);
+    }
+
+    // ── 5. Toroidal flow particles (lighter blend)
+    this.spawnFlows(dt, renderRMS);
+    ctx.globalCompositeOperation = "lighter";
+    for (const p of this.flows) {
+      p.update(dt, renderRMS, renderPitch, W, H);
+      p.draw(ctx, W, H);
+    }
+    ctx.globalCompositeOperation = "source-over";
+
+    // ── 6. Central toroidal membrane + void (on top of flows)
+    drawToroidalMembrane(ctx, renderRMS, renderCentroid, W, H);
+
+    // ── 7. Fibonacci spiral (inside the membrane)
+    this.spiral.draw(ctx, W/2, H/2, renderRMS, renderCentroid, W, H);
+
+    // ── 8. Optional animated scientific HUDs: phase torus and population manifold trajectory
+    if (STATE.scientificDetails) {
+      drawPhaseTorusHUD(ctx, renderPitch, renderRMS, W, H);
+      this.manifold.draw(ctx, W, H);
+    }
+
+    // ── 9. Photisms (on top of everything)
+    this.spawnTimer -= dt;
+    if (renderPitch > 0 && renderRMS > CONFIG.minSpawnRMS && this.spawnTimer <= 0) {
+      this.spawnPhotism(renderPitch, renderRMS, renderCentroid);
+      this.spawnTimer = CONFIG.photismCooldown;
+    }
+    for (const p of this.photisms) {
+      p.update(dt, renderRMS, renderCentroid, W, H);
+      p.draw(ctx);
+    }
+
+    this.updateDebug(renderRMS, renderPitch, renderCentroid);
+    this.updateMindReadout();
+    hideRuntimeError();
+    requestAnimationFrame(this.loop.bind(this));
+  }
+}
+
+// Exposed for debugging and automated end-to-end tests.
+window.APP = new VisualizerApp();
+</script>
+</body>
+</html>
