@@ -50,6 +50,10 @@ Fernandes T, Gonçalves NM, Matiolli CC, Rodrigues MAA, Barros PM, Oliveira MM, 
 DOI: 10.1007/s00425-024-04565-1
 Source: verified against /home/clever/aidbio/site/add-ons/papers.html (title, author order, journal, year, DOI cross-checked).
 
+Alves HLS, Matiolli CC (equal contribution), Soares RC, Almadanim MC, Oliveira MM, Abreu IA. *Carbon/nitrogen metabolism and stress response networks – calcium-dependent protein kinases as the missing link?* Journal of Experimental Botany 72, 4190–4201 (2021).
+DOI: 10.1093/jxb/erab136
+Source: full-text PDF at ~/cv/papers/Alves_etal_2021.pdf; author order and co-first-author status confirmed from the paper's byline (previously listed in citations.md but not yet cited in any chapter — resolved here).
+
 ## Chapter 03 — Data
 
 The ~80% reduction in manual image-processing effort is supported by the 2026 academic/industry CV source supplied for this portfolio.
