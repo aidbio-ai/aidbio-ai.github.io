@@ -1,18 +1,49 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 — Biology becomes data | AidBio founder story</title><link rel="stylesheet" href="../assets/site.css"></head><body>
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 — Biology becomes data | AidBio founder story</title><meta name="theme-color" content="#FBFCFE">
+<script>
+    (function () {
+      var STORAGE_KEY = "aidbio-theme-preference";
+      var legacyKey = "aidbio-theme";
+      var root = document.documentElement;
+      var metaTheme = document.querySelector('meta[name="theme-color"]');
+      var mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      function getStoredPreference() {
+        var current = localStorage.getItem(STORAGE_KEY);
+        if (current === "system" || current === "light" || current === "dark") return current;
+        var legacy = localStorage.getItem(legacyKey);
+        if (legacy === "light" || legacy === "dark") return legacy;
+        return "system";
+      }
+      function getResolvedTheme(preference) {
+        if (preference === "light" || preference === "dark") return preference;
+        return mediaQuery.matches ? "dark" : "light";
+      }
+      function applyTheme(preference) {
+        var resolved = getResolvedTheme(preference);
+        root.setAttribute("data-theme", resolved);
+        root.style.colorScheme = resolved;
+        root.setAttribute("data-theme-preference", preference);
+        if (metaTheme) metaTheme.setAttribute("content", resolved === "dark" ? "#0E1219" : "#FBFCFE");
+      }
+      var initialPreference = getStoredPreference();
+      applyTheme(initialPreference);
+      window.__aidbioTheme = { key: STORAGE_KEY, mediaQuery: mediaQuery, applyTheme: applyTheme, getStoredPreference: getStoredPreference, getResolvedTheme: getResolvedTheme };
+    })();
+  </script>
+<link rel="stylesheet" href="../assets/site.css"></head><body>
 <header class="site-header"><div class="wrap nav">
-<a class="brand" href="../index.html"><img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo"><span>AidBio<small>Founder story</small></span></a>
-<nav class="navlinks" aria-label="Primary"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" >Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" aria-current="page">Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" >Portfolio</a><a href="../../index.html">← AidBio.com</a></nav></div></header><main><section class="hero"><div class="wrap"><div class="kicker">Chapter 03 · Biology becomes data</div><h1>Complexity eventually exceeds manual reasoning.</h1><p class="lede">RNA-seq matrices, interaction screens, images, time series and field records are different views of the same problem: how to extract structure from high-dimensional biological evidence without losing experimental meaning.</p><div class="progress-nav"><a class="" href="01-mechanism.html">01 Mechanism</a><a class="" href="02-networks.html">02 Networks</a><a class="active" href="03-data.html">03 Data</a><a class="" href="04-models.html">04 Models</a><a class="" href="05-software.html">05 Software</a><a class="" href="06-aidbio.html">06 AidBio</a></div></div></section>
+<a class="brand" href="../index.html"><img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo" class="mark-light"><img src="../../assets/aidbio-mark-dark.webp" alt="AidBio logo" class="mark-dark"><span>AidBio<small>Founder story</small></span></a>
+<div class="nav-actions"><nav class="navlinks" aria-label="Primary"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" >Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" aria-current="page">Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" >Portfolio</a><a href="../../index.html">← AidBio.com</a></nav><div class="theme-switcher" role="group" aria-label="Theme preference"><button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button><button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button><button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div><button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></div></div></header><div class="mobile-menu" id="mobile-menu"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" >Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html">Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" >Portfolio</a><a href="../../index.html">← AidBio.com</a></div><main><section class="hero"><div class="wrap"><div class="kicker">Chapter 03 · Biology becomes data</div><h1>Complexity eventually exceeds manual reasoning.</h1><p class="lede">Gene-activity tables, interaction screens, plant images, weather time series and field records all look different, but they're the same underlying problem: how do you pull a clear pattern out of a huge, messy dataset without losing what the experiment actually measured?</p><div class="progress-nav"><a class="" href="01-mechanism.html">01 Mechanism</a><a class="" href="02-networks.html">02 Networks</a><a class="active" href="03-data.html">03 Data</a><a class="" href="04-models.html">04 Models</a><a class="" href="05-software.html">05 Software</a><a class="" href="06-aidbio.html">06 AidBio</a></div></div></section>
 <section class="section white"><div class="wrap"><div class="section-title"><div class="eyebrow">The computational turn</div><h2>Computation was a response to scale.</h2></div>
 <div class="grid-3">
-<div class="card accent green"><h3>Transcriptomics</h3><p>RNA-seq converts molecular response into large expression matrices that can be compared across genotypes, treatments, tissues and time.</p></div>
-<div class="card accent"><h3>Phenotyping</h3><p>Python/OpenCV workflows at ITQB NOVA reduced manual image-processing effort by approximately 80%, turning images into quantitative plant traits at experiment scale.</p></div>
-<div class="card accent orange"><h3>Field data</h3><p>Spreadsheets, developmental stages and longitudinal plant observations require identity tracking, normalization and reproducible ETL before statistical analysis is meaningful.</p></div>
+<div class="card accent green"><h3>Transcriptomics</h3><p>RNA-seq measures which genes are active in a sample and by how much, turning a plant's molecular response into a large table that can be compared across varieties, treatments, tissues and time.</p></div>
+<div class="card accent"><h3>Phenotyping</h3><p>At ITQB NOVA, automated image-analysis code replaced manual measurement of plant photos, cutting that manual effort by roughly 80% and turning thousands of images into consistent, measurable plant traits — leaf area, growth rate, and so on — at full experiment scale.</p></div>
+<div class="card accent orange"><h3>Field data</h3><p>Field spreadsheets track the same plants across many developmental stages over time — which only becomes useful data once every row is reliably tied back to the right plant, cleaned up consistently, and processed the same way every time.</p></div>
 </div></div></section>
-<section class="section"><div class="wrap grid-2"><div><h2>From “data cleaning” to scientific identity.</h2><p>A core engineering lesson is that biological observations need stable identity across time. The public <strong>excelxtract</strong> project formalizes that idea by converting multi-sheet phenology workbooks to tidy, ML-ready data and generating persistent sample IDs for specific plant units.</p>
+<section class="section"><div class="wrap grid-2"><div><h2>From “data cleaning” to scientific identity.</h2><p>The core lesson here is simple to state and easy to get wrong in practice: every measurement needs to stay traceable back to the exact same plant, every time it's measured. The open-source <strong>excelxtract</strong> project builds that guarantee into the pipeline — it converts messy, multi-sheet field-observation spreadsheets into clean, analysis-ready data, with a permanent ID for every individual plant.</p>
 <div class="code">raw workbook → sheet classification → wide-to-long normalization → stable sample identity → PCA / t-SNE → interpretable developmental patterns</div>
 <div class="diagram"><img src="../assets/data-pipeline.svg" alt="Pipeline from raw workbook through sheet classification, wide-to-long normalization, and stable sample identity to PCA/t-SNE and interpretable developmental patterns"></div>
-</div><div class="project-card"><span class="tag">Python</span><span class="tag">uv</span><span class="tag">ETL</span><span class="tag">PCA</span><span class="tag">t-SNE</span><h3 style="margin-top:13px">excelxtract</h3><p>Automated extraction and normalization of agricultural phenology data, with persistent IDs designed for longitudinal biological analysis.</p><a href="https://github.com/matiollipt/excelxtract">View repository →</a></div></div></section>
-<section class="section white"><div class="wrap"><div class="callout"><h2>Data is not evidence until provenance survives the transformation.</h2><p>This becomes one of AidBio’s strongest design principles: every stage should preserve enough metadata to reconstruct what was measured, how it was transformed and how a conclusion was produced.</p></div></div></section>
+</div><div class="project-card"><span class="tag">Python</span><span class="tag">uv</span><span class="tag">ETL</span><span class="tag">PCA</span><span class="tag">t-SNE</span><h3 style="margin-top:13px">excelxtract</h3><p>Automatically extracts and standardizes agricultural field-observation data, keeping a stable identity per plant so the same individual can be tracked reliably across an entire growing season.</p><a href="https://github.com/matiollipt/excelxtract">View repository →</a></div></div></section>
+<section class="section white"><div class="wrap"><div class="callout"><h2>A number isn't evidence unless you can explain where it came from.</h2><p>That becomes one of AidBio's core design rules: every step of a pipeline should keep enough of a paper trail that you could reconstruct exactly what was measured, how it was transformed, and how a final conclusion was reached — not just trust the last number on the screen.</p></div></div></section>
 </main><footer><div class="wrap"><div class="spectrum"></div>
 <p><strong>AidBio</strong> — AI &amp; Data Science for Life Sciences and Agritech.</p>
 <p class="small">Founder: Cleverson Carlos Matiolli, PhD · <a href="https://github.com/matiollipt">GitHub</a> · <a href="https://orcid.org/0000-0001-8185-7628">ORCID</a> · <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&hl=en">Google Scholar</a></p>

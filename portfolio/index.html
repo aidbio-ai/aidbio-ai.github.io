@@ -1,33 +1,64 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Why AidBio exists — Founder story</title><meta name="description" content="The scientific trajectory behind AidBio: from plant molecular biology to scientific AI and decision systems."><link rel="stylesheet" href="assets/site.css"></head><body>
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Why AidBio exists — Founder story</title><meta name="description" content="The scientific trajectory behind AidBio: from plant molecular biology to scientific AI and decision systems."><meta name="theme-color" content="#FBFCFE">
+<script>
+    (function () {
+      var STORAGE_KEY = "aidbio-theme-preference";
+      var legacyKey = "aidbio-theme";
+      var root = document.documentElement;
+      var metaTheme = document.querySelector('meta[name="theme-color"]');
+      var mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      function getStoredPreference() {
+        var current = localStorage.getItem(STORAGE_KEY);
+        if (current === "system" || current === "light" || current === "dark") return current;
+        var legacy = localStorage.getItem(legacyKey);
+        if (legacy === "light" || legacy === "dark") return legacy;
+        return "system";
+      }
+      function getResolvedTheme(preference) {
+        if (preference === "light" || preference === "dark") return preference;
+        return mediaQuery.matches ? "dark" : "light";
+      }
+      function applyTheme(preference) {
+        var resolved = getResolvedTheme(preference);
+        root.setAttribute("data-theme", resolved);
+        root.style.colorScheme = resolved;
+        root.setAttribute("data-theme-preference", preference);
+        if (metaTheme) metaTheme.setAttribute("content", resolved === "dark" ? "#0E1219" : "#FBFCFE");
+      }
+      var initialPreference = getStoredPreference();
+      applyTheme(initialPreference);
+      window.__aidbioTheme = { key: STORAGE_KEY, mediaQuery: mediaQuery, applyTheme: applyTheme, getStoredPreference: getStoredPreference, getResolvedTheme: getResolvedTheme };
+    })();
+  </script>
+<link rel="stylesheet" href="assets/site.css"></head><body>
 <header class="site-header"><div class="wrap nav">
-<a class="brand" href="index.html"><img src="../assets/aidbio-mark-light.webp" alt="AidBio logo"><span>AidBio<small>Founder story</small></span></a>
-<nav class="navlinks" aria-label="Primary"><a href="index.html" aria-current="page">Why AidBio</a><a href="pages/01-mechanism.html" >Mechanism</a><a href="pages/02-networks.html" >Networks</a><a href="pages/03-data.html" >Data</a><a href="pages/04-models.html" >Models</a><a href="pages/05-software.html" >Software</a><a href="pages/06-aidbio.html" >AidBio</a><a href="pages/07-portfolio.html" >Portfolio</a><a href="../index.html">← AidBio.com</a></nav></div></header>
+<a class="brand" href="index.html"><img src="../assets/aidbio-mark-light.webp" alt="AidBio logo" class="mark-light"><img src="../assets/aidbio-mark-dark.webp" alt="AidBio logo" class="mark-dark"><span>AidBio<small>Founder story</small></span></a>
+<div class="nav-actions"><nav class="navlinks" aria-label="Primary"><a href="index.html" aria-current="page">Why AidBio</a><a href="pages/01-mechanism.html" >Mechanism</a><a href="pages/02-networks.html" >Networks</a><a href="pages/03-data.html" >Data</a><a href="pages/04-models.html" >Models</a><a href="pages/05-software.html" >Software</a><a href="pages/06-aidbio.html" >AidBio</a><a href="pages/07-portfolio.html" >Portfolio</a><a href="../index.html">← AidBio.com</a></nav><div class="theme-switcher" role="group" aria-label="Theme preference"><button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button><button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button><button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div><button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></div></div></header><div class="mobile-menu" id="mobile-menu"><a href="index.html">Why AidBio</a><a href="pages/01-mechanism.html" >Mechanism</a><a href="pages/02-networks.html" >Networks</a><a href="pages/03-data.html" >Data</a><a href="pages/04-models.html" >Models</a><a href="pages/05-software.html" >Software</a><a href="pages/06-aidbio.html" >AidBio</a><a href="pages/07-portfolio.html" >Portfolio</a><a href="../index.html">← AidBio.com</a></div>
 <main>
 <section class="hero"><div class="wrap hero-grid"><div>
 <div class="kicker">Founder story · Cleverson Carlos Matiolli, PhD</div>
 <h1>AidBio did not begin with AI.</h1>
-<p class="lede">It began with a biological question: <strong>how do interacting signals become an observable phenotype?</strong> Two decades later, the same question sits underneath AidBio — now expressed through bioinformatics, machine learning, scientific software, environmental data and AI-assisted research.</p>
+<p class="lede">It began with a biological question: <strong>how do many small signals inside a living cell add up to something you can actually see or measure — a trait, a stress response, a yield?</strong> Two decades later, that's still the question underneath AidBio — now answered with bioinformatics, machine learning, scientific software, environmental data and AI-assisted research instead of a single lab bench.</p>
 <div class="btns"><a class="btn" href="pages/01-mechanism.html">Start the tutorial →</a><a class="btn secondary" href="pages/06-aidbio.html">See AidBio today</a></div>
 </div><aside class="hero-card"><div class="spectrum"></div><h3 style="margin-top:21px">The scale of the problem kept expanding</h3>
 <div class="chain"><div><b>01</b> gene &amp; signal</div><div><b>02</b> regulatory network</div><div><b>03</b> organism &amp; phenotype</div><div><b>04</b> biological data</div><div><b>05</b> computational model</div><div><b>06</b> scientific software &amp; AI</div></div></aside></div></section>
 
 <section class="section white"><div class="wrap"><div class="section-title"><div class="eyebrow">The founder thesis</div><h2>The tools changed. The scientific method did not.</h2></div>
 <div class="grid-3">
-<div class="card accent green"><h3>Mechanism first</h3><p>Start by identifying variables, interactions, measurements, causal hypotheses and confounders. This came directly from molecular genetics and experimental plant biology.</p></div>
-<div class="card accent magenta"><h3>Represent complexity</h3><p>When biological relationships become too dense for intuition alone, convert them into structured data: expression matrices, interaction graphs, phenotypes and environmental time series.</p></div>
-<div class="card accent orange"><h3>Make evidence reusable</h3><p>A one-off analysis answers one experiment. Software encodes a repeatable way of answering a class of scientific questions.</p></div>
+<div class="card accent green"><h3>Mechanism first</h3><p>Before modeling anything, ask the same questions a bench scientist asks: what are the variables, what interacts with what, what did we actually measure versus infer, and what could be misleading us? That habit came straight out of molecular genetics and hands-on plant biology.</p></div>
+<div class="card accent magenta"><h3>Represent complexity honestly</h3><p>Once a system has too many moving parts to hold in your head, turn it into structured data instead of guessing — gene activity tables, interaction networks, measured traits, weather records over time.</p></div>
+<div class="card accent orange"><h3>Make the evidence reusable</h3><p>A one-off spreadsheet analysis only answers one question, once. Software that captures the same reasoning can answer the next hundred questions like it — for a client, not just for one paper.</p></div>
 </div></div></section>
 
 <section class="section"><div class="wrap"><div class="grid-2"><div>
 <div class="eyebrow">2005 → today</div><h2>From crop biotechnology to scientific AI</h2>
-<p>The story begins in applied agricultural biotechnology at Alellyx, deepens through doctoral and postdoctoral research on sugar, hormone and stress signalling, expands into protein interaction networks and crop biology, then moves increasingly into computation, graph learning, climate analytics and agentic research software.</p>
-<p>The important point is continuity: the computational phase was not an escape from biology. It was a response to biological complexity.</p>
+<p>The story starts in applied agricultural biotech at Alellyx, deepens through years of academic research on how plants sense sugar, hormones and stress, expands into mapping how proteins interact inside crop cells, and then moves increasingly into computation — graph-based machine learning, climate analytics and AI-assisted research software.</p>
+<p>The important point is continuity, not a career change: the move into computing wasn't an escape from biology. It was what biology demanded once the questions got too complex to answer by hand.</p>
 </div><div class="timeline">
-<div class="timeline-item"><div class="timeline-year">2005–08</div><div class="timeline-content"><b>Alellyx Applied Genomics</b><br>Crop genomics, cloning, candidate genes, greenhouse and field validation.</div></div>
-<div class="timeline-item"><div class="timeline-year">2008–16</div><div class="timeline-content"><b>UNICAMP + UT Arlington</b><br>bZIP63, sugar/ABA signalling, stress, circadian regulation, RNA-seq and protein interactions.</div></div>
-<div class="timeline-item"><div class="timeline-year">2017–24</div><div class="timeline-content"><b>UC Davis + ITQB NOVA</b><br>Plant immunity, interactomes, rice stress biology, systems-level regulatory networks and computational phenotyping.</div></div>
-<div class="timeline-item"><div class="timeline-year">2024–</div><div class="timeline-content"><b>AidBio</b><br>Scientific software, bioinformatics, graph ML, agroclimatic analytics and local-first AI workflows.</div></div>
+<div class="timeline-item"><div class="timeline-year">2005–08</div><div class="timeline-content"><b>Alellyx Applied Genomics</b><br>Crop genetics in industry: finding the genes behind useful traits and validating them in the greenhouse and field.</div></div>
+<div class="timeline-item"><div class="timeline-year">2008–16</div><div class="timeline-content"><b>UNICAMP + UT Arlington</b><br>PhD and postdoctoral research on how a single regulatory protein (bZIP63) lets a plant's energy and stress signals talk to its internal clock — plus the RNA and protein-interaction data behind that finding.</div></div>
+<div class="timeline-item"><div class="timeline-year">2017–24</div><div class="timeline-content"><b>UC Davis + ITQB NOVA</b><br>Plant immunity, protein-interaction networks, rice stress biology, and turning plant images into measurable data at scale.</div></div>
+<div class="timeline-item"><div class="timeline-year">2024–</div><div class="timeline-content"><b>AidBio</b><br>Scientific software, bioinformatics, graph-based machine learning, agricultural climate analytics, and AI workflows that keep the underlying evidence traceable.</div></div>
 </div></div></div></section>
 
 <section class="section white"><div class="wrap"><div class="callout"><p class="quote">“Can molecular, biological, agronomic and environmental complexity be transformed into reproducible computational evidence that researchers can actually use to make decisions?”</p>

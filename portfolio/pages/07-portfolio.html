@@ -1,9 +1,40 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Portfolio — The method applied across domains | AidBio founder story</title><meta name="description" content="Selected applied engagements where the same mechanism-first, evidence-before-interpretation method was used outside plant biology: agriculture, oncology and biomedical engineering."><link rel="stylesheet" href="../assets/site.css"></head><body>
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Portfolio — The method applied across domains | AidBio founder story</title><meta name="description" content="Selected applied engagements where the same mechanism-first, evidence-before-interpretation method was used outside plant biology: agriculture, oncology and biomedical engineering."><meta name="theme-color" content="#FBFCFE">
+<script>
+    (function () {
+      var STORAGE_KEY = "aidbio-theme-preference";
+      var legacyKey = "aidbio-theme";
+      var root = document.documentElement;
+      var metaTheme = document.querySelector('meta[name="theme-color"]');
+      var mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      function getStoredPreference() {
+        var current = localStorage.getItem(STORAGE_KEY);
+        if (current === "system" || current === "light" || current === "dark") return current;
+        var legacy = localStorage.getItem(legacyKey);
+        if (legacy === "light" || legacy === "dark") return legacy;
+        return "system";
+      }
+      function getResolvedTheme(preference) {
+        if (preference === "light" || preference === "dark") return preference;
+        return mediaQuery.matches ? "dark" : "light";
+      }
+      function applyTheme(preference) {
+        var resolved = getResolvedTheme(preference);
+        root.setAttribute("data-theme", resolved);
+        root.style.colorScheme = resolved;
+        root.setAttribute("data-theme-preference", preference);
+        if (metaTheme) metaTheme.setAttribute("content", resolved === "dark" ? "#0E1219" : "#FBFCFE");
+      }
+      var initialPreference = getStoredPreference();
+      applyTheme(initialPreference);
+      window.__aidbioTheme = { key: STORAGE_KEY, mediaQuery: mediaQuery, applyTheme: applyTheme, getStoredPreference: getStoredPreference, getResolvedTheme: getResolvedTheme };
+    })();
+  </script>
+<link rel="stylesheet" href="../assets/site.css"></head><body>
 <header class="site-header"><div class="wrap nav">
-<a class="brand" href="../index.html"><img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo"><span>AidBio<small>Founder story</small></span></a>
-<nav class="navlinks" aria-label="Primary"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" >Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" >Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" aria-current="page">Portfolio</a><a href="../../index.html">← AidBio.com</a></nav></div></header>
+<a class="brand" href="../index.html"><img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo" class="mark-light"><img src="../../assets/aidbio-mark-dark.webp" alt="AidBio logo" class="mark-dark"><span>AidBio<small>Founder story</small></span></a>
+<div class="nav-actions"><nav class="navlinks" aria-label="Primary"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" >Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" >Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" aria-current="page">Portfolio</a><a href="../../index.html">← AidBio.com</a></nav><div class="theme-switcher" role="group" aria-label="Theme preference"><button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button><button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button><button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div><button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></div></div></header><div class="mobile-menu" id="mobile-menu"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" >Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" >Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html">Portfolio</a><a href="../../index.html">← AidBio.com</a></div>
 <main>
-<section class="hero"><div class="wrap"><div class="kicker">Portfolio · The method applied beyond plant biology</div><h1>Same reasoning, different domains.</h1><p class="lede">The chapters explain <em>why</em> the method exists. This page shows <em>where else</em> it has been applied: mechanism-first framing, structured representations and evidence-before-interpretation, carried into agriculture, precision oncology and biomedical engineering client work.</p>
+<section class="hero"><div class="wrap"><div class="kicker">Portfolio · The method applied beyond plant biology</div><h1>Same reasoning, different domains.</h1><p class="lede">The earlier chapters explain <em>why</em> this way of working exists. This page shows <em>where else</em> it's been put to use: start with the mechanism, represent it as structured data, and don't interpret until the evidence is solid — applied to client work in agriculture, cancer research and biomedical engineering.</p>
 <p class="small">This is a selection, not a full CV. Client identities are generalized where the source material does not authorize public naming. Full academic record: <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&hl=en">Google Scholar</a> · <a href="https://orcid.org/0000-0001-8185-7628">ORCID</a>.</p>
 <div class="diagram"><img src="../assets/applied-portfolio.svg" alt="One mechanism-first method applied across agriculture, oncology, biomedical engineering and protein prediction"></div>
 </div></section>
@@ -13,13 +44,13 @@
 <section class="section"><div class="wrap"><div class="section-title"><div class="eyebrow">Applied engagements</div><h2>The same evidence-first method, transferred to new problems.</h2></div>
 <div class="project-list">
 
-<div class="project-card"><span class="tag">NASA POWER</span><span class="tag">Field-trial data</span><span class="tag">Negative binomial regression</span><span class="tag">Random forest / XGBoost</span><h3 style="margin-top:13px">Agroclimatic field-trial analytics for coffee reproductive development</h3><p>For a multinational food and beverage client, meteorological variables (temperature, precipitation, radiation, humidity) were combined with experimental field data to analyze coffee reproductive development. Related yield-optimization work modeled flower-to-pod conversion across multiple sites, using negative binomial regression to address count overdispersion and tree-based models to improve predictive accuracy — informing pruning regimes, genotype selection and site-specific harvest scheduling.</p></div>
+<div class="project-card"><span class="tag">NASA POWER</span><span class="tag">Field-trial data</span><span class="tag">Negative binomial regression</span><span class="tag">Random forest / XGBoost</span><h3 style="margin-top:13px">Agroclimatic field-trial analytics for coffee reproductive development</h3><p>For a multinational food and beverage client, weather variables (temperature, rainfall, sunlight, humidity) were combined with field-trial data to study coffee flowering and fruit development. A related project modeled how many coffee flowers actually turn into harvestable pods across multiple sites — using a statistical model built for count data like this, plus machine-learning models to sharpen the predictions — to help guide pruning, variety selection and harvest timing decisions at each site.</p></div>
 
-<div class="project-card"><span class="tag">RNA-seq</span><span class="tag">DESeq2</span><span class="tag">PCA / t-SNE</span><span class="tag">GSEA</span><h3 style="margin-top:13px">Transcriptomic patient stratification in precision oncology</h3><p>High-throughput RNA-seq was applied to study treatment effects in cutaneous melanoma. Differential expression (DESeq2), dimensionality reduction (PCA, t-SNE) and Gene Set Enrichment Analysis identified pathways associated with drug response, distinguishing sensitive from resistant patient cohorts as candidate predictive biomarkers.</p></div>
+<div class="project-card"><span class="tag">RNA-seq</span><span class="tag">DESeq2</span><span class="tag">PCA / t-SNE</span><span class="tag">GSEA</span><h3 style="margin-top:13px">Transcriptomic patient stratification in precision oncology</h3><p>Gene-activity sequencing (RNA-seq) was used to study how melanoma (skin cancer) tumors respond to treatment. Comparing which genes were more or less active between patients, and which biological pathways those genes belonged to, helped separate patients whose tumors responded to a drug from those whose didn't — candidate biological signals that could eventually help predict response before treatment starts.</p></div>
 
-<div class="project-card"><span class="tag">Ti-6Al-4V lattices</span><span class="tag">PLSR</span><span class="tag">Random forest</span><span class="tag">XGBoost</span><h3 style="margin-top:13px">Structure–property optimization of 3D-printed implants</h3><p>Mechanical testing of additively manufactured Ti-6Al-4V lattice structures (Young's modulus, yield stress, compressive strength) was combined with regression and tree-based machine-learning models to predict structure–property relationships, supporting implant designs that balance mechanical stability with biological compatibility.</p></div>
+<div class="project-card"><span class="tag">Ti-6Al-4V lattices</span><span class="tag">PLSR</span><span class="tag">Random forest</span><span class="tag">XGBoost</span><h3 style="margin-top:13px">Structure–property optimization of 3D-printed implants</h3><p>3D-printed titanium lattice structures — the kind used in medical implants — were mechanically tested for stiffness, strength and how much load they can take before failing. Machine-learning models then learned how the lattice's internal geometry drives those mechanical properties, to help design implants that are strong enough to bear load while staying compatible with the body.</p></div>
 
-<div class="project-card"><span class="tag">GATv2</span><span class="tag">Siamese network</span><span class="tag">GraphSAGE</span><span class="tag">ProtBERT</span><h3 style="margin-top:13px">gPPIpred and Aid2GO — graph ML for protein interactions and function</h3><p>Covered in full in <a href="04-models.html">Chapter 04 — Models</a>: a published, graph-based protein-protein interaction predictor (gPPIpred) and a complementary heterogeneous-graph workflow for protein-function prediction (Aid2GO), both encoding biological network structure directly into the learned representation.</p></div>
+<div class="project-card"><span class="tag">GATv2</span><span class="tag">Siamese network</span><span class="tag">GraphSAGE</span><span class="tag">ProtBERT</span><h3 style="margin-top:13px">gPPIpred and Aid2GO — graph ML for protein interactions and function</h3><p>Covered in full in <a href="04-models.html">Chapter 04 — Models</a>: a published AI model that predicts whether two proteins interact (gPPIpred), and a complementary system that predicts what a protein does (Aid2GO) — both built so the biological network structure is part of the model itself, not just an input to it.</p></div>
 
 </div></div></section>
 

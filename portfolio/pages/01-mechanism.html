@@ -1,11 +1,42 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>01 — Learn the mechanism | AidBio founder story</title><link rel="stylesheet" href="../assets/site.css"></head><body>
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>01 — Learn the mechanism | AidBio founder story</title><meta name="theme-color" content="#FBFCFE">
+<script>
+    (function () {
+      var STORAGE_KEY = "aidbio-theme-preference";
+      var legacyKey = "aidbio-theme";
+      var root = document.documentElement;
+      var metaTheme = document.querySelector('meta[name="theme-color"]');
+      var mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+      function getStoredPreference() {
+        var current = localStorage.getItem(STORAGE_KEY);
+        if (current === "system" || current === "light" || current === "dark") return current;
+        var legacy = localStorage.getItem(legacyKey);
+        if (legacy === "light" || legacy === "dark") return legacy;
+        return "system";
+      }
+      function getResolvedTheme(preference) {
+        if (preference === "light" || preference === "dark") return preference;
+        return mediaQuery.matches ? "dark" : "light";
+      }
+      function applyTheme(preference) {
+        var resolved = getResolvedTheme(preference);
+        root.setAttribute("data-theme", resolved);
+        root.style.colorScheme = resolved;
+        root.setAttribute("data-theme-preference", preference);
+        if (metaTheme) metaTheme.setAttribute("content", resolved === "dark" ? "#0E1219" : "#FBFCFE");
+      }
+      var initialPreference = getStoredPreference();
+      applyTheme(initialPreference);
+      window.__aidbioTheme = { key: STORAGE_KEY, mediaQuery: mediaQuery, applyTheme: applyTheme, getStoredPreference: getStoredPreference, getResolvedTheme: getResolvedTheme };
+    })();
+  </script>
+<link rel="stylesheet" href="../assets/site.css"></head><body>
 <header class="site-header"><div class="wrap nav">
-<a class="brand" href="../index.html"><img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo"><span>AidBio<small>Founder story</small></span></a>
-<nav class="navlinks" aria-label="Primary"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" aria-current="page">Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" >Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" >Portfolio</a><a href="../../index.html">← AidBio.com</a></nav></div></header><main>
-<section class="hero"><div class="wrap"><div class="kicker">Chapter 01 · Learn the mechanism</div><h1>Before prediction, understand regulation.</h1><p class="lede">The founder story begins with Arabidopsis and a transcription factor called <strong>bZIP63</strong>. The central lesson was not a specific gene; it was how to think about interacting signals.</p><div class="progress-nav"><a class="active" href="01-mechanism.html">01 Mechanism</a><a class="" href="02-networks.html">02 Networks</a><a class="" href="03-data.html">03 Data</a><a class="" href="04-models.html">04 Models</a><a class="" href="05-software.html">05 Software</a><a class="" href="06-aidbio.html">06 AidBio</a></div></div></section>
+<a class="brand" href="../index.html"><img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo" class="mark-light"><img src="../../assets/aidbio-mark-dark.webp" alt="AidBio logo" class="mark-dark"><span>AidBio<small>Founder story</small></span></a>
+<div class="nav-actions"><nav class="navlinks" aria-label="Primary"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" aria-current="page">Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" >Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" >Portfolio</a><a href="../../index.html">← AidBio.com</a></nav><div class="theme-switcher" role="group" aria-label="Theme preference"><button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button><button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button><button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div><button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></div></div></header><div class="mobile-menu" id="mobile-menu"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html">Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" >Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" >Portfolio</a><a href="../../index.html">← AidBio.com</a></div><main>
+<section class="hero"><div class="wrap"><div class="kicker">Chapter 01 · Learn the mechanism</div><h1>Before prediction, understand regulation.</h1><p class="lede">The founder story begins with a small lab plant, Arabidopsis, and one regulatory protein called <strong>bZIP63</strong> — a molecular "switch" that turns genes on or off. The real lesson wasn't about that one protein; it was about how to think about signals that interact rather than act alone.</p><div class="progress-nav"><a class="active" href="01-mechanism.html">01 Mechanism</a><a class="" href="02-networks.html">02 Networks</a><a class="" href="03-data.html">03 Data</a><a class="" href="04-models.html">04 Models</a><a class="" href="05-software.html">05 Software</a><a class="" href="06-aidbio.html">06 AidBio</a></div></div></section>
 <section class="section white"><div class="wrap grid-2"><div><div class="eyebrow">Doctoral research · UNICAMP</div><h2>A gene is rarely an isolated switch.</h2>
-<p>The 2011 <em>Plant Physiology</em> study established AtbZIP63 as a sensitive integrator of transient glucose and abscisic-acid (ABA) signals. In practical terms, cellular energy status and stress-hormone signalling converge on transcriptional regulation rather than acting as unrelated inputs.</p>
-<p>This establishes the intellectual template that later becomes computational: identify the inputs, the integration point, the downstream outputs and the conditions under which the relationship changes.</p>
+<p>A 2011 study in <em>Plant Physiology</em> showed that AtbZIP63 reads two signals at once — how much sugar (glucose) is available, and how much of the stress hormone ABA is present — and combines them into a single decision about which genes to turn on. In plain terms: the plant's energy status and its stress alarm aren't separate conversations. They converge on the same switch.</p>
+<p>That's the template this whole story follows, later translated into code: find the inputs, find the point where they combine, find what comes out the other end, and find the conditions where that relationship changes.</p>
 <div class="takeaway"><b>Tutorial takeaway.</b> Ask six questions: What are the variables? Which interact? What is directly measured? What is inferred? What is plausibly causal? What could confound the result?</div>
 </div><div class="diagram"><img src="../assets/mechanism.svg" alt="Glucose and ABA converge on bZIP63, leading to changes in gene expression"></div></div></section>
 
@@ -13,16 +44,16 @@
 <div class="grid-2">
 <article class="paper-card"><div class="paper-image">
 <img src="../assets/figures/frank2018-graphical-abstract.png" alt="Graphical abstract from Frank et al. 2018 showing sugar-dependent circadian entrainment through bZIP63 and PRR7"></div>
-<div class="paper-body"><div class="meta">CURRENT BIOLOGY · 2018 · CC BY 4.0</div><h3>Circadian entrainment by sugars</h3><p>The study showed that bZIP63 regulates the clock gene <em>PRR7</em>, and that sugar availability can adjust circadian phase through a pathway involving Tre6P, SnRK1/KIN10 and bZIP63.</p>
+<div class="paper-body"><div class="meta">CURRENT BIOLOGY · 2018 · CC BY 4.0</div><h3>Circadian entrainment by sugars</h3><p>This study showed that bZIP63 also controls a clock gene called <em>PRR7</em> — so sugar levels in the plant can nudge its internal circadian clock earlier or later, through a short chain of energy-sensing signals (a sugar-derived molecule called Tre6P, an energy-sensing enzyme called SnRK1/KIN10, and bZIP63 itself).</p>
 <p class="citation">Frank A, Matiolli CC†, et al. <em>Circadian Entrainment in Arabidopsis by the Sugar-Responsive Transcription Factor bZIP63.</em> Current Biology 28, 2597–2606.e6 (2018). DOI: 10.1016/j.cub.2018.05.092.</p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6108399/">Open article →</a></div></article>
-<div><h3>Why this matters to the AidBio story</h3><p>A regulatory mechanism had become a dynamic system:</p><div class="chain"><div><b>1</b> light drives photosynthesis</div><div><b>2</b> photosynthesis changes sugar availability</div><div><b>3</b> sugar/energy signalling regulates bZIP63</div><div><b>4</b> bZIP63 regulates PRR7</div><div><b>5</b> the circadian phase changes</div><div><b>6</b> timing affects metabolism and growth</div></div>
-<p>The biological problem now spans molecules, time and phenotype — exactly the kind of multidimensional structure that eventually demands computational representation.</p></div>
+<div><h3>Why this matters to the AidBio story</h3><p>A single molecular switch turned out to be one link in a longer chain, one that connects sunlight to plant growth:</p><div class="chain"><div><b>1</b> light drives photosynthesis</div><div><b>2</b> photosynthesis changes sugar availability</div><div><b>3</b> sugar/energy signalling regulates bZIP63</div><div><b>4</b> bZIP63 regulates PRR7</div><div><b>5</b> the circadian phase changes</div><div><b>6</b> timing affects metabolism and growth</div></div>
+<p>The problem now spans molecules, timing and a visible outcome all at once — exactly the kind of many-layered picture that eventually needs a computer, not a whiteboard, to keep straight.</p></div>
 </div></div></section>
 
-<section class="section white"><div class="wrap"><div class="grid-2"><div><h2>The same mechanism scales toward growth.</h2><p>The 2021 <em>New Phytologist</em> paper showed that bZIP63 mutants mismanage night-time starch use and display photoperiod-dependent growth impairment. In short-day conditions, mutant rosette area and dry weight were substantially reduced, linking metabolic timing to a visible phenotype.</p></div>
+<section class="section white"><div class="wrap"><div class="grid-2"><div><h2>The same mechanism, but now it shows up in how big the plant gets.</h2><p>A 2021 study in <em>New Phytologist</em> found that plants missing working bZIP63 mismanage their overnight starch reserves and grow poorly when days are short. Their leaf area and dry weight both dropped substantially — turning an invisible timing problem into a plant that is visibly smaller than it should be.</p></div>
 <article class="paper-card"><div class="paper-image">
 <img src="../assets/figures/viana2021-fig5.png" alt="Model figure from Viana et al. 2021 showing bZIP63 linking the circadian clock, sugar signalling and starch degradation rate to plant growth"></div>
-<div class="paper-body"><div class="meta">NEW PHYTOLOGIST · 2021 · CC BY</div><h3>bZIP63 modulates plant growth</h3><p>Energy status ↔ circadian regulation ↔ starch breakdown ↔ growth.</p><p class="citation">Viana AJC†, Matiolli CC†, et al. <em>The sugar-responsive circadian clock regulator bZIP63 modulates plant growth.</em> New Phytologist 231, 1875–1889 (2021). DOI: 10.1111/nph.17518.</p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9292441/">Open article →</a></div></article></div></div></section>
+<div class="paper-body"><div class="meta">NEW PHYTOLOGIST · 2021 · CC BY</div><h3>bZIP63 modulates plant growth</h3><p>Energy status ↔ internal clock ↔ overnight starch use ↔ how much the plant grows.</p><p class="citation">Viana AJC†, Matiolli CC†, et al. <em>The sugar-responsive circadian clock regulator bZIP63 modulates plant growth.</em> New Phytologist 231, 1875–1889 (2021). DOI: 10.1111/nph.17518.</p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9292441/">Open article →</a></div></article></div></div></section>
 </main><footer><div class="wrap"><div class="spectrum"></div>
 <p><strong>AidBio</strong> — AI &amp; Data Science for Life Sciences and Agritech.</p>
 <p class="small">Founder: Cleverson Carlos Matiolli, PhD · <a href="https://github.com/matiollipt">GitHub</a> · <a href="https://orcid.org/0000-0001-8185-7628">ORCID</a> · <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&hl=en">Google Scholar</a></p>
