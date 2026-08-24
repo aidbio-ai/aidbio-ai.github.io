@@ -14,7 +14,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" />
 
   <script>
@@ -130,8 +130,8 @@
       --focus-ring: 0 0 0 3px rgba(46, 75, 223, 0.32);
 
       /* Typography */
-      --font-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
-      --font-ui: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+      --font-display: 'Baloo 2', 'Segoe UI Rounded', ui-rounded, system-ui, sans-serif;
+      --font-ui: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
       --font-data: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
 
       /* Fibonacci spacing */
@@ -512,6 +512,53 @@
     .nav-links a.nav-cta:hover {
       background: var(--brand-blue-press);
       color: var(--text-on-accent);
+    }
+
+    .has-submenu {
+      position: relative;
+    }
+
+    .submenu {
+      list-style: none;
+      margin: 0;
+      padding: var(--space-2);
+      position: absolute;
+      top: 100%;
+      left: 0;
+      min-width: 220px;
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-lg);
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(4px);
+      transition:
+        opacity var(--dur-fast) var(--ease-out),
+        transform var(--dur-fast) var(--ease-out),
+        visibility var(--dur-fast) var(--ease-out);
+    }
+
+    .has-submenu:hover .submenu,
+    .has-submenu:focus-within .submenu {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .submenu a {
+      display: block;
+      padding: 8px 12px;
+      border-radius: var(--radius-sm);
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text-body);
+      white-space: nowrap;
+    }
+
+    .submenu a:hover {
+      color: var(--accent);
+      background: var(--accent-tint);
     }
 
     .theme-switcher {
@@ -1426,8 +1473,13 @@
           <li><a href="#solutions">Solutions</a></li>
           <li><a href="#projects">Projects</a></li>
           <li><a href="#process">Process</a></li>
-          <li><a href="#founder">Founder</a></li>
-          <li><a href="portfolio/index.html">Portfolio</a></li>
+          <li class="has-submenu">
+            <a href="#founder">Founder</a>
+            <ul class="submenu">
+              <li><a href="#founder">Founder overview</a></li>
+              <li><a href="portfolio/index.html">Portfolio: the founder story →</a></li>
+            </ul>
+          </li>
           <li><a href="#contact" class="nav-cta">Start a project</a></li>
         </ul>
 
@@ -1455,7 +1507,7 @@
     <a href="#projects">Projects</a>
     <a href="#process">Process</a>
     <a href="#founder">Founder</a>
-    <a href="portfolio/index.html">Portfolio</a>
+    <a href="portfolio/index.html" style="padding-left:var(--space-4);font-size:14px">↳ Portfolio: the founder story</a>
     <a href="#contact" class="btn btn-primary">Start a project</a>
   </div>
 
