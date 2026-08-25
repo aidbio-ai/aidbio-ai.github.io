@@ -12,8 +12,8 @@ single self-contained `.html` file with inline `<style>` and `<script>`.
 - `aidweather.html` — standalone page for the AidWeather project.
 - `assets/` — logomarks, favicon, hero network graphics (WebP/PNG). See table in `README.md` for what each file is.
 - `portfolio/` — a separate, self-contained static site (its own `README.md`, `AGENTS.md`, `index.html`, `pages/`,
-  `assets/`, `docs/`). It is currently untracked in git (not yet committed) — check `git status` before assuming
-  it's part of the deployed site. Treat it as an independent project with its own rules (see below).
+  `assets/`, `docs/`), tracked in git and merged into `main` — part of the deployed site. Treat it as an
+  independent project with its own rules (see below).
 
 ## Running locally
 
