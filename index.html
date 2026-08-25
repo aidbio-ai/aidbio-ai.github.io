@@ -2016,7 +2016,7 @@
   <script>
     (function () {
       const themeApi = window.__aidbioTheme;
-      const buttons = Array.from(document.querySelectorAll(".theme-option"));
+      const buttons = Array.from(document.querySelectorAll(".theme-switcher:not(.lang-switcher) .theme-option"));
       const nav = document.getElementById("site-nav");
       const STORAGE_KEY = themeApi.key;
       const mediaQuery = themeApi.mediaQuery;
