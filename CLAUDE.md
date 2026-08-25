@@ -60,3 +60,14 @@ read `portfolio/AGENTS.md` in full first — key constraints:
   degrade gracefully.
 
 Run locally the same way (`python -m http.server 8000` from inside `portfolio/`).
+
+## Domain, DNS, and email (aidbio.org)
+
+The custom domain `aidbio.org` is registered and DNS-managed on Cloudflare (Cloudflare Registrar + Cloudflare
+DNS), pointed at this repo's GitHub Pages hosting, with Cloudflare Email Routing forwarding `contact@aidbio.org`.
+This repo has no `CNAME` file to touch for that — DNS is managed entirely on Cloudflare's side, not in-repo.
+
+For anything involving DNS records, SPF/DKIM/DMARC, email forwarding rules, or registrar/WHOIS status, use the
+`aidbio-domain` Claude Code skill rather than guessing — it has the current zone setup and known gotchas (e.g.
+the Cloudflare API token in use is read-only; writes must go through the dashboard). Account IDs and other
+infra specifics are intentionally kept out of this public repo; see that skill instead.
