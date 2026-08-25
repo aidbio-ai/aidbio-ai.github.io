@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mechanism — AidBio Founder Story</title>
+  <meta name="description" content="How a single Arabidopsis transcription factor, AtbZIP63, integrates sugar and ABA hormone signals — the founding mechanistic question behind AidBio." />
+  <link rel="icon" type="image/png" href="../../assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">
+        <img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo" width="28" height="28" />
+        <span>AidBio<small>Founder story</small></span>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="../index.html">Why AidBio</a>
+        <a href="01-mechanism.html" aria-current="page">Mechanism</a>
+        <a href="02-networks.html">Networks</a>
+        <a href="03-data.html">Data</a>
+        <a href="04-models.html">Models</a>
+        <a href="05-software.html">Software</a>
+        <a href="06-aidbio.html">AidBio</a>
+        <a href="../../index.html" class="back-home">AidBio.com ↗</a>
+      </nav>
+    </div>
+    <div class="read-progress"></div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="padding-top:55px;">
+      <div class="wrap">
+        <div class="kicker">Chapter 01 · Mechanism</div>
+        <h1 style="max-width:20ch;">One transcription factor, two signals, one measurable output.</h1>
+        <p class="lede">Every AidBio project still starts the way this one did: name the molecular actor, name its
+          inputs, and define what "output" actually means before touching any data.</p>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="wrap grid-2">
+        <div>
+          <div class="eyebrow">The question</div>
+          <h2>How does a plant cell decide what "low sugar" means?</h2>
+          <p>Early graduate work centered on <strong>AtbZIP63</strong>, an Arabidopsis basic-leucine-zipper (bZIP)
+            transcription factor. Plant cells are constantly exposed to two overlapping chemical signals — sugar
+            availability and the hormone abscisic acid (ABA) — that both need to shape gene expression, but on
+            different timescales and through different concentration thresholds.</p>
+          <p>The mechanistic question was narrow on purpose: does a single transcription factor integrate both
+            signals, and can that integration be measured directly, rather than assumed?</p>
+        </div>
+        <figure class="diagram">
+          <svg viewBox="0 0 520 220" role="img" aria-labelledby="dg1-title">
+            <title id="dg1-title">Schematic: glucose and ABA signals converging on AtbZIP63, which shapes downstream gene expression</title>
+            <defs>
+              <marker id="arrow1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#6B7588" />
+              </marker>
+            </defs>
+            <circle cx="70" cy="60" r="34" fill="#EFA63A" opacity="0.16" />
+            <text x="70" y="55" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#28303F">Glucose</text>
+            <text x="70" y="70" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#6B7588">signal</text>
+
+            <circle cx="70" cy="160" r="34" fill="#1FA07C" opacity="0.16" />
+            <text x="70" y="155" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#28303F">ABA</text>
+            <text x="70" y="170" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#6B7588">hormone</text>
+
+            <line x1="104" y1="70" x2="205" y2="102" stroke="#6B7588" stroke-width="1.5" marker-end="url(#arrow1)" />
+            <line x1="104" y1="150" x2="205" y2="118" stroke="#6B7588" stroke-width="1.5" marker-end="url(#arrow1)" />
+
+            <rect x="210" y="80" width="120" height="60" rx="14" fill="#2E4BDF" />
+            <text x="270" y="105" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="12" fill="#FFFFFF">AtbZIP63</text>
+            <text x="270" y="122" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#EAEDFC">integrator</text>
+
+            <line x1="330" y1="110" x2="430" y2="110" stroke="#6B7588" stroke-width="1.5" marker-end="url(#arrow1)" />
+            <rect x="434" y="82" width="76" height="56" rx="12" fill="#C13E9D" opacity="0.14" />
+            <text x="472" y="106" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#28303F">Target</text>
+            <text x="472" y="120" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#28303F">genes</text>
+          </svg>
+          <figcaption>Schematic — original diagram, not a reproduction of a published figure.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-title">
+          <div class="eyebrow">What was actually measured</div>
+          <h2>A transient, dose-dependent response — not a simple on/off switch</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card accent amber">
+            <h3>Measured result</h3>
+            <p>AtbZIP63 transcript levels were transiently repressed by 2% glucose treatment, independently of the
+              HXK1 hexokinase sensor.</p>
+          </div>
+          <div class="card accent green">
+            <h3>Measured result</h3>
+            <p>At a higher glucose concentration (6%), the repression was instead modulated by ABA signalling —
+              the same gene, a different regulatory route depending on signal strength.</p>
+          </div>
+          <div class="card accent blue">
+            <h3>Interpretation</h3>
+            <p>AtbZIP63 behaves as a node where glucose and ABA signalling intersect, rather than two independent
+              pathways acting in parallel on separate genes.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="wrap">
+        <div class="evidence">
+          <h3>Primary source</h3>
+          <ul>
+            <li>Matiolli CC, Tomaz T, Duarte GT, et al. (2011). <em>The Arabidopsis bZIP Gene AtbZIP63 Is a
+              Sensitive Integrator of Transient Abscisic Acid and Glucose Signals.</em> Plant Physiology 157(2),
+              692–705. <a href="https://pubmed.ncbi.nlm.nih.gov/21844310/" target="_blank" rel="noopener">PubMed
+              21844310</a> · <a href="https://academic.oup.com/plphys/article/157/2/692/6108890" target="_blank"
+              rel="noopener">Journal article</a></li>
+          </ul>
+          <span class="tag-note">First-author work · peer-reviewed · open in a new tab</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="callout">
+          <p class="quote">A single gene rarely explains a phenotype. But a well-characterized gene is the first
+            honest unit of evidence.</p>
+          <p>The next question was unavoidable: if one transcription factor integrates two signals, what happens
+            when dozens of signals and regulators are in play at once?</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="wrap chapter-nav" aria-label="Chapter">
+    <a href="../index.html"><span class="dir">← Previous</span><strong>Why AidBio</strong></a>
+    <a href="02-networks.html" class="next"><span class="dir">Next →</span><strong>Networks</strong></a>
+  </nav>
+
+  <footer>
+    <div class="wrap">
+      <div class="spectrum"></div>
+      <p><strong>AidBio</strong> — AI &amp; Data Science for Life Sciences and Agritech.</p>
+      <p class="small">Founder: Cleverson Carlos Matiolli, PhD · <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a> · <a href="https://orcid.org/0000-0001-8185-7628" target="_blank" rel="noopener">ORCID</a> · <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></p>
+      <p class="small">This site is a narrative portfolio. Scientific claims link to primary literature; diagrams labelled “schematic” are original explanatory redraws, not reproductions of published figures.</p>
+    </div>
+  </footer>
+  <script src="../assets/site.js"></script>
+</body>
+
+</html>

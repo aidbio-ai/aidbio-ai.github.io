@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Models — AidBio Founder Story</title>
+  <meta name="description" content="How predicting a specific regulatory interaction — a microRNA controlling an ABA-receptor transcript — connects hypothesis-driven biology to AidBio's graph-based prediction tools." />
+  <link rel="icon" type="image/png" href="../../assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">
+        <img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo" width="28" height="28" />
+        <span>AidBio<small>Founder story</small></span>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="../index.html">Why AidBio</a>
+        <a href="01-mechanism.html">Mechanism</a>
+        <a href="02-networks.html">Networks</a>
+        <a href="03-data.html">Data</a>
+        <a href="04-models.html" aria-current="page">Models</a>
+        <a href="05-software.html">Software</a>
+        <a href="06-aidbio.html">AidBio</a>
+        <a href="../../index.html" class="back-home">AidBio.com ↗</a>
+      </nav>
+    </div>
+    <div class="read-progress"></div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="padding-top:55px;">
+      <div class="wrap">
+        <div class="kicker">Chapter 04 · Models</div>
+        <h1 style="max-width:22ch;">Predicting a regulatory edge before confirming it at the bench.</h1>
+        <p class="lede">The most recent research step reframes the same kind of question — "what regulates what?"
+          — as a prediction problem: propose a specific regulatory interaction computationally, then test it
+          experimentally.</p>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="wrap grid-2">
+        <div>
+          <div class="eyebrow">A concrete predicted interaction</div>
+          <h2>Does a microRNA control the stability of an ABA-receptor transcript?</h2>
+          <p>Work on the ABA receptor family (PYR/PYL/RCAR) asked whether receptor transcript levels are shaped
+            not only by transcription, but by targeted mRNA decay. Sequence and expression evidence pointed to
+            <strong>microRNA5628</strong> as a candidate regulator of the <strong>PYL6</strong> transcript — a
+            specific predicted edge in the post-transcriptional regulatory network, later supported by decay-assay
+            evidence involving the XRN4 exoribonuclease pathway.</p>
+          <p>Structurally, this is the same problem class as the network chapter, but posed prospectively: instead
+            of describing a hub after the fact, propose a specific edge and go test whether it holds.</p>
+        </div>
+        <figure class="diagram">
+          <svg viewBox="0 0 520 220" role="img" aria-labelledby="dg4-title">
+            <title id="dg4-title">Schematic: a predicted regulatory edge from a microRNA to a target transcript, later experimentally supported</title>
+            <defs>
+              <marker id="arrow1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#6B7588" />
+              </marker>
+            </defs>
+            <circle cx="90" cy="70" r="10" fill="#B4BCC9" />
+            <circle cx="90" cy="150" r="10" fill="#B4BCC9" />
+            <circle cx="180" cy="110" r="10" fill="#B4BCC9" />
+            <circle cx="260" cy="60" r="14" fill="#6E47D4" />
+            <text x="260" y="40" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#28303F">miR5628</text>
+            <circle cx="380" cy="150" r="16" fill="#2E4BDF" />
+            <text x="380" y="185" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#28303F">PYL6 mRNA</text>
+
+            <line x1="98" y1="80" x2="172" y2="104" stroke="#D6DBE3" stroke-width="1.5" />
+            <line x1="98" y1="140" x2="172" y2="116" stroke="#D6DBE3" stroke-width="1.5" />
+            <line x1="190" y1="105" x2="248" y2="68" stroke="#D6DBE3" stroke-width="1.5" />
+
+            <line x1="272" y1="72" x2="368" y2="138" stroke="#C13E9D" stroke-width="2" stroke-dasharray="5 4" marker-end="url(#arrow1)" />
+            <text x="330" y="95" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#C13E9D">predicted →</text>
+            <text x="330" y="108" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="10" fill="#C13E9D">confirmed</text>
+          </svg>
+          <figcaption>Schematic — original diagram, not a reproduction of a published figure.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-title">
+          <div class="eyebrow">From one predicted edge to graph-scale prediction</div>
+          <h2>The same logic, applied at the scale of a whole graph</h2>
+        </div>
+        <div class="grid-3">
+          <div class="card accent magenta">
+            <h3>2011 → 2024</h3>
+            <p>From integrating two signals at one gene, to predicting one regulatory edge from sequence and
+              expression evidence — the unit of prediction stayed small, but the reasoning became computational.</p>
+          </div>
+          <div class="card accent indigo">
+            <h3>Today, at AidBio</h3>
+            <p>That same prediction logic — propose an edge, weigh the evidence, flag it for confirmation — is
+              what AidBio's graph-learning tool, <strong>Aid2GO</strong>, runs at the scale of full
+              protein–protein interaction and Gene Ontology graphs.</p>
+          </div>
+          <div class="card accent teal">
+            <h3>What stays constant</h3>
+            <p>A prediction is not a confirmed result. Every computational claim in this progression is kept
+              distinct from experimentally validated ones — a discipline carried forward into AidBio's software.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="wrap">
+        <div class="evidence">
+          <h3>Primary source</h3>
+          <ul>
+            <li>Vieira JGP, Duarte GT, Barrera-Rojas CH, Matiolli CC, et al. (2024). <em>Regulation of abscisic
+              acid receptor mRNA stability: Involvement of microRNA5628 in PYL6 transcript decay.</em> Plant
+              Physiology 197(1), kiae663. <a href="https://pubmed.ncbi.nlm.nih.gov/39707902/" target="_blank"
+              rel="noopener">PubMed 39707902</a> · <a
+              href="https://academic.oup.com/plphys/article-abstract/197/1/kiae663/7930158" target="_blank"
+              rel="noopener">Journal article</a></li>
+          </ul>
+          <span class="tag-note">Co-authored research article · peer-reviewed · open in a new tab</span>
+        </div>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="callout">
+          <p class="quote">A predicted edge is a hypothesis with a confidence score, not a fact.</p>
+          <p>Turning that discipline into something reusable — instead of re-deriving it for every new dataset —
+            is exactly what pushed the work from individual analyses toward scientific software.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="wrap chapter-nav" aria-label="Chapter">
+    <a href="03-data.html"><span class="dir">← Previous</span><strong>Data</strong></a>
+    <a href="05-software.html" class="next"><span class="dir">Next →</span><strong>Software</strong></a>
+  </nav>
+
+  <footer>
+    <div class="wrap">
+      <div class="spectrum"></div>
+      <p><strong>AidBio</strong> — AI &amp; Data Science for Life Sciences and Agritech.</p>
+      <p class="small">Founder: Cleverson Carlos Matiolli, PhD · <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a> · <a href="https://orcid.org/0000-0001-8185-7628" target="_blank" rel="noopener">ORCID</a> · <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></p>
+      <p class="small">This site is a narrative portfolio. Scientific claims link to primary literature; diagrams labelled “schematic” are original explanatory redraws, not reproductions of published figures.</p>
+    </div>
+  </footer>
+  <script src="../assets/site.js"></script>
+</body>
+
+</html>

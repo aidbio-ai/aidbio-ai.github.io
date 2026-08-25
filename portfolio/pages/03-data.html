@@ -1,0 +1,153 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Data — AidBio Founder Story</title>
+  <meta name="description" content="Why studying AtbZIP63's role in the circadian clock and plant growth required aligning genotype, treatment and time-series data rather than a single measurement." />
+  <link rel="icon" type="image/png" href="../../assets/favicon.png" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    rel="stylesheet" />
+  <link rel="stylesheet" href="../assets/site.css" />
+</head>
+
+<body>
+  <header class="site-header">
+    <div class="wrap nav">
+      <a class="brand" href="../index.html">
+        <img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo" width="28" height="28" />
+        <span>AidBio<small>Founder story</small></span>
+      </a>
+      <nav class="navlinks" aria-label="Primary">
+        <a href="../index.html">Why AidBio</a>
+        <a href="01-mechanism.html">Mechanism</a>
+        <a href="02-networks.html">Networks</a>
+        <a href="03-data.html" aria-current="page">Data</a>
+        <a href="04-models.html">Models</a>
+        <a href="05-software.html">Software</a>
+        <a href="06-aidbio.html">AidBio</a>
+        <a href="../../index.html" class="back-home">AidBio.com ↗</a>
+      </nav>
+    </div>
+    <div class="read-progress"></div>
+  </header>
+
+  <main>
+
+    <section class="hero" style="padding-top:55px;">
+      <div class="wrap">
+        <div class="kicker">Chapter 03 · Data</div>
+        <h1 style="max-width:22ch;">A network across genotypes, sugars and circadian time is not a spreadsheet
+          you can eyeball.</h1>
+        <p class="lede">Once AtbZIP63 was tied back to the circadian clock and to plant growth, the experiments
+          needed to span many genotypes, treatments and timepoints at once — the point where biology became a
+          high-dimensional data problem rather than a bench problem.</p>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="wrap grid-2">
+        <div>
+          <div class="eyebrow">The question changed shape</div>
+          <h2>Does the same transcription factor shape both the clock and growth?</h2>
+          <p>Follow-up work asked whether AtbZIP63, already known to integrate sugar and ABA signals, also feeds
+            into circadian clock timing and, through it, plant growth. Answering that required comparing wild-type
+            and mutant lines across sugar treatments and time-of-day sampling — growth curves, circadian period
+            estimates and gene-expression time series layered on top of each other.</p>
+          <p>No single measurement answers that question. It only becomes visible once the different data layers
+            are aligned, normalized and analyzed together.</p>
+        </div>
+        <figure class="diagram">
+          <svg viewBox="0 0 520 220" role="img" aria-labelledby="dg3-title">
+            <title id="dg3-title">Schematic: genotype-by-treatment-by-time data cube collapsing into a single circadian growth curve</title>
+            <defs>
+              <marker id="arrow1" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+                <path d="M0,0 L10,5 L0,10 z" fill="#6B7588" />
+              </marker>
+            </defs>
+            <rect x="30" y="30" width="150" height="130" rx="10" fill="none" stroke="#B4BCC9" stroke-width="1.5" />
+            <rect x="46" y="46" width="150" height="130" rx="10" fill="none" stroke="#8E97A8" stroke-width="1.5" />
+            <rect x="62" y="62" width="150" height="130" rx="10" fill="#EAEDFC" stroke="#2E4BDF" stroke-width="1.5" />
+            <text x="137" y="132" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#2E4BDF">genotype ×</text>
+            <text x="137" y="148" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#2E4BDF">sugar × time</text>
+
+            <line x1="222" y1="120" x2="270" y2="120" stroke="#6B7588" stroke-width="1.5" marker-end="url(#arrow1)" />
+
+            <polyline points="290,150 320,90 350,150 380,90 410,150 440,90 470,150"
+              fill="none" stroke="#1FA07C" stroke-width="2.5" />
+            <text x="380" y="185" text-anchor="middle" font-family="IBM Plex Mono, monospace" font-size="11" fill="#28303F">circadian growth curve</text>
+          </svg>
+          <figcaption>Schematic — original diagram, not a reproduction of a published figure.</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="section-title">
+          <div class="eyebrow">What the data layers were</div>
+          <h2>Three data types, one underlying regulator</h2>
+        </div>
+        <div class="stat-row">
+          <div class="stat"><b>Genotypes</b><span>Wild type vs. bzip63 mutant lines compared side by side</span></div>
+          <div class="stat"><b>Treatments</b><span>Sugar availability manipulated across conditions</span></div>
+          <div class="stat"><b>Time series</b><span>Circadian-phase sampling to estimate clock period and growth
+            dynamics</span></div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section white">
+      <div class="wrap">
+        <div class="evidence">
+          <h3>Primary source</h3>
+          <ul>
+            <li>Viana AJC, Matiolli CC, Newman DW, et al. (2021). <em>The sugar-responsive circadian clock
+              regulator bZIP63 modulates plant growth.</em> New Phytologist 231(5), 1875–1889. <a
+              href="https://doi.org/10.1111/nph.17518" target="_blank" rel="noopener">doi.org/10.1111/nph.17518</a>
+              · <a href="https://www.ncbi.nlm.nih.gov/pmc/articles/PMC9292441/" target="_blank"
+              rel="noopener">Open-access full text (PMC)</a></li>
+          </ul>
+          <span class="tag-note">Co-authored research article · peer-reviewed · open in a new tab</span>
+        </div>
+        <p style="margin-top:var(--space-4);color:var(--text-muted);font-size:14px;max-width:62ch;">Measured
+          result: genotype, treatment and time-of-day jointly shape growth and clock phenotypes in this dataset.
+          Interpretation: bZIP63 is one point where sugar status is translated into circadian and growth output —
+          this study does not claim it is the only such point.</p>
+      </div>
+    </section>
+
+    <section class="section">
+      <div class="wrap">
+        <div class="callout">
+          <p class="quote">Multi-layered data does not interpret itself. It needs models built specifically to
+            respect its structure.</p>
+          <p>That need — for models that reason over structured, high-dimensional biological data rather than
+            flatten it — is exactly what pushed the work toward computational and graph-based prediction.</p>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <nav class="wrap chapter-nav" aria-label="Chapter">
+    <a href="02-networks.html"><span class="dir">← Previous</span><strong>Networks</strong></a>
+    <a href="04-models.html" class="next"><span class="dir">Next →</span><strong>Models</strong></a>
+  </nav>
+
+  <footer>
+    <div class="wrap">
+      <div class="spectrum"></div>
+      <p><strong>AidBio</strong> — AI &amp; Data Science for Life Sciences and Agritech.</p>
+      <p class="small">Founder: Cleverson Carlos Matiolli, PhD · <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a> · <a href="https://orcid.org/0000-0001-8185-7628" target="_blank" rel="noopener">ORCID</a> · <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&hl=en" target="_blank" rel="noopener">Google Scholar</a></p>
+      <p class="small">This site is a narrative portfolio. Scientific claims link to primary literature; diagrams labelled “schematic” are original explanatory redraws, not reproductions of published figures.</p>
+    </div>
+  </footer>
+  <script src="../assets/site.js"></script>
+</body>
+
+</html>
