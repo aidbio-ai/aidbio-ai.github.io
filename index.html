@@ -4,9 +4,9 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AidBio | AI & Data Science for Life Sciences and Agritech</title>
-  <meta name="description"
-    content="AidBio delivers end-to-end data science, machine learning, and agentic AI workflows for life sciences, biotech, and agritech teams." />
+  <title data-i18n="meta.title">AidBio | AI & Data Science for Life Sciences, Pharma and Agritech</title>
+  <meta name="description" data-i18n-attr="content:meta.description"
+    content="AidBio partners with academic labs, pharma R&D teams, and agritech companies to turn experimental and field data into predictive models, agentic AI workflows, and decisions you can act on." />
   <meta name="theme-color" content="#FBFCFE" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -765,10 +765,10 @@
       }
     }
 
-    .hero-stats {
+    .hero-links {
       display: grid;
       grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-4);
+      gap: var(--space-3);
       margin-top: var(--space-6);
       padding-top: var(--space-5);
       border-top: 1px solid var(--border-subtle);
@@ -776,19 +776,48 @@
       z-index: 1;
     }
 
-    .stat-val {
-      display: block;
-      margin-bottom: var(--space-1);
-      font-family: var(--font-data);
+    .hero-link-card {
+      display: flex;
+      flex-direction: column;
+      gap: var(--space-1);
+      padding: var(--space-4);
+      border-radius: var(--radius-md);
+      background: var(--surface-card);
+      border: 1px solid var(--border-subtle);
+      border-top: 3px solid var(--mini-accent, var(--accent));
+      box-shadow: var(--shadow-sm);
+      text-decoration: none;
+      transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
+    }
+
+    .hero-link-card:hover,
+    .hero-link-card:focus-visible {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-md);
+    }
+
+    .hero-link-label {
+      color: var(--text-muted);
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.06em;
+    }
+
+    .hero-link-title {
       color: var(--text-strong);
-      font-size: 24px;
+      font-family: var(--font-data);
+      font-size: 16px;
       font-weight: 600;
       letter-spacing: -0.02em;
     }
 
-    .stat-label {
+    .hero-link-note {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
       color: var(--text-muted);
-      font-size: 14px;
+      font-size: 13.5px;
     }
 
     /* ============================================================ Signal band */
@@ -1385,7 +1414,7 @@
         padding-top: calc(var(--nav-h) + var(--space-5));
       }
 
-      .hero-stats {
+      .hero-links {
         grid-template-columns: 1fr;
         gap: var(--space-3);
       }
@@ -1470,23 +1499,29 @@
 
       <div class="nav-actions">
         <ul class="nav-links" aria-label="Primary">
-          <li><a href="#solutions">Solutions</a></li>
-          <li><a href="#projects">Projects</a></li>
-          <li><a href="#process">Process</a></li>
+          <li><a href="#solutions" data-i18n="nav.solutions">Solutions</a></li>
+          <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
+          <li><a href="#process" data-i18n="nav.process">Process</a></li>
           <li class="has-submenu">
-            <a href="#founder">Founder</a>
+            <a href="#founder" data-i18n="nav.founder">Founder</a>
             <ul class="submenu">
-              <li><a href="#founder">Founder overview</a></li>
-              <li><a href="portfolio/index.html">Portfolio: the founder story →</a></li>
+              <li><a href="#founder" data-i18n="nav.founderOverview">Founder overview</a></li>
+              <li><a href="portfolio/index.html" data-i18n="nav.founderStory">Portfolio: the founder story →</a></li>
             </ul>
           </li>
-          <li><a href="#contact" class="nav-cta">Start a project</a></li>
+          <li><a href="#contact" class="nav-cta" data-i18n="nav.cta">Start a project</a></li>
         </ul>
 
         <div class="theme-switcher" role="group" aria-label="Theme preference">
           <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
           <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
           <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+        </div>
+
+        <div class="theme-switcher lang-switcher" role="group" aria-label="Language">
+          <button class="theme-option" type="button" data-lang-choice="en" aria-pressed="false">EN</button>
+          <button class="theme-option" type="button" data-lang-choice="pt" aria-pressed="false">PT</button>
+          <button class="theme-option" type="button" data-lang-choice="es" aria-pressed="false">ES</button>
         </div>
 
         <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu"
@@ -1503,38 +1538,47 @@
   </nav>
 
   <div class="mobile-menu" id="mobile-menu">
-    <a href="#solutions">Solutions</a>
-    <a href="#projects">Projects</a>
-    <a href="#process">Process</a>
-    <a href="#founder">Founder</a>
-    <a href="portfolio/index.html" style="padding-left:var(--space-4);font-size:14px">↳ Portfolio: the founder story</a>
-    <a href="#contact" class="btn btn-primary">Start a project</a>
+    <a href="#solutions" data-i18n="nav.solutions">Solutions</a>
+    <a href="#projects" data-i18n="nav.projects">Projects</a>
+    <a href="#process" data-i18n="nav.process">Process</a>
+    <a href="#founder" data-i18n="nav.founder">Founder</a>
+    <a href="portfolio/index.html" style="padding-left:var(--space-4);font-size:14px"
+      data-i18n="mobile.founderStory">↳ Portfolio: the founder story</a>
+    <a href="#contact" class="btn btn-primary" data-i18n="nav.cta">Start a project</a>
+    <div class="theme-switcher lang-switcher" role="group" aria-label="Language" style="margin-top:var(--space-3)">
+      <button class="theme-option" type="button" data-lang-choice="en" aria-pressed="false">EN</button>
+      <button class="theme-option" type="button" data-lang-choice="pt" aria-pressed="false">PT</button>
+      <button class="theme-option" type="button" data-lang-choice="es" aria-pressed="false">ES</button>
+    </div>
   </div>
 
   <header class="hero">
     <div class="container">
       <div class="hero-grid">
         <div class="hero-copy reveal">
-          <span class="eyebrow">Data intelligence for life sciences</span>
-          <h1 class="heading-lg">Transforming biological complexity into <span class="accent-italic">decisive
-              action.</span></h1>
-          <p class="hero-desc">
-            AidBio builds rigorous data pipelines, predictive machine-learning systems, and agentic AI workflows for
-            agritech, biotech, and applied R&D teams that need signal, speed, and scientific credibility.
+          <span class="eyebrow" data-i18n="hero.eyebrow">Data intelligence for life sciences, pharma and
+            agriculture</span>
+          <h1 class="heading-lg"><span data-i18n="hero.h1_lead">Transforming biological complexity into</span> <span
+              class="accent-italic" data-i18n="hero.h1_accent">decisive action.</span></h1>
+          <p class="hero-desc" data-i18n="hero.desc">
+            Whether you're running a university lab, interpreting omics data for a pharma research team, or reading
+            signal out of a season's field trials, AidBio builds the data pipelines, predictive models, and
+            AI-assisted workflows that turn raw experimental and environmental data into results you can stand
+            behind.
           </p>
 
           <div class="hero-actions">
-            <a href="#contact" class="btn btn-primary">Engage AidBio</a>
-            <a href="#solutions" class="btn btn-secondary">Explore capabilities</a>
+            <a href="#contact" class="btn btn-primary" data-i18n="hero.ctaPrimary">Engage AidBio</a>
+            <a href="#solutions" class="btn btn-secondary" data-i18n="hero.ctaSecondary">Explore capabilities</a>
           </div>
 
           <div class="hero-proof" aria-label="Capabilities summary">
-            <span class="proof-pill"><span class="proof-dot" style="background: var(--spectrum-indigo);"></span> AI
-              workflows grounded in real data</span>
+            <span class="proof-pill"><span class="proof-dot" style="background: var(--spectrum-indigo);"></span>
+              <span data-i18n="hero.proof1">AI workflows grounded in real data</span></span>
             <span class="proof-pill"><span class="proof-dot" style="background: var(--spectrum-emerald);"></span>
-              Agritech and omics fluency</span>
+              <span data-i18n="hero.proof2">Fluent in omics, agronomy and protein-interaction data</span></span>
             <span class="proof-pill"><span class="proof-dot" style="background: var(--spectrum-coral);"></span>
-              Reproducible, production-ready delivery</span>
+              <span data-i18n="hero.proof3">Reproducible, production-ready delivery</span></span>
           </div>
         </div>
 
@@ -1544,19 +1588,27 @@
         </div>
       </div>
 
-      <div class="hero-stats reveal delay-2">
-        <div class="stat">
-          <span class="stat-val">10+ years</span>
-          <span class="stat-label">Academic and industry R&amp;D experience</span>
-        </div>
-        <div class="stat">
-          <span class="stat-val">15+ papers</span>
-          <span class="stat-label">Peer-reviewed scientific publications</span>
-        </div>
-        <div class="stat">
-          <span class="stat-val">End-to-end</span>
-          <span class="stat-label">From interrogation to deployment</span>
-        </div>
+      <div class="hero-links reveal delay-2">
+        <a href="#projects" class="hero-link-card" style="--mini-accent: var(--spectrum-indigo);">
+          <span class="hero-link-label" data-i18n="hero.links.projects.label">Open now</span>
+          <span class="hero-link-title">AidWeather, Aid2GO, AidViz</span>
+          <span class="hero-link-note"><span data-i18n="hero.links.projects.note">Explore the projects</span>
+            <span aria-hidden="true">→</span></span>
+        </a>
+        <a href="portfolio/index.html" class="hero-link-card" style="--mini-accent: var(--spectrum-coral);">
+          <span class="hero-link-label" data-i18n="hero.links.portfolio.label">Portfolio</span>
+          <span class="hero-link-title" data-i18n="hero.links.portfolio.title">From crop biotechnology to scientific
+            AI</span>
+          <span class="hero-link-note"><span data-i18n="hero.links.portfolio.note">Read the founder story</span>
+            <span aria-hidden="true">→</span></span>
+        </a>
+        <a href="portfolio/pages/01-mechanism.html" class="hero-link-card"
+          style="--mini-accent: var(--spectrum-emerald);">
+          <span class="hero-link-label">Current Biology</span>
+          <span class="hero-link-title" data-i18n="hero.links.paper.title">Circadian entrainment by bZIP63</span>
+          <span class="hero-link-note"><span data-i18n="hero.links.paper.note">Read the paper</span>
+            <span aria-hidden="true">→</span></span>
+        </a>
       </div>
     </div>
   </header>
@@ -1565,35 +1617,40 @@
     <section class="signal-band">
       <div class="container reveal">
         <div class="signal-head">
-          <span class="signal-badge">Applied intelligence</span>
-          <span class="signal-tagline">Small teams. Serious output.</span>
+          <span class="signal-badge" data-i18n="signal.badge">Applied intelligence</span>
+          <span class="signal-tagline" data-i18n="signal.tagline">Small teams. Serious output.</span>
         </div>
 
-        <p class="signal-lead">
-          From field trials and climate-linked agronomic signal to omics interpretation and scientific reporting,
-          AidBio emphasizes delivery that survives real operational use.
+        <p class="signal-lead" data-i18n="signal.lead">
+          From field trials and climate-linked agronomic signal, to omics interpretation, biomarker discovery, and
+          scientific reporting, AidBio delivers work that survives contact with a real lab, a real season, or a real
+          peer review.
         </p>
 
         <div class="signal-grid">
           <div class="mini-card" style="--mini-accent: var(--spectrum-indigo);">
-            <span class="mini-label">Pipeline focus</span>
+            <span class="mini-label" data-i18n="signal.card1.label">Pipeline focus</span>
             <div class="mini-value">ML + AI</div>
-            <div class="mini-note">Prediction, automation, and reporting workflows</div>
+            <div class="mini-note" data-i18n="signal.card1.note">Prediction, automation, and reporting workflows
+            </div>
           </div>
           <div class="mini-card" style="--mini-accent: var(--spectrum-emerald);">
-            <span class="mini-label">Domain fit</span>
-            <div class="mini-value">Agri + Bio</div>
-            <div class="mini-note">Agritech, biotech, omics, translational analysis</div>
+            <span class="mini-label" data-i18n="signal.card2.label">Domain fit</span>
+            <div class="mini-value">Agri + Bio + Pharma</div>
+            <div class="mini-note" data-i18n="signal.card2.note">Agritech, biotech, pharma R&D, omics, translational
+              analysis</div>
           </div>
           <div class="mini-card" style="--mini-accent: var(--spectrum-teal);">
-            <span class="mini-label">Delivery mode</span>
-            <div class="mini-value">Scoped</div>
-            <div class="mini-note">Clear milestones and maintainable code hand-off</div>
+            <span class="mini-label" data-i18n="signal.card3.label">Delivery mode</span>
+            <div class="mini-value" data-i18n="signal.card3.value">Scoped</div>
+            <div class="mini-note" data-i18n="signal.card3.note">Clear milestones and maintainable code hand-off
+            </div>
           </div>
           <div class="mini-card" style="--mini-accent: var(--spectrum-coral);">
-            <span class="mini-label">Philosophy</span>
-            <div class="mini-value">Rigorous</div>
-            <div class="mini-note">No black-box hype without scientific accountability</div>
+            <span class="mini-label" data-i18n="signal.card4.label">Philosophy</span>
+            <div class="mini-value" data-i18n="signal.card4.value">Rigorous</div>
+            <div class="mini-note" data-i18n="signal.card4.note">No black-box hype without scientific accountability
+            </div>
           </div>
         </div>
       </div>
@@ -1602,11 +1659,13 @@
     <section id="solutions" class="section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">Core capabilities</span>
-          <h2 class="heading-md">Targeted intelligence for technically demanding domains.</h2>
-          <p class="text-lead">
-            AidBio bridges deep biological domain knowledge with modern AI and data-engineering practice, producing
-            systems that are useful to scientists, not just impressive in demos.
+          <span class="eyebrow" data-i18n="solutions.eyebrow">Core capabilities</span>
+          <h2 class="heading-md" data-i18n="solutions.h2">Targeted intelligence for technically demanding domains.
+          </h2>
+          <p class="text-lead" data-i18n="solutions.lead">
+            AidBio bridges deep biological domain knowledge with modern AI and data-engineering practice — producing
+            systems that hold up in front of a principal investigator, a peer reviewer, or an agronomist who's seen
+            too many black boxes.
           </p>
         </div>
 
@@ -1620,8 +1679,8 @@
                 <circle cx="19" cy="6.5" r="1.7" fill="none" />
               </svg>
             </div>
-            <h3>Machine Learning &amp; Predictive Modeling</h3>
-            <p>
+            <h3 data-i18n="solutions.card1.title">Machine Learning &amp; Predictive Modeling</h3>
+            <p data-i18n="solutions.card1.body">
               Supervised learning, model selection, validation, and interpretation for field, laboratory, and
               translational settings. Built with strong attention to data quality, honest evaluation, and downstream
               usability.
@@ -1629,8 +1688,8 @@
             <div class="tech-tags">
               <span class="tag">PyTorch</span>
               <span class="tag">scikit-learn</span>
-              <span class="tag">Feature engineering</span>
-              <span class="tag">Model interpretation</span>
+              <span class="tag" data-i18n="solutions.card1.tag3">Feature engineering</span>
+              <span class="tag" data-i18n="solutions.card1.tag4">Model interpretation</span>
             </div>
           </article>
 
@@ -1643,15 +1702,15 @@
                 <path d="M15.4 15.2l1.7 1.1" />
               </svg>
             </div>
-            <h3>Agentic AI Workflows</h3>
-            <p>
+            <h3 data-i18n="solutions.card2.title">Agentic AI Workflows</h3>
+            <p data-i18n="solutions.card2.body">
               Domain-aware assistants, structured reporting flows, retrieval pipelines, and lightweight automation that
               augment small scientific teams without creating infrastructure sprawl.
             </p>
             <div class="tech-tags">
               <span class="tag">LLMs</span>
               <span class="tag">RAG</span>
-              <span class="tag">Tool use</span>
+              <span class="tag" data-i18n="solutions.card2.tag3">Tool use</span>
             </div>
           </article>
 
@@ -1664,10 +1723,11 @@
                 <circle cx="4.5" cy="21" r="1.5" fill="none" />
               </svg>
             </div>
-            <h3>Agritech &amp; Climate Analytics</h3>
-            <p>
+            <h3 data-i18n="solutions.card3.title">Agritech &amp; Climate Analytics</h3>
+            <p data-i18n="solutions.card3.body">
               Crop-linked and geospatial analytics for field trials, yield-oriented investigation, environmental signal
-              extraction, and weather-aware modeling.
+              extraction, and weather-aware modeling — built for the realities of seasons, sites, and imperfect
+              sensors.
             </p>
           </article>
 
@@ -1681,16 +1741,17 @@
                 <path d="M9.9 17h4.2" />
               </svg>
             </div>
-            <h3>Omics, Bioinformatics &amp; Scientific Data Systems</h3>
-            <p>
+            <h3 data-i18n="solutions.card4.title">Omics, Bioinformatics &amp; Scientific Data Systems</h3>
+            <p data-i18n="solutions.card4.body">
               Support for multi-omics interpretation, biomarker-oriented workflows, experimental data consolidation, and
-              reproducible analysis architecture tailored to research realities.
+              reproducible analysis architecture — for academic labs building toward publication and pharma teams
+              building toward a decision.
             </p>
             <div class="tech-tags">
               <span class="tag">Python</span>
               <span class="tag">Pandas</span>
               <span class="tag">EDA</span>
-              <span class="tag">Bioinformatics</span>
+              <span class="tag" data-i18n="solutions.card4.tag4">Bioinformatics</span>
             </div>
           </article>
         </div>
@@ -1700,9 +1761,9 @@
     <section id="projects" class="section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">Projects &amp; open tools</span>
-          <h2 class="heading-md">Things we build in the open.</h2>
-          <p class="text-lead">
+          <span class="eyebrow" data-i18n="projects.eyebrow">Projects &amp; open tools</span>
+          <h2 class="heading-md" data-i18n="projects.h2">Things we build in the open.</h2>
+          <p class="text-lead" data-i18n="projects.lead">
             Alongside client work, AidBio ships practical, open-source tools for agritech and life-science data
             workflows. Open to try right now:
           </p>
@@ -1715,24 +1776,24 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M17 18a4 4 0 0 0-.9-7.9A6 6 0 1 0 6 15" /><path d="M8 18h9" />
                 </svg>
-                Open-source library
+                <span data-i18n="projects.kindLabel">Open-source library</span>
               </span>
             </div>
             <div class="project-body">
               <h3>AidWeather</h3>
-              <p>
+              <p data-i18n="projects.aidweather.body">
                 A Python library and CLI that turns NASA POWER weather and solar-radiation data into clean,
                 cached, analysis-ready tables — for a single point, a transect, or a whole region.
               </p>
               <div class="project-tags">
                 <span class="tag">NASA POWER</span>
                 <span class="tag">Python + CLI</span>
-                <span class="tag">Agroclimatic</span>
-                <span class="tag">Solar</span>
+                <span class="tag" data-i18n="projects.aidweather.tag3">Agroclimatic</span>
+                <span class="tag" data-i18n="projects.aidweather.tag4">Solar</span>
               </div>
               <div class="project-actions">
-                <a href="aidweather.html" class="btn btn-primary">Explore AidWeather</a>
-                <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary">GitHub ↗</a>
+                <a href="aidweather.html" class="btn btn-primary" data-i18n="projects.aidweather.cta">Explore AidWeather</a>
+                <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="projects.githubCta">GitHub ↗</a>
               </div>
             </div>
           </article>
@@ -1743,12 +1804,12 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M17 18a4 4 0 0 0-.9-7.9A6 6 0 1 0 6 15" /><path d="M8 18h9" />
                 </svg>
-                Open-source library
+                <span data-i18n="projects.kindLabel">Open-source library</span>
               </span>
             </div>
             <div class="project-body">
               <h3>Aid2GO</h3>
-              <p>
+              <p data-i18n="projects.aid2go.body">
                 A graph-learning workflow for protein-function prediction that links proteins, protein-protein
                 interactions, the Gene Ontology hierarchy, and experimentally supported GO annotations into one
                 heterogeneous graph, using GraphSAGE and GAT variants over ProtBERT sequence embeddings.
@@ -1760,7 +1821,7 @@
                 <span class="tag">ProtBERT</span>
               </div>
               <div class="project-actions">
-                <a href="https://github.com/matiollipt/aid2go" target="_blank" rel="noopener" class="btn btn-secondary">GitHub ↗</a>
+                <a href="https://github.com/matiollipt/aid2go" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="projects.githubCta">GitHub ↗</a>
               </div>
             </div>
           </article>
@@ -1771,23 +1832,23 @@
                 <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
                   <path d="M17 18a4 4 0 0 0-.9-7.9A6 6 0 1 0 6 15" /><path d="M8 18h9" />
                 </svg>
-                Open-source library
+                <span data-i18n="projects.kindLabel">Open-source library</span>
               </span>
             </div>
             <div class="project-body">
               <h3>AidViz</h3>
-              <p>
+              <p data-i18n="projects.aidviz.body">
                 A visualization-only toolkit that intentionally does not fetch data or train models: static
                 publication figures, interactive dashboards, and climate storytelling plots built from clean
                 DataFrames, keeping data provenance and presentation responsibilities cleanly separated.
               </p>
               <div class="project-tags">
-                <span class="tag">Visualization</span>
-                <span class="tag">Dashboards</span>
-                <span class="tag">Scientific storytelling</span>
+                <span class="tag" data-i18n="projects.aidviz.tag1">Visualization</span>
+                <span class="tag" data-i18n="projects.aidviz.tag2">Dashboards</span>
+                <span class="tag" data-i18n="projects.aidviz.tag3">Scientific storytelling</span>
               </div>
               <div class="project-actions">
-                <a href="https://github.com/matiollipt/aidviz" target="_blank" rel="noopener" class="btn btn-secondary">GitHub ↗</a>
+                <a href="https://github.com/matiollipt/aidviz" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="projects.githubCta">GitHub ↗</a>
               </div>
             </div>
           </article>
@@ -1798,37 +1859,39 @@
     <section id="process" class="section process-section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow warm">Engagement model</span>
-          <h2 class="heading-md">Rigorous process. Zero ambiguity.</h2>
-          <p class="text-lead">
-            Engagements are scoped tightly so teams spend time on science and decisions instead of deciphering vague
-            software deliverables.
+          <span class="eyebrow warm" data-i18n="process.eyebrow">Engagement model</span>
+          <h2 class="heading-md" data-i18n="process.h2">Rigorous process. Zero ambiguity.</h2>
+          <p class="text-lead" data-i18n="process.lead">
+            Every engagement is scoped tightly, so your team spends time on the science and the decision — not on
+            decoding a vague deliverable.
           </p>
         </div>
 
         <div class="workflow-list reveal delay-1">
           <div class="step" style="--step-accent: var(--spectrum-indigo);">
             <div class="step-num">01</div>
-            <h4>Define &amp; Align</h4>
-            <p>Clarify the business question, scientific constraints, dataset realities, and decision context before
-              implementation starts.</p>
+            <h4 data-i18n="process.step1.title">Define &amp; Align</h4>
+            <p data-i18n="process.step1.body">Clarify the business question, scientific constraints, dataset
+              realities, and decision context before implementation starts.</p>
           </div>
           <div class="step" style="--step-accent: var(--spectrum-teal);">
             <div class="step-num">02</div>
-            <h4>Interrogate Data</h4>
-            <p>Standardize, clean, audit, and explore the data to isolate signal from experimental and operational
-              noise.</p>
+            <h4 data-i18n="process.step2.title">Interrogate Data</h4>
+            <p data-i18n="process.step2.body">Standardize, clean, audit, and explore the data to isolate signal from
+              experimental and operational noise.</p>
           </div>
           <div class="step" style="--step-accent: var(--spectrum-emerald);">
             <div class="step-num">03</div>
-            <h4>Build &amp; Validate</h4>
-            <p>Develop reproducible, maintainable pipelines for prediction, interpretation, or structured automation.
+            <h4 data-i18n="process.step3.title">Build &amp; Validate</h4>
+            <p data-i18n="process.step3.body">Develop reproducible, maintainable pipelines for prediction,
+              interpretation, or structured automation.
             </p>
           </div>
           <div class="step" style="--step-accent: var(--spectrum-coral);">
             <div class="step-num">04</div>
-            <h4>Ship &amp; Transfer</h4>
-            <p>Deliver documented code, practical outputs, and a hand-off your internal team can actually own.</p>
+            <h4 data-i18n="process.step4.title">Ship &amp; Transfer</h4>
+            <p data-i18n="process.step4.body">Deliver documented code, practical outputs, and a hand-off your
+              internal team can actually own.</p>
           </div>
         </div>
       </div>
@@ -1837,39 +1900,40 @@
     <section id="founder" class="section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">The founder</span>
-          <h2 class="heading-md">Scientific depth meets practical implementation.</h2>
+          <span class="eyebrow" data-i18n="founder.eyebrow">The founder</span>
+          <h2 class="heading-md" data-i18n="founder.h2">Scientific depth meets practical implementation.</h2>
         </div>
 
         <div class="about-shell reveal delay-1">
           <div class="about-section">
             <div class="about-main">
               <p class="text-lead" style="margin-top: 0;">
-                AidBio is led by <strong>Cleverson Matiolli, PhD</strong> — a quantitative biologist and
-                machine-learning practitioner with experience spanning academic research, applied R&amp;D, and
-                computational problem-solving across life sciences and agritech.
+                <span data-i18n="founder.bio1_prefix">AidBio is led by</span> <strong>Cleverson Matiolli, PhD</strong>
+                <span data-i18n="founder.bio1_suffix">— a quantitative biologist and machine-learning practitioner
+                  with experience spanning academic research, applied R&amp;D, and computational problem-solving
+                  across life sciences and agritech.</span>
               </p>
-              <p class="text-lead">
+              <p class="text-lead" data-i18n="founder.bio2">
                 The operating philosophy is straightforward: honest modeling, reproducible architecture, and
                 deliverables that remain useful after the presentation ends.
               </p>
 
               <div class="founder-links">
                 <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener" class="f-link">
-                  <span>Connect on LinkedIn</span>
+                  <span data-i18n="founder.linkLinkedin">Connect on LinkedIn</span>
                   <span class="f-ico" aria-hidden="true">↗</span>
                 </a>
                 <a href="https://github.com/matiollipt" target="_blank" rel="noopener" class="f-link">
-                  <span>View GitHub repositories</span>
+                  <span data-i18n="founder.linkGithub">View GitHub repositories</span>
                   <span class="f-ico" aria-hidden="true">↗</span>
                 </a>
                 <a href="https://scholar.google.com/scholar?q=%22Cleverson+Matiolli%22" target="_blank" rel="noopener"
                   class="f-link">
-                  <span>Read peer-reviewed papers</span>
+                  <span data-i18n="founder.linkScholar">Read peer-reviewed papers</span>
                   <span class="f-ico" aria-hidden="true">↗</span>
                 </a>
                 <a href="portfolio/index.html" class="f-link">
-                  <span>Read the founder story</span>
+                  <span data-i18n="founder.linkPortfolio">Read the founder story</span>
                   <span class="f-ico" aria-hidden="true">↗</span>
                 </a>
               </div>
@@ -1877,16 +1941,19 @@
 
             <aside class="about-side">
               <div class="about-metric">
-                <span class="about-metric-label">Delivery style</span>
-                <div class="about-metric-value">Fixed-scope projects and milestone-based sprints</div>
+                <span class="about-metric-label" data-i18n="founder.metric1.label">Delivery style</span>
+                <div class="about-metric-value" data-i18n="founder.metric1.value">Fixed-scope projects and
+                  milestone-based sprints</div>
               </div>
               <div class="about-metric">
-                <span class="about-metric-label">Technical emphasis</span>
-                <div class="about-metric-value">ML systems, data workflows, scientific reporting, applied AI</div>
+                <span class="about-metric-label" data-i18n="founder.metric2.label">Technical emphasis</span>
+                <div class="about-metric-value" data-i18n="founder.metric2.value">ML systems, data workflows,
+                  scientific reporting, applied AI</div>
               </div>
               <div class="about-metric">
-                <span class="about-metric-label">Primary sectors</span>
-                <div class="about-metric-value">Agritech, biotech, life sciences, applied research teams</div>
+                <span class="about-metric-label" data-i18n="founder.metric3.label">Primary sectors</span>
+                <div class="about-metric-value" data-i18n="founder.metric3.value">Agritech, biotech, life sciences,
+                  applied research teams</div>
               </div>
             </aside>
           </div>
@@ -1897,12 +1964,13 @@
     <section id="contact" class="section contact-section">
       <div class="container">
         <div class="contact-card reveal">
-          <h2 class="heading-md">Ready to extract signal from your data?</h2>
-          <p class="text-lead" style="margin: 0 auto var(--space-5);">
-            AidBio engages through well-scoped projects designed to move from messy data to clear operational or
-            scientific decisions.
+          <h2 class="heading-md" data-i18n="contact.h2">Ready to turn your lab, trial, or pipeline data into a
+            decision?</h2>
+          <p class="text-lead" style="margin: 0 auto var(--space-5);" data-i18n="contact.lead">
+            Whether you're an academic lab, a pharma R&amp;D group, or an agritech company, AidBio engages through
+            well-scoped projects that move from messy data to a decision you can act on.
           </p>
-          <a href="mailto:contact@aidbio.com" class="btn btn-warm">contact@aidbio.com</a>
+          <a href="mailto:contact@aidbio.org" class="btn btn-warm">contact@aidbio.org</a>
         </div>
       </div>
     </section>
@@ -1916,33 +1984,35 @@
             <img src="assets/aidbio-mark-dark.webp" alt="" aria-hidden="true" />
             <span class="brand-word">AidBio</span>
           </div>
-          <p class="footer-blurb">AI &amp; data science for agritech and life sciences. Where biology, intelligence,
-            and mathematics meet the spectrum.</p>
+          <p class="footer-blurb" data-i18n="footer.blurb">AI &amp; data science for life sciences, pharma and
+            agritech. Where biology, intelligence, and mathematics meet the spectrum.</p>
         </div>
         <div class="footer-col">
-          <span class="footer-col-h">Explore</span>
-          <a href="#solutions">Solutions</a>
-          <a href="#projects">Projects</a>
+          <span class="footer-col-h" data-i18n="footer.exploreHeading">Explore</span>
+          <a href="#solutions" data-i18n="nav.solutions">Solutions</a>
+          <a href="#projects" data-i18n="nav.projects">Projects</a>
           <a href="aidweather.html">AidWeather</a>
-          <a href="#process">Process</a>
-          <a href="#founder">Founder</a>
-          <a href="portfolio/index.html">Founder story</a>
-          <a href="#contact">Contact</a>
+          <a href="#process" data-i18n="nav.process">Process</a>
+          <a href="#founder" data-i18n="nav.founder">Founder</a>
+          <a href="portfolio/index.html" data-i18n="footer.founderStory">Founder story</a>
+          <a href="#contact" data-i18n="footer.contact">Contact</a>
         </div>
         <div class="footer-col">
-          <span class="footer-col-h">Connect</span>
+          <span class="footer-col-h" data-i18n="footer.connectHeading">Connect</span>
           <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
           <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
-          <a href="mailto:contact@aidbio.com">contact@aidbio.com</a>
+          <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
         </div>
       </div>
       <div class="footer-bar">
-        <span>&copy; 2026 AidBio. Built for the future of scientific decision-making.</span>
-        <span>AI &amp; Data Science for Life Sciences and Agritech</span>
+        <span data-i18n="footer.copyright">&copy; 2026 AidBio. Built for the future of scientific
+          decision-making.</span>
+        <span data-i18n="footer.tagline">AI &amp; Data Science for Life Sciences, Pharma and Agritech</span>
       </div>
     </div>
   </footer>
 
+  <script src="assets/js/i18n.js"></script>
   <script>
     (function () {
       const themeApi = window.__aidbioTheme;
@@ -1986,6 +2056,16 @@
 
       syncThemeButtons(getPreference());
 
+      // Language switcher
+      const i18nApi = window.__aidbioI18n;
+      const langButtons = Array.from(document.querySelectorAll("[data-lang-choice]"));
+
+      langButtons.forEach((button) => {
+        button.addEventListener("click", () => {
+          i18nApi.setLanguage(button.dataset.langChoice);
+        });
+      });
+
       // Mobile menu
       const menuToggle = document.getElementById("menu-toggle");
       const mobileMenu = document.getElementById("mobile-menu");
@@ -1993,13 +2073,13 @@
       function closeMenu() {
         mobileMenu.classList.remove("open");
         menuToggle.setAttribute("aria-expanded", "false");
-        menuToggle.setAttribute("aria-label", "Open menu");
+        menuToggle.setAttribute("aria-label", i18nApi.t("nav.openMenu"));
       }
 
       menuToggle.addEventListener("click", () => {
         const open = mobileMenu.classList.toggle("open");
         menuToggle.setAttribute("aria-expanded", String(open));
-        menuToggle.setAttribute("aria-label", open ? "Close menu" : "Open menu");
+        menuToggle.setAttribute("aria-label", i18nApi.t(open ? "nav.closeMenu" : "nav.openMenu"));
       });
 
       mobileMenu.querySelectorAll("a").forEach((link) => {
