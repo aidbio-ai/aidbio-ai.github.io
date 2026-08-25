@@ -1404,6 +1404,10 @@
         display: none;
       }
 
+      .nav-actions .lang-switcher {
+        display: none;
+      }
+
       .menu-toggle {
         display: inline-flex;
       }
@@ -1420,12 +1424,17 @@
       }
 
       .bento-grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: minmax(0, 1fr);
       }
 
       .card-wide,
       .card-square {
         grid-column: auto;
+      }
+
+      .tag {
+        white-space: normal;
+        text-align: center;
       }
     }
 

@@ -1,173 +1,173 @@
 {
   "meta": {
-    "title": "AidBio | AI & Data Science for Life Sciences, Pharma and Agritech",
-    "description": "AidBio partners with academic labs, pharma R&D teams, and agritech companies to turn experimental and field data into predictive models, agentic AI workflows, and decisions you can act on."
+    "title": "AidBio | IA y Ciencia de Datos para Ciencias de la Vida, Farmacéutica y Agritech",
+    "description": "AidBio colabora con laboratorios académicos, equipos de I+D farmacéutico y empresas de agritech para convertir datos experimentales y de campo en modelos predictivos, flujos de trabajo de IA agéntica y decisiones sobre las que se puede actuar."
   },
   "nav": {
-    "solutions": "Solutions",
-    "projects": "Projects",
-    "process": "Process",
-    "founder": "Founder",
-    "founderOverview": "Founder overview",
-    "founderStory": "Portfolio: the founder story →",
-    "cta": "Start a project",
-    "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "solutions": "Soluciones",
+    "projects": "Proyectos",
+    "process": "Proceso",
+    "founder": "Fundador",
+    "founderOverview": "Sobre el fundador",
+    "founderStory": "Portafolio: la historia del fundador →",
+    "cta": "Iniciar un proyecto",
+    "openMenu": "Abrir menú",
+    "closeMenu": "Cerrar menú"
   },
   "mobile": {
-    "founderStory": "↳ Portfolio: the founder story"
+    "founderStory": "↳ Portafolio: la historia del fundador"
   },
   "hero": {
-    "eyebrow": "Data intelligence for life sciences, pharma and agriculture",
-    "h1_lead": "Transforming biological complexity into",
-    "h1_accent": "decisive action.",
-    "desc": "Whether you're running a university lab, interpreting omics data for a pharma research team, or reading signal out of a season's field trials, AidBio builds the data pipelines, predictive models, and AI-assisted workflows that turn raw experimental and environmental data into results you can stand behind.",
-    "ctaPrimary": "Engage AidBio",
-    "ctaSecondary": "Explore capabilities",
-    "proof1": "AI workflows grounded in real data",
-    "proof2": "Fluent in omics, agronomy and protein-interaction data",
-    "proof3": "Reproducible, production-ready delivery",
+    "eyebrow": "Inteligencia de datos para ciencias de la vida, farmacéutica y agricultura",
+    "h1_lead": "Transformando la complejidad biológica en",
+    "h1_accent": "acción decisiva.",
+    "desc": "Ya sea que dirijas un laboratorio universitario, interpretes datos ómicos para un equipo de investigación farmacéutica, o busques la señal de toda una temporada de ensayos de campo, AidBio construye los pipelines de datos, modelos predictivos y flujos de trabajo asistidos por IA que convierten datos experimentales y ambientales en bruto en resultados en los que puedes confiar.",
+    "ctaPrimary": "Habla con AidBio",
+    "ctaSecondary": "Explorar capacidades",
+    "proof1": "Flujos de IA fundamentados en datos reales",
+    "proof2": "Fluidez en datos ómicos, agronómicos y de interacción proteica",
+    "proof3": "Entrega reproducible y lista para producción",
     "links": {
       "projects": {
-        "label": "Open now",
-        "note": "Explore the projects"
+        "label": "Disponible ahora",
+        "note": "Explorar los proyectos"
       },
       "portfolio": {
-        "label": "Portfolio",
-        "title": "From crop biotechnology to scientific AI",
-        "note": "Read the founder story"
+        "label": "Portafolio",
+        "title": "De la biotecnología agrícola a la IA científica",
+        "note": "Leer la historia del fundador"
       },
       "paper": {
-        "title": "Circadian entrainment by bZIP63",
-        "note": "Read the paper"
+        "title": "Sincronización circadiana por bZIP63",
+        "note": "Leer el artículo"
       }
     }
   },
   "signal": {
-    "badge": "Applied intelligence",
-    "tagline": "Small teams. Serious output.",
-    "lead": "From field trials and climate-linked agronomic signal, to omics interpretation, biomarker discovery, and scientific reporting, AidBio delivers work that survives contact with a real lab, a real season, or a real peer review.",
+    "badge": "Inteligencia aplicada",
+    "tagline": "Equipos pequeños. Resultados serios.",
+    "lead": "Desde ensayos de campo y señal agronómica ligada al clima, hasta interpretación de datos ómicos, descubrimiento de biomarcadores y comunicación científica, AidBio entrega un trabajo que resiste el contacto con un laboratorio real, una temporada real o una revisión por pares real.",
     "card1": {
-      "label": "Pipeline focus",
-      "note": "Prediction, automation, and reporting workflows"
+      "label": "Foco del pipeline",
+      "note": "Predicción, automatización y flujos de reportes"
     },
     "card2": {
-      "label": "Domain fit",
-      "note": "Agritech, biotech, pharma R&D, omics, translational analysis"
+      "label": "Ajuste de dominio",
+      "note": "Agritech, biotecnología, I+D farmacéutico, ómica, análisis traslacional"
     },
     "card3": {
-      "label": "Delivery mode",
-      "value": "Scoped",
-      "note": "Clear milestones and maintainable code hand-off"
+      "label": "Modo de entrega",
+      "value": "Con alcance definido",
+      "note": "Hitos claros y entrega de código mantenible"
     },
     "card4": {
-      "label": "Philosophy",
-      "value": "Rigorous",
-      "note": "No black-box hype without scientific accountability"
+      "label": "Filosofía",
+      "value": "Riguroso",
+      "note": "Sin exageraciones de caja negra sin responsabilidad científica"
     }
   },
   "solutions": {
-    "eyebrow": "Core capabilities",
-    "h2": "Targeted intelligence for technically demanding domains.",
-    "lead": "AidBio bridges deep biological domain knowledge with modern AI and data-engineering practice — producing systems that hold up in front of a principal investigator, a peer reviewer, or an agronomist who's seen too many black boxes.",
+    "eyebrow": "Capacidades principales",
+    "h2": "Inteligencia dirigida a dominios técnicamente exigentes.",
+    "lead": "AidBio conecta un profundo conocimiento biológico con la práctica moderna de IA e ingeniería de datos, produciendo sistemas que se sostienen frente a un investigador principal, un revisor por pares o un agrónomo que ya ha visto demasiadas cajas negras.",
     "card1": {
-      "title": "Machine Learning & Predictive Modeling",
-      "body": "Supervised learning, model selection, validation, and interpretation for field, laboratory, and translational settings. Built with strong attention to data quality, honest evaluation, and downstream usability.",
-      "tag3": "Feature engineering",
-      "tag4": "Model interpretation"
+      "title": "Machine Learning y Modelado Predictivo",
+      "body": "Aprendizaje supervisado, selección de modelos, validación e interpretación para entornos de campo, laboratorio y traslacionales. Construido con especial atención a la calidad de los datos, la evaluación honesta y la usabilidad posterior.",
+      "tag3": "Ingeniería de atributos",
+      "tag4": "Interpretación de modelos"
     },
     "card2": {
-      "title": "Agentic AI Workflows",
-      "body": "Domain-aware assistants, structured reporting flows, retrieval pipelines, and lightweight automation that augment small scientific teams without creating infrastructure sprawl.",
-      "tag3": "Tool use"
+      "title": "Flujos de Trabajo de IA Agéntica",
+      "body": "Asistentes con conocimiento del dominio, flujos estructurados de reportes, pipelines de recuperación y automatización ligera que potencian equipos científicos pequeños sin generar una infraestructura excesiva.",
+      "tag3": "Uso de herramientas"
     },
     "card3": {
-      "title": "Agritech & Climate Analytics",
-      "body": "Crop-linked and geospatial analytics for field trials, yield-oriented investigation, environmental signal extraction, and weather-aware modeling — built for the realities of seasons, sites, and imperfect sensors."
+      "title": "Analítica Agrícola y Climática",
+      "body": "Analítica geoespacial y ligada al cultivo para ensayos de campo, investigación orientada al rendimiento, extracción de señal ambiental y modelado sensible al clima — construida para la realidad de las temporadas, los sitios y los sensores imperfectos."
     },
     "card4": {
-      "title": "Omics, Bioinformatics & Scientific Data Systems",
-      "body": "Support for multi-omics interpretation, biomarker-oriented workflows, experimental data consolidation, and reproducible analysis architecture — for academic labs building toward publication and pharma teams building toward a decision.",
-      "tag4": "Bioinformatics"
+      "title": "Ómica, Bioinformática y Sistemas de Datos Científicos",
+      "body": "Soporte para interpretación multi-ómica, flujos orientados a biomarcadores, consolidación de datos experimentales y arquitectura de análisis reproducible — para laboratorios académicos que avanzan hacia la publicación y equipos farmacéuticos que avanzan hacia una decisión.",
+      "tag4": "Bioinformática"
     }
   },
   "projects": {
-    "eyebrow": "Projects & open tools",
-    "h2": "Things we build in the open.",
-    "lead": "Alongside client work, AidBio ships practical, open-source tools for agritech and life-science data workflows. Open to try right now:",
-    "kindLabel": "Open-source library",
+    "eyebrow": "Proyectos y herramientas abiertas",
+    "h2": "Cosas que construimos en código abierto.",
+    "lead": "Junto con el trabajo para clientes, AidBio publica herramientas prácticas de código abierto para flujos de datos en agritech y ciencias de la vida. Disponibles para probar ahora mismo:",
+    "kindLabel": "Biblioteca de código abierto",
     "githubCta": "GitHub ↗",
     "aidweather": {
-      "body": "A Python library and CLI that turns NASA POWER weather and solar-radiation data into clean, cached, analysis-ready tables — for a single point, a transect, or a whole region.",
-      "tag3": "Agroclimatic",
+      "body": "Una biblioteca de Python y CLI que convierte datos climáticos y de radiación solar de NASA POWER en tablas limpias, en caché y listas para análisis — para un solo punto, un transecto o una región completa.",
+      "tag3": "Agroclimático",
       "tag4": "Solar",
-      "cta": "Explore AidWeather"
+      "cta": "Explorar AidWeather"
     },
     "aid2go": {
-      "body": "A graph-learning workflow for protein-function prediction that links proteins, protein-protein interactions, the Gene Ontology hierarchy, and experimentally supported GO annotations into one heterogeneous graph, using GraphSAGE and GAT variants over ProtBERT sequence embeddings."
+      "body": "Un flujo de graph learning para la predicción de función de proteínas que conecta proteínas, interacciones proteína-proteína, la jerarquía de la Gene Ontology y anotaciones GO con respaldo experimental en un único grafo heterogéneo, usando variantes de GraphSAGE y GAT sobre embeddings de secuencia de ProtBERT."
     },
     "aidviz": {
-      "body": "A visualization-only toolkit that intentionally does not fetch data or train models: static publication figures, interactive dashboards, and climate storytelling plots built from clean DataFrames, keeping data provenance and presentation responsibilities cleanly separated.",
-      "tag1": "Visualization",
+      "body": "Un toolkit exclusivamente de visualización que, de forma intencional, no obtiene datos ni entrena modelos: figuras estáticas para publicación, dashboards interactivos y gráficos narrativos sobre el clima, construidos a partir de DataFrames limpios, manteniendo separadas las responsabilidades de procedencia de los datos y presentación.",
+      "tag1": "Visualización",
       "tag2": "Dashboards",
-      "tag3": "Scientific storytelling"
+      "tag3": "Narrativa científica"
     }
   },
   "process": {
-    "eyebrow": "Engagement model",
-    "h2": "Rigorous process. Zero ambiguity.",
-    "lead": "Every engagement is scoped tightly, so your team spends time on the science and the decision — not on decoding a vague deliverable.",
+    "eyebrow": "Modelo de colaboración",
+    "h2": "Proceso riguroso. Cero ambigüedad.",
+    "lead": "Cada proyecto tiene un alcance bien definido, para que tu equipo dedique tiempo a la ciencia y a la decisión — no a descifrar una entrega vaga.",
     "step1": {
-      "title": "Define & Align",
-      "body": "Clarify the business question, scientific constraints, dataset realities, and decision context before implementation starts."
+      "title": "Definir y Alinear",
+      "body": "Aclarar la pregunta de negocio, las restricciones científicas, la realidad de los datos y el contexto de la decisión antes de comenzar la implementación."
     },
     "step2": {
-      "title": "Interrogate Data",
-      "body": "Standardize, clean, audit, and explore the data to isolate signal from experimental and operational noise."
+      "title": "Interrogar los Datos",
+      "body": "Estandarizar, limpiar, auditar y explorar los datos para aislar la señal del ruido experimental y operativo."
     },
     "step3": {
-      "title": "Build & Validate",
-      "body": "Develop reproducible, maintainable pipelines for prediction, interpretation, or structured automation."
+      "title": "Construir y Validar",
+      "body": "Desarrollar pipelines reproducibles y mantenibles para predicción, interpretación o automatización estructurada."
     },
     "step4": {
-      "title": "Ship & Transfer",
-      "body": "Deliver documented code, practical outputs, and a hand-off your internal team can actually own."
+      "title": "Entregar y Transferir",
+      "body": "Entregar código documentado, resultados prácticos y una transición que tu equipo interno realmente pueda asumir."
     }
   },
   "founder": {
-    "eyebrow": "The founder",
-    "h2": "Scientific depth meets practical implementation.",
-    "bio1_prefix": "AidBio is led by",
-    "bio1_suffix": "— a quantitative biologist and machine-learning practitioner with experience spanning academic research, applied R&D, and computational problem-solving across life sciences and agritech.",
-    "bio2": "The operating philosophy is straightforward: honest modeling, reproducible architecture, and deliverables that remain useful after the presentation ends.",
-    "linkLinkedin": "Connect on LinkedIn",
-    "linkGithub": "View GitHub repositories",
-    "linkScholar": "Read peer-reviewed papers",
-    "linkPortfolio": "Read the founder story",
+    "eyebrow": "El fundador",
+    "h2": "La profundidad científica se encuentra con la implementación práctica.",
+    "bio1_prefix": "AidBio está dirigida por",
+    "bio1_suffix": "— un biólogo cuantitativo y practicante de machine learning con experiencia en investigación académica, I+D aplicado y resolución computacional de problemas en ciencias de la vida y agritech.",
+    "bio2": "La filosofía de trabajo es directa: modelado honesto, arquitectura reproducible y entregas que siguen siendo útiles después de que termina la presentación.",
+    "linkLinkedin": "Conectar en LinkedIn",
+    "linkGithub": "Ver repositorios en GitHub",
+    "linkScholar": "Leer los artículos revisados por pares",
+    "linkPortfolio": "Leer la historia del fundador",
     "metric1": {
-      "label": "Delivery style",
-      "value": "Fixed-scope projects and milestone-based sprints"
+      "label": "Estilo de entrega",
+      "value": "Proyectos de alcance fijo y sprints por hitos"
     },
     "metric2": {
-      "label": "Technical emphasis",
-      "value": "ML systems, data workflows, scientific reporting, applied AI"
+      "label": "Énfasis técnico",
+      "value": "Sistemas de ML, flujos de datos, comunicación científica, IA aplicada"
     },
     "metric3": {
-      "label": "Primary sectors",
-      "value": "Agritech, biotech, life sciences, applied research teams"
+      "label": "Sectores principales",
+      "value": "Agritech, biotecnología, ciencias de la vida, equipos de investigación aplicada"
     }
   },
   "contact": {
-    "h2": "Ready to turn your lab, trial, or pipeline data into a decision?",
-    "lead": "Whether you're an academic lab, a pharma R&D group, or an agritech company, AidBio engages through well-scoped projects that move from messy data to a decision you can act on."
+    "h2": "¿Listo para convertir los datos de tu laboratorio, ensayo o pipeline en una decisión?",
+    "lead": "Ya seas un laboratorio académico, un equipo de I+D farmacéutico o una empresa de agritech, AidBio trabaja a través de proyectos de alcance bien definido que llevan de datos desordenados a una decisión sobre la que puedes actuar."
   },
   "footer": {
-    "blurb": "AI & data science for life sciences, pharma and agritech. Where biology, intelligence, and mathematics meet the spectrum.",
-    "exploreHeading": "Explore",
-    "connectHeading": "Connect",
-    "founderStory": "Founder story",
-    "contact": "Contact",
-    "copyright": "© 2026 AidBio. Built for the future of scientific decision-making.",
-    "tagline": "AI & Data Science for Life Sciences, Pharma and Agritech"
+    "blurb": "IA y ciencia de datos para ciencias de la vida, farmacéutica y agritech. Donde la biología, la inteligencia y las matemáticas se encuentran con el espectro.",
+    "exploreHeading": "Explorar",
+    "connectHeading": "Conectar",
+    "founderStory": "Historia del fundador",
+    "contact": "Contacto",
+    "copyright": "© 2026 AidBio. Construido para el futuro de la toma de decisiones científicas.",
+    "tagline": "IA y Ciencia de Datos para Ciencias de la Vida, Farmacéutica y Agritech"
   }
 }

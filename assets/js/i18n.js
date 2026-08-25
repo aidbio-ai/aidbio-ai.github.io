@@ -1,8 +1,9 @@
 /*
  * AidBio client-side i18n: swaps [data-i18n] text content and [data-i18n-attr]
- * attributes from assets/i18n/<lang>.json. English text stays hard-coded in the
- * DOM (en.json is the canonical key list, used only as a fallback/dev reference)
- * so English visitors never wait on a fetch.
+ * attributes from assets/i18n/<lang>.json. All three languages, including
+ * English, go through the same fetch+apply path — switching away and back to
+ * English has to restore the DOM from en.json rather than assume the original
+ * hard-coded text is still there, since a prior switch may have overwritten it.
  */
 (function () {
   "use strict";
@@ -83,15 +84,6 @@
 
   function setLanguage(lang) {
     if (SUPPORTED.indexOf(lang) === -1) lang = DEFAULT_LANG;
-
-    if (lang === DEFAULT_LANG) {
-      currentLang = lang;
-      currentDict = null;
-      document.documentElement.setAttribute("lang", lang);
-      syncSwitchers(lang);
-      localStorage.setItem(LANG_KEY, lang);
-      return Promise.resolve();
-    }
 
     return loadDictionary(lang)
       .then(function (dict) {
