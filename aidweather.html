@@ -7,6 +7,22 @@
   <title>AidWeather | Agroclimatic &amp; Solar Data from NASA POWER — AidBio</title>
   <meta name="description"
     content="AidWeather is an open-source Python library and CLI that turns NASA POWER weather and solar data into clean, cached, analysis-ready tables — for a point, a transect, or a whole region." />
+  <link rel="canonical" href="https://aidbio.org/aidweather" />
+
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="AidBio" />
+  <meta property="og:url" content="https://aidbio.org/aidweather" />
+  <meta property="og:title" content="AidWeather | Agroclimatic &amp; Solar Data from NASA POWER" />
+  <meta property="og:description"
+    content="Weather data infrastructure for agricultural science: reliable NASA POWER weather and solar data for Python, CLI workflows, and scientific applications." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/matiollipt/aidweather/main/docs/img/aidweather-logo-transparent.png" />
+
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="AidWeather | Agroclimatic &amp; Solar Data from NASA POWER" />
+  <meta name="twitter:description"
+    content="Weather data infrastructure for agricultural science: reliable NASA POWER weather and solar data for Python, CLI workflows, and scientific applications." />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/matiollipt/aidweather/main/docs/img/aidweather-logo-transparent.png" />
+
   <meta name="theme-color" content="#FBFCFE" />
   <link rel="icon" type="image/png" href="assets/favicon.png" />
   <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
@@ -1119,8 +1135,8 @@
         </p>
 
         <div class="hero-actions">
-          <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-primary">View on GitHub ↗</a>
-          <a href="#install" class="btn btn-secondary">How to install</a>
+          <a href="#install" class="btn btn-primary">Install AidWeather</a>
+          <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub ↗</a>
         </div>
       </div>
 
@@ -1337,24 +1353,46 @@ aidweather cache info</pre>
           <span class="eyebrow warm">Installation</span>
           <h2 class="heading-md">One command to get going.</h2>
           <p class="text-lead">
-            Pick the line for your platform. The <span class="mono">uv tool</span> route works everywhere Python does.
+            AidWeather is published on <a href="https://pypi.org/project/aidweather/" target="_blank" rel="noopener">PyPI</a>.
+            Use <span class="mono">pip</span> for the Python library, or <span class="mono">uv tool</span> to get the CLI
+            as an isolated tool.
           </p>
         </div>
 
         <div class="code-grid single-code-grid" style="margin-top: var(--space-5);">
           <div class="code-block reveal">
-            <div class="code-head"><span class="dot" style="background: var(--spectrum-emerald);"></span> Unix / macOS</div>
-<pre><span class="c-com"># install script</span>
+            <div class="code-head"><span class="dot" style="background: var(--spectrum-emerald);"></span> Python (pip)</div>
+<pre><span class="c-com"># install the library</span>
+pip install aidweather</pre>
+          </div>
+
+          <div class="code-block reveal delay-1">
+            <div class="code-head"><span class="dot" style="background: var(--spectrum-teal);"></span> CLI (uv tool)</div>
+<pre><span class="c-com"># install the CLI as an isolated tool</span>
+uv tool install aidweather</pre>
+          </div>
+        </div>
+
+        <div class="reveal delay-1" style="margin-top: var(--space-5);">
+          <p class="text-lead" style="margin: 0;">
+            From source / development install:
+          </p>
+        </div>
+
+        <div class="code-grid single-code-grid" style="margin-top: var(--space-4);">
+          <div class="code-block reveal">
+            <div class="code-head"><span class="dot" style="background: var(--spectrum-violet);"></span> Unix / macOS</div>
+<pre><span class="c-com"># install script (clones from GitHub, adds dev tooling)</span>
 <span class="c-fn">curl</span> -fsSL https://raw.githubusercontent.com/\
 matiollipt/aidweather/main/install.sh | bash
 
-<span class="c-com"># …or via uv tool (any platform)</span>
+<span class="c-com"># …or latest unreleased main via uv tool</span>
 uv tool install \
   git+https://github.com/matiollipt/aidweather.git</pre>
           </div>
 
           <div class="code-block reveal delay-1">
-            <div class="code-head"><span class="dot" style="background: var(--spectrum-teal);"></span> Windows · PowerShell</div>
+            <div class="code-head"><span class="dot" style="background: var(--spectrum-magenta);"></span> Windows · PowerShell</div>
 <pre>&amp; ([scriptblock]::<span class="c-fn">Create</span>((irm https://raw\
 .githubusercontent.com/matiollipt/aidweather/\
 main/install.ps1))) <span class="c-flag">-Yes</span></pre>
@@ -1482,7 +1520,8 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
             the NASA Earthdata Data Use and Attribution Policy.
           </p>
           <div class="btn-row">
-            <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-primary">Explore the repository ↗</a>
+            <a href="https://pypi.org/project/aidweather/" target="_blank" rel="noopener" class="btn btn-primary">View on PyPI ↗</a>
+            <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary">Explore the repository ↗</a>
             <a href="https://power.larc.nasa.gov/" target="_blank" rel="noopener" class="btn btn-secondary">NASA POWER project ↗</a>
           </div>
         </div>
@@ -1506,7 +1545,9 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
           <a href="#quickstart">Quick start</a>
           <a href="#install">Install</a>
           <a href="#parameters">Parameters</a>
+          <a href="https://pypi.org/project/aidweather/" target="_blank" rel="noopener">PyPI ↗</a>
           <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener">GitHub ↗</a>
+          <a href="https://github.com/matiollipt/aidweather/issues" target="_blank" rel="noopener">Issues ↗</a>
         </div>
         <div class="footer-col">
           <span class="footer-col-h">AidBio</span>
