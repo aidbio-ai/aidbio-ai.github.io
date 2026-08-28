@@ -347,6 +347,14 @@
       color: var(--accent);
     }
 
+    .headline-nature {
+      color: var(--spectrum-indigo);
+    }
+
+    .headline-decoded {
+      color: var(--spectrum-coral);
+    }
+
     .text-lead {
       max-width: 62ch;
       font-size: 17px;
@@ -766,18 +774,23 @@
     }
 
     .hero-links {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
+      display: flex;
       gap: var(--space-3);
       margin-top: var(--space-6);
       padding-top: var(--space-5);
+      padding-bottom: var(--space-1);
       border-top: 1px solid var(--border-subtle);
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      scrollbar-width: thin;
       position: relative;
       z-index: 1;
     }
 
     .hero-link-card {
       display: flex;
+      flex: 0 0 auto;
+      width: 220px;
       flex-direction: column;
       gap: var(--space-1);
       padding: var(--space-4);
@@ -787,6 +800,7 @@
       border-top: 3px solid var(--mini-accent, var(--accent));
       box-shadow: var(--shadow-sm);
       text-decoration: none;
+      scroll-snap-align: start;
       transition: transform 0.2s var(--ease-out), box-shadow 0.2s var(--ease-out);
     }
 
@@ -794,6 +808,16 @@
     .hero-link-card:focus-visible {
       transform: translateY(-3px);
       box-shadow: var(--shadow-md);
+    }
+
+    .hero-link-thumb {
+      width: 100%;
+      height: 84px;
+      object-fit: cover;
+      object-position: top;
+      border-radius: var(--radius-sm);
+      margin-bottom: var(--space-1);
+      border: 1px solid var(--border-subtle);
     }
 
     .hero-link-label {
@@ -1419,8 +1443,11 @@
       }
 
       .hero-links {
-        grid-template-columns: 1fr;
         gap: var(--space-3);
+      }
+
+      .hero-link-card {
+        width: 200px;
       }
 
       .bento-grid {
@@ -1567,13 +1594,11 @@
         <div class="hero-copy reveal">
           <span class="eyebrow" data-i18n="hero.eyebrow">Data intelligence for life sciences, pharma and
             agriculture</span>
-          <h1 class="heading-lg"><span data-i18n="hero.h1_lead">Transforming biological complexity into</span> <span
-              class="accent-italic" data-i18n="hero.h1_accent">decisive action.</span></h1>
+          <h1 class="heading-lg"><span class="headline-nature" data-i18n="hero.h1_lead">Nature,</span> <span
+              class="headline-decoded" data-i18n="hero.h1_accent">Decoded.</span></h1>
           <p class="hero-desc" data-i18n="hero.desc">
-            Whether you're running a university lab, interpreting omics data for a pharma research team, or reading
-            signal out of a season's field trials, AidBio builds the data pipelines, predictive models, and
-            AI-assisted workflows that turn raw experimental and environmental data into results you can stand
-            behind.
+            AidBio uses modern data analytics and modeling to help research teams in universities, biotech, and
+            agritech make informed decisions.
           </p>
 
           <div class="hero-actions">
@@ -1598,22 +1623,36 @@
       </div>
 
       <div class="hero-links reveal delay-2">
-        <a href="#projects" class="hero-link-card" style="--mini-accent: var(--spectrum-indigo);">
-          <span class="hero-link-label" data-i18n="hero.links.projects.label">Open now</span>
-          <span class="hero-link-title">AidWeather, Aid2GO, AidViz</span>
-          <span class="hero-link-note"><span data-i18n="hero.links.projects.note">Explore the projects</span>
+        <a href="aidweather.html" class="hero-link-card" style="--mini-accent: var(--spectrum-indigo);">
+          <span class="hero-link-label" data-i18n="hero.links.aidweather.label">Open-source library</span>
+          <span class="hero-link-title">AidWeather</span>
+          <span class="hero-link-note"><span data-i18n="hero.links.aidweather.note">Explore the project</span>
             <span aria-hidden="true">→</span></span>
         </a>
-        <a href="portfolio/index.html" class="hero-link-card" style="--mini-accent: var(--spectrum-coral);">
-          <span class="hero-link-label" data-i18n="hero.links.portfolio.label">Portfolio</span>
-          <span class="hero-link-title" data-i18n="hero.links.portfolio.title">From crop biotechnology to scientific
-            AI</span>
-          <span class="hero-link-note"><span data-i18n="hero.links.portfolio.note">Read the founder story</span>
+        <div class="hero-link-card" style="--mini-accent: var(--spectrum-violet);">
+          <img src="assets/aidweather-report-example.webp" alt="Sample AidBio AI Weather Intelligence report dashboard"
+            class="hero-link-thumb" loading="lazy" />
+          <span class="hero-link-label" data-i18n="hero.links.report.label">Coming soon</span>
+          <span class="hero-link-title">AidWeather-Report</span>
+          <span class="hero-link-note" data-i18n="hero.links.report.note">Example report output</span>
+        </div>
+        <a href="https://github.com/matiollipt/aid2go" target="_blank" rel="noopener" class="hero-link-card"
+          style="--mini-accent: var(--spectrum-coral);">
+          <span class="hero-link-label" data-i18n="hero.links.aid2go.label">Open-source library</span>
+          <span class="hero-link-title">Aid2GO</span>
+          <span class="hero-link-note"><span data-i18n="hero.links.aid2go.note">Explore the project</span>
+            <span aria-hidden="true">→</span></span>
+        </a>
+        <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13109786/" target="_blank" rel="noopener"
+          class="hero-link-card" style="--mini-accent: var(--spectrum-teal);">
+          <span class="hero-link-label" data-i18n="hero.links.gppipred.label">Publication · 2026</span>
+          <span class="hero-link-title">gPPIpred</span>
+          <span class="hero-link-note"><span data-i18n="hero.links.gppipred.note">Read the paper</span>
             <span aria-hidden="true">→</span></span>
         </a>
         <a href="portfolio/pages/01-mechanism.html" class="hero-link-card"
           style="--mini-accent: var(--spectrum-emerald);">
-          <span class="hero-link-label">Current Biology</span>
+          <span class="hero-link-label">Current Biology · 2018</span>
           <span class="hero-link-title" data-i18n="hero.links.paper.title">Circadian entrainment by bZIP63</span>
           <span class="hero-link-note"><span data-i18n="hero.links.paper.note">Read the paper</span>
             <span aria-hidden="true">→</span></span>

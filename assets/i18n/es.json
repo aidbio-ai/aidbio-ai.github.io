@@ -19,23 +19,30 @@
   },
   "hero": {
     "eyebrow": "Inteligencia de datos para ciencias de la vida, farmacéutica y agricultura",
-    "h1_lead": "Transformando la complejidad biológica en",
-    "h1_accent": "acción decisiva.",
-    "desc": "Ya sea que dirijas un laboratorio universitario, interpretes datos ómicos para un equipo de investigación farmacéutica, o busques la señal de toda una temporada de ensayos de campo, AidBio construye los pipelines de datos, modelos predictivos y flujos de trabajo asistidos por IA que convierten datos experimentales y ambientales en bruto en resultados en los que puedes confiar.",
+    "h1_lead": "Naturaleza,",
+    "h1_accent": "Decodificada.",
+    "desc": "AidBio utiliza análisis de datos moderno y modelado para ayudar a los equipos de investigación en universidades, biotecnología y agritech a tomar decisiones informadas.",
     "ctaPrimary": "Habla con AidBio",
     "ctaSecondary": "Explorar capacidades",
     "proof1": "Flujos de IA fundamentados en datos reales",
     "proof2": "Fluidez en datos ómicos, agronómicos y de interacción proteica",
     "proof3": "Entrega reproducible y lista para producción",
     "links": {
-      "projects": {
-        "label": "Disponible ahora",
-        "note": "Explorar los proyectos"
+      "aidweather": {
+        "label": "Biblioteca de código abierto",
+        "note": "Explorar el proyecto"
       },
-      "portfolio": {
-        "label": "Portafolio",
-        "title": "De la biotecnología agrícola a la IA científica",
-        "note": "Leer la historia del fundador"
+      "report": {
+        "label": "Próximamente",
+        "note": "Ejemplo de informe"
+      },
+      "aid2go": {
+        "label": "Biblioteca de código abierto",
+        "note": "Explorar el proyecto"
+      },
+      "gppipred": {
+        "label": "Publicación · 2026",
+        "note": "Leer el artículo"
       },
       "paper": {
         "title": "Sincronización circadiana por bZIP63",

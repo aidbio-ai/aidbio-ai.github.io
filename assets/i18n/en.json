@@ -19,23 +19,30 @@
   },
   "hero": {
     "eyebrow": "Data intelligence for life sciences, pharma and agriculture",
-    "h1_lead": "Transforming biological complexity into",
-    "h1_accent": "decisive action.",
-    "desc": "Whether you're running a university lab, interpreting omics data for a pharma research team, or reading signal out of a season's field trials, AidBio builds the data pipelines, predictive models, and AI-assisted workflows that turn raw experimental and environmental data into results you can stand behind.",
+    "h1_lead": "Nature,",
+    "h1_accent": "Decoded.",
+    "desc": "AidBio uses modern data analytics and modeling to help research teams in universities, biotech, and agritech make informed decisions.",
     "ctaPrimary": "Engage AidBio",
     "ctaSecondary": "Explore capabilities",
     "proof1": "AI workflows grounded in real data",
     "proof2": "Fluent in omics, agronomy and protein-interaction data",
     "proof3": "Reproducible, production-ready delivery",
     "links": {
-      "projects": {
-        "label": "Open now",
-        "note": "Explore the projects"
+      "aidweather": {
+        "label": "Open-source library",
+        "note": "Explore the project"
       },
-      "portfolio": {
-        "label": "Portfolio",
-        "title": "From crop biotechnology to scientific AI",
-        "note": "Read the founder story"
+      "report": {
+        "label": "Coming soon",
+        "note": "Example report output"
+      },
+      "aid2go": {
+        "label": "Open-source library",
+        "note": "Explore the project"
+      },
+      "gppipred": {
+        "label": "Publication · 2026",
+        "note": "Read the paper"
       },
       "paper": {
         "title": "Circadian entrainment by bZIP63",
