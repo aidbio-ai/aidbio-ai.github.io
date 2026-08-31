@@ -1,6 +1,6 @@
 /*
  * AidBio client-side i18n: swaps [data-i18n] text content and [data-i18n-attr]
- * attributes from assets/i18n/<lang>.json. All three languages, including
+ * attributes from assets/i18n/<lang>.json. Both supported languages, including
  * English, go through the same fetch+apply path — switching away and back to
  * English has to restore the DOM from en.json rather than assume the original
  * hard-coded text is still there, since a prior switch may have overwritten it.
@@ -9,7 +9,7 @@
   "use strict";
 
   var LANG_KEY = "aidbio-lang-preference";
-  var SUPPORTED = ["en", "pt", "es"];
+  var SUPPORTED = ["en", "pt"];
   var DEFAULT_LANG = "en";
 
   // Small set of strings that have no DOM default to fall back to, because
