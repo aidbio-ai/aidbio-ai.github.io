@@ -1,0 +1,9 @@
+/* AidBio webfonts — loaded via Google Fonts CDN.
+   SUBSTITUTION NOTE: no brand font files were provided, so these are Google Fonts
+   chosen to match the "modern, rounded, approachable" direction, updated
+   2026-07. Swap the @import for self-hosted @font-face rules once licensed brand
+   files are available.
+   - Baloo 2           -> rounded modern display (headlines, hero, quotes)
+   - Plus Jakarta Sans -> modern geometric-humanist sans (body, UI)
+   - IBM Plex Mono    -> data / tabular / code accents */
+@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
