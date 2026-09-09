@@ -1,79 +1,17 @@
-@import url('https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap');
+/* Design-system tokens (brand/spectrum/ink/surface/text/border/accent/
+   font/space/radius/shadow/motion) — vendored via scripts/sync-design-system.sh */
+@import url('../../assets/ds/styles.css');
 
 :root{
-  color-scheme: light dark;
-
-  --brand-blue:#2E4BDF;
-  --brand-orange:#E8772E;
-  --brand-ink:#28303F;
-  --brand-cloud:#F4F6FA;
-  --brand-blue-press:#2138C2;
-  --brand-blue-tint:#EAEDFC;
-  --brand-orange-press:#CF6320;
-  --brand-orange-tint:#FCEEE2;
-
-  --spectrum-indigo:#2E4BDF; --spectrum-violet:#6E47D4; --spectrum-magenta:#C13E9D; --spectrum-coral:#E8772E;
-  --spectrum-amber:#EFA63A; --spectrum-lime:#8DB23C; --spectrum-emerald:#1FA07C; --spectrum-teal:#1F95C4;
-
-  --ink-950:#12161F; --ink-900:#1B2230; --ink-800:#28303F; --ink-700:#3A4355; --ink-500:#6B7588;
-  --ink-400:#8E97A8; --ink-300:#B4BCC9; --ink-200:#D6DBE3; --ink-100:#E9ECF1; --ink-50:#F4F6FA;
-
-  --surface-base:#FBFCFE; --surface-card:#FFFFFF; --surface-sunken:#F4F6FA;
-  --surface-nav: rgba(251, 252, 254, 0.86);
-
-  --text-strong: var(--ink-900); --text-body: var(--ink-700); --text-muted: var(--ink-500); --text-faint: var(--ink-400);
-  --text-on-accent:#FFFFFF;
-
-  --border-subtle: var(--ink-100); --border-default: var(--ink-200); --border-strong: var(--ink-300);
-
-  --accent: var(--brand-blue); --accent-press: var(--brand-blue-press); --accent-tint: var(--brand-blue-tint);
-  --accent-warm: var(--brand-orange); --accent-warm-press: var(--brand-orange-press); --accent-warm-tint: var(--brand-orange-tint);
-
-  --focus-ring: 0 0 0 3px rgba(46, 75, 223, 0.32);
-
-  --font-display: 'Baloo 2', 'Segoe UI Rounded', ui-rounded, system-ui, sans-serif;
-  --font-ui: 'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
-  --font-data: 'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
-
-  --space-1:4px; --space-2:8px; --space-3:13px; --space-4:21px; --space-5:34px; --space-6:55px; --space-7:89px; --space-8:144px;
-
-  --radius-sm:8px; --radius-md:12px; --radius-lg:18px; --radius-xl:28px; --radius-full:999px;
-
-  --shadow-sm: 0 1px 2px rgba(40,48,63,.06), 0 1px 3px rgba(40,48,63,.08);
-  --shadow-md: 0 2px 4px rgba(40,48,63,.05), 0 6px 16px rgba(40,48,63,.09);
-  --shadow-lg: 0 4px 8px rgba(40,48,63,.06), 0 14px 36px rgba(40,48,63,.12);
-  --shadow-xl: 0 8px 16px rgba(40,48,63,.08), 0 28px 64px rgba(40,48,63,.16);
-  --glow-blue: 0 8px 28px rgba(46,75,223,.28);
-  --glow-orange: 0 8px 28px rgba(232,119,46,.28);
-
+  /* Site-specific tokens not part of the design system */
   --gradient-spectrum: linear-gradient(90deg,#2E4BDF,#6E47D4,#C13E9D,#E8772E,#EFA63A,#8DB23C,#1FA07C,#1F95C4);
-
-  --ease-out: cubic-bezier(0.22,0.8,0.28,1);
-  --dur-fast: 150ms;
-
   --nav-h: 60px;
+  /* Nav backdrop — not a DS token (translucency tuned per page) */
+  --surface-nav: rgba(251, 252, 254, 0.86);
 }
 
 html[data-theme="dark"]{
-  --surface-base:#0E1219; --surface-card:#181E29; --surface-sunken:#12161F;
   --surface-nav: rgba(14, 18, 25, 0.86);
-
-  --text-strong:#F4F6FA; --text-body:#C4CCD9; --text-muted:#8E97A8; --text-faint:#6B7588;
-
-  --border-subtle:#232B39; --border-default:#2C3545; --border-strong:#3A4557;
-
-  --accent:#5C74EC; --accent-press:#485FE0; --accent-tint:#1C2540;
-  --accent-warm:#F08A45; --accent-warm-tint:#34261C;
-
-  --focus-ring: 0 0 0 3px rgba(92,116,236,.40);
-
-  --spectrum-indigo:#5C74EC; --spectrum-violet:#8E6CEA; --spectrum-magenta:#DB64B6; --spectrum-coral:#F08A45;
-  --spectrum-amber:#F2B658; --spectrum-lime:#A6C957; --spectrum-emerald:#34BC95; --spectrum-teal:#41AEDB;
-
-  --shadow-sm: 0 1px 2px rgba(0,0,0,.32), 0 1px 3px rgba(0,0,0,.36);
-  --shadow-md: 0 2px 6px rgba(0,0,0,.40), 0 8px 20px rgba(0,0,0,.44);
-  --shadow-lg: 0 6px 14px rgba(0,0,0,.44), 0 18px 44px rgba(0,0,0,.52);
-  --shadow-xl: 0 10px 22px rgba(0,0,0,.48), 0 32px 72px rgba(0,0,0,.58);
 }
 
 *{box-sizing:border-box}

@@ -1,0 +1,16 @@
+/* ============================================================
+   AidBio · RADII & BORDERS
+   Circles are the brand's signature — radii stay generous and round.
+   ============================================================ */
+:root {
+  --radius-xs:   4px;
+  --radius-sm:   8px;
+  --radius-md:   12px;
+  --radius-lg:   18px;
+  --radius-xl:   28px;
+  --radius-2xl:  40px;
+  --radius-full: 999px;
+
+  --border-width: 1px;
+  --border-width-strong: 1.5px;
+}
