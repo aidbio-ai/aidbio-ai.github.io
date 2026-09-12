@@ -30,7 +30,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link
-    href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&family=Hanken+Grotesk:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
     rel="stylesheet" />
 
   <script>
@@ -84,17 +84,13 @@
 
   <style>
     /* ============================================================
-       Site-specific tokens (not part of the design system — page
-       font overrides, extra gradients, layout constants, theme-
-       swapped imagery). Brand/spectrum/spacing/shadow/motion tokens
-       come from assets/ds/styles.css.
+       Site-specific tokens (not part of the design system — extra
+       gradients, layout constants, theme-swapped imagery). Brand/
+       type/spectrum/spacing/shadow/motion tokens come from
+       assets/ds/styles.css.
        ============================================================ */
     :root {
       color-scheme: light dark;
-
-      /* This page uses a different font pairing than the DS default */
-      --font-display: 'Newsreader', 'Iowan Old Style', Georgia, serif;
-      --font-ui: 'Hanken Grotesk', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
 
       /* Extra gradients not in the DS token set */
       --gradient-sky: linear-gradient(135deg, #1F95C4 0%, #2E4BDF 55%, #6E47D4 100%);
@@ -299,6 +295,9 @@
       color: var(--text-strong);
       line-height: 1;
     }
+
+    .brand-aid { color: var(--brand-blue); }
+    .brand-bio { color: var(--brand-orange); }
 
     .nav-actions {
       display: flex;
@@ -750,6 +749,7 @@
 
     .group-met { background: rgba(46, 75, 223, 0.12); color: var(--spectrum-indigo); }
     .group-sol { background: rgba(232, 119, 46, 0.14); color: var(--spectrum-coral); }
+    .group-soil { background: rgba(30, 204, 114, 0.14); color: var(--spectrum-emerald); }
 
     /* Provenance callout */
     .callout {
@@ -879,7 +879,7 @@
     }
 
     .footer-brand img { height: 26px; width: auto; }
-    .footer-brand .brand-word { color: #fff; font-size: 20px; }
+    .footer-brand .brand-word { font-size: 20px; }
 
     .footer-blurb {
       margin: 0;
@@ -974,7 +974,7 @@
       <a href="index.html" class="brand" aria-label="AidBio home">
         <img src="assets/aidbio-mark-light.webp" alt="" class="brand-mark mark-light" width="63" height="30" />
         <img src="assets/aidbio-mark-dark.webp" alt="" class="brand-mark mark-dark" width="62" height="30" />
-        <span class="brand-word">AidBio</span>
+        <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
       </a>
 
       <div class="nav-actions">
@@ -1036,8 +1036,8 @@
 
       <div class="hero-stats reveal delay-2">
         <div>
-          <span class="stat-val">15</span>
-          <span class="stat-label">Weather &amp; solar parameters, unit-validated</span>
+          <span class="stat-val">18</span>
+          <span class="stat-label">Weather, solar &amp; soil parameters, unit-validated</span>
         </div>
         <div>
           <span class="stat-val">3 shapes</span>
@@ -1063,9 +1063,9 @@
           <span class="eyebrow">What it does</span>
           <h2 class="heading-md">The awkward parts of NASA POWER, handled for you.</h2>
           <p class="text-lead">
-            NASA POWER is a wonderful free dataset, but talking to it directly means building request URLs, babysitting
-            timeouts, checking payload shapes, and reconciling units and grids. AidWeather quietly takes care of all of
-            that, so what you get back is data you can actually start analyzing.
+            NASA POWER is a free public dataset, but talking to it directly means building request URLs, handling
+            timeouts and retries, checking payload shapes, and reconciling units and grids yourself. AidWeather does
+            that work for you, so what you get back is a table you can start analyzing right away.
           </p>
         </div>
 
@@ -1077,8 +1077,8 @@
                 <path d="M8 18h9" />
               </svg>
             </div>
-            <h3>Seamless NASA POWER access</h3>
-            <p>Acts as a clean bridge to NASA POWER — hiding request construction, timeout handling, and payload checks behind a couple of simple calls.</p>
+            <h3>Direct NASA POWER access</h3>
+            <p>Builds the request, handles timeouts and retries, and checks the response shape — so you call one method instead of writing that logic yourself.</p>
           </article>
 
           <article class="feature-card reveal delay-1">
@@ -1112,7 +1112,7 @@
               </svg>
             </div>
             <h3>Python API + full CLI</h3>
-            <p>Two ways in: an intuitive Python API that fits data-science workflows, and a full command-line tool for quick, scriptable extractions.</p>
+            <p>Two ways in: a Python API for notebooks and scripts, and a command-line tool for quick, scriptable extractions.</p>
           </article>
 
           <article class="feature-card reveal delay-1">
@@ -1124,7 +1124,7 @@
               </svg>
             </div>
             <h3>Clear errors &amp; logging</h3>
-            <p>Comprehensive activity logging and intelligent error catching give you readable insight into what a query did — instead of a raw stack trace.</p>
+            <p>Logs what each query did, and raises specific error types with a plain-language message — instead of a raw stack trace.</p>
           </article>
 
           <article class="feature-card reveal delay-2">
@@ -1134,8 +1134,8 @@
                 <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" />
               </svg>
             </div>
-            <h3>Weather &amp; solar together</h3>
-            <p>Temperature, humidity, wind, precipitation, pressure, and solar irradiance / PAR — the meteorological and energy variables agritech work usually needs, side by side.</p>
+            <h3>Weather, solar &amp; soil together</h3>
+            <p>Temperature, humidity, wind, precipitation, pressure, solar irradiance / PAR, and soil wetness (surface, root-zone, profile) — the meteorological, energy, and soil-moisture variables agritech work usually needs, side by side.</p>
           </article>
         </div>
       </div>
@@ -1300,10 +1300,11 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
       <div class="container">
         <div class="reveal">
           <span class="eyebrow">Parameter catalogue</span>
-          <h2 class="heading-md">15 core parameters, with the grid facts built in.</h2>
+          <h2 class="heading-md">18 core parameters, with the grid facts built in.</h2>
           <p class="text-lead">
             Each parameter ships with metadata, unit validation, and its native NASA source-grid resolution — so you
-            always know what a value means and where it came from.
+            always know what a value means and where it came from. Weather, solar, and soil-moisture parameters are
+            all daily; the three soil parameters (GWETTOP, GWETROOT, GWETPROF) aren't available at hourly resolution.
           </p>
         </div>
 
@@ -1336,6 +1337,9 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
                 <tr><td><code>WS10M_MAX</code></td><td>Maximum wind speed at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>m/s</td></tr>
                 <tr><td><code>WD10M</code></td><td>Wind direction at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>degrees</td></tr>
                 <tr><td><code>PS</code></td><td>Surface pressure</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>kPa</td></tr>
+                <tr><td><code>GWETTOP</code></td><td>Surface soil wetness</td><td><span class="group-tag group-soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
+                <tr><td><code>GWETROOT</code></td><td>Root-zone soil wetness</td><td><span class="group-tag group-soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
+                <tr><td><code>GWETPROF</code></td><td>Profile soil moisture</td><td><span class="group-tag group-soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
               </tbody>
             </table>
           </div>
@@ -1429,7 +1433,7 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
         <div>
           <div class="footer-brand">
             <img src="assets/aidbio-mark-dark.webp" alt="" aria-hidden="true" />
-            <span class="brand-word">AidBio</span>
+            <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
           </div>
           <p class="footer-blurb">AI &amp; data science for agritech and life sciences. AidWeather is one of AidBio's
             open tools for turning environmental data into decisions.</p>

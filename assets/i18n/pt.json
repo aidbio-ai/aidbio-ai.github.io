@@ -12,7 +12,8 @@
     "founderStory": "Portfólio: a trajetória do fundador →",
     "cta": "Iniciar um projeto",
     "openMenu": "Abrir menu",
-    "closeMenu": "Fechar menu"
+    "closeMenu": "Fechar menu",
+    "blog": "Blog"
   },
   "mobile": {
     "founderStory": "↳ Portfólio: a trajetória do fundador"
@@ -21,7 +22,7 @@
     "eyebrow": "Inteligência de dados para ciências da vida, farmacêutica e agricultura",
     "h1_lead": "Natureza,",
     "h1_accent": "Decodificada.",
-    "desc": "A AidBio usa análise de dados moderna e modelagem para ajudar equipes de pesquisa em universidades, biotecnologia e agritech a tomar decisões informadas.",
+    "desc": "A AidBio transforma dados de pesquisa e de campo em decisões — para laboratórios universitários, equipes de biotecnologia e operações de agritech.",
     "ctaPrimary": "Fale com a AidBio",
     "ctaSecondary": "Explorar capacidades",
     "proof1": "Workflows de IA fundamentados em dados reais",
@@ -31,10 +32,6 @@
       "aidweather": {
         "label": "Biblioteca de código aberto",
         "note": "Explorar o projeto"
-      },
-      "report": {
-        "label": "Em breve",
-        "note": "Exemplo de relatório"
       },
       "aid2go": {
         "label": "Biblioteca de código aberto",
@@ -75,49 +72,55 @@
   },
   "solutions": {
     "eyebrow": "Capacidades principais",
-    "h2": "Inteligência direcionada para domínios tecnicamente exigentes.",
+    "h2_lead": "",
+    "h2_accent": "Inteligência",
+    "h2_tail": "direcionada para domínios tecnicamente exigentes.",
     "lead": "A AidBio une conhecimento biológico profundo à prática moderna de IA e engenharia de dados — produzindo sistemas que se sustentam diante de um pesquisador principal, um revisor de pares ou um agrônomo que já viu caixas-pretas demais.",
     "card1": {
       "title": "Machine Learning e Modelagem Preditiva",
-      "body": "Aprendizado supervisionado, seleção de modelos, validação e interpretação para contextos de campo, laboratório e translacionais. Construído com forte atenção à qualidade dos dados, avaliação honesta e usabilidade posterior.",
+      "body": "Aprendizado supervisionado, seleção e validação de modelos para dados de campo, laboratório e translacionais — construído para avaliação honesta, não só uma métrica de acurácia.",
       "tag3": "Engenharia de atributos",
       "tag4": "Interpretação de modelos"
     },
     "card2": {
       "title": "Workflows de IA Agêntica",
-      "body": "Assistentes com consciência de domínio, fluxos estruturados de relatórios, pipelines de recuperação e automação leve que potencializam equipes científicas pequenas sem criar excesso de infraestrutura.",
+      "body": "Assistentes com conhecimento de domínio e automação leve — relatórios, busca de informação, tarefas rotineiras — no tamanho certo para uma equipe científica pequena, não uma equipe de infraestrutura.",
       "tag3": "Uso de ferramentas"
     },
     "card3": {
       "title": "Analytics Agrícola e Climático",
-      "body": "Análises geoespaciais e ligadas à cultura para ensaios de campo, investigação orientada à produtividade, extração de sinal ambiental e modelagem sensível ao clima — construídas para a realidade de safras, sítios e sensores imperfeitos."
+      "body": "Análises geoespaciais e sensíveis ao clima para ensaios de campo e questões de produtividade — pensadas para safras reais, sítios reais e sensores imperfeitos."
     },
     "card4": {
       "title": "Ômica, Bioinformática e Sistemas de Dados Científicos",
-      "body": "Suporte para interpretação multi-ômica, workflows orientados a biomarcadores, consolidação de dados experimentais e arquitetura de análise reprodutível — para laboratórios acadêmicos construindo rumo à publicação e equipes farmacêuticas construindo rumo a uma decisão.",
+      "body": "Suporte para dados multi-ômicos — genômica, proteômica e conjuntos de dados biológicos similares — além de análises reprodutíveis construídas rumo a uma publicação ou uma decisão.",
       "tag4": "Bioinformática"
     }
   },
   "projects": {
     "eyebrow": "Projetos e ferramentas abertas",
-    "h2": "Coisas que construímos em código aberto.",
-    "lead": "Além do trabalho com clientes, a AidBio disponibiliza ferramentas open-source práticas para workflows de dados em agritech e ciências da vida. Disponíveis para testar agora:",
+    "h2_lead": "Coisas que construímos em código",
+    "h2_accent": "aberto",
+    "h2_tail": ".",
+    "lead": "Além do trabalho com clientes, a AidBio disponibiliza ferramentas open-source para dados de agritech e ciências da vida. Disponíveis para testar agora:",
     "kindLabel": "Biblioteca open-source",
-    "githubCta": "GitHub ↗",
+    "githubCta": "Detalhes técnicos ↗",
     "aidweather": {
-      "body": "Uma biblioteca Python e CLI que transforma dados de clima e radiação solar da NASA POWER em tabelas limpas, em cache e prontas para análise — para um único ponto, um transecto ou uma região inteira.",
+      "body": "Transforma dados de clima e radiação solar da NASA POWER em tabelas limpas e prontas para uso — para um ponto, uma linha no mapa ou uma região inteira.",
       "tag3": "Agroclimático",
       "tag4": "Solar",
       "cta": "Explorar o AidWeather"
     },
     "aid2go": {
-      "body": "Um workflow de graph learning para predição de função de proteínas que conecta proteínas, interações proteína-proteína, a hierarquia da Gene Ontology e anotações GO com suporte experimental em um único grafo heterogêneo, usando variantes de GraphSAGE e GAT sobre embeddings de sequência do ProtBERT."
+      "body": "Prevê a função de proteínas a partir de um único grafo que conecta proteínas, suas interações e termos da Gene Ontology — usando redes neurais de grafos sobre embeddings de modelos de linguagem de proteínas.",
+      "stat": "Protótipo de pesquisa"
     },
     "aidviz": {
-      "body": "Um toolkit apenas de visualização que intencionalmente não busca dados nem treina modelos: figuras estáticas para publicação, dashboards interativos e gráficos narrativos sobre clima, construídos a partir de DataFrames limpos, mantendo separadas as responsabilidades de proveniência dos dados e apresentação.",
+      "body": "Figuras para publicação e dashboards construídos a partir de DataFrames limpos — sem busca de dados, sem treinamento de modelos, só a visualização.",
       "tag1": "Visualização",
       "tag2": "Dashboards",
-      "tag3": "Narrativa científica"
+      "tag3": "Narrativa científica",
+      "stat": "Apenas visualização"
     }
   },
   "process": {
@@ -126,27 +129,29 @@
     "lead": "Cada projeto tem escopo bem definido, para que sua equipe gaste tempo com a ciência e a decisão — não decifrando uma entrega vaga.",
     "step1": {
       "title": "Definir e Alinhar",
-      "body": "Esclarecer a pergunta de negócio, as restrições científicas, a realidade dos dados e o contexto da decisão antes de começar a implementação."
+      "body": "Esclarecemos a pergunta, as restrições e o que os dados realmente sustentam — antes de escrever qualquer código."
     },
     "step2": {
       "title": "Interrogar os Dados",
-      "body": "Padronizar, limpar, auditar e explorar os dados para isolar o sinal do ruído experimental e operacional."
+      "body": "Primeiro limpamos e exploramos os dados, para separar o sinal real do ruído."
     },
     "step3": {
       "title": "Construir e Validar",
-      "body": "Desenvolver pipelines reprodutíveis e sustentáveis para predição, interpretação ou automação estruturada."
+      "body": "Construímos pipelines que dão a mesma resposta todas as vezes que você os executa."
     },
     "step4": {
       "title": "Entregar e Transferir",
-      "body": "Entregar código documentado, resultados práticos e uma transição que sua equipe interna realmente consegue assumir."
+      "body": "Entregamos código documentado que sua equipe realmente consegue executar e manter."
     }
   },
   "founder": {
     "eyebrow": "O fundador",
-    "h2": "Profundidade científica encontra implementação prática.",
+    "h2_lead": "Profundidade científica encontra implementação",
+    "h2_accent": "prática",
+    "h2_tail": ".",
     "bio1_prefix": "A AidBio é liderada por",
-    "bio1_suffix": "— um biólogo quantitativo e praticante de machine learning com experiência em pesquisa acadêmica, P&D aplicado e resolução computacional de problemas em ciências da vida e agritech.",
-    "bio2": "A filosofia de trabalho é direta: modelagem honesta, arquitetura reprodutível e entregas que continuam úteis depois que a apresentação termina.",
+    "bio1_suffix": "— um biólogo quantitativo e praticante de machine learning, atuando em pesquisa acadêmica, P&D aplicado e problemas de dados em ciências da vida e agritech.",
+    "bio2": "A abordagem é simples: modelos honestos, código que roda igual da segunda vez, e resultados que continuam úteis depois que a reunião termina.",
     "linkLinkedin": "Conectar no LinkedIn",
     "linkGithub": "Ver repositórios no GitHub",
     "linkScholar": "Ler os artigos revisados por pares",
@@ -169,12 +174,41 @@
     "lead": "Seja você um laboratório acadêmico, uma equipe de P&D farmacêutico ou uma empresa de agritech, a AidBio atua por meio de projetos com escopo bem definido que levam de dados confusos a uma decisão que você pode colocar em prática."
   },
   "footer": {
-    "blurb": "IA e ciência de dados para ciências da vida, farmacêutica e agritech. Onde biologia, inteligência e matemática encontram o espectro.",
+    "blurb": "IA e ciência de dados para ciências da vida, farmacêutica e agritech.",
     "exploreHeading": "Explorar",
     "connectHeading": "Conectar",
     "founderStory": "Trajetória do fundador",
     "contact": "Contato",
     "copyright": "© 2026 AidBio. Construído para o futuro da tomada de decisão científica.",
     "tagline": "IA e Ciência de Dados para Ciências da Vida, Farmacêutica e Agritech"
+  },
+  "blog": {
+    "eyebrow": "Leituras mais longas",
+    "h2_lead": "Para quando você quiser a versão mais",
+    "h2_accent": "longa",
+    "h2_tail": ".",
+    "lead": "Alguns textos mais longos, para quando um parágrafo nesta página não é suficiente.",
+    "readCta": "Ler o capítulo →",
+    "readmeCta": "Ler a documentação ↗",
+    "mechanism": {
+      "kind": "História da fundadora · Mecanismo",
+      "title": "Antes de prever, entenda a regulação.",
+      "excerpt": "Como uma única proteína regulatória em uma planta de laboratório se tornou uma lição sobre sinais que interagem em vez de agir isoladamente."
+    },
+    "data": {
+      "kind": "História da fundadora · Dados",
+      "title": "A complexidade eventualmente supera o raciocínio manual.",
+      "excerpt": "Tabelas de atividade gênica, séries temporais de clima, registros de campo — dados diferentes, o mesmo problema: encontrar o padrão real sem perder o que foi medido."
+    },
+    "software": {
+      "kind": "História da fundadora · Software",
+      "title": "Uma análise responde ao conjunto de dados de hoje. Software responde ao próximo também.",
+      "excerpt": "Por que scripts pontuais deixaram de ser suficientes, e o que os substituiu: ferramentas instaláveis que registram de onde vieram seus números."
+    },
+    "aidweather": {
+      "kind": "Documentação open-source",
+      "title": "Integração de dados agroclimáticos e solares da NASA POWER",
+      "excerpt": "O que o AidWeather realmente faz por debaixo: tratamento de requisições, amostragem espacial, cache e a CLI — direto da documentação do projeto."
+    }
   }
 }

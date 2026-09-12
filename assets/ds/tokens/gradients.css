@@ -10,6 +10,13 @@
   --gradient-aurora: linear-gradient(135deg, #0B45FA 0%, #14A8D6 40%, #1ECC72 72%, #8FCB3D 100%); /* @kind color */
   --gradient-iris:   linear-gradient(135deg, #7C3FE0 0%, #C929D9 100%); /* @kind color */
 
+  /* Full 8-hue spectrum, evenly stepped — for hairlines/accent bars that
+     should read as "the whole spectrum," not a curated blend. */
+  --gradient-spectrum: linear-gradient(90deg,
+    #0B45FA 0%, #7C3FE0 14.3%, #C929D9 28.6%, #FF5A2E 42.9%,
+    #FFB020 57.1%, #8FCB3D 71.4%, #1ECC72 85.7%, #14A8D6 100%
+  ); /* @kind color */
+
   /* Subtle surface washes */
   --wash-cool:  linear-gradient(180deg, rgba(46,75,223,0.06), rgba(46,75,223,0)); /* @kind color */
   --wash-warm:  linear-gradient(180deg, rgba(232,119,46,0.07), rgba(232,119,46,0)); /* @kind color */

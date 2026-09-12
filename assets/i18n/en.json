@@ -12,7 +12,8 @@
     "founderStory": "Portfolio: the founder story →",
     "cta": "Start a project",
     "openMenu": "Open menu",
-    "closeMenu": "Close menu"
+    "closeMenu": "Close menu",
+    "blog": "Blog"
   },
   "mobile": {
     "founderStory": "↳ Portfolio: the founder story"
@@ -21,7 +22,7 @@
     "eyebrow": "Data intelligence for life sciences, pharma and agriculture",
     "h1_lead": "Nature,",
     "h1_accent": "Decoded.",
-    "desc": "AidBio uses modern data analytics and modeling to help research teams in universities, biotech, and agritech make informed decisions.",
+    "desc": "AidBio turns research and field data into decisions — for university labs, biotech teams, and agritech operations.",
     "ctaPrimary": "Engage AidBio",
     "ctaSecondary": "Explore capabilities",
     "proof1": "AI workflows grounded in real data",
@@ -31,10 +32,6 @@
       "aidweather": {
         "label": "Open-source library",
         "note": "Explore the project"
-      },
-      "report": {
-        "label": "Coming soon",
-        "note": "Example report output"
       },
       "aid2go": {
         "label": "Open-source library",
@@ -75,49 +72,55 @@
   },
   "solutions": {
     "eyebrow": "Core capabilities",
-    "h2": "Targeted intelligence for technically demanding domains.",
+    "h2_lead": "Targeted",
+    "h2_accent": "intelligence",
+    "h2_tail": "for technically demanding domains.",
     "lead": "AidBio bridges deep biological domain knowledge with modern AI and data-engineering practice — producing systems that hold up in front of a principal investigator, a peer reviewer, or an agronomist who's seen too many black boxes.",
     "card1": {
       "title": "Machine Learning & Predictive Modeling",
-      "body": "Supervised learning, model selection, validation, and interpretation for field, laboratory, and translational settings. Built with strong attention to data quality, honest evaluation, and downstream usability.",
+      "body": "Supervised learning, model selection, and validation for field, lab, and translational data — built for honest evaluation, not just an accuracy score.",
       "tag3": "Feature engineering",
       "tag4": "Model interpretation"
     },
     "card2": {
       "title": "Agentic AI Workflows",
-      "body": "Domain-aware assistants, structured reporting flows, retrieval pipelines, and lightweight automation that augment small scientific teams without creating infrastructure sprawl.",
+      "body": "Domain-aware assistants and lightweight automation — reporting, retrieval, routine tasks — sized for a small scientific team, not an infrastructure team.",
       "tag3": "Tool use"
     },
     "card3": {
       "title": "Agritech & Climate Analytics",
-      "body": "Crop-linked and geospatial analytics for field trials, yield-oriented investigation, environmental signal extraction, and weather-aware modeling — built for the realities of seasons, sites, and imperfect sensors."
+      "body": "Geospatial and weather-aware analytics for field trials and yield questions — built for real seasons, real sites, and imperfect sensors."
     },
     "card4": {
       "title": "Omics, Bioinformatics & Scientific Data Systems",
-      "body": "Support for multi-omics interpretation, biomarker-oriented workflows, experimental data consolidation, and reproducible analysis architecture — for academic labs building toward publication and pharma teams building toward a decision.",
+      "body": "Support for multi-omics data — genomics, proteomics, and similar large biological datasets — plus reproducible analysis built toward a publication or a decision.",
       "tag4": "Bioinformatics"
     }
   },
   "projects": {
     "eyebrow": "Projects & open tools",
-    "h2": "Things we build in the open.",
-    "lead": "Alongside client work, AidBio ships practical, open-source tools for agritech and life-science data workflows. Open to try right now:",
+    "h2_lead": "Things we build in the",
+    "h2_accent": "open",
+    "h2_tail": ".",
+    "lead": "Alongside client work, AidBio ships open-source tools for agritech and life-science data. Try them now:",
     "kindLabel": "Open-source library",
-    "githubCta": "GitHub ↗",
+    "githubCta": "Technical details ↗",
     "aidweather": {
-      "body": "A Python library and CLI that turns NASA POWER weather and solar-radiation data into clean, cached, analysis-ready tables — for a single point, a transect, or a whole region.",
+      "body": "Turns NASA POWER weather and solar data into clean, ready-to-use tables — for one point, a line across a map, or a whole region.",
       "tag3": "Agroclimatic",
       "tag4": "Solar",
       "cta": "Explore AidWeather"
     },
     "aid2go": {
-      "body": "A graph-learning workflow for protein-function prediction that links proteins, protein-protein interactions, the Gene Ontology hierarchy, and experimentally supported GO annotations into one heterogeneous graph, using GraphSAGE and GAT variants over ProtBERT sequence embeddings."
+      "body": "Predicts protein function from one graph that links proteins, their interactions, and Gene Ontology terms — using graph neural networks over protein language-model embeddings.",
+      "stat": "Research prototype"
     },
     "aidviz": {
-      "body": "A visualization-only toolkit that intentionally does not fetch data or train models: static publication figures, interactive dashboards, and climate storytelling plots built from clean DataFrames, keeping data provenance and presentation responsibilities cleanly separated.",
+      "body": "Publication figures and dashboards built from clean DataFrames — no data fetching, no model training, just plotting.",
       "tag1": "Visualization",
       "tag2": "Dashboards",
-      "tag3": "Scientific storytelling"
+      "tag3": "Scientific storytelling",
+      "stat": "Visualization only"
     }
   },
   "process": {
@@ -126,27 +129,29 @@
     "lead": "Every engagement is scoped tightly, so your team spends time on the science and the decision — not on decoding a vague deliverable.",
     "step1": {
       "title": "Define & Align",
-      "body": "Clarify the business question, scientific constraints, dataset realities, and decision context before implementation starts."
+      "body": "We clarify the question, the constraints, and what the data can actually support — before writing any code."
     },
     "step2": {
       "title": "Interrogate Data",
-      "body": "Standardize, clean, audit, and explore the data to isolate signal from experimental and operational noise."
+      "body": "We clean and explore the data first, to separate real signal from noise."
     },
     "step3": {
       "title": "Build & Validate",
-      "body": "Develop reproducible, maintainable pipelines for prediction, interpretation, or structured automation."
+      "body": "We build pipelines that give the same answer every time you run them."
     },
     "step4": {
       "title": "Ship & Transfer",
-      "body": "Deliver documented code, practical outputs, and a hand-off your internal team can actually own."
+      "body": "We hand off documented code your team can actually run and maintain."
     }
   },
   "founder": {
     "eyebrow": "The founder",
-    "h2": "Scientific depth meets practical implementation.",
+    "h2_lead": "Scientific depth meets",
+    "h2_accent": "practical",
+    "h2_tail": "implementation.",
     "bio1_prefix": "AidBio is led by",
-    "bio1_suffix": "— a quantitative biologist and machine-learning practitioner with experience spanning academic research, applied R&D, and computational problem-solving across life sciences and agritech.",
-    "bio2": "The operating philosophy is straightforward: honest modeling, reproducible architecture, and deliverables that remain useful after the presentation ends.",
+    "bio1_suffix": "— a quantitative biologist and machine-learning practitioner, working across academic research, applied R&D, and life-science and agritech data problems.",
+    "bio2": "The approach is plain: honest models, code that reruns the same way twice, and results that stay useful after the meeting ends.",
     "linkLinkedin": "Connect on LinkedIn",
     "linkGithub": "View GitHub repositories",
     "linkScholar": "Read peer-reviewed papers",
@@ -169,12 +174,41 @@
     "lead": "Whether you're an academic lab, a pharma R&D group, or an agritech company, AidBio engages through well-scoped projects that move from messy data to a decision you can act on."
   },
   "footer": {
-    "blurb": "AI & data science for life sciences, pharma and agritech. Where biology, intelligence, and mathematics meet the spectrum.",
+    "blurb": "AI and data science for life sciences, pharma, and agritech.",
     "exploreHeading": "Explore",
     "connectHeading": "Connect",
     "founderStory": "Founder story",
     "contact": "Contact",
     "copyright": "© 2026 AidBio. Built for the future of scientific decision-making.",
     "tagline": "AI & Data Science for Life Sciences, Pharma and Agritech"
+  },
+  "blog": {
+    "eyebrow": "Longer reads",
+    "h2_lead": "For when you want the",
+    "h2_accent": "longer",
+    "h2_tail": "version.",
+    "lead": "A few longer pieces, for when a paragraph on this page isn't enough.",
+    "readCta": "Read the chapter →",
+    "readmeCta": "Read the docs ↗",
+    "mechanism": {
+      "kind": "Founder story · Mechanism",
+      "title": "Before prediction, understand regulation.",
+      "excerpt": "How a single regulatory protein in a lab plant became a lesson in signals that interact rather than act alone."
+    },
+    "data": {
+      "kind": "Founder story · Data",
+      "title": "Complexity eventually exceeds manual reasoning.",
+      "excerpt": "Gene-activity tables, weather time series, field records — different data, the same problem: finding the real pattern without losing what was measured."
+    },
+    "software": {
+      "kind": "Founder story · Software",
+      "title": "An analysis answers today's dataset. Software answers the next one too.",
+      "excerpt": "Why one-off scripts stopped being enough, and what replaced them: installable tools that record where their numbers came from."
+    },
+    "aidweather": {
+      "kind": "Open-source docs",
+      "title": "Agroclimatic & solar data integration from NASA POWER",
+      "excerpt": "What AidWeather actually does under the hood: request handling, spatial sampling, caching, and the CLI — from the project's own documentation."
+    }
   }
 }
