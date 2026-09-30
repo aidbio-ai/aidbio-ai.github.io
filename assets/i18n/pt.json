@@ -22,12 +22,14 @@
     "eyebrow": "Inteligência de dados para ciências da vida, farmacêutica e agricultura",
     "h1_lead": "Natureza,",
     "h1_accent": "Decodificada.",
-    "desc": "A AidBio transforma dados de pesquisa e de campo em decisões — para laboratórios universitários, equipes de biotecnologia e operações de agritech.",
+    "desc": "A AidBio transforma dados de pesquisa e de campo em resultados e decisões.",
     "ctaPrimary": "Fale com a AidBio",
     "ctaSecondary": "Explorar capacidades",
-    "proof1": "Workflows de IA fundamentados em dados reais",
-    "proof2": "Fluência em dados ômicos, agronômicos e de interação proteica",
-    "proof3": "Entrega reprodutível e pronta para produção",
+    "proof1": "Analytics agronômico e climático para o campo",
+    "proof2": "Ômica, bioinformática e dados científicos",
+    "proof3": "Modelagem de proteínas e de interações proteicas",
+    "proof4": "Projetos sob medida, entregues de forma reprodutível e pronta para produção",
+    "proof5": "Modelos de IA locais opcionais para privacidade e segurança de dados",
     "links": {
       "aidweather": {
         "label": "Biblioteca de código aberto",
@@ -115,12 +117,12 @@
       "body": "Prevê a função de proteínas a partir de um único grafo que conecta proteínas, suas interações e termos da Gene Ontology — usando redes neurais de grafos sobre embeddings de modelos de linguagem de proteínas.",
       "stat": "Protótipo de pesquisa"
     },
-    "aidviz": {
-      "body": "Figuras para publicação e dashboards construídos a partir de DataFrames limpos — sem busca de dados, sem treinamento de modelos, só a visualização.",
-      "tag1": "Visualização",
-      "tag2": "Dashboards",
-      "tag3": "Narrativa científica",
-      "stat": "Apenas visualização"
+    "aidweatherReport": {
+      "kind": "Gerador de relatórios",
+      "body": "Gera relatórios agronômicos portáteis e autônomos — dashboards de clima a partir da NASA POWER e dashboards de fazenda a partir dos seus próprios dados experimentais, com resumos opcionais por modelo local.",
+      "tag2": "Dashboards de fazenda",
+      "tag3": "LLM local",
+      "cta": "Solicitar um relatório de exemplo"
     }
   },
   "process": {

@@ -22,12 +22,14 @@
     "eyebrow": "Data intelligence for life sciences, pharma and agriculture",
     "h1_lead": "Nature,",
     "h1_accent": "Decoded.",
-    "desc": "AidBio turns research and field data into decisions — for university labs, biotech teams, and agritech operations.",
+    "desc": "AidBio turns research and field data into results and decisions.",
     "ctaPrimary": "Engage AidBio",
     "ctaSecondary": "Explore capabilities",
-    "proof1": "AI workflows grounded in real data",
-    "proof2": "Fluent in omics, agronomy and protein-interaction data",
-    "proof3": "Reproducible, production-ready delivery",
+    "proof1": "Agronomy and climate analytics for the field",
+    "proof2": "Omics, bioinformatics and scientific data",
+    "proof3": "Protein and protein-interaction modeling",
+    "proof4": "Custom projects, delivered reproducible and production-ready",
+    "proof5": "Optional local AI models for privacy and data security",
     "links": {
       "aidweather": {
         "label": "Open-source library",
@@ -115,12 +117,12 @@
       "body": "Predicts protein function from one graph that links proteins, their interactions, and Gene Ontology terms — using graph neural networks over protein language-model embeddings.",
       "stat": "Research prototype"
     },
-    "aidviz": {
-      "body": "Publication figures and dashboards built from clean DataFrames — no data fetching, no model training, just plotting.",
-      "tag1": "Visualization",
-      "tag2": "Dashboards",
-      "tag3": "Scientific storytelling",
-      "stat": "Visualization only"
+    "aidweatherReport": {
+      "kind": "Report generator",
+      "body": "Generates portable, standalone agronomic reports — weather dashboards from NASA POWER data and farm dashboards from your own experimental datasets, with optional local-model summaries.",
+      "tag2": "Farm dashboards",
+      "tag3": "Local LLM",
+      "cta": "Request a sample report"
     }
   },
   "process": {
