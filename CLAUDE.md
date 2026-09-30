@@ -38,8 +38,8 @@ page in a browser (check both light and dark themes, and mobile width ~320px).
   `theme-color` meta) and `assets/js/chrome.js` at the end of `<body>`.
 - **Local navigation**: page families (portfolio chapters, AidWeather sections) add a sticky `.subnav` strip
   under the header via `<!--chrome:subnav set="...">` and `<body class="has-subnav">`. The header never changes.
-- **Language switcher**: `i18n="1"` on the header marker adds EN/PT. Only `index.html` has translated content,
-  so only it sets the flag; flip it on a page only once that page has PT strings in `assets/i18n/`.
+- **Language switcher**: `i18n="1"` on the header marker adds EN/PT. `index.html` and `aidweather.html` have translated content (the portfolio does not),
+  so only they set the flag; flip it on another page only once that page has PT strings in `assets/i18n/`.
 - **Theme system**: `assets/js/theme.js` (blocking, in `<head>`) reads `localStorage` key
   `aidbio-theme-preference` (legacy `aidbio-theme`), resolves `system` via `prefers-color-scheme`, sets
   `data-theme` + `color-scheme` on `<html>` before first paint, and exposes `window.__aidbioTheme`.
@@ -58,8 +58,11 @@ page in a browser (check both light and dark themes, and mobile width ~320px).
   (all in `chrome.css`). One gradient accent word per section heading (`.accent-spectrum`), never in a hero.
 - Buttons are `.btn .btn-primary|.btn-secondary|.btn-warm`; eyebrows are `.eyebrow`; alternate section bands
   are `.section-alt`; figures use `.figure` / `.figure-media`; cards use `--radius-lg`, `--shadow-sm`.
-- Copy: sentence case, plain and de-hyped (Field Notes voice); no "AI" wording outside the Agentic AI card
-  and the portfolio founder narrative; domain is aidbio.org.
+- Copy: sentence case, plain and de-hyped (Field Notes voice); domain is aidbio.org. Lead with machine
+  learning and data analytics; AI terms are fine but as support (e.g. "AI-assisted"), never the headline.
+- Logo: always free-standing — no network backdrop, card, frame or border around the mark.
+- Translated pages keep keys in `assets/i18n/{en,pt}.json` (`data-i18n` for text, `data-i18n-html` for trusted
+  inline markup such as links or `<strong>`).
 
 ## `portfolio/` subproject
 

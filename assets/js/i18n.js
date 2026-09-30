@@ -58,6 +58,12 @@
       if (typeof value === "string") el.textContent = value;
     });
 
+    // Trusted same-origin strings that contain inline markup (links, <strong>).
+    document.querySelectorAll("[data-i18n-html]").forEach(function (el) {
+      var value = getValue(dict, el.getAttribute("data-i18n-html"));
+      if (typeof value === "string") el.innerHTML = value;
+    });
+
     document.querySelectorAll("[data-i18n-attr]").forEach(function (el) {
       el.getAttribute("data-i18n-attr")
         .split(";")

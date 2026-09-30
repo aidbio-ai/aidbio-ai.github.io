@@ -29,18 +29,10 @@
 
     <style>
       /* ============================================================
-       Page-specific tokens. Layout constants, the header, footer, buttons
+       Page-specific styles. Layout constants, the header, footer, buttons
        and type helpers live in assets/css/chrome.css (shared by every
        page); brand tokens come from assets/ds/styles.css.
        ============================================================ */
-      :root {
-        --network-img: url("assets/network-light.webp");
-      }
-
-      html[data-theme="dark"] {
-        --network-img: url("assets/network-dark.webp");
-      }
-
       /* ============================================================ Hero */
       .hero-grid {
         display: grid;
@@ -80,30 +72,15 @@
         flex: 0 0 auto;
       }
 
-      /* Hero mark — the infinity logomark over the network motif */
+      /* Hero mark — the infinity logomark, free-standing: no backdrop, no frame */
       .hero-visual {
-        position: relative;
         display: flex;
         align-items: center;
         justify-content: center;
-        min-height: 300px;
-      }
-
-      .hero-visual::before {
-        content: "";
-        position: absolute;
-        inset: -8% -6%;
-        background-image: var(--network-img);
-        background-size: contain;
-        background-position: center;
-        background-repeat: no-repeat;
-        opacity: 0.55;
-        pointer-events: none;
       }
 
       .hero-mark {
-        position: relative;
-        width: min(100%, 440px);
+        width: min(100%, 360px);
         height: auto;
         animation: mark-float 9s var(--ease-out) infinite alternate;
         will-change: transform;
@@ -643,11 +620,10 @@
 
         .hero-visual {
           order: -1;
-          min-height: 0;
         }
 
         .hero-mark {
-          width: min(70%, 360px);
+          width: min(60%, 280px);
         }
 
         .signal-grid {

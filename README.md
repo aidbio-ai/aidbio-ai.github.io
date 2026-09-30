@@ -13,7 +13,6 @@ IBM Plex Mono typography, Fibonacci spacing, and light + dark themes.
 | --- | --- |
 | `assets/aidbio-mark-light.webp` | Infinity logomark for light surfaces (nav, hero, brand) |
 | `assets/aidbio-mark-dark.webp` | Infinity logomark for dark surfaces (dark theme, footer) |
-| `assets/network-light.webp` / `network-dark.webp` | Golden-angle network motif behind the hero |
 | `assets/favicon.png` | Favicon derived from the logomark |
 | `assets/apple-touch-icon.png` | iOS home-screen icon (opaque cloud background) |
 

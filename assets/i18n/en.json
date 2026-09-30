@@ -213,5 +213,176 @@
       "title": "Agroclimatic & solar data integration from NASA POWER",
       "excerpt": "What AidWeather actually does under the hood: request handling, spatial sampling, caching, and the CLI — from the project's own documentation."
     }
+  },
+  "aw": {
+    "hero": {
+      "back": "← Back to AidBio",
+      "badge": "Open source · Beta",
+      "eyebrow": "AidBio open tools · AidWeather",
+      "h1": "Weather and solar data, <span class=\"accent-italic\">already cleaned up.</span>",
+      "desc": "AidWeather is a small Python library and command-line tool that pulls agroclimatic and solar-radiation data straight from <strong>NASA's POWER API</strong> — and hands it back as tidy, analysis-ready tables for data analytics and machine-learning workflows. You ask for a place and a date range; it deals with the requests, retries, caching, and units so you don't have to.",
+      "ctaInstall": "Install AidWeather",
+      "ctaGithub": "View on GitHub ↗"
+    },
+    "stats": {
+      "s1": "Weather, solar & soil parameters, unit-validated",
+      "v2": "3 shapes",
+      "s2": "Point, transect, and regional sampling",
+      "s3": "Built-in caching, no repeat downloads",
+      "s4": "Use it in a notebook or the terminal"
+    },
+    "what": {
+      "eyebrow": "What it does",
+      "h2": "The awkward parts of NASA POWER, handled for you.",
+      "lead": "NASA POWER is a free public dataset, but talking to it directly means building request URLs, handling timeouts and retries, checking payload shapes, and reconciling units and grids yourself. AidWeather does that work for you, so what you get back is a table you can start analyzing right away — in a statistical model, a machine-learning pipeline, or an AI-assisted workflow."
+    },
+    "f1": {
+      "t": "Direct NASA POWER access",
+      "b": "Builds the request, handles timeouts and retries, and checks the response shape — so you call one method instead of writing that logic yourself."
+    },
+    "f2": {
+      "t": "Point, path, or region",
+      "b": "Fetch a single coordinate, sample along a 1D transect, or pull a 2D bounding box — with internal tuning so the spatial sampling stays accurate and consistent."
+    },
+    "f3": {
+      "t": "Caching & API compliance",
+      "b": "A built-in SQLite cache means the same query is never downloaded twice — saving bandwidth and respecting NASA POWER's rate limits and usage policy."
+    },
+    "f4": {
+      "t": "Python API + full CLI",
+      "b": "Two ways in: a Python API for notebooks and scripts, and a command-line tool for quick, scriptable extractions."
+    },
+    "f5": {
+      "t": "Clear errors & logging",
+      "b": "Logs what each query did, and raises specific error types with a plain-language message — instead of a raw stack trace."
+    },
+    "f6": {
+      "t": "Weather, solar & soil together",
+      "b": "Temperature, humidity, wind, precipitation, pressure, solar irradiance / PAR, and soil wetness (surface, root-zone, profile) — the meteorological, energy, and soil-moisture variables agritech work usually needs, side by side."
+    },
+    "scope": {
+      "eyebrow": "Three ways to sample space",
+      "h2": "Match the query to the question.",
+      "lead": "The same client fetches a single site, a line across a landscape, or a filled-in region — each respecting the native grid spacing of the parameters you ask for."
+    },
+    "s1": {
+      "t": "A single point",
+      "b": "One latitude/longitude and a date range returns a clean daily or hourly series for that site — the everyday case for a field, a station, or a trial plot."
+    },
+    "s2": {
+      "t": "Along a transect",
+      "b": "Give a start and end coordinate and a spacing in kilometres; AidWeather samples evenly along the line, respecting each parameter's real grid resolution."
+    },
+    "s3": {
+      "t": "Across a region",
+      "b": "Define a bounding box (up to 4.5° × 4.5°) and pull a gridded field over the whole area — one parameter per request, cached like everything else."
+    },
+    "quick": {
+      "eyebrow": "Quick start",
+      "h2": "A few lines to your first dataset.",
+      "lead": "Whether you live in notebooks or the terminal, getting a table of weather and solar data is a short trip.",
+      "cli": "Command line"
+    },
+    "install": {
+      "eyebrow": "Installation",
+      "h2": "One command to get going.",
+      "lead": "AidWeather is published on <a href=\"https://pypi.org/project/aidweather/\" target=\"_blank\" rel=\"noopener\">PyPI</a>. Use <span class=\"mono\">pip</span> for the Python library, or <span class=\"mono\">uv tool</span> to get the CLI as an isolated tool.",
+      "source": "From source / development install:"
+    },
+    "params": {
+      "eyebrow": "Parameter catalogue",
+      "h2": "18 core parameters, with the grid facts built in.",
+      "lead": "Each parameter ships with metadata, unit validation, and its native NASA source-grid resolution — so you always know what a value means and where it came from. Weather, solar, and soil-moisture parameters are all daily; the three soil parameters (GWETTOP, GWETROOT, GWETPROF) aren't available at hourly resolution."
+    },
+    "th1": "Code",
+    "th2": "Parameter",
+    "th3": "Group",
+    "th4": "Source product",
+    "th5": "Native grid",
+    "th6": "Daily unit",
+    "callout": {
+      "h": "A coordinate is a grid cell, not a pinpoint",
+      "p1": "A coordinate you submit resolves to a source-product grid cell — it isn't a point measurement at your exact latitude and longitude. Different parameters come from different source products (MERRA-2 at 0.5° × 0.625°, CERES solar radiation at 1.0° × 1.0°), so nearby coordinates that map to the same cell return identical series.",
+      "p2": "AidWeather keeps this provenance visible so your spatial interpretation stays honest."
+    },
+    "guides": {
+      "eyebrow": "Documentation",
+      "h2": "Guides for scientists and developers.",
+      "lead": "The docs are split into focused guides — start with the user guide, dip into provenance and spatial interpretation when you need the details."
+    },
+    "g1": {
+      "n": "User Guide",
+      "d": "Step-by-step intro to fetching & analyzing data"
+    },
+    "g2": {
+      "n": "Spatial Interpretation",
+      "d": "Grids, transects, regional boxes, station comparisons"
+    },
+    "g3": {
+      "n": "Parameter & Provenance",
+      "d": "Catalogue, NASA source models, time standards"
+    },
+    "g4": {
+      "n": "Geospatial Coordinates",
+      "d": "DD, DDM, DMS notation and GeoCoordinate usage"
+    },
+    "g5": {
+      "n": "API Reference",
+      "d": "PowerClient, GeoCoordinate, query functions"
+    },
+    "g6": {
+      "n": "Configuration",
+      "d": "Env vars, JSON config, SQLite cache settings"
+    },
+    "cta": {
+      "eyebrow": "Open access · Apache-2.0",
+      "h2": "Free data, with the attribution it deserves.",
+      "lead": "NASA POWER data are open access and free of charge. Work that uses AidWeather should cite the NASA POWER project and acknowledge the underlying MERRA-2 / GEOS-IT and CERES / FLASHFlux / SRB source products, per the NASA Earthdata Data Use and Attribution Policy.",
+      "b1": "View on PyPI ↗",
+      "b2": "Explore the repository ↗",
+      "b3": "NASA POWER project ↗"
+    },
+    "par": {
+      "T2M": "Temperature at 2 m",
+      "T2M_MAX": "Maximum temperature at 2 m",
+      "T2M_MIN": "Minimum temperature at 2 m",
+      "T2M_RANGE": "Diurnal temperature range at 2 m",
+      "T2MWET": "Wet-bulb temperature at 2 m",
+      "T2MDEW": "Dew-point temperature at 2 m",
+      "TS": "Surface skin temperature",
+      "RH2M": "Relative humidity at 2 m",
+      "PRECTOTCORR": "Corrected total precipitation",
+      "ALLSKY_SFC_SW_DWN": "Surface shortwave downward irradiance",
+      "ALLSKY_SFC_PAR_TOT": "Surface PAR total",
+      "WS10M": "Wind speed at 10 m",
+      "WS10M_MAX": "Maximum wind speed at 10 m",
+      "WD10M": "Wind direction at 10 m",
+      "PS": "Surface pressure",
+      "GWETTOP": "Surface soil wetness",
+      "GWETROOT": "Root-zone soil wetness",
+      "GWETPROF": "Profile soil moisture"
+    },
+    "group": {
+      "soil": "Soil"
+    },
+    "unit": {
+      "mmday": "mm/day",
+      "kwh": "kWh/m²/day",
+      "mj": "MJ/m²/day",
+      "deg": "degrees"
+    },
+    "sub": {
+      "what": "What it does",
+      "quick": "Quick start",
+      "install": "Install",
+      "params": "Parameters"
+    },
+    "footer": {
+      "tagline": "AidWeather · Apache-2.0 · Data © NASA POWER"
+    },
+    "meta": {
+      "title": "AidWeather | Agroclimatic & Solar Data from NASA POWER — AidBio",
+      "description": "AidWeather is an open-source Python library and CLI that turns NASA POWER weather and solar data into clean, cached, analysis-ready tables — for a point, a transect, or a whole region."
+    }
   }
 }
