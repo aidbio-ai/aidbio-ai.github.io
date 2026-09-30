@@ -1,51 +1,137 @@
-<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 — Biology becomes data | AidBio founder story</title><meta name="theme-color" content="#FBFCFE">
-<script>
-    (function () {
-      var STORAGE_KEY = "aidbio-theme-preference";
-      var legacyKey = "aidbio-theme";
-      var root = document.documentElement;
-      var metaTheme = document.querySelector('meta[name="theme-color"]');
-      var mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      function getStoredPreference() {
-        var current = localStorage.getItem(STORAGE_KEY);
-        if (current === "system" || current === "light" || current === "dark") return current;
-        var legacy = localStorage.getItem(legacyKey);
-        if (legacy === "light" || legacy === "dark") return legacy;
-        return "system";
-      }
-      function getResolvedTheme(preference) {
-        if (preference === "light" || preference === "dark") return preference;
-        return mediaQuery.matches ? "dark" : "light";
-      }
-      function applyTheme(preference) {
-        var resolved = getResolvedTheme(preference);
-        root.setAttribute("data-theme", resolved);
-        root.style.colorScheme = resolved;
-        root.setAttribute("data-theme-preference", preference);
-        if (metaTheme) metaTheme.setAttribute("content", resolved === "dark" ? "#0E1219" : "#FBFCFE");
-      }
-      var initialPreference = getStoredPreference();
-      applyTheme(initialPreference);
-      window.__aidbioTheme = { key: STORAGE_KEY, mediaQuery: mediaQuery, applyTheme: applyTheme, getStoredPreference: getStoredPreference, getResolvedTheme: getResolvedTheme };
-    })();
-  </script>
-<link rel="stylesheet" href="../assets/site.css"></head><body>
-<header class="site-header"><div class="wrap nav">
-<a class="brand" href="../index.html"><img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo" class="mark-light"><img src="../../assets/aidbio-mark-dark.webp" alt="AidBio logo" class="mark-dark"><span><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span><small>Founder story</small></span></a>
-<div class="nav-actions"><nav class="navlinks" aria-label="Primary"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" >Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" aria-current="page">Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" >Portfolio</a><a href="../../index.html">← AidBio.com</a></nav><div class="theme-switcher" role="group" aria-label="Theme preference"><button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button><button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button><button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div><button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></div></div></header><div class="mobile-menu" id="mobile-menu"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" >Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html">Data</a><a href="04-models.html" >Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" >Portfolio</a><a href="../../index.html">← AidBio.com</a></div><main><section class="hero"><div class="wrap"><div class="kicker">Chapter 03 · Biology becomes data</div><h1>Complexity eventually exceeds manual reasoning.</h1><p class="lede">Gene-activity tables, interaction screens, plant images, weather time series and field records all look different, but they're the same underlying problem: how do you pull a clear pattern out of a huge, messy dataset without losing what the experiment actually measured?</p><div class="progress-nav"><a class="" href="01-mechanism.html">01 Mechanism</a><a class="" href="02-networks.html">02 Networks</a><a class="active" href="03-data.html">03 Data</a><a class="" href="04-models.html">04 Models</a><a class="" href="05-software.html">05 Software</a><a class="" href="06-aidbio.html">06 AidBio</a></div></div></section>
-<section class="section white"><div class="wrap"><div class="section-title"><div class="eyebrow">The computational turn</div><h2>Computation was a response to scale.</h2></div>
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 · Biology becomes data | AidBio</title><meta name="description" content="Chapter 3 of the AidBio founder story: why biological complexity outgrew manual reasoning and became a data problem."><meta name="theme-color" content="#FBFCFE">
+<script src="../../assets/js/theme.js"></script>
+<link rel="icon" type="image/png" href="../../assets/favicon.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/ds/styles.css">
+<link rel="stylesheet" href="../../assets/css/chrome.css">
+<link rel="stylesheet" href="../assets/site.css"></head><body class="has-subnav">
+<!--chrome:header active="founder"-->
+<nav class="nav" id="site-nav">
+  <div class="container nav-inner">
+    <a href="../../index.html" class="brand" aria-label="AidBio home">
+      <img src="../../assets/aidbio-mark-light.webp" alt="" class="brand-mark mark-light" width="63" height="30" />
+      <img src="../../assets/aidbio-mark-dark.webp" alt="" class="brand-mark mark-dark" width="62" height="30" />
+      <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
+    </a>
+
+    <div class="nav-actions">
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="../../index.html#solutions" data-i18n="nav.solutions">Solutions</a></li>
+        <li><a href="../../index.html#projects" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="../../index.html#blog" data-i18n="nav.blog">Blog</a></li>
+        <li><a href="../../index.html#process" data-i18n="nav.process">Process</a></li>
+        <li class="has-submenu">
+          <a href="../../index.html#founder" data-i18n="nav.founder" aria-current="true">Founder</a>
+          <ul class="submenu">
+            <li><a href="../../index.html#founder" data-i18n="nav.founderOverview">Founder overview</a></li>
+            <li><a href="../../portfolio/index.html" data-i18n="nav.founderStory" aria-current="page">Portfolio: the founder story →</a></li>
+          </ul>
+        </li>
+        <li><a href="../../index.html#contact" class="nav-cta" data-i18n="nav.cta">Start a project</a></li>
+      </ul>
+
+      <div class="theme-switcher" role="group" aria-label="Theme preference">
+        <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
+        <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+        <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+      </div>
+      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html#solutions" data-i18n="nav.solutions">Solutions</a>
+  <a href="../../index.html#projects" data-i18n="nav.projects">Projects</a>
+  <a href="../../index.html#blog" data-i18n="nav.blog">Blog</a>
+  <a href="../../index.html#process" data-i18n="nav.process">Process</a>
+  <a href="../../index.html#founder" data-i18n="nav.founder">Founder</a>
+  <a href="../../portfolio/index.html" class="mobile-sublink" data-i18n="mobile.founderStory">↳ Portfolio: the founder story</a>
+  <a href="../../index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Start a project</a>
+  <div class="theme-switcher" role="group" aria-label="Theme preference">
+    <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
+    <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+    <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+  </div>
+</div>
+<!--/chrome:header-->
+<!--chrome:subnav set="portfolio" active="03"-->
+<nav class="subnav" aria-label="Founder story chapters">
+  <div class="container subnav-inner">
+    <span class="subnav-label">Founder story</span>
+    <div class="subnav-links">
+      <a href="../index.html">Why AidBio</a>
+      <a href="01-mechanism.html">01 Mechanism</a>
+      <a href="02-networks.html">02 Networks</a>
+      <a href="03-data.html" aria-current="page">03 Data</a>
+      <a href="04-models.html">04 Models</a>
+      <a href="05-software.html">05 Software</a>
+      <a href="06-aidbio.html">06 AidBio</a>
+      <a href="07-portfolio.html">Portfolio</a>
+    </div>
+  </div>
+</nav>
+<!--/chrome:subnav-->
+<main><section class="hero"><div class="container"><div class="eyebrow">Chapter 03 · Biology becomes data</div><h1>Complexity eventually exceeds manual reasoning.</h1><p class="hero-desc">Gene-activity tables, interaction screens, plant images, weather time series and field records all look different, but they're the same underlying problem: how do you pull a clear pattern out of a huge, messy dataset without losing what the experiment actually measured?</p></div></section>
+<section class="section section-alt"><div class="container"><div class="section-title"><div class="eyebrow">The computational turn</div><h2>Computation was a response to <span class="accent-spectrum grad-dawn">scale</span>.</h2></div>
 <div class="grid-3">
 <div class="card accent green"><h3>Transcriptomics</h3><p>RNA-seq measures which genes are active in a sample and by how much, turning a plant's molecular response into a large table that can be compared across varieties, treatments, tissues and time.</p></div>
 <div class="card accent"><h3>Phenotyping</h3><p>At ITQB NOVA, automated image-analysis code replaced manual measurement of plant photos, cutting that manual effort by roughly 80% and turning thousands of images into consistent, measurable plant traits — leaf area, growth rate, and so on — at full experiment scale.</p></div>
 <div class="card accent orange"><h3>Field data</h3><p>Field spreadsheets track the same plants across many developmental stages over time — which only becomes useful data once every row is reliably tied back to the right plant, cleaned up consistently, and processed the same way every time.</p></div>
 </div></div></section>
-<section class="section"><div class="wrap grid-2"><div><h2>From “data cleaning” to scientific identity.</h2><p>The core lesson here is simple to state and easy to get wrong in practice: every measurement needs to stay traceable back to the exact same plant, every time it's measured. The open-source <strong>excelxtract</strong> project builds that guarantee into the pipeline — it converts messy, multi-sheet field-observation spreadsheets into clean, analysis-ready data, with a permanent ID for every individual plant.</p>
+<section class="section"><div class="container grid-2"><div><h2>From “data cleaning” to <span class="accent-spectrum grad-dawn">scientific identity</span>.</h2><p>The core lesson here is simple to state and easy to get wrong in practice: every measurement needs to stay traceable back to the exact same plant, every time it's measured. The open-source <strong>excelxtract</strong> project builds that guarantee into the pipeline — it converts messy, multi-sheet field-observation spreadsheets into clean, analysis-ready data, with a permanent ID for every individual plant.</p>
 <div class="code">raw workbook → sheet classification → wide-to-long normalization → stable sample identity → PCA / t-SNE → interpretable developmental patterns</div>
-<div class="diagram"><img src="../assets/data-pipeline.svg" alt="Pipeline from raw workbook through sheet classification, wide-to-long normalization, and stable sample identity to PCA/t-SNE and interpretable developmental patterns"></div>
+<div class="figure figure-media"><img src="../assets/data-pipeline.svg" alt="Pipeline from raw workbook through sheet classification, wide-to-long normalization, and stable sample identity to PCA/t-SNE and interpretable developmental patterns"></div>
 </div><div class="project-card"><span class="tag">Python</span><span class="tag">uv</span><span class="tag">ETL</span><span class="tag">PCA</span><span class="tag">t-SNE</span><h3 style="margin-top:13px">excelxtract</h3><p>Automatically extracts and standardizes agricultural field-observation data, keeping a stable identity per plant so the same individual can be tracked reliably across an entire growing season.</p><a href="https://github.com/matiollipt/excelxtract">View repository →</a></div></div></section>
-<section class="section white"><div class="wrap"><div class="callout"><h2>A number isn't evidence unless you can explain where it came from.</h2><p>That becomes one of AidBio's core design rules: every step of a pipeline should keep enough of a paper trail that you could reconstruct exactly what was measured, how it was transformed, and how a final conclusion was reached — not just trust the last number on the screen.</p></div></div></section>
-</main><footer><div class="wrap"><div class="spectrum"></div>
-<p><strong>AidBio</strong> — AI &amp; Data Science for Life Sciences and Agritech.</p>
-<p class="small">Founder: Cleverson Carlos Matiolli, PhD · <a href="https://github.com/matiollipt">GitHub</a> · <a href="https://orcid.org/0000-0001-8185-7628">ORCID</a> · <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&hl=en">Google Scholar</a></p>
-<p class="small">This site is a narrative portfolio. Scientific claims link to primary literature; diagrams labelled “adapted” are original explanatory redraws, not reproductions.</p>
-</div></footer><script src="../assets/site.js"></script></body></html>
+<section class="section section-alt"><div class="container"><div class="callout"><h2>A number isn't <span class="accent-spectrum grad-dawn">evidence</span> unless you can explain where it came from.</h2><p>That becomes one of AidBio's core design rules: every step of a pipeline should keep enough of a paper trail that you could reconstruct exactly what was measured, how it was transformed, and how a final conclusion was reached — not just trust the last number on the screen.</p></div></div></section>
+</main><!--chrome:footer note="portfolio"-->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="../../assets/aidbio-mark-dark.webp" alt="" aria-hidden="true" />
+          <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
+        </div>
+        <p class="footer-blurb" data-i18n="footer.blurb">Data science for life sciences, pharma, and agritech.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-h" data-i18n="footer.exploreHeading">Explore</span>
+        <a href="../../index.html#solutions" data-i18n="nav.solutions">Solutions</a>
+        <a href="../../index.html#projects" data-i18n="nav.projects">Projects</a>
+        <a href="../../aidweather.html">AidWeather</a>
+        <a href="../../index.html#blog" data-i18n="nav.blog">Blog</a>
+        <a href="../../index.html#process" data-i18n="nav.process">Process</a>
+        <a href="../../index.html#founder" data-i18n="nav.founder">Founder</a>
+        <a href="../../portfolio/index.html" data-i18n="footer.founderStory">Founder story</a>
+        <a href="../../index.html#contact" data-i18n="footer.contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-h" data-i18n="footer.connectHeading">Connect</span>
+        <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+      </div>
+    </div>
+    <p class="footer-note">
+      Founder: Cleverson Carlos Matiolli, PhD ·
+      <a href="https://orcid.org/0000-0001-8185-7628" target="_blank" rel="noopener">ORCID</a> ·
+      <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.
+      This is a narrative portfolio: scientific claims link to primary literature, and diagrams labelled “adapted” are original explanatory redraws, not reproductions.
+    </p>
+    <div class="footer-bar">
+      <span data-i18n="footer.copyright">© 2026 AidBio. Built for the future of scientific decision-making.</span>
+      <span data-i18n="footer.tagline">Data Science for Life Sciences, Pharma and Agritech</span>
+    </div>
+  </div>
+</footer>
+<!--/chrome:footer--><script src="../../assets/js/chrome.js"></script></body></html>

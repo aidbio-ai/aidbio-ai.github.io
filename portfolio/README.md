@@ -69,3 +69,9 @@ See `docs/figure-rights.md`.
 ## Next engineering step
 
 A local coding agent may refactor this static baseline into Astro/Vite/React **only if there is a concrete benefit**. Preserve URLs, semantic content, citation provenance and the founder-story progression.
+
+## Shared header and footer
+
+The portfolio uses the same fixed AidBio header and footer as the rest of the site (generated from
+`../assets/partials/` by `../scripts/sync-chrome.py`); chapter navigation lives in the sticky sub-nav below it.
+`assets/site.css` holds portfolio-only content components; everything shared is in `../assets/css/chrome.css`.

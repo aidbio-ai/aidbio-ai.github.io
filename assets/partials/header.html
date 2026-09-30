@@ -1,0 +1,66 @@
+<nav class="nav" id="site-nav">
+  <div class="container nav-inner">
+    <a href="{{root}}index.html" class="brand" aria-label="AidBio home">
+      <img src="{{root}}assets/aidbio-mark-light.webp" alt="" class="brand-mark mark-light" width="63" height="30" />
+      <img src="{{root}}assets/aidbio-mark-dark.webp" alt="" class="brand-mark mark-dark" width="62" height="30" />
+      <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
+    </a>
+
+    <div class="nav-actions">
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="{{root}}index.html#solutions" data-i18n="nav.solutions"{{cur:solutions}}>Solutions</a></li>
+        <li><a href="{{root}}index.html#projects" data-i18n="nav.projects"{{cur:projects}}>Projects</a></li>
+        <li><a href="{{root}}index.html#blog" data-i18n="nav.blog"{{cur:blog}}>Blog</a></li>
+        <li><a href="{{root}}index.html#process" data-i18n="nav.process"{{cur:process}}>Process</a></li>
+        <li class="has-submenu">
+          <a href="{{root}}index.html#founder" data-i18n="nav.founder"{{curtrue:founder}}>Founder</a>
+          <ul class="submenu">
+            <li><a href="{{root}}index.html#founder" data-i18n="nav.founderOverview">Founder overview</a></li>
+            <li><a href="{{root}}portfolio/index.html" data-i18n="nav.founderStory"{{cur:founder}}>Portfolio: the founder story →</a></li>
+          </ul>
+        </li>
+        <li><a href="{{root}}index.html#contact" class="nav-cta" data-i18n="nav.cta">Start a project</a></li>
+      </ul>
+
+      <div class="theme-switcher" role="group" aria-label="Theme preference">
+        <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
+        <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+        <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+      </div>
+{{#i18n}}
+      <div class="theme-switcher lang-switcher" role="group" aria-label="Language">
+        <button class="theme-option" type="button" data-lang-choice="en" aria-pressed="false">EN</button>
+        <button class="theme-option" type="button" data-lang-choice="pt" aria-pressed="false">PT</button>
+      </div>
+{{/i18n}}
+      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="{{root}}index.html#solutions" data-i18n="nav.solutions">Solutions</a>
+  <a href="{{root}}index.html#projects" data-i18n="nav.projects">Projects</a>
+  <a href="{{root}}index.html#blog" data-i18n="nav.blog">Blog</a>
+  <a href="{{root}}index.html#process" data-i18n="nav.process">Process</a>
+  <a href="{{root}}index.html#founder" data-i18n="nav.founder">Founder</a>
+  <a href="{{root}}portfolio/index.html" class="mobile-sublink" data-i18n="mobile.founderStory">↳ Portfolio: the founder story</a>
+  <a href="{{root}}index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Start a project</a>
+  <div class="theme-switcher" role="group" aria-label="Theme preference">
+    <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
+    <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+    <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+  </div>
+{{#i18n}}
+  <div class="theme-switcher lang-switcher" role="group" aria-label="Language">
+    <button class="theme-option" type="button" data-lang-choice="en" aria-pressed="false">EN</button>
+    <button class="theme-option" type="button" data-lang-choice="pt" aria-pressed="false">PT</button>
+  </div>
+{{/i18n}}
+</div>

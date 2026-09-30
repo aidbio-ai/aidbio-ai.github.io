@@ -19,6 +19,13 @@
     "nav.closeMenu": "Close menu",
   };
 
+  // Resolve dictionaries relative to this script, not the page, so pages in
+  // subfolders can load it too.
+  var BASE =
+    document.currentScript && document.currentScript.src
+      ? new URL("../i18n/", document.currentScript.src).href
+      : "assets/i18n/";
+
   var dictCache = {};
   var currentLang = DEFAULT_LANG;
   var currentDict = null;
@@ -73,7 +80,7 @@
 
   function loadDictionary(lang) {
     if (dictCache[lang]) return Promise.resolve(dictCache[lang]);
-    return fetch("assets/i18n/" + lang + ".json").then(function (res) {
+    return fetch(BASE + lang + ".json").then(function (res) {
       if (!res.ok) throw new Error("Failed to load " + lang + ".json (" + res.status + ")");
       return res.json();
     }).then(function (dict) {

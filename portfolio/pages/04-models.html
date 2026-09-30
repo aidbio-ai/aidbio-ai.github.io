@@ -1,48 +1,134 @@
-<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04 — Data becomes models | AidBio founder story</title><meta name="theme-color" content="#FBFCFE">
-<script>
-    (function () {
-      var STORAGE_KEY = "aidbio-theme-preference";
-      var legacyKey = "aidbio-theme";
-      var root = document.documentElement;
-      var metaTheme = document.querySelector('meta[name="theme-color"]');
-      var mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      function getStoredPreference() {
-        var current = localStorage.getItem(STORAGE_KEY);
-        if (current === "system" || current === "light" || current === "dark") return current;
-        var legacy = localStorage.getItem(legacyKey);
-        if (legacy === "light" || legacy === "dark") return legacy;
-        return "system";
-      }
-      function getResolvedTheme(preference) {
-        if (preference === "light" || preference === "dark") return preference;
-        return mediaQuery.matches ? "dark" : "light";
-      }
-      function applyTheme(preference) {
-        var resolved = getResolvedTheme(preference);
-        root.setAttribute("data-theme", resolved);
-        root.style.colorScheme = resolved;
-        root.setAttribute("data-theme-preference", preference);
-        if (metaTheme) metaTheme.setAttribute("content", resolved === "dark" ? "#0E1219" : "#FBFCFE");
-      }
-      var initialPreference = getStoredPreference();
-      applyTheme(initialPreference);
-      window.__aidbioTheme = { key: STORAGE_KEY, mediaQuery: mediaQuery, applyTheme: applyTheme, getStoredPreference: getStoredPreference, getResolvedTheme: getResolvedTheme };
-    })();
-  </script>
-<link rel="stylesheet" href="../assets/site.css"></head><body>
-<header class="site-header"><div class="wrap nav">
-<a class="brand" href="../index.html"><img src="../../assets/aidbio-mark-light.webp" alt="AidBio logo" class="mark-light"><img src="../../assets/aidbio-mark-dark.webp" alt="AidBio logo" class="mark-dark"><span><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span><small>Founder story</small></span></a>
-<div class="nav-actions"><nav class="navlinks" aria-label="Primary"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" >Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" >Data</a><a href="04-models.html" aria-current="page">Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" >Portfolio</a><a href="../../index.html">← AidBio.com</a></nav><div class="theme-switcher" role="group" aria-label="Theme preference"><button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button><button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button><button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div><button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></div></div></header><div class="mobile-menu" id="mobile-menu"><a href="../index.html" >Why AidBio</a><a href="01-mechanism.html" >Mechanism</a><a href="02-networks.html" >Networks</a><a href="03-data.html" >Data</a><a href="04-models.html">Models</a><a href="05-software.html" >Software</a><a href="06-aidbio.html" >AidBio</a><a href="07-portfolio.html" >Portfolio</a><a href="../../index.html">← AidBio.com</a></div><main><section class="hero"><div class="wrap"><div class="kicker">Chapter 04 · Data becomes models</div><h1>Prediction should preserve biological structure.</h1><p class="lede">The strongest machine-learning work in this trajectory doesn't flatten biology into arbitrary spreadsheet rows and columns. It builds the relationships directly into how the model "sees" the data — as protein shapes, interaction networks, and organized biological categories.</p><div class="progress-nav"><a class="" href="01-mechanism.html">01 Mechanism</a><a class="" href="02-networks.html">02 Networks</a><a class="" href="03-data.html">03 Data</a><a class="active" href="04-models.html">04 Models</a><a class="" href="05-software.html">05 Software</a><a class="" href="06-aidbio.html">06 AidBio</a></div></div></section>
-<section class="section white"><div class="wrap grid-2"><div><div class="eyebrow">2026 · gPPIpred</div><h2>Return to the protein-interaction question — now with graphs.</h2>
+<!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>04 · Data becomes models | AidBio</title><meta name="description" content="Chapter 4 of the AidBio founder story: graph-based models that keep biological structure in the prediction."><meta name="theme-color" content="#FBFCFE">
+<script src="../../assets/js/theme.js"></script>
+<link rel="icon" type="image/png" href="../../assets/favicon.png">
+<link rel="apple-touch-icon" href="../../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../../assets/ds/styles.css">
+<link rel="stylesheet" href="../../assets/css/chrome.css">
+<link rel="stylesheet" href="../assets/site.css"></head><body class="has-subnav">
+<!--chrome:header active="founder"-->
+<nav class="nav" id="site-nav">
+  <div class="container nav-inner">
+    <a href="../../index.html" class="brand" aria-label="AidBio home">
+      <img src="../../assets/aidbio-mark-light.webp" alt="" class="brand-mark mark-light" width="63" height="30" />
+      <img src="../../assets/aidbio-mark-dark.webp" alt="" class="brand-mark mark-dark" width="62" height="30" />
+      <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
+    </a>
+
+    <div class="nav-actions">
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="../../index.html#solutions" data-i18n="nav.solutions">Solutions</a></li>
+        <li><a href="../../index.html#projects" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="../../index.html#blog" data-i18n="nav.blog">Blog</a></li>
+        <li><a href="../../index.html#process" data-i18n="nav.process">Process</a></li>
+        <li class="has-submenu">
+          <a href="../../index.html#founder" data-i18n="nav.founder" aria-current="true">Founder</a>
+          <ul class="submenu">
+            <li><a href="../../index.html#founder" data-i18n="nav.founderOverview">Founder overview</a></li>
+            <li><a href="../../portfolio/index.html" data-i18n="nav.founderStory" aria-current="page">Portfolio: the founder story →</a></li>
+          </ul>
+        </li>
+        <li><a href="../../index.html#contact" class="nav-cta" data-i18n="nav.cta">Start a project</a></li>
+      </ul>
+
+      <div class="theme-switcher" role="group" aria-label="Theme preference">
+        <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
+        <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+        <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+      </div>
+      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../../index.html#solutions" data-i18n="nav.solutions">Solutions</a>
+  <a href="../../index.html#projects" data-i18n="nav.projects">Projects</a>
+  <a href="../../index.html#blog" data-i18n="nav.blog">Blog</a>
+  <a href="../../index.html#process" data-i18n="nav.process">Process</a>
+  <a href="../../index.html#founder" data-i18n="nav.founder">Founder</a>
+  <a href="../../portfolio/index.html" class="mobile-sublink" data-i18n="mobile.founderStory">↳ Portfolio: the founder story</a>
+  <a href="../../index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Start a project</a>
+  <div class="theme-switcher" role="group" aria-label="Theme preference">
+    <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
+    <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+    <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+  </div>
+</div>
+<!--/chrome:header-->
+<!--chrome:subnav set="portfolio" active="04"-->
+<nav class="subnav" aria-label="Founder story chapters">
+  <div class="container subnav-inner">
+    <span class="subnav-label">Founder story</span>
+    <div class="subnav-links">
+      <a href="../index.html">Why AidBio</a>
+      <a href="01-mechanism.html">01 Mechanism</a>
+      <a href="02-networks.html">02 Networks</a>
+      <a href="03-data.html">03 Data</a>
+      <a href="04-models.html" aria-current="page">04 Models</a>
+      <a href="05-software.html">05 Software</a>
+      <a href="06-aidbio.html">06 AidBio</a>
+      <a href="07-portfolio.html">Portfolio</a>
+    </div>
+  </div>
+</nav>
+<!--/chrome:subnav-->
+<main><section class="hero"><div class="container"><div class="eyebrow">Chapter 04 · Data becomes models</div><h1>Prediction should preserve biological structure.</h1><p class="hero-desc">The strongest machine-learning work in this trajectory doesn't flatten biology into arbitrary spreadsheet rows and columns. It builds the relationships directly into how the model "sees" the data — as protein shapes, interaction networks, and organized biological categories.</p></div></section>
+<section class="section section-alt"><div class="container grid-2"><div><div class="eyebrow">2026 · gPPIpred</div><h2>Return to the protein-interaction question — now with <span class="accent-spectrum grad-iris">graphs</span>.</h2>
 <p>Years after running Y2H experiments by hand in the lab, gPPIpred answers the same kind of question — will these two proteins interact? — computationally instead. Each protein is represented as a 3D graph, where the building blocks (amino acids) are dots and physical closeness between them is the connecting lines. An AI model then compares two of these protein graphs side by side and predicts whether they'll stick together, while also highlighting which specific spots on the protein surface likely drive the interaction.</p>
 <p>Tested against 72,358 protein pairs it had never seen before, the model correctly flagged 96% of true interactions, with an overall accuracy score (MCC) of 0.46 — a solid result for a hard prediction problem like this one.</p>
 </div><article class="paper-card"><div class="paper-image"><img src="../assets/figures/gppipred2026-fig1d.png" alt="ROC curve from the gPPIpred paper, AUC 0.8451"></div>
 <div class="paper-body"><div class="meta">MICROPUBLICATION BIOLOGY · 2026 · CC BY</div><h3>gPPIpred</h3><p class="citation">Matiolli CC†, Marques J†, Abreu IA. <em>gPPIpred: A User-Friendly PPI Predictor Based on Protein Molecular Graphs.</em> (2026). DOI: 10.17912/micropub.biology.001796.</p><a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13109786/">Open article →</a></div></article></div></section>
-<section class="section"><div class="wrap"><div class="section-title"><div class="eyebrow">Current graph-learning work</div><h2>Aid2Go extends the representation problem.</h2></div>
+<section class="section"><div class="container"><div class="section-title"><div class="eyebrow">Current graph-learning work</div><h2>Aid2Go extends the <span class="accent-spectrum grad-iris">representation</span> problem.</h2></div>
 <div class="grid-2"><div class="project-card"><span class="tag">PyTorch Geometric</span><span class="tag">GraphSAGE</span><span class="tag">GAT</span><span class="tag">ProtBERT</span><h3 style="margin-top:13px">Protein function prediction as a heterogeneous graph</h3><p>Aid2Go connects several kinds of protein information — known interactions, a standardized biological classification system (Gene Ontology), and lab-confirmed function labels — into a single network. A protein's amino-acid sequence becomes just one input feeding that network, instead of being asked to explain everything on its own.</p></div>
-<div class="diagram"><svg viewBox="0 0 850 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heterogeneous graph for protein function prediction"><style>.l{stroke:#cbd5e1;stroke-width:3}.t{font:600 16px system-ui;fill:#202735}.s{font:13px system-ui;fill:#64748b}</style><line class="l" x1="180" y1="130" x2="420" y2="100"/><line class="l" x1="180" y1="130" x2="420" y2="255"/><line class="l" x1="420" y1="100" x2="670" y2="165"/><line class="l" x1="420" y1="255" x2="670" y2="165"/><circle cx="180" cy="130" r="70" fill="#4d55c7"/><circle cx="420" cy="100" r="62" fill="#3aa879"/><circle cx="420" cy="255" r="62" fill="#3aa879"/><circle cx="670" cy="165" r="78" fill="#e7a83e"/><text class="t" x="180" y="136" text-anchor="middle" fill="white">Protein</text><text class="t" x="420" y="106" text-anchor="middle">PPI</text><text class="t" x="420" y="261" text-anchor="middle">Sequence</text><text class="t" x="670" y="171" text-anchor="middle">GO terms</text><text class="s" x="425" y="380" text-anchor="middle">Biological structure is encoded in the representation before learning begins.</text></svg></div></div></div></section>
-</main><footer><div class="wrap"><div class="spectrum"></div>
-<p><strong>AidBio</strong> — AI &amp; Data Science for Life Sciences and Agritech.</p>
-<p class="small">Founder: Cleverson Carlos Matiolli, PhD · <a href="https://github.com/matiollipt">GitHub</a> · <a href="https://orcid.org/0000-0001-8185-7628">ORCID</a> · <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&hl=en">Google Scholar</a></p>
-<p class="small">This site is a narrative portfolio. Scientific claims link to primary literature; diagrams labelled “adapted” are original explanatory redraws, not reproductions.</p>
-</div></footer><script src="../assets/site.js"></script></body></html>
+<div class="figure figure-media"><svg viewBox="0 0 850 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heterogeneous graph for protein function prediction"><style>.l{stroke:#cbd5e1;stroke-width:3}.t{font:600 16px system-ui;fill:#202735}.s{font:13px system-ui;fill:#64748b}</style><line class="l" x1="180" y1="130" x2="420" y2="100"/><line class="l" x1="180" y1="130" x2="420" y2="255"/><line class="l" x1="420" y1="100" x2="670" y2="165"/><line class="l" x1="420" y1="255" x2="670" y2="165"/><circle cx="180" cy="130" r="70" fill="#4d55c7"/><circle cx="420" cy="100" r="62" fill="#3aa879"/><circle cx="420" cy="255" r="62" fill="#3aa879"/><circle cx="670" cy="165" r="78" fill="#e7a83e"/><text class="t" x="180" y="136" text-anchor="middle" fill="white">Protein</text><text class="t" x="420" y="106" text-anchor="middle">PPI</text><text class="t" x="420" y="261" text-anchor="middle">Sequence</text><text class="t" x="670" y="171" text-anchor="middle">GO terms</text><text class="s" x="425" y="380" text-anchor="middle">Biological structure is encoded in the representation before learning begins.</text></svg></div></div></div></section>
+</main><!--chrome:footer note="portfolio"-->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="../../assets/aidbio-mark-dark.webp" alt="" aria-hidden="true" />
+          <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
+        </div>
+        <p class="footer-blurb" data-i18n="footer.blurb">Data science for life sciences, pharma, and agritech.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-h" data-i18n="footer.exploreHeading">Explore</span>
+        <a href="../../index.html#solutions" data-i18n="nav.solutions">Solutions</a>
+        <a href="../../index.html#projects" data-i18n="nav.projects">Projects</a>
+        <a href="../../aidweather.html">AidWeather</a>
+        <a href="../../index.html#blog" data-i18n="nav.blog">Blog</a>
+        <a href="../../index.html#process" data-i18n="nav.process">Process</a>
+        <a href="../../index.html#founder" data-i18n="nav.founder">Founder</a>
+        <a href="../../portfolio/index.html" data-i18n="footer.founderStory">Founder story</a>
+        <a href="../../index.html#contact" data-i18n="footer.contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-h" data-i18n="footer.connectHeading">Connect</span>
+        <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+      </div>
+    </div>
+    <p class="footer-note">
+      Founder: Cleverson Carlos Matiolli, PhD ·
+      <a href="https://orcid.org/0000-0001-8185-7628" target="_blank" rel="noopener">ORCID</a> ·
+      <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.
+      This is a narrative portfolio: scientific claims link to primary literature, and diagrams labelled “adapted” are original explanatory redraws, not reproductions.
+    </p>
+    <div class="footer-bar">
+      <span data-i18n="footer.copyright">© 2026 AidBio. Built for the future of scientific decision-making.</span>
+      <span data-i18n="footer.tagline">Data Science for Life Sciences, Pharma and Agritech</span>
+    </div>
+  </div>
+</footer>
+<!--/chrome:footer--><script src="../../assets/js/chrome.js"></script></body></html>
