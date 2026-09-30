@@ -36,8 +36,8 @@
         "note": "Explore the project"
       },
       "aid2go": {
-        "label": "Open-source library",
-        "note": "Explore the project"
+        "label": "Research prototype",
+        "note": "Learn more"
       },
       "gppipred": {
         "label": "Publication · 2026",
@@ -104,7 +104,7 @@
     "h2_lead": "Things we build in the",
     "h2_accent": "open",
     "h2_tail": ".",
-    "lead": "Alongside client work, AidBio ships open-source tools for agritech and life-science data. Try them now:",
+    "lead": "Alongside client work, AidBio builds tools for agritech and life-science data — some open source, some available on request.",
     "kindLabel": "Open-source library",
     "githubCta": "Technical details ↗",
     "aidweather": {
@@ -114,8 +114,10 @@
       "cta": "Explore AidWeather"
     },
     "aid2go": {
+      "kind": "Research software",
       "body": "Predicts protein function from one graph that links proteins, their interactions, and Gene Ontology terms — using graph neural networks over protein language-model embeddings.",
-      "stat": "Research prototype"
+      "stat": "Research prototype",
+      "cta": "Request access"
     },
     "aidweatherReport": {
       "kind": "Report generator",

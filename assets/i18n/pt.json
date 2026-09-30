@@ -36,8 +36,8 @@
         "note": "Explorar o projeto"
       },
       "aid2go": {
-        "label": "Biblioteca de código aberto",
-        "note": "Explorar o projeto"
+        "label": "Protótipo de pesquisa",
+        "note": "Saiba mais"
       },
       "gppipred": {
         "label": "Publicação · 2026",
@@ -104,7 +104,7 @@
     "h2_lead": "Coisas que construímos em código",
     "h2_accent": "aberto",
     "h2_tail": ".",
-    "lead": "Além do trabalho com clientes, a AidBio disponibiliza ferramentas open-source para dados de agritech e ciências da vida. Disponíveis para testar agora:",
+    "lead": "Além do trabalho com clientes, a AidBio desenvolve ferramentas para dados de agritech e ciências da vida — algumas open-source, outras disponíveis sob consulta.",
     "kindLabel": "Biblioteca open-source",
     "githubCta": "Detalhes técnicos ↗",
     "aidweather": {
@@ -114,8 +114,10 @@
       "cta": "Explorar o AidWeather"
     },
     "aid2go": {
+      "kind": "Software de pesquisa",
       "body": "Prevê a função de proteínas a partir de um único grafo que conecta proteínas, suas interações e termos da Gene Ontology — usando redes neurais de grafos sobre embeddings de modelos de linguagem de proteínas.",
-      "stat": "Protótipo de pesquisa"
+      "stat": "Protótipo de pesquisa",
+      "cta": "Solicitar acesso"
     },
     "aidweatherReport": {
       "kind": "Gerador de relatórios",
