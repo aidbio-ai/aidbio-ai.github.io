@@ -159,6 +159,17 @@ main li a:not(.btn):hover,
   margin-top: var(--space-4);
 }
 
+/* Free-standing logo mark: no card, border or backdrop */
+.hero-logo-mark {
+  display: flex;
+  justify-content: center;
+}
+
+.hero-logo-mark img {
+  width: min(100%, 320px);
+  height: auto;
+}
+
 .spectrum {
   height: 4px;
   border-radius: var(--radius-full);

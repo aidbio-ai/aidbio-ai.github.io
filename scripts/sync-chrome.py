@@ -21,7 +21,8 @@ Marker syntax inside a page (attributes are optional):
           assets/js/i18n.js and have translated content).
   set     which assets/partials/subnav-<set>.html to use.
   note    optional assets/partials/note-<note>.html shown above the footer bar.
-  tagline replaces the default right-hand footer text.
+  tagline replaces the default right-hand footer text; taglinekey (optional) is the
+          data-i18n key that translates it.
 
 Relative URL prefixes ({{root}}, {{portfolio}}, {{pages}}) are computed from
 each page's location, so the same partial works at any folder depth.
@@ -70,7 +71,11 @@ def render(kind, attrs, page_dir):
     if kind == "footer":
         note = read("note-%s.html" % opts["note"]) if opts.get("note") else ""
         if "tagline" in opts:
-            tagline = "<span>%s</span>" % html.escape(opts["tagline"], quote=False)
+            key = opts.get("taglinekey")
+            tagline = "<span%s>%s</span>" % (
+                (' data-i18n="%s"' % key) if key else "",
+                html.escape(opts["tagline"], quote=False),
+            )
         else:
             tagline = (
                 '<span data-i18n="footer.tagline">'

@@ -4,8 +4,8 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>AidWeather | Agroclimatic &amp; Solar Data from NASA POWER — AidBio</title>
-  <meta name="description"
+  <title data-i18n="aw.meta.title">AidWeather | Agroclimatic &amp; Solar Data from NASA POWER — AidBio</title>
+  <meta name="description" data-i18n-attr="content:aw.meta.description"
     content="AidWeather is an open-source Python library and CLI that turns NASA POWER weather and solar data into clean, cached, analysis-ready tables — for a point, a transect, or a whole region." />
   <link rel="canonical" href="https://aidbio.org/aidweather" />
 
@@ -479,7 +479,7 @@
 </head>
 
 <body class="has-subnav">
-  <!--chrome:header active="projects"-->
+  <!--chrome:header active="projects" i18n="1"-->
   <nav class="nav" id="site-nav">
     <div class="container nav-inner">
       <a href="index.html" class="brand" aria-label="AidBio home">
@@ -509,6 +509,10 @@
           <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
           <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
         </div>
+        <div class="theme-switcher lang-switcher" role="group" aria-label="Language">
+          <button class="theme-option" type="button" data-lang-choice="en" aria-pressed="false">EN</button>
+          <button class="theme-option" type="button" data-lang-choice="pt" aria-pressed="false">PT</button>
+        </div>
         <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
           <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
             <line x1="4" y1="7" x2="20" y2="7" />
@@ -533,6 +537,10 @@
       <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
       <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
     </div>
+    <div class="theme-switcher lang-switcher" role="group" aria-label="Language">
+      <button class="theme-option" type="button" data-lang-choice="en" aria-pressed="false">EN</button>
+      <button class="theme-option" type="button" data-lang-choice="pt" aria-pressed="false">PT</button>
+    </div>
   </div>
   <!--/chrome:header-->
 
@@ -541,10 +549,10 @@
     <div class="container subnav-inner">
       <span class="subnav-label">AidWeather</span>
       <div class="subnav-links">
-        <a href="#what">What it does</a>
-        <a href="#quickstart">Quick start</a>
-        <a href="#install">Install</a>
-        <a href="#parameters">Parameters</a>
+        <a href="#what" data-i18n="aw.sub.what">What it does</a>
+        <a href="#quickstart" data-i18n="aw.sub.quick">Quick start</a>
+        <a href="#install" data-i18n="aw.sub.install">Install</a>
+        <a href="#parameters" data-i18n="aw.sub.params">Parameters</a>
         <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="subnav-ext">GitHub ↗</a>
       </div>
     </div>
@@ -556,40 +564,37 @@
       <div class="reveal">
         <img src="assets/aidweather-logo.png" alt="AidWeather logo" class="hero-logo" width="270" height="188" />
         <div class="kicker-row">
-          <a href="index.html#projects" class="back-link">← Back to AidBio</a>
-          <span class="badge-beta">Open source · Beta</span>
+          <a href="index.html#projects" class="back-link" data-i18n="aw.hero.back">← Back to AidBio</a>
+          <span class="badge-beta" data-i18n="aw.hero.badge">Open source · Beta</span>
         </div>
-        <span class="eyebrow">AidBio open tools · AidWeather</span>
-        <h1 class="heading-lg">Weather and solar data, <span class="accent-italic">already cleaned up.</span></h1>
-        <p class="hero-desc">
-          AidWeather is a small Python library and command-line tool that pulls agroclimatic and solar-radiation
-          data straight from <strong>NASA's POWER API</strong> — and hands it back as tidy, analysis-ready tables.
-          You ask for a place and a date range; it deals with the requests, retries, caching, and units so you
-          don't have to.
+        <span class="eyebrow" data-i18n="aw.hero.eyebrow">AidBio open tools · AidWeather</span>
+        <h1 class="heading-lg" data-i18n-html="aw.hero.h1">Weather and solar data, <span class="accent-italic">already cleaned up.</span></h1>
+        <p class="hero-desc" data-i18n-html="aw.hero.desc">
+          AidWeather is a small Python library and command-line tool that pulls agroclimatic and solar-radiation data straight from <strong>NASA's POWER API</strong> — and hands it back as tidy, analysis-ready tables for data analytics and machine-learning workflows. You ask for a place and a date range; it deals with the requests, retries, caching, and units so you don't have to.
         </p>
 
         <div class="hero-actions">
-          <a href="#install" class="btn btn-primary">Install AidWeather</a>
-          <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary">View on GitHub ↗</a>
+          <a href="#install" class="btn btn-primary" data-i18n="aw.hero.ctaInstall">Install AidWeather</a>
+          <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="aw.hero.ctaGithub">View on GitHub ↗</a>
         </div>
       </div>
 
       <div class="hero-stats reveal delay-2">
         <div>
           <span class="stat-val">18</span>
-          <span class="stat-label">Weather, solar &amp; soil parameters, unit-validated</span>
+          <span class="stat-label" data-i18n="aw.stats.s1">Weather, solar &amp; soil parameters, unit-validated</span>
         </div>
         <div>
-          <span class="stat-val">3 shapes</span>
-          <span class="stat-label">Point, transect, and regional sampling</span>
+          <span class="stat-val" data-i18n="aw.stats.v2">3 shapes</span>
+          <span class="stat-label" data-i18n="aw.stats.s2">Point, transect, and regional sampling</span>
         </div>
         <div>
           <span class="stat-val">SQLite</span>
-          <span class="stat-label">Built-in caching, no repeat downloads</span>
+          <span class="stat-label" data-i18n="aw.stats.s3">Built-in caching, no repeat downloads</span>
         </div>
         <div>
           <span class="stat-val">Python + CLI</span>
-          <span class="stat-label">Use it in a notebook or the terminal</span>
+          <span class="stat-label" data-i18n="aw.stats.s4">Use it in a notebook or the terminal</span>
         </div>
       </div>
     </div>
@@ -600,12 +605,10 @@
     <section id="what" class="section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">What it does</span>
-          <h2 class="heading-md">The awkward parts of NASA POWER, handled for you.</h2>
-          <p class="text-lead">
-            NASA POWER is a free public dataset, but talking to it directly means building request URLs, handling
-            timeouts and retries, checking payload shapes, and reconciling units and grids yourself. AidWeather does
-            that work for you, so what you get back is a table you can start analyzing right away.
+          <span class="eyebrow" data-i18n="aw.what.eyebrow">What it does</span>
+          <h2 class="heading-md" data-i18n="aw.what.h2">The awkward parts of NASA POWER, handled for you.</h2>
+          <p class="text-lead" data-i18n="aw.what.lead">
+            NASA POWER is a free public dataset, but talking to it directly means building request URLs, handling timeouts and retries, checking payload shapes, and reconciling units and grids yourself. AidWeather does that work for you, so what you get back is a table you can start analyzing right away — in a statistical model, a machine-learning pipeline, or an AI-assisted workflow.
           </p>
         </div>
 
@@ -617,8 +620,8 @@
                 <path d="M8 18h9" />
               </svg>
             </div>
-            <h3>Direct NASA POWER access</h3>
-            <p>Builds the request, handles timeouts and retries, and checks the response shape — so you call one method instead of writing that logic yourself.</p>
+            <h3 data-i18n="aw.f1.t">Direct NASA POWER access</h3>
+            <p data-i18n="aw.f1.b">Builds the request, handles timeouts and retries, and checks the response shape — so you call one method instead of writing that logic yourself.</p>
           </article>
 
           <article class="feature-card reveal delay-1">
@@ -628,8 +631,8 @@
                 <circle cx="12" cy="10" r="2.4" />
               </svg>
             </div>
-            <h3>Point, path, or region</h3>
-            <p>Fetch a single coordinate, sample along a 1D transect, or pull a 2D bounding box — with internal tuning so the spatial sampling stays accurate and consistent.</p>
+            <h3 data-i18n="aw.f2.t">Point, path, or region</h3>
+            <p data-i18n="aw.f2.b">Fetch a single coordinate, sample along a 1D transect, or pull a 2D bounding box — with internal tuning so the spatial sampling stays accurate and consistent.</p>
           </article>
 
           <article class="feature-card reveal delay-2">
@@ -640,8 +643,8 @@
                 <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
               </svg>
             </div>
-            <h3>Caching &amp; API compliance</h3>
-            <p>A built-in SQLite cache means the same query is never downloaded twice — saving bandwidth and respecting NASA POWER's rate limits and usage policy.</p>
+            <h3 data-i18n="aw.f3.t">Caching &amp; API compliance</h3>
+            <p data-i18n="aw.f3.b">A built-in SQLite cache means the same query is never downloaded twice — saving bandwidth and respecting NASA POWER's rate limits and usage policy.</p>
           </article>
 
           <article class="feature-card reveal">
@@ -651,8 +654,8 @@
                 <polyline points="16 6 21 12 16 18" />
               </svg>
             </div>
-            <h3>Python API + full CLI</h3>
-            <p>Two ways in: a Python API for notebooks and scripts, and a command-line tool for quick, scriptable extractions.</p>
+            <h3 data-i18n="aw.f4.t">Python API + full CLI</h3>
+            <p data-i18n="aw.f4.b">Two ways in: a Python API for notebooks and scripts, and a command-line tool for quick, scriptable extractions.</p>
           </article>
 
           <article class="feature-card reveal delay-1">
@@ -663,8 +666,8 @@
                 <path d="M10.3 4.3 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 4.3a2 2 0 0 0-3.4 0z" />
               </svg>
             </div>
-            <h3>Clear errors &amp; logging</h3>
-            <p>Logs what each query did, and raises specific error types with a plain-language message — instead of a raw stack trace.</p>
+            <h3 data-i18n="aw.f5.t">Clear errors &amp; logging</h3>
+            <p data-i18n="aw.f5.b">Logs what each query did, and raises specific error types with a plain-language message — instead of a raw stack trace.</p>
           </article>
 
           <article class="feature-card reveal delay-2">
@@ -674,8 +677,8 @@
                 <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" />
               </svg>
             </div>
-            <h3>Weather, solar &amp; soil together</h3>
-            <p>Temperature, humidity, wind, precipitation, pressure, solar irradiance / PAR, and soil wetness (surface, root-zone, profile) — the meteorological, energy, and soil-moisture variables agritech work usually needs, side by side.</p>
+            <h3 data-i18n="aw.f6.t">Weather, solar &amp; soil together</h3>
+            <p data-i18n="aw.f6.b">Temperature, humidity, wind, precipitation, pressure, solar irradiance / PAR, and soil wetness (surface, root-zone, profile) — the meteorological, energy, and soil-moisture variables agritech work usually needs, side by side.</p>
           </article>
         </div>
       </div>
@@ -685,29 +688,28 @@
     <section class="section how-section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow warm">Three ways to sample space</span>
-          <h2 class="heading-md">Match the query to the question.</h2>
-          <p class="text-lead">
-            The same client fetches a single site, a line across a landscape, or a filled-in region — each respecting
-            the native grid spacing of the parameters you ask for.
+          <span class="eyebrow warm" data-i18n="aw.scope.eyebrow">Three ways to sample space</span>
+          <h2 class="heading-md" data-i18n="aw.scope.h2">Match the query to the question.</h2>
+          <p class="text-lead" data-i18n="aw.scope.lead">
+            The same client fetches a single site, a line across a landscape, or a filled-in region — each respecting the native grid spacing of the parameters you ask for.
           </p>
         </div>
 
         <div class="scope-grid reveal delay-1">
           <div class="scope-card" style="--scope-accent: var(--spectrum-indigo);">
             <span class="scope-tag">get_point_data</span>
-            <h4>A single point</h4>
-            <p>One latitude/longitude and a date range returns a clean daily or hourly series for that site — the everyday case for a field, a station, or a trial plot.</p>
+            <h4 data-i18n="aw.s1.t">A single point</h4>
+            <p data-i18n="aw.s1.b">One latitude/longitude and a date range returns a clean daily or hourly series for that site — the everyday case for a field, a station, or a trial plot.</p>
           </div>
           <div class="scope-card" style="--scope-accent: var(--spectrum-teal);">
             <span class="scope-tag">get_transect_data</span>
-            <h4>Along a transect</h4>
-            <p>Give a start and end coordinate and a spacing in kilometres; AidWeather samples evenly along the line, respecting each parameter's real grid resolution.</p>
+            <h4 data-i18n="aw.s2.t">Along a transect</h4>
+            <p data-i18n="aw.s2.b">Give a start and end coordinate and a spacing in kilometres; AidWeather samples evenly along the line, respecting each parameter's real grid resolution.</p>
           </div>
           <div class="scope-card" style="--scope-accent: var(--spectrum-emerald);">
             <span class="scope-tag">fetch-regional</span>
-            <h4>Across a region</h4>
-            <p>Define a bounding box (up to 4.5° × 4.5°) and pull a gridded field over the whole area — one parameter per request, cached like everything else.</p>
+            <h4 data-i18n="aw.s3.t">Across a region</h4>
+            <p data-i18n="aw.s3.b">Define a bounding box (up to 4.5° × 4.5°) and pull a gridded field over the whole area — one parameter per request, cached like everything else.</p>
           </div>
         </div>
       </div>
@@ -717,9 +719,9 @@
     <section id="quickstart" class="section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">Quick start</span>
-          <h2 class="heading-md">A few lines to your first dataset.</h2>
-          <p class="text-lead">
+          <span class="eyebrow" data-i18n="aw.quick.eyebrow">Quick start</span>
+          <h2 class="heading-md" data-i18n="aw.quick.h2">A few lines to your first dataset.</h2>
+          <p class="text-lead" data-i18n="aw.quick.lead">
             Whether you live in notebooks or the terminal, getting a table of weather and solar data is a short trip.
           </p>
         </div>
@@ -752,7 +754,7 @@ df_t = client.<span class="c-fn">get_transect_data</span>(
           </div>
 
           <div class="code-block reveal delay-1">
-            <div class="code-head"><span class="dot" style="background: var(--spectrum-coral);"></span> Command line</div>
+            <div class="code-head"><span class="dot" style="background: var(--spectrum-coral);"></span> <span data-i18n="aw.quick.cli">Command line</span></div>
 <pre><span class="c-com"># single-point data → CSV</span>
 aidweather fetch <span class="c-flag">--lat</span> <span class="c-num">-23.55</span> <span class="c-flag">--lon</span> <span class="c-num">-46.63</span> \
     <span class="c-flag">--start</span> 2023-01-01 <span class="c-flag">--end</span> 2023-01-31 \
@@ -784,12 +786,10 @@ aidweather cache info</pre>
     <section id="install" class="section how-section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow warm">Installation</span>
-          <h2 class="heading-md">One command to get going.</h2>
-          <p class="text-lead">
-            AidWeather is published on <a href="https://pypi.org/project/aidweather/" target="_blank" rel="noopener">PyPI</a>.
-            Use <span class="mono">pip</span> for the Python library, or <span class="mono">uv tool</span> to get the CLI
-            as an isolated tool.
+          <span class="eyebrow warm" data-i18n="aw.install.eyebrow">Installation</span>
+          <h2 class="heading-md" data-i18n="aw.install.h2">One command to get going.</h2>
+          <p class="text-lead" data-i18n-html="aw.install.lead">
+            AidWeather is published on <a href="https://pypi.org/project/aidweather/" target="_blank" rel="noopener">PyPI</a>. Use <span class="mono">pip</span> for the Python library, or <span class="mono">uv tool</span> to get the CLI as an isolated tool.
           </p>
         </div>
 
@@ -808,7 +808,7 @@ uv tool install aidweather</pre>
         </div>
 
         <div class="reveal delay-1" style="margin-top: var(--space-5);">
-          <p class="text-lead" style="margin: 0;">
+          <p class="text-lead" style="margin: 0;" data-i18n="aw.install.source">
             From source / development install:
           </p>
         </div>
@@ -839,12 +839,10 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
     <section id="parameters" class="section param-section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">Parameter catalogue</span>
-          <h2 class="heading-md">18 core parameters, with the grid facts built in.</h2>
-          <p class="text-lead">
-            Each parameter ships with metadata, unit validation, and its native NASA source-grid resolution — so you
-            always know what a value means and where it came from. Weather, solar, and soil-moisture parameters are
-            all daily; the three soil parameters (GWETTOP, GWETROOT, GWETPROF) aren't available at hourly resolution.
+          <span class="eyebrow" data-i18n="aw.params.eyebrow">Parameter catalogue</span>
+          <h2 class="heading-md" data-i18n="aw.params.h2">18 core parameters, with the grid facts built in.</h2>
+          <p class="text-lead" data-i18n="aw.params.lead">
+            Each parameter ships with metadata, unit validation, and its native NASA source-grid resolution — so you always know what a value means and where it came from. Weather, solar, and soil-moisture parameters are all daily; the three soil parameters (GWETTOP, GWETROOT, GWETPROF) aren't available at hourly resolution.
           </p>
         </div>
 
@@ -853,33 +851,33 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
             <table class="param-table">
               <thead>
                 <tr>
-                  <th>Code</th>
-                  <th>Parameter</th>
-                  <th>Group</th>
-                  <th>Source product</th>
-                  <th>Native grid</th>
-                  <th>Daily unit</th>
+                  <th data-i18n="aw.th1">Code</th>
+                  <th data-i18n="aw.th2">Parameter</th>
+                  <th data-i18n="aw.th3">Group</th>
+                  <th data-i18n="aw.th4">Source product</th>
+                  <th data-i18n="aw.th5">Native grid</th>
+                  <th data-i18n="aw.th6">Daily unit</th>
                 </tr>
               </thead>
               <tbody>
-                <tr><td><code>T2M</code></td><td>Temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>T2M_MAX</code></td><td>Maximum temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>T2M_MIN</code></td><td>Minimum temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>T2M_RANGE</code></td><td>Diurnal temperature range at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>T2MWET</code></td><td>Wet-bulb temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>T2MDEW</code></td><td>Dew-point temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>TS</code></td><td>Surface skin temperature</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>RH2M</code></td><td>Relative humidity at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>%</td></tr>
-                <tr><td><code>PRECTOTCORR</code></td><td>Corrected total precipitation</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>mm/day</td></tr>
-                <tr><td><code>ALLSKY_SFC_SW_DWN</code></td><td>Surface shortwave downward irradiance</td><td><span class="group-tag group-sol">Solar</span></td><td><span class="src-pill">CERES SYN1deg / SRB</span></td><td class="mono">1.00° × 1.00°</td><td>kWh/m²/day</td></tr>
-                <tr><td><code>ALLSKY_SFC_PAR_TOT</code></td><td>Surface PAR total</td><td><span class="group-tag group-sol">Solar</span></td><td><span class="src-pill">CERES SYN1deg / SRB</span></td><td class="mono">1.00° × 1.00°</td><td>MJ/m²/day</td></tr>
-                <tr><td><code>WS10M</code></td><td>Wind speed at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>m/s</td></tr>
-                <tr><td><code>WS10M_MAX</code></td><td>Maximum wind speed at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>m/s</td></tr>
-                <tr><td><code>WD10M</code></td><td>Wind direction at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>degrees</td></tr>
-                <tr><td><code>PS</code></td><td>Surface pressure</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>kPa</td></tr>
-                <tr><td><code>GWETTOP</code></td><td>Surface soil wetness</td><td><span class="group-tag group-soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
-                <tr><td><code>GWETROOT</code></td><td>Root-zone soil wetness</td><td><span class="group-tag group-soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
-                <tr><td><code>GWETPROF</code></td><td>Profile soil moisture</td><td><span class="group-tag group-soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
+                <tr><td><code>T2M</code></td><td data-i18n="aw.par.T2M">Temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
+                <tr><td><code>T2M_MAX</code></td><td data-i18n="aw.par.T2M_MAX">Maximum temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
+                <tr><td><code>T2M_MIN</code></td><td data-i18n="aw.par.T2M_MIN">Minimum temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
+                <tr><td><code>T2M_RANGE</code></td><td data-i18n="aw.par.T2M_RANGE">Diurnal temperature range at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
+                <tr><td><code>T2MWET</code></td><td data-i18n="aw.par.T2MWET">Wet-bulb temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
+                <tr><td><code>T2MDEW</code></td><td data-i18n="aw.par.T2MDEW">Dew-point temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
+                <tr><td><code>TS</code></td><td data-i18n="aw.par.TS">Surface skin temperature</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
+                <tr><td><code>RH2M</code></td><td data-i18n="aw.par.RH2M">Relative humidity at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>%</td></tr>
+                <tr><td><code>PRECTOTCORR</code></td><td data-i18n="aw.par.PRECTOTCORR">Corrected total precipitation</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td data-i18n="aw.unit.mmday">mm/day</td></tr>
+                <tr><td><code>ALLSKY_SFC_SW_DWN</code></td><td data-i18n="aw.par.ALLSKY_SFC_SW_DWN">Surface shortwave downward irradiance</td><td><span class="group-tag group-sol">Solar</span></td><td><span class="src-pill">CERES SYN1deg / SRB</span></td><td class="mono">1.00° × 1.00°</td><td data-i18n="aw.unit.kwh">kWh/m²/day</td></tr>
+                <tr><td><code>ALLSKY_SFC_PAR_TOT</code></td><td data-i18n="aw.par.ALLSKY_SFC_PAR_TOT">Surface PAR total</td><td><span class="group-tag group-sol">Solar</span></td><td><span class="src-pill">CERES SYN1deg / SRB</span></td><td class="mono">1.00° × 1.00°</td><td data-i18n="aw.unit.mj">MJ/m²/day</td></tr>
+                <tr><td><code>WS10M</code></td><td data-i18n="aw.par.WS10M">Wind speed at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>m/s</td></tr>
+                <tr><td><code>WS10M_MAX</code></td><td data-i18n="aw.par.WS10M_MAX">Maximum wind speed at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>m/s</td></tr>
+                <tr><td><code>WD10M</code></td><td data-i18n="aw.par.WD10M">Wind direction at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td data-i18n="aw.unit.deg">degrees</td></tr>
+                <tr><td><code>PS</code></td><td data-i18n="aw.par.PS">Surface pressure</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>kPa</td></tr>
+                <tr><td><code>GWETTOP</code></td><td data-i18n="aw.par.GWETTOP">Surface soil wetness</td><td><span class="group-tag group-soil" data-i18n="aw.group.soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
+                <tr><td><code>GWETROOT</code></td><td data-i18n="aw.par.GWETROOT">Root-zone soil wetness</td><td><span class="group-tag group-soil" data-i18n="aw.group.soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
+                <tr><td><code>GWETPROF</code></td><td data-i18n="aw.par.GWETPROF">Profile soil moisture</td><td><span class="group-tag group-soil" data-i18n="aw.group.soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
               </tbody>
             </table>
           </div>
@@ -893,13 +891,11 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
             </svg>
           </div>
           <div>
-            <h4>A coordinate is a grid cell, not a pinpoint</h4>
-            <p>
-              A coordinate you submit resolves to a source-product grid cell — it isn't a point measurement at your exact
-              latitude and longitude. Different parameters come from different source products (MERRA-2 at 0.5° × 0.625°,
-              CERES solar radiation at 1.0° × 1.0°), so nearby coordinates that map to the same cell return identical series.
+            <h4 data-i18n="aw.callout.h">A coordinate is a grid cell, not a pinpoint</h4>
+            <p data-i18n="aw.callout.p1">
+              A coordinate you submit resolves to a source-product grid cell — it isn't a point measurement at your exact latitude and longitude. Different parameters come from different source products (MERRA-2 at 0.5° × 0.625°, CERES solar radiation at 1.0° × 1.0°), so nearby coordinates that map to the same cell return identical series.
             </p>
-            <p>AidWeather keeps this provenance visible so your spatial interpretation stays honest.</p>
+            <p data-i18n="aw.callout.p2">AidWeather keeps this provenance visible so your spatial interpretation stays honest.</p>
           </div>
         </div>
       </div>
@@ -909,37 +905,36 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
     <section class="section">
       <div class="container">
         <div class="reveal">
-          <span class="eyebrow">Documentation</span>
-          <h2 class="heading-md">Guides for scientists and developers.</h2>
-          <p class="text-lead">
-            The docs are split into focused guides — start with the user guide, dip into provenance and spatial
-            interpretation when you need the details.
+          <span class="eyebrow" data-i18n="aw.guides.eyebrow">Documentation</span>
+          <h2 class="heading-md" data-i18n="aw.guides.h2">Guides for scientists and developers.</h2>
+          <p class="text-lead" data-i18n="aw.guides.lead">
+            The docs are split into focused guides — start with the user guide, dip into provenance and spatial interpretation when you need the details.
           </p>
         </div>
 
         <div class="guide-grid reveal delay-1">
           <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/user_guide.md" target="_blank" rel="noopener">
-            <span><span class="g-name">User Guide</span><span class="g-desc">Step-by-step intro to fetching &amp; analyzing data</span></span>
+            <span><span class="g-name" data-i18n="aw.g1.n">User Guide</span><span class="g-desc" data-i18n="aw.g1.d">Step-by-step intro to fetching &amp; analyzing data</span></span>
             <span class="g-ico" aria-hidden="true">↗</span>
           </a>
           <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/spatial_interpretation.md" target="_blank" rel="noopener">
-            <span><span class="g-name">Spatial Interpretation</span><span class="g-desc">Grids, transects, regional boxes, station comparisons</span></span>
+            <span><span class="g-name" data-i18n="aw.g2.n">Spatial Interpretation</span><span class="g-desc" data-i18n="aw.g2.d">Grids, transects, regional boxes, station comparisons</span></span>
             <span class="g-ico" aria-hidden="true">↗</span>
           </a>
           <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/parameter_provenance.md" target="_blank" rel="noopener">
-            <span><span class="g-name">Parameter &amp; Provenance</span><span class="g-desc">Catalogue, NASA source models, time standards</span></span>
+            <span><span class="g-name" data-i18n="aw.g3.n">Parameter &amp; Provenance</span><span class="g-desc" data-i18n="aw.g3.d">Catalogue, NASA source models, time standards</span></span>
             <span class="g-ico" aria-hidden="true">↗</span>
           </a>
           <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/geo_reference.md" target="_blank" rel="noopener">
-            <span><span class="g-name">Geospatial Coordinates</span><span class="g-desc">DD, DDM, DMS notation and GeoCoordinate usage</span></span>
+            <span><span class="g-name" data-i18n="aw.g4.n">Geospatial Coordinates</span><span class="g-desc" data-i18n="aw.g4.d">DD, DDM, DMS notation and GeoCoordinate usage</span></span>
             <span class="g-ico" aria-hidden="true">↗</span>
           </a>
           <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/api_reference.md" target="_blank" rel="noopener">
-            <span><span class="g-name">API Reference</span><span class="g-desc">PowerClient, GeoCoordinate, query functions</span></span>
+            <span><span class="g-name" data-i18n="aw.g5.n">API Reference</span><span class="g-desc" data-i18n="aw.g5.d">PowerClient, GeoCoordinate, query functions</span></span>
             <span class="g-ico" aria-hidden="true">↗</span>
           </a>
           <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/config_reference.md" target="_blank" rel="noopener">
-            <span><span class="g-name">Configuration</span><span class="g-desc">Env vars, JSON config, SQLite cache settings</span></span>
+            <span><span class="g-name" data-i18n="aw.g6.n">Configuration</span><span class="g-desc" data-i18n="aw.g6.d">Env vars, JSON config, SQLite cache settings</span></span>
             <span class="g-ico" aria-hidden="true">↗</span>
           </a>
         </div>
@@ -950,24 +945,22 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
     <section class="section cta-section">
       <div class="container">
         <div class="cta-card reveal">
-          <span class="eyebrow" style="justify-content:center;">Open access · Apache-2.0</span>
-          <h2 class="heading-md">Free data, with the attribution it deserves.</h2>
-          <p class="text-lead" style="margin: 0 auto;">
-            NASA POWER data are open access and free of charge. Work that uses AidWeather should cite the NASA POWER
-            project and acknowledge the underlying MERRA-2 / GEOS-IT and CERES / FLASHFlux / SRB source products, per
-            the NASA Earthdata Data Use and Attribution Policy.
+          <span class="eyebrow" style="justify-content:center;" data-i18n="aw.cta.eyebrow">Open access · Apache-2.0</span>
+          <h2 class="heading-md" data-i18n="aw.cta.h2">Free data, with the attribution it deserves.</h2>
+          <p class="text-lead" style="margin: 0 auto;" data-i18n="aw.cta.lead">
+            NASA POWER data are open access and free of charge. Work that uses AidWeather should cite the NASA POWER project and acknowledge the underlying MERRA-2 / GEOS-IT and CERES / FLASHFlux / SRB source products, per the NASA Earthdata Data Use and Attribution Policy.
           </p>
           <div class="btn-row">
-            <a href="https://pypi.org/project/aidweather/" target="_blank" rel="noopener" class="btn btn-primary">View on PyPI ↗</a>
-            <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary">Explore the repository ↗</a>
-            <a href="https://power.larc.nasa.gov/" target="_blank" rel="noopener" class="btn btn-secondary">NASA POWER project ↗</a>
+            <a href="https://pypi.org/project/aidweather/" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="aw.cta.b1">View on PyPI ↗</a>
+            <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="aw.cta.b2">Explore the repository ↗</a>
+            <a href="https://power.larc.nasa.gov/" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="aw.cta.b3">NASA POWER project ↗</a>
           </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!--chrome:footer tagline="AidWeather · Apache-2.0 · Data © NASA POWER"-->
+  <!--chrome:footer tagline="AidWeather · Apache-2.0 · Data © NASA POWER" taglinekey="aw.footer.tagline"-->
   <footer class="footer">
     <div class="container">
       <div class="footer-top">
@@ -998,12 +991,13 @@ main/install.ps1))) <span class="c-flag">-Yes</span></pre>
       </div>
       <div class="footer-bar">
         <span data-i18n="footer.copyright">© 2026 AidBio. Built for the future of scientific decision-making.</span>
-        <span>AidWeather · Apache-2.0 · Data © NASA POWER</span>
+        <span data-i18n="aw.footer.tagline">AidWeather · Apache-2.0 · Data © NASA POWER</span>
       </div>
     </div>
   </footer>
   <!--/chrome:footer-->
 
+  <script src="assets/js/i18n.js"></script>
   <script src="assets/js/chrome.js"></script>
 </body>
 
