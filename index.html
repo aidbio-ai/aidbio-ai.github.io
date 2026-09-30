@@ -22,606 +22,26 @@
       rel="stylesheet"
     />
 
-    <script>
-      (function () {
-        const STORAGE_KEY = "aidbio-theme-preference";
-        const legacyKey = "aidbio-theme";
-        const root = document.documentElement;
-        const metaTheme = document.querySelector('meta[name="theme-color"]');
-        const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-
-        function getStoredPreference() {
-          const current = localStorage.getItem(STORAGE_KEY);
-          if (current === "system" || current === "light" || current === "dark")
-            return current;
-
-          const legacy = localStorage.getItem(legacyKey);
-          if (legacy === "light" || legacy === "dark") return legacy;
-
-          return "system";
-        }
-
-        function getResolvedTheme(preference) {
-          if (preference === "light" || preference === "dark")
-            return preference;
-          return mediaQuery.matches ? "dark" : "light";
-        }
-
-        function applyTheme(preference) {
-          const resolved = getResolvedTheme(preference);
-          root.setAttribute("data-theme", resolved);
-          root.style.colorScheme = resolved;
-          root.setAttribute("data-theme-preference", preference);
-
-          if (metaTheme) {
-            metaTheme.setAttribute(
-              "content",
-              resolved === "dark" ? "#0E1219" : "#FBFCFE",
-            );
-          }
-        }
-
-        const initialPreference = getStoredPreference();
-        applyTheme(initialPreference);
-
-        window.__aidbioTheme = {
-          key: STORAGE_KEY,
-          mediaQuery,
-          applyTheme,
-          getStoredPreference,
-          getResolvedTheme,
-        };
-      })();
-    </script>
+    <script src="assets/js/theme.js"></script>
 
     <link rel="stylesheet" href="assets/ds/styles.css" />
+    <link rel="stylesheet" href="assets/css/chrome.css" />
 
     <style>
       /* ============================================================
-       Site-specific tokens (not part of the design system — layout
-       constants + theme-swapped imagery). Brand/spectrum/spacing/
-       type/shadow/gradient/motion tokens come from assets/ds/styles.css.
+       Page-specific tokens. Layout constants, the header, footer, buttons
+       and type helpers live in assets/css/chrome.css (shared by every
+       page); brand tokens come from assets/ds/styles.css.
        ============================================================ */
       :root {
-        color-scheme: light dark;
-
-        /* Layout */
-        --max-w: 1200px;
-        --nav-h: 76px;
-
-        /* Nav backdrop — not a DS token (translucency tuned per page) */
-        --surface-nav: rgba(251, 252, 254, 0.82);
-
-        /* Theme-swapped imagery */
         --network-img: url("assets/network-light.webp");
       }
 
       html[data-theme="dark"] {
-        --surface-nav: rgba(14, 18, 25, 0.82);
         --network-img: url("assets/network-dark.webp");
       }
 
-      /* ============================================================ Base */
-      * {
-        box-sizing: border-box;
-      }
-
-      html {
-        scroll-behavior: smooth;
-        font-size: 16px;
-      }
-
-      body {
-        margin: 0;
-        font-family: var(--font-ui);
-        background: var(--surface-base);
-        color: var(--text-body);
-        line-height: 1.6;
-        -webkit-font-smoothing: antialiased;
-        text-rendering: optimizeLegibility;
-        overflow-x: hidden;
-        transition:
-          background-color var(--dur-base) var(--ease-out),
-          color var(--dur-fast) var(--ease-out);
-      }
-
-      img,
-      svg {
-        display: block;
-        max-width: 100%;
-      }
-
-      a {
-        color: inherit;
-        text-decoration: none;
-        transition:
-          color var(--dur-fast) var(--ease-out),
-          opacity var(--dur-fast) var(--ease-out);
-      }
-
-      button,
-      input {
-        font: inherit;
-      }
-
-      button {
-        cursor: pointer;
-      }
-
-      ul {
-        list-style: none;
-        margin: 0;
-        padding: 0;
-      }
-
-      :focus-visible {
-        outline: none;
-        box-shadow: var(--focus-ring);
-        border-radius: var(--radius-sm);
-      }
-
-      .container {
-        width: min(calc(100% - 2 * var(--space-4)), var(--max-w));
-        margin-inline: auto;
-      }
-
-      /* Theme-paired logo images */
-      .mark-dark {
-        display: none;
-      }
-
-      html[data-theme="dark"] .mark-light {
-        display: none;
-      }
-
-      html[data-theme="dark"] .mark-dark {
-        display: block;
-      }
-
-      /* ============================================================ Type */
-      .eyebrow {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-2);
-        margin-bottom: var(--space-4);
-        font-size: 12px;
-        font-weight: 600;
-        letter-spacing: 0.12em;
-        text-transform: uppercase;
-        color: var(--accent);
-      }
-
-      .eyebrow.warm {
-        color: var(--accent-warm);
-      }
-
-      .eyebrow::before {
-        content: "";
-        width: 7px;
-        height: 7px;
-        border-radius: 50%;
-        background: currentColor;
-      }
-
-      .heading-lg {
-        margin: 0;
-        font-family: var(--font-display);
-        font-size: clamp(38px, 6vw, 76px);
-        font-weight: 500;
-        line-height: 1.04;
-        letter-spacing: -0.02em;
-        color: var(--text-strong);
-        max-width: 15ch;
-      }
-
-      .heading-md {
-        margin: 0 0 var(--space-3);
-        font-family: var(--font-display);
-        font-size: clamp(28px, 4vw, 40px);
-        font-weight: 500;
-        line-height: 1.1;
-        letter-spacing: -0.01em;
-        color: var(--text-strong);
-      }
-
-      .accent-italic {
-        font-style: italic;
-        color: var(--accent);
-      }
-
-      .headline-nature {
-        color: var(--spectrum-indigo);
-      }
-
-      .headline-decoded {
-        color: var(--spectrum-coral);
-      }
-
-      /* Sparse gradient-clip accent word — used once per major section
-         heading, never on the hero (which keeps its own flat two-color
-         split above) and never on eyebrows. */
-      .accent-spectrum {
-        background-image: var(--gradient-aurora);
-        color: var(--spectrum-indigo);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-      }
-
-      .accent-spectrum.grad-dawn {
-        background-image: var(--gradient-dawn);
-      }
-
-      .accent-spectrum.grad-flora {
-        background-image: var(--gradient-flora);
-      }
-
-      .accent-spectrum.grad-iris {
-        background-image: var(--gradient-iris);
-      }
-
-      .accent-spectrum.grad-ember {
-        background-image: var(--gradient-ember);
-      }
-
-      @media print {
-        .accent-spectrum {
-          background-image: none;
-          -webkit-text-fill-color: currentColor;
-          color: var(--text-strong);
-        }
-      }
-
-      @media (forced-colors: active) {
-        .accent-spectrum {
-          background-image: none;
-          -webkit-text-fill-color: currentColor;
-        }
-      }
-
-      .text-lead {
-        max-width: 62ch;
-        font-size: 17px;
-        line-height: 1.6;
-        color: var(--text-muted);
-      }
-
-      .mono {
-        font-family: var(--font-data);
-      }
-
-      /* ============================================================ Buttons */
-      .btn {
-        display: inline-flex;
-        align-items: center;
-        justify-content: center;
-        gap: var(--space-2);
-        padding: 12px 22px;
-        border-radius: var(--radius-full);
-        border: 1px solid transparent;
-        font-size: 15px;
-        font-weight: 600;
-        white-space: nowrap;
-        transition:
-          transform var(--dur-base) var(--ease-spring),
-          background-color var(--dur-fast) var(--ease-out),
-          border-color var(--dur-fast) var(--ease-out),
-          color var(--dur-fast) var(--ease-out),
-          box-shadow var(--dur-fast) var(--ease-out);
-      }
-
-      .btn:hover {
-        transform: translateY(-2px);
-      }
-
-      .btn-primary {
-        background: var(--brand-blue);
-        color: var(--text-on-accent);
-      }
-
-      .btn-primary:hover {
-        background: var(--brand-blue-press);
-        box-shadow: var(--glow-blue);
-      }
-
-      .btn-warm {
-        background: var(--brand-orange);
-        color: var(--text-on-accent);
-      }
-
-      .btn-warm:hover {
-        background: var(--brand-orange-press);
-        box-shadow: var(--glow-orange);
-      }
-
-      .btn-secondary {
-        background: var(--surface-card);
-        border-color: var(--border-default);
-        color: var(--text-strong);
-      }
-
-      .btn-secondary:hover {
-        border-color: var(--border-strong);
-        box-shadow: var(--shadow-md);
-      }
-
-      .section {
-        padding: var(--space-7) 0;
-      }
-
-      /* ============================================================ Nav */
-      .nav {
-        position: fixed;
-        inset: 0 0 auto 0;
-        z-index: 1000;
-        height: var(--nav-h);
-        background: var(--surface-nav);
-        border-bottom: 1px solid var(--border-subtle);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        transition:
-          background-color var(--dur-fast) var(--ease-out),
-          border-color var(--dur-fast) var(--ease-out),
-          box-shadow var(--dur-fast) var(--ease-out);
-      }
-
-      /* Spectrum hairline — the brand's synesthetic accent */
-      .nav::before {
-        content: "";
-        position: absolute;
-        inset: 0 0 auto 0;
-        height: 3px;
-        background: var(--gradient-spectrum);
-      }
-
-      .nav.scrolled {
-        box-shadow: var(--shadow-md);
-      }
-
-      .nav-inner {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        gap: var(--space-3);
-        height: 100%;
-      }
-
-      .brand {
-        display: inline-flex;
-        align-items: center;
-        gap: var(--space-2);
-        min-width: 0;
-      }
-
-      .brand-mark {
-        height: 30px;
-        width: auto;
-        flex: 0 0 auto;
-      }
-
-      .brand-word {
-        font-family: var(--font-display);
-        font-size: 22px;
-        font-weight: 600;
-        letter-spacing: -0.01em;
-        color: var(--text-strong);
-        line-height: 1;
-      }
-
-      .brand-aid {
-        color: var(--brand-blue);
-      }
-
-      .brand-bio {
-        color: var(--brand-orange);
-      }
-
-      .nav-actions {
-        display: flex;
-        align-items: center;
-        gap: var(--space-3);
-        min-width: 0;
-      }
-
-      .nav-links {
-        display: flex;
-        align-items: center;
-        gap: var(--space-1);
-      }
-
-      .nav-links a {
-        padding: 8px 14px;
-        border-radius: var(--radius-full);
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-body);
-      }
-
-      .nav-links a:hover {
-        color: var(--accent);
-        background: var(--accent-tint);
-      }
-
-      .nav-links a.nav-cta {
-        margin-left: var(--space-2);
-        background: var(--brand-blue);
-        color: var(--text-on-accent);
-        font-weight: 600;
-      }
-
-      .nav-links a.nav-cta:hover {
-        background: var(--brand-blue-press);
-        color: var(--text-on-accent);
-      }
-
-      .has-submenu {
-        position: relative;
-      }
-
-      .submenu {
-        list-style: none;
-        margin: 0;
-        padding: var(--space-2);
-        position: absolute;
-        top: 100%;
-        left: 0;
-        min-width: 220px;
-        background: var(--surface-card);
-        border: 1px solid var(--border-subtle);
-        border-radius: var(--radius-md);
-        box-shadow: var(--shadow-lg);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(4px);
-        transition:
-          opacity var(--dur-fast) var(--ease-out),
-          transform var(--dur-fast) var(--ease-out),
-          visibility var(--dur-fast) var(--ease-out);
-      }
-
-      .has-submenu:hover .submenu,
-      .has-submenu:focus-within .submenu {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-      }
-
-      .submenu a {
-        display: block;
-        padding: 8px 12px;
-        border-radius: var(--radius-sm);
-        font-size: 14px;
-        font-weight: 500;
-        color: var(--text-body);
-        white-space: nowrap;
-      }
-
-      .submenu a:hover {
-        color: var(--accent);
-        background: var(--accent-tint);
-      }
-
-      .theme-switcher {
-        display: inline-flex;
-        align-items: center;
-        padding: 3px;
-        border-radius: var(--radius-full);
-        border: 1px solid var(--border-subtle);
-        background: var(--surface-card);
-        box-shadow: var(--shadow-sm);
-        gap: 2px;
-        flex-wrap: nowrap;
-      }
-
-      .theme-option {
-        border: 0;
-        background: transparent;
-        color: var(--text-muted);
-        padding: 6px 12px;
-        border-radius: var(--radius-full);
-        font-size: 13px;
-        font-weight: 500;
-        transition:
-          background-color var(--dur-fast) var(--ease-out),
-          color var(--dur-fast) var(--ease-out);
-      }
-
-      .theme-option:hover {
-        color: var(--text-strong);
-      }
-
-      .theme-option[aria-pressed="true"] {
-        color: var(--accent);
-        background: var(--accent-tint);
-        font-weight: 600;
-      }
-
-      .menu-toggle {
-        display: none;
-        border: 1px solid var(--border-subtle);
-        background: var(--surface-card);
-        color: var(--text-strong);
-        width: 40px;
-        height: 40px;
-        border-radius: var(--radius-md);
-        align-items: center;
-        justify-content: center;
-        flex: 0 0 auto;
-      }
-
-      .mobile-menu {
-        display: none;
-        position: fixed;
-        top: var(--nav-h);
-        left: 0;
-        right: 0;
-        z-index: 999;
-        background: var(--surface-nav);
-        backdrop-filter: blur(12px);
-        -webkit-backdrop-filter: blur(12px);
-        border-bottom: 1px solid var(--border-subtle);
-        box-shadow: var(--shadow-lg);
-        padding: var(--space-3) var(--space-4) var(--space-4);
-      }
-
-      .mobile-menu.open {
-        display: block;
-      }
-
-      .mobile-menu a {
-        display: block;
-        padding: 12px var(--space-2);
-        font-size: 16px;
-        font-weight: 500;
-        color: var(--text-strong);
-        border-bottom: 1px solid var(--border-subtle);
-      }
-
-      .mobile-menu a:last-child {
-        border-bottom: 0;
-        margin-top: var(--space-2);
-        text-align: center;
-      }
-
       /* ============================================================ Hero */
-      .hero {
-        position: relative;
-        padding: calc(var(--nav-h) + var(--space-6)) 0 var(--space-6);
-        overflow: clip;
-      }
-
-      .hero::before {
-        content: "";
-        position: absolute;
-        right: -12rem;
-        top: -10rem;
-        width: 38rem;
-        height: 38rem;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(232, 119, 46, 0.1),
-          transparent 66%
-        );
-        pointer-events: none;
-      }
-
-      .hero::after {
-        content: "";
-        position: absolute;
-        left: -10rem;
-        bottom: -12rem;
-        width: 36rem;
-        height: 36rem;
-        border-radius: 50%;
-        background: radial-gradient(
-          circle,
-          rgba(46, 75, 223, 0.1),
-          transparent 68%
-        );
-        pointer-events: none;
-      }
-
       .hero-grid {
         display: grid;
         grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
@@ -629,21 +49,6 @@
         gap: var(--space-6);
         position: relative;
         z-index: 1;
-      }
-
-      .hero-desc {
-        margin: var(--space-4) 0 var(--space-5);
-        max-width: 56ch;
-        font-size: 18px;
-        line-height: 1.6;
-        color: var(--text-muted);
-      }
-
-      .hero-actions {
-        display: flex;
-        flex-wrap: wrap;
-        gap: var(--space-3);
-        align-items: center;
       }
 
       .hero-proof {
@@ -1229,103 +634,6 @@
         pointer-events: none;
       }
 
-      /* ============================================================ Footer */
-      .footer {
-        background: var(--ink-950);
-        color: var(--ink-300);
-        font-size: 14px;
-        padding: var(--space-6) 0 var(--space-4);
-      }
-
-      .footer-top {
-        display: flex;
-        justify-content: space-between;
-        gap: var(--space-5);
-        flex-wrap: wrap;
-        padding-bottom: var(--space-5);
-      }
-
-      .footer-brand {
-        display: flex;
-        align-items: center;
-        gap: var(--space-2);
-        margin-bottom: var(--space-3);
-      }
-
-      .footer-brand img {
-        height: 26px;
-        width: auto;
-      }
-
-      .footer-brand .brand-word {
-        font-size: 20px;
-      }
-
-      .footer-blurb {
-        margin: 0;
-        max-width: 34ch;
-        font-size: 13.5px;
-        line-height: 1.6;
-        color: var(--ink-400);
-      }
-
-      .footer-col {
-        display: flex;
-        flex-direction: column;
-        gap: var(--space-2);
-      }
-
-      .footer-col-h {
-        font-size: 12px;
-        text-transform: uppercase;
-        letter-spacing: 0.12em;
-        color: var(--ink-500);
-        font-weight: 600;
-        margin-bottom: var(--space-1);
-      }
-
-      .footer-col a {
-        font-size: 13.5px;
-        color: var(--ink-300);
-      }
-
-      .footer-col a:hover {
-        color: #fff;
-      }
-
-      .footer-bar {
-        display: flex;
-        justify-content: space-between;
-        gap: var(--space-3);
-        flex-wrap: wrap;
-        padding-top: var(--space-4);
-        border-top: 1px solid var(--ink-900);
-        font-size: 12.5px;
-        color: var(--ink-500);
-      }
-
-      /* ============================================================ Reveal */
-      .reveal {
-        opacity: 0;
-        transform: translateY(18px);
-        transition:
-          opacity var(--dur-slower) var(--ease-out),
-          transform var(--dur-slower) var(--ease-out);
-      }
-
-      .reveal.visible {
-        opacity: 1;
-        transform: translateY(0);
-      }
-
-      .delay-1 {
-        transition-delay: 80ms;
-      }
-
-      .delay-2 {
-        transition-delay: 160ms;
-      }
-
       /* ============================================================ Responsive */
       @media (max-width: 1024px) {
         .hero-grid {
@@ -1360,25 +668,7 @@
         }
       }
 
-      @media (max-width: 880px) {
-        .nav-links {
-          display: none;
-        }
-
-        .nav-actions .lang-switcher {
-          display: none;
-        }
-
-        .menu-toggle {
-          display: inline-flex;
-        }
-      }
-
       @media (max-width: 780px) {
-        .hero {
-          padding-top: calc(var(--nav-h) + var(--space-5));
-        }
-
         .hero-links {
           gap: var(--space-3);
         }
@@ -1403,19 +693,6 @@
       }
 
       @media (max-width: 560px) {
-        :root {
-          --nav-h: 68px;
-        }
-
-        .brand-word {
-          font-size: 19px;
-        }
-
-        .theme-option {
-          padding: 5px 9px;
-          font-size: 12px;
-        }
-
         .signal-grid,
         .workflow-list {
           grid-template-columns: 1fr;
@@ -1429,161 +706,53 @@
         .contact-card {
           padding: var(--space-5) var(--space-4);
         }
-
-        .footer-top {
-          flex-direction: column;
-          gap: var(--space-4);
-        }
       }
 
       @media (prefers-reduced-motion: reduce) {
-        html {
-          scroll-behavior: auto;
-        }
-
-        *,
-        *::before,
-        *::after {
-          animation: none !important;
-          transition-duration: 0.01ms !important;
-          transition-delay: 0ms !important;
-        }
-
         .hero-mark {
           animation: none !important;
-        }
-
-        .reveal {
-          opacity: 1;
-          transform: none;
         }
       }
     </style>
   </head>
 
   <body>
+    <!--chrome:header i18n="1"-->
     <nav class="nav" id="site-nav">
       <div class="container nav-inner">
-        <a href="#" class="brand" aria-label="AidBio home">
-          <img
-            src="assets/aidbio-mark-light.webp"
-            alt=""
-            class="brand-mark mark-light"
-            width="63"
-            height="30"
-          />
-          <img
-            src="assets/aidbio-mark-dark.webp"
-            alt=""
-            class="brand-mark mark-dark"
-            width="62"
-            height="30"
-          />
+        <a href="index.html" class="brand" aria-label="AidBio home">
+          <img src="assets/aidbio-mark-light.webp" alt="" class="brand-mark mark-light" width="63" height="30" />
+          <img src="assets/aidbio-mark-dark.webp" alt="" class="brand-mark mark-dark" width="62" height="30" />
           <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
         </a>
 
         <div class="nav-actions">
           <ul class="nav-links" aria-label="Primary">
-            <li>
-              <a href="#solutions" data-i18n="nav.solutions">Solutions</a>
-            </li>
-            <li><a href="#projects" data-i18n="nav.projects">Projects</a></li>
-            <li><a href="#blog" data-i18n="nav.blog">Blog</a></li>
-            <li><a href="#process" data-i18n="nav.process">Process</a></li>
+            <li><a href="index.html#solutions" data-i18n="nav.solutions">Solutions</a></li>
+            <li><a href="index.html#projects" data-i18n="nav.projects">Projects</a></li>
+            <li><a href="index.html#blog" data-i18n="nav.blog">Blog</a></li>
+            <li><a href="index.html#process" data-i18n="nav.process">Process</a></li>
             <li class="has-submenu">
-              <a href="#founder" data-i18n="nav.founder">Founder</a>
+              <a href="index.html#founder" data-i18n="nav.founder">Founder</a>
               <ul class="submenu">
-                <li>
-                  <a href="#founder" data-i18n="nav.founderOverview"
-                    >Founder overview</a
-                  >
-                </li>
-                <li>
-                  <a href="portfolio/index.html" data-i18n="nav.founderStory"
-                    >Portfolio: the founder story →</a
-                  >
-                </li>
+                <li><a href="index.html#founder" data-i18n="nav.founderOverview">Founder overview</a></li>
+                <li><a href="portfolio/index.html" data-i18n="nav.founderStory">Portfolio: the founder story →</a></li>
               </ul>
             </li>
-            <li>
-              <a href="#contact" class="nav-cta" data-i18n="nav.cta"
-                >Start a project</a
-              >
-            </li>
+            <li><a href="index.html#contact" class="nav-cta" data-i18n="nav.cta">Start a project</a></li>
           </ul>
 
-          <div
-            class="theme-switcher"
-            role="group"
-            aria-label="Theme preference"
-          >
-            <button
-              class="theme-option"
-              type="button"
-              data-theme-choice="system"
-              aria-pressed="false"
-            >
-              Auto
-            </button>
-            <button
-              class="theme-option"
-              type="button"
-              data-theme-choice="light"
-              aria-pressed="false"
-            >
-              Light
-            </button>
-            <button
-              class="theme-option"
-              type="button"
-              data-theme-choice="dark"
-              aria-pressed="false"
-            >
-              Dark
-            </button>
+          <div class="theme-switcher" role="group" aria-label="Theme preference">
+            <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
+            <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+            <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
           </div>
-
-          <div
-            class="theme-switcher lang-switcher"
-            role="group"
-            aria-label="Language"
-          >
-            <button
-              class="theme-option"
-              type="button"
-              data-lang-choice="en"
-              aria-pressed="false"
-            >
-              EN
-            </button>
-            <button
-              class="theme-option"
-              type="button"
-              data-lang-choice="pt"
-              aria-pressed="false"
-            >
-              PT
-            </button>
+          <div class="theme-switcher lang-switcher" role="group" aria-label="Language">
+            <button class="theme-option" type="button" data-lang-choice="en" aria-pressed="false">EN</button>
+            <button class="theme-option" type="button" data-lang-choice="pt" aria-pressed="false">PT</button>
           </div>
-
-          <button
-            class="menu-toggle"
-            type="button"
-            id="menu-toggle"
-            aria-expanded="false"
-            aria-controls="mobile-menu"
-            aria-label="Open menu"
-          >
-            <svg
-              width="20"
-              height="20"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              stroke-width="2"
-              stroke-linecap="round"
-              aria-hidden="true"
-            >
+          <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
               <line x1="4" y1="7" x2="20" y2="7" />
               <line x1="4" y1="12" x2="20" y2="12" />
               <line x1="4" y1="17" x2="20" y2="17" />
@@ -1594,44 +763,24 @@
     </nav>
 
     <div class="mobile-menu" id="mobile-menu">
-      <a href="#solutions" data-i18n="nav.solutions">Solutions</a>
-      <a href="#projects" data-i18n="nav.projects">Projects</a>
-      <a href="#blog" data-i18n="nav.blog">Blog</a>
-      <a href="#process" data-i18n="nav.process">Process</a>
-      <a href="#founder" data-i18n="nav.founder">Founder</a>
-      <a
-        href="portfolio/index.html"
-        style="padding-left: var(--space-4); font-size: 14px"
-        data-i18n="mobile.founderStory"
-        >↳ Portfolio: the founder story</a
-      >
-      <a href="#contact" class="btn btn-primary" data-i18n="nav.cta"
-        >Start a project</a
-      >
-      <div
-        class="theme-switcher lang-switcher"
-        role="group"
-        aria-label="Language"
-        style="margin-top: var(--space-3)"
-      >
-        <button
-          class="theme-option"
-          type="button"
-          data-lang-choice="en"
-          aria-pressed="false"
-        >
-          EN
-        </button>
-        <button
-          class="theme-option"
-          type="button"
-          data-lang-choice="pt"
-          aria-pressed="false"
-        >
-          PT
-        </button>
+      <a href="index.html#solutions" data-i18n="nav.solutions">Solutions</a>
+      <a href="index.html#projects" data-i18n="nav.projects">Projects</a>
+      <a href="index.html#blog" data-i18n="nav.blog">Blog</a>
+      <a href="index.html#process" data-i18n="nav.process">Process</a>
+      <a href="index.html#founder" data-i18n="nav.founder">Founder</a>
+      <a href="portfolio/index.html" class="mobile-sublink" data-i18n="mobile.founderStory">↳ Portfolio: the founder story</a>
+      <a href="index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Start a project</a>
+      <div class="theme-switcher" role="group" aria-label="Theme preference">
+        <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
+        <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+        <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+      </div>
+      <div class="theme-switcher lang-switcher" role="group" aria-label="Language">
+        <button class="theme-option" type="button" data-lang-choice="en" aria-pressed="false">EN</button>
+        <button class="theme-option" type="button" data-lang-choice="pt" aria-pressed="false">PT</button>
       </div>
     </div>
+    <!--/chrome:header-->
 
     <header class="hero">
       <div class="container">
@@ -2510,176 +1659,44 @@
       </section>
     </main>
 
+    <!--chrome:footer-->
     <footer class="footer">
       <div class="container">
         <div class="footer-top">
           <div>
             <div class="footer-brand">
-              <img
-                src="assets/aidbio-mark-dark.webp"
-                alt=""
-                aria-hidden="true"
-              />
+              <img src="assets/aidbio-mark-dark.webp" alt="" aria-hidden="true" />
               <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
             </div>
-            <p class="footer-blurb" data-i18n="footer.blurb">
-              Data science for life sciences, pharma and agritech.
-              Where biology, intelligence, and mathematics meet the spectrum.
-            </p>
+            <p class="footer-blurb" data-i18n="footer.blurb">Data science for life sciences, pharma, and agritech.</p>
           </div>
           <div class="footer-col">
-            <span class="footer-col-h" data-i18n="footer.exploreHeading"
-              >Explore</span
-            >
-            <a href="#solutions" data-i18n="nav.solutions">Solutions</a>
-            <a href="#projects" data-i18n="nav.projects">Projects</a>
+            <span class="footer-col-h" data-i18n="footer.exploreHeading">Explore</span>
+            <a href="index.html#solutions" data-i18n="nav.solutions">Solutions</a>
+            <a href="index.html#projects" data-i18n="nav.projects">Projects</a>
             <a href="aidweather.html">AidWeather</a>
-            <a href="#blog" data-i18n="nav.blog">Blog</a>
-            <a href="#process" data-i18n="nav.process">Process</a>
-            <a href="#founder" data-i18n="nav.founder">Founder</a>
-            <a href="portfolio/index.html" data-i18n="footer.founderStory"
-              >Founder story</a
-            >
-            <a href="#contact" data-i18n="footer.contact">Contact</a>
+            <a href="index.html#blog" data-i18n="nav.blog">Blog</a>
+            <a href="index.html#process" data-i18n="nav.process">Process</a>
+            <a href="index.html#founder" data-i18n="nav.founder">Founder</a>
+            <a href="portfolio/index.html" data-i18n="footer.founderStory">Founder story</a>
+            <a href="index.html#contact" data-i18n="footer.contact">Contact</a>
           </div>
           <div class="footer-col">
-            <span class="footer-col-h" data-i18n="footer.connectHeading"
-              >Connect</span
-            >
-            <a
-              href="https://linkedin.com/in/cleversonmatiolli"
-              target="_blank"
-              rel="noopener"
-              >LinkedIn</a
-            >
-            <a
-              href="https://github.com/matiollipt"
-              target="_blank"
-              rel="noopener"
-              >GitHub</a
-            >
+            <span class="footer-col-h" data-i18n="footer.connectHeading">Connect</span>
+            <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
+            <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
             <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
           </div>
         </div>
         <div class="footer-bar">
-          <span data-i18n="footer.copyright"
-            >&copy; 2026 AidBio. Built for the future of scientific
-            decision-making.</span
-          >
-          <span data-i18n="footer.tagline"
-            >Data Science for Life Sciences, Pharma and Agritech</span
-          >
+          <span data-i18n="footer.copyright">© 2026 AidBio. Built for the future of scientific decision-making.</span>
+          <span data-i18n="footer.tagline">Data Science for Life Sciences, Pharma and Agritech</span>
         </div>
       </div>
     </footer>
+    <!--/chrome:footer-->
 
     <script src="assets/js/i18n.js"></script>
-    <script>
-      (function () {
-        const themeApi = window.__aidbioTheme;
-        const buttons = Array.from(
-          document.querySelectorAll(
-            ".theme-switcher:not(.lang-switcher) .theme-option",
-          ),
-        );
-        const nav = document.getElementById("site-nav");
-        const STORAGE_KEY = themeApi.key;
-        const mediaQuery = themeApi.mediaQuery;
-
-        function getPreference() {
-          const stored = localStorage.getItem(STORAGE_KEY);
-          if (stored === "system" || stored === "light" || stored === "dark")
-            return stored;
-          return themeApi.getStoredPreference();
-        }
-
-        function syncThemeButtons(preference) {
-          buttons.forEach((button) => {
-            const active = button.dataset.themeChoice === preference;
-            button.setAttribute("aria-pressed", String(active));
-          });
-        }
-
-        function setPreference(preference) {
-          localStorage.setItem(STORAGE_KEY, preference);
-          themeApi.applyTheme(preference);
-          syncThemeButtons(preference);
-        }
-
-        buttons.forEach((button) => {
-          button.addEventListener("click", () => {
-            setPreference(button.dataset.themeChoice);
-          });
-        });
-
-        mediaQuery.addEventListener("change", () => {
-          const preference = getPreference();
-          if (preference === "system") {
-            themeApi.applyTheme("system");
-            syncThemeButtons("system");
-          }
-        });
-
-        syncThemeButtons(getPreference());
-
-        // Language switcher
-        const i18nApi = window.__aidbioI18n;
-        const langButtons = Array.from(
-          document.querySelectorAll("[data-lang-choice]"),
-        );
-
-        langButtons.forEach((button) => {
-          button.addEventListener("click", () => {
-            i18nApi.setLanguage(button.dataset.langChoice);
-          });
-        });
-
-        // Mobile menu
-        const menuToggle = document.getElementById("menu-toggle");
-        const mobileMenu = document.getElementById("mobile-menu");
-
-        function closeMenu() {
-          mobileMenu.classList.remove("open");
-          menuToggle.setAttribute("aria-expanded", "false");
-          menuToggle.setAttribute("aria-label", i18nApi.t("nav.openMenu"));
-        }
-
-        menuToggle.addEventListener("click", () => {
-          const open = mobileMenu.classList.toggle("open");
-          menuToggle.setAttribute("aria-expanded", String(open));
-          menuToggle.setAttribute(
-            "aria-label",
-            i18nApi.t(open ? "nav.closeMenu" : "nav.openMenu"),
-          );
-        });
-
-        mobileMenu.querySelectorAll("a").forEach((link) => {
-          link.addEventListener("click", closeMenu);
-        });
-
-        // Nav shadow on scroll
-        function onScroll() {
-          nav.classList.toggle("scrolled", window.scrollY > 12);
-        }
-        onScroll();
-        window.addEventListener("scroll", onScroll, { passive: true });
-
-        // Scroll reveal
-        const observer = new IntersectionObserver(
-          (entries, obs) => {
-            entries.forEach((entry) => {
-              if (!entry.isIntersecting) return;
-              entry.target.classList.add("visible");
-              obs.unobserve(entry.target);
-            });
-          },
-          { threshold: 0.12 },
-        );
-
-        document
-          .querySelectorAll(".reveal")
-          .forEach((el) => observer.observe(el));
-      })();
-    </script>
+    <script src="assets/js/chrome.js"></script>
   </body>
 </html>

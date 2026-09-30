@@ -1,57 +1,105 @@
 <!doctype html><html lang="en" data-theme="light"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Why AidBio exists — Founder story</title><meta name="description" content="The scientific trajectory behind AidBio: from plant molecular biology to scientific AI and decision systems."><meta name="theme-color" content="#FBFCFE">
-<script>
-    (function () {
-      var STORAGE_KEY = "aidbio-theme-preference";
-      var legacyKey = "aidbio-theme";
-      var root = document.documentElement;
-      var metaTheme = document.querySelector('meta[name="theme-color"]');
-      var mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
-      function getStoredPreference() {
-        var current = localStorage.getItem(STORAGE_KEY);
-        if (current === "system" || current === "light" || current === "dark") return current;
-        var legacy = localStorage.getItem(legacyKey);
-        if (legacy === "light" || legacy === "dark") return legacy;
-        return "system";
-      }
-      function getResolvedTheme(preference) {
-        if (preference === "light" || preference === "dark") return preference;
-        return mediaQuery.matches ? "dark" : "light";
-      }
-      function applyTheme(preference) {
-        var resolved = getResolvedTheme(preference);
-        root.setAttribute("data-theme", resolved);
-        root.style.colorScheme = resolved;
-        root.setAttribute("data-theme-preference", preference);
-        if (metaTheme) metaTheme.setAttribute("content", resolved === "dark" ? "#0E1219" : "#FBFCFE");
-      }
-      var initialPreference = getStoredPreference();
-      applyTheme(initialPreference);
-      window.__aidbioTheme = { key: STORAGE_KEY, mediaQuery: mediaQuery, applyTheme: applyTheme, getStoredPreference: getStoredPreference, getResolvedTheme: getResolvedTheme };
-    })();
-  </script>
-<link rel="stylesheet" href="assets/site.css"></head><body>
-<header class="site-header"><div class="wrap nav">
-<a class="brand" href="index.html"><img src="../assets/aidbio-mark-light.webp" alt="AidBio logo" class="mark-light"><img src="../assets/aidbio-mark-dark.webp" alt="AidBio logo" class="mark-dark"><span><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span><small>Founder story</small></span></a>
-<div class="nav-actions"><nav class="navlinks" aria-label="Primary"><a href="index.html" aria-current="page">Why AidBio</a><a href="pages/01-mechanism.html" >Mechanism</a><a href="pages/02-networks.html" >Networks</a><a href="pages/03-data.html" >Data</a><a href="pages/04-models.html" >Models</a><a href="pages/05-software.html" >Software</a><a href="pages/06-aidbio.html" >AidBio</a><a href="pages/07-portfolio.html" >Portfolio</a><a href="../index.html">← AidBio.com</a></nav><div class="theme-switcher" role="group" aria-label="Theme preference"><button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button><button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button><button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button></div><button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><line x1="4" y1="7" x2="20" y2="7"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="17" x2="20" y2="17"/></svg></button></div></div></header><div class="mobile-menu" id="mobile-menu"><a href="index.html">Why AidBio</a><a href="pages/01-mechanism.html" >Mechanism</a><a href="pages/02-networks.html" >Networks</a><a href="pages/03-data.html" >Data</a><a href="pages/04-models.html" >Models</a><a href="pages/05-software.html" >Software</a><a href="pages/06-aidbio.html" >AidBio</a><a href="pages/07-portfolio.html" >Portfolio</a><a href="../index.html">← AidBio.com</a></div>
+<title>Why AidBio exists | AidBio</title><meta name="description" content="The scientific trajectory behind AidBio: from plant molecular biology to scientific software and decision support."><meta name="theme-color" content="#FBFCFE">
+<script src="../assets/js/theme.js"></script>
+<link rel="icon" type="image/png" href="../assets/favicon.png">
+<link rel="apple-touch-icon" href="../assets/apple-touch-icon.png">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&amp;family=Plus+Jakarta+Sans:wght@400;500;600;700&amp;family=IBM+Plex+Mono:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../assets/ds/styles.css">
+<link rel="stylesheet" href="../assets/css/chrome.css">
+<link rel="stylesheet" href="assets/site.css"></head><body class="has-subnav">
+<!--chrome:header active="founder"-->
+<nav class="nav" id="site-nav">
+  <div class="container nav-inner">
+    <a href="../index.html" class="brand" aria-label="AidBio home">
+      <img src="../assets/aidbio-mark-light.webp" alt="" class="brand-mark mark-light" width="63" height="30" />
+      <img src="../assets/aidbio-mark-dark.webp" alt="" class="brand-mark mark-dark" width="62" height="30" />
+      <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
+    </a>
+
+    <div class="nav-actions">
+      <ul class="nav-links" aria-label="Primary">
+        <li><a href="../index.html#solutions" data-i18n="nav.solutions">Solutions</a></li>
+        <li><a href="../index.html#projects" data-i18n="nav.projects">Projects</a></li>
+        <li><a href="../index.html#blog" data-i18n="nav.blog">Blog</a></li>
+        <li><a href="../index.html#process" data-i18n="nav.process">Process</a></li>
+        <li class="has-submenu">
+          <a href="../index.html#founder" data-i18n="nav.founder" aria-current="true">Founder</a>
+          <ul class="submenu">
+            <li><a href="../index.html#founder" data-i18n="nav.founderOverview">Founder overview</a></li>
+            <li><a href="../portfolio/index.html" data-i18n="nav.founderStory" aria-current="page">Portfolio: the founder story →</a></li>
+          </ul>
+        </li>
+        <li><a href="../index.html#contact" class="nav-cta" data-i18n="nav.cta">Start a project</a></li>
+      </ul>
+
+      <div class="theme-switcher" role="group" aria-label="Theme preference">
+        <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
+        <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+        <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+      </div>
+      <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
+          <line x1="4" y1="7" x2="20" y2="7" />
+          <line x1="4" y1="12" x2="20" y2="12" />
+          <line x1="4" y1="17" x2="20" y2="17" />
+        </svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobile-menu">
+  <a href="../index.html#solutions" data-i18n="nav.solutions">Solutions</a>
+  <a href="../index.html#projects" data-i18n="nav.projects">Projects</a>
+  <a href="../index.html#blog" data-i18n="nav.blog">Blog</a>
+  <a href="../index.html#process" data-i18n="nav.process">Process</a>
+  <a href="../index.html#founder" data-i18n="nav.founder">Founder</a>
+  <a href="../portfolio/index.html" class="mobile-sublink" data-i18n="mobile.founderStory">↳ Portfolio: the founder story</a>
+  <a href="../index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Start a project</a>
+  <div class="theme-switcher" role="group" aria-label="Theme preference">
+    <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
+    <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
+    <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
+  </div>
+</div>
+<!--/chrome:header-->
+<!--chrome:subnav set="portfolio" active="home"-->
+<nav class="subnav" aria-label="Founder story chapters">
+  <div class="container subnav-inner">
+    <span class="subnav-label">Founder story</span>
+    <div class="subnav-links">
+      <a href="index.html" aria-current="page">Why AidBio</a>
+      <a href="pages/01-mechanism.html">01 Mechanism</a>
+      <a href="pages/02-networks.html">02 Networks</a>
+      <a href="pages/03-data.html">03 Data</a>
+      <a href="pages/04-models.html">04 Models</a>
+      <a href="pages/05-software.html">05 Software</a>
+      <a href="pages/06-aidbio.html">06 AidBio</a>
+      <a href="pages/07-portfolio.html">Portfolio</a>
+    </div>
+  </div>
+</nav>
+<!--/chrome:subnav-->
 <main>
-<section class="hero"><div class="wrap hero-grid"><div>
-<div class="kicker">Founder story · Cleverson Carlos Matiolli, PhD</div>
+<section class="hero"><div class="container hero-grid"><div>
+<div class="eyebrow">Founder story · Cleverson Carlos Matiolli, PhD</div>
 <h1>AidBio did not begin with AI.</h1>
-<p class="lede">It began with a biological question: <strong>how do many small signals inside a living cell add up to something you can actually see or measure — a trait, a stress response, a yield?</strong> Two decades later, that's still the question underneath AidBio — now answered with bioinformatics, machine learning, scientific software, environmental data and AI-assisted research instead of a single lab bench.</p>
-<div class="btns"><a class="btn" href="pages/01-mechanism.html">Start the tutorial →</a><a class="btn secondary" href="pages/06-aidbio.html">See AidBio today</a></div>
+<p class="hero-desc">It began with a biological question: <strong>how do many small signals inside a living cell add up to something you can actually see or measure — a trait, a stress response, a yield?</strong> Two decades later, that's still the question underneath AidBio — now answered with bioinformatics, machine learning, scientific software, environmental data and AI-assisted research instead of a single lab bench.</p>
+<div class="btns"><a class="btn btn-primary" href="pages/01-mechanism.html">Start the tutorial →</a><a class="btn btn-secondary" href="pages/06-aidbio.html">See AidBio today</a></div>
 </div><aside class="hero-card"><div class="spectrum"></div><h3 style="margin-top:21px">The scale of the problem kept expanding</h3>
 <div class="chain"><div><b>01</b> gene &amp; signal</div><div><b>02</b> regulatory network</div><div><b>03</b> organism &amp; phenotype</div><div><b>04</b> biological data</div><div><b>05</b> computational model</div><div><b>06</b> scientific software &amp; AI</div></div></aside></div></section>
 
-<section class="section white"><div class="wrap"><div class="section-title"><div class="eyebrow">The founder thesis</div><h2>The tools changed. The scientific method did not.</h2></div>
+<section class="section section-alt"><div class="container"><div class="section-title"><div class="eyebrow">The founder thesis</div><h2>The tools changed. The scientific <span class="accent-spectrum grad-spectrum">method</span> did not.</h2></div>
 <div class="grid-3">
 <div class="card accent green"><h3>Mechanism first</h3><p>Before modeling anything, ask the same questions a bench scientist asks: what are the variables, what interacts with what, what did we actually measure versus infer, and what could be misleading us? That habit came straight out of molecular genetics and hands-on plant biology.</p></div>
 <div class="card accent magenta"><h3>Represent complexity honestly</h3><p>Once a system has too many moving parts to hold in your head, turn it into structured data instead of guessing — gene activity tables, interaction networks, measured traits, weather records over time.</p></div>
 <div class="card accent orange"><h3>Make the evidence reusable</h3><p>A one-off spreadsheet analysis only answers one question, once. Software that captures the same reasoning can answer the next hundred questions like it — for a client, not just for one paper.</p></div>
 </div></div></section>
 
-<section class="section"><div class="wrap"><div class="grid-2"><div>
-<div class="eyebrow">2005 → today</div><h2>From crop biotechnology to scientific AI</h2>
+<section class="section"><div class="container"><div class="grid-2"><div>
+<div class="eyebrow">2005 → today</div><h2>From crop <span class="accent-spectrum grad-spectrum">biotechnology</span> to scientific AI</h2>
 <p>The story starts in applied agricultural biotech at Alellyx, deepens through years of academic research on how plants sense sugar, hormones and stress, expands into mapping how proteins interact inside crop cells, and then moves increasingly into computation — graph-based machine learning, climate analytics and AI-assisted research software.</p>
 <p>The important point is continuity, not a career change: the move into computing wasn't an escape from biology. It was what biology demanded once the questions got too complex to answer by hand.</p>
 </div><div class="timeline">
@@ -61,10 +109,47 @@
 <div class="timeline-item"><div class="timeline-year">2024–</div><div class="timeline-content"><b>AidBio</b><br>Scientific software, bioinformatics, graph-based machine learning, agricultural climate analytics, and AI workflows that keep the underlying evidence traceable.</div></div>
 </div></div></div></section>
 
-<section class="section white"><div class="wrap"><div class="callout"><p class="quote">“Can molecular, biological, agronomic and environmental complexity be transformed into reproducible computational evidence that researchers can actually use to make decisions?”</p>
+<section class="section section-alt"><div class="container"><div class="callout"><p class="quote">“Can molecular, biological, agronomic and environmental complexity be transformed into reproducible computational evidence that researchers can actually use to make decisions?”</p>
 <p>This is the question AidBio is structured around.</p></div></div></section>
-</main><footer><div class="wrap"><div class="spectrum"></div>
-<p><strong>AidBio</strong> — AI &amp; Data Science for Life Sciences and Agritech.</p>
-<p class="small">Founder: Cleverson Carlos Matiolli, PhD · <a href="https://github.com/matiollipt">GitHub</a> · <a href="https://orcid.org/0000-0001-8185-7628">ORCID</a> · <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&hl=en">Google Scholar</a></p>
-<p class="small">This site is a narrative portfolio. Scientific claims link to primary literature; diagrams labelled “adapted” are original explanatory redraws, not reproductions.</p>
-</div></footer><script src="assets/site.js"></script></body></html>
+</main><!--chrome:footer note="portfolio"-->
+<footer class="footer">
+  <div class="container">
+    <div class="footer-top">
+      <div>
+        <div class="footer-brand">
+          <img src="../assets/aidbio-mark-dark.webp" alt="" aria-hidden="true" />
+          <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
+        </div>
+        <p class="footer-blurb" data-i18n="footer.blurb">Data science for life sciences, pharma, and agritech.</p>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-h" data-i18n="footer.exploreHeading">Explore</span>
+        <a href="../index.html#solutions" data-i18n="nav.solutions">Solutions</a>
+        <a href="../index.html#projects" data-i18n="nav.projects">Projects</a>
+        <a href="../aidweather.html">AidWeather</a>
+        <a href="../index.html#blog" data-i18n="nav.blog">Blog</a>
+        <a href="../index.html#process" data-i18n="nav.process">Process</a>
+        <a href="../index.html#founder" data-i18n="nav.founder">Founder</a>
+        <a href="../portfolio/index.html" data-i18n="footer.founderStory">Founder story</a>
+        <a href="../index.html#contact" data-i18n="footer.contact">Contact</a>
+      </div>
+      <div class="footer-col">
+        <span class="footer-col-h" data-i18n="footer.connectHeading">Connect</span>
+        <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
+        <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
+        <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+      </div>
+    </div>
+    <p class="footer-note">
+      Founder: Cleverson Carlos Matiolli, PhD ·
+      <a href="https://orcid.org/0000-0001-8185-7628" target="_blank" rel="noopener">ORCID</a> ·
+      <a href="https://scholar.google.com/citations?user=jk2GJNQAAAAJ&amp;hl=en" target="_blank" rel="noopener">Google Scholar</a>.
+      This is a narrative portfolio: scientific claims link to primary literature, and diagrams labelled “adapted” are original explanatory redraws, not reproductions.
+    </p>
+    <div class="footer-bar">
+      <span data-i18n="footer.copyright">© 2026 AidBio. Built for the future of scientific decision-making.</span>
+      <span data-i18n="footer.tagline">Data Science for Life Sciences, Pharma and Agritech</span>
+    </div>
+  </div>
+</footer>
+<!--/chrome:footer--><script src="../assets/js/chrome.js"></script></body></html>

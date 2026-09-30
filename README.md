@@ -19,3 +19,9 @@ IBM Plex Mono typography, Fibonacci spacing, and light + dark themes.
 
 Marks were derived from the design system's `project/assets/aidbio-logo-{light,dark}.png`
 (background removed, trimmed, downscaled, converted to WebP).
+
+## Shared chrome
+
+The header, footer and local sub-nav are generated from `assets/partials/` into every page by
+`python3 scripts/sync-chrome.py` (run with `--check` in CI or before committing). Shared styles and scripts:
+`assets/css/chrome.css`, `assets/js/theme.js`, `assets/js/chrome.js`. See `CLAUDE.md` for the page contract.
