@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "AidBio | IA e Ciência de Dados para Ciências da Vida, Farmacêutica e Agritech",
-    "description": "A AidBio trabalha com laboratórios acadêmicos, equipes de P&D farmacêutico e empresas de agritech para transformar dados experimentais e de campo em modelos preditivos, workflows de IA agêntica e decisões que você pode colocar em prática."
+    "title": "AidBio | Ciência de Dados para Ciências da Vida, Farmacêutica e Agritech",
+    "description": "A AidBio trabalha com laboratórios acadêmicos, equipes de P&D farmacêutico e empresas de agritech para transformar dados experimentais e de campo em modelos preditivos, workflows reprodutíveis e decisões que você pode colocar em prática."
   },
   "nav": {
     "solutions": "Soluções",
@@ -25,11 +25,11 @@
     "desc": "A AidBio transforma dados de pesquisa e de campo em resultados e decisões.",
     "ctaPrimary": "Fale com a AidBio",
     "ctaSecondary": "Explorar capacidades",
-    "proof1": "Analytics agronômico e climático para o campo",
-    "proof2": "Ômica, bioinformática e dados científicos",
-    "proof3": "Modelagem de proteínas e de interações proteicas",
-    "proof4": "Projetos sob medida, entregues de forma reprodutível e pronta para produção",
-    "proof5": "Modelos de IA locais opcionais para privacidade e segurança de dados",
+    "proof1": "Agronomia e clima",
+    "proof2": "Ômica e bioinformática",
+    "proof3": "Modelagem de proteínas",
+    "proof4": "Entrega reprodutível",
+    "proof5": "Processamento local e privado",
     "links": {
       "aidweather": {
         "label": "Biblioteca de código aberto",
@@ -77,7 +77,7 @@
     "h2_lead": "",
     "h2_accent": "Inteligência",
     "h2_tail": "direcionada para domínios tecnicamente exigentes.",
-    "lead": "A AidBio une conhecimento biológico profundo à prática moderna de IA e engenharia de dados — produzindo sistemas que se sustentam diante de um pesquisador principal, um revisor de pares ou um agrônomo que já viu caixas-pretas demais.",
+    "lead": "A AidBio une conhecimento biológico profundo à prática moderna de machine learning e engenharia de dados — produzindo sistemas que se sustentam diante de um pesquisador principal, um revisor de pares ou um agrônomo que já viu caixas-pretas demais.",
     "card1": {
       "title": "Machine Learning e Modelagem Preditiva",
       "body": "Aprendizado supervisionado, seleção e validação de modelos para dados de campo, laboratório e translacionais — construído para avaliação honesta, não só uma métrica de acurácia.",
@@ -121,9 +121,8 @@
     },
     "aidweatherReport": {
       "kind": "Gerador de relatórios",
-      "body": "Gera relatórios agronômicos portáteis e autônomos — dashboards de clima a partir da NASA POWER e dashboards de fazenda a partir dos seus próprios dados experimentais, com resumos opcionais por modelo local.",
+      "body": "Gera relatórios agronômicos portáteis e autônomos — dashboards de clima a partir da NASA POWER e dashboards de fazenda a partir dos seus próprios dados experimentais.",
       "tag2": "Dashboards de fazenda",
-      "tag3": "LLM local",
       "cta": "Solicitar um relatório de exemplo"
     }
   },
@@ -166,7 +165,7 @@
     },
     "metric2": {
       "label": "Ênfase técnica",
-      "value": "Sistemas de ML, workflows de dados, comunicação científica, IA aplicada"
+      "value": "Sistemas de ML, workflows de dados, comunicação científica, ciência de dados aplicada"
     },
     "metric3": {
       "label": "Setores principais",
@@ -178,13 +177,13 @@
     "lead": "Seja você um laboratório acadêmico, uma equipe de P&D farmacêutico ou uma empresa de agritech, a AidBio atua por meio de projetos com escopo bem definido que levam de dados confusos a uma decisão que você pode colocar em prática."
   },
   "footer": {
-    "blurb": "IA e ciência de dados para ciências da vida, farmacêutica e agritech.",
+    "blurb": "Ciência de dados para ciências da vida, farmacêutica e agritech.",
     "exploreHeading": "Explorar",
     "connectHeading": "Conectar",
     "founderStory": "Trajetória do fundador",
     "contact": "Contato",
     "copyright": "© 2026 AidBio. Construído para o futuro da tomada de decisão científica.",
-    "tagline": "IA e Ciência de Dados para Ciências da Vida, Farmacêutica e Agritech"
+    "tagline": "Ciência de Dados para Ciências da Vida, Farmacêutica e Agritech"
   },
   "blog": {
     "eyebrow": "Leituras mais longas",

@@ -1,7 +1,7 @@
 {
   "meta": {
-    "title": "AidBio | AI & Data Science for Life Sciences, Pharma and Agritech",
-    "description": "AidBio partners with academic labs, pharma R&D teams, and agritech companies to turn experimental and field data into predictive models, agentic AI workflows, and decisions you can act on."
+    "title": "AidBio | Data Science for Life Sciences, Pharma and Agritech",
+    "description": "AidBio partners with academic labs, pharma R&D teams, and agritech companies to turn experimental and field data into predictive models, reproducible workflows, and decisions you can act on."
   },
   "nav": {
     "solutions": "Solutions",
@@ -25,11 +25,11 @@
     "desc": "AidBio turns research and field data into results and decisions.",
     "ctaPrimary": "Engage AidBio",
     "ctaSecondary": "Explore capabilities",
-    "proof1": "Agronomy and climate analytics for the field",
-    "proof2": "Omics, bioinformatics and scientific data",
-    "proof3": "Protein and protein-interaction modeling",
-    "proof4": "Custom projects, delivered reproducible and production-ready",
-    "proof5": "Optional local AI models for privacy and data security",
+    "proof1": "Agronomy & climate",
+    "proof2": "Omics & bioinformatics",
+    "proof3": "Protein modeling",
+    "proof4": "Reproducible delivery",
+    "proof5": "Local, private processing",
     "links": {
       "aidweather": {
         "label": "Open-source library",
@@ -77,7 +77,7 @@
     "h2_lead": "Targeted",
     "h2_accent": "intelligence",
     "h2_tail": "for technically demanding domains.",
-    "lead": "AidBio bridges deep biological domain knowledge with modern AI and data-engineering practice — producing systems that hold up in front of a principal investigator, a peer reviewer, or an agronomist who's seen too many black boxes.",
+    "lead": "AidBio bridges deep biological domain knowledge with modern machine learning and data-engineering practice — producing systems that hold up in front of a principal investigator, a peer reviewer, or an agronomist who's seen too many black boxes.",
     "card1": {
       "title": "Machine Learning & Predictive Modeling",
       "body": "Supervised learning, model selection, and validation for field, lab, and translational data — built for honest evaluation, not just an accuracy score.",
@@ -121,9 +121,8 @@
     },
     "aidweatherReport": {
       "kind": "Report generator",
-      "body": "Generates portable, standalone agronomic reports — weather dashboards from NASA POWER data and farm dashboards from your own experimental datasets, with optional local-model summaries.",
+      "body": "Generates portable, standalone agronomic reports — weather dashboards from NASA POWER data and farm dashboards from your own experimental datasets.",
       "tag2": "Farm dashboards",
-      "tag3": "Local LLM",
       "cta": "Request a sample report"
     }
   },
@@ -166,7 +165,7 @@
     },
     "metric2": {
       "label": "Technical emphasis",
-      "value": "ML systems, data workflows, scientific reporting, applied AI"
+      "value": "ML systems, data workflows, scientific reporting, applied data science"
     },
     "metric3": {
       "label": "Primary sectors",
@@ -178,13 +177,13 @@
     "lead": "Whether you're an academic lab, a pharma R&D group, or an agritech company, AidBio engages through well-scoped projects that move from messy data to a decision you can act on."
   },
   "footer": {
-    "blurb": "AI and data science for life sciences, pharma, and agritech.",
+    "blurb": "Data science for life sciences, pharma, and agritech.",
     "exploreHeading": "Explore",
     "connectHeading": "Connect",
     "founderStory": "Founder story",
     "contact": "Contact",
     "copyright": "© 2026 AidBio. Built for the future of scientific decision-making.",
-    "tagline": "AI & Data Science for Life Sciences, Pharma and Agritech"
+    "tagline": "Data Science for Life Sciences, Pharma and Agritech"
   },
   "blog": {
     "eyebrow": "Longer reads",
