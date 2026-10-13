@@ -19,35 +19,52 @@
     "founderStory": "↳ Portfolio: the founder story"
   },
   "hero": {
-    "eyebrow": "Data intelligence for life sciences, pharma and agriculture",
     "h1_lead": "Nature,",
     "h1_accent": "Decoded.",
-    "desc": "AidBio turns research and field data into results and decisions.",
+    "desc": "AidBio gives molecular and agronomic research the expertise and tools to master its data. From lab experiments to field trials, we turn raw data into results and decisions, for academic and industry teams.",
     "ctaPrimary": "Engage AidBio",
     "ctaSecondary": "Explore capabilities",
     "proof1": "Agronomy & climate",
     "proof2": "Omics & bioinformatics",
     "proof3": "Protein modeling",
     "proof4": "Reproducible delivery",
-    "proof5": "Local, private processing",
-    "links": {
-      "aidweather": {
-        "label": "Open-source library",
-        "note": "Explore the project"
-      },
-      "aid2go": {
-        "label": "Research prototype",
-        "note": "Learn more"
-      },
-      "gppipred": {
-        "label": "Publication · 2026",
-        "note": "Read the paper"
-      },
-      "paper": {
-        "title": "Circadian entrainment by bZIP63",
-        "note": "Read the paper"
-      }
+    "proof5": "Local, private processing"
+  },
+  "work": {
+    "eyebrow": "Selected work",
+    "h2_lead": "Tools and papers,",
+    "h2_accent": "at a glance",
+    "h2_tail": ".",
+    "aidweather": {
+      "label": "Open-source library",
+      "note": "Explore the project"
+    },
+    "aid2go": {
+      "label": "Research prototype",
+      "note": "Learn more"
+    },
+    "gppipred": {
+      "label": "Publication · 2026",
+      "note": "Read the paper"
+    },
+    "paper": {
+      "title": "Circadian entrainment by bZIP63",
+      "note": "Read the paper"
     }
+  },
+  "tools": {
+    "eyebrow": "Open source by AidBio",
+    "h2": "Weather and solar data, ready for your research.",
+    "lead": "AidWeather is an open-source Python library and CLI that turns NASA POWER data into clean, cached, analysis-ready tables — for a point, a transect, or a whole region.",
+    "copy": "Copy",
+    "soon": "Coming soon",
+    "aidweather": {
+      "body": "The library and command-line tool. Install it from PyPI."
+    },
+    "client": {
+      "body": "Not published yet. The install command will appear here."
+    },
+    "note": "These packages are built and maintained by AidBio and released as open source. We also develop <strong>internal tools</strong> for client projects — <a href=\"#contact\">get in touch</a> to learn more."
   },
   "signal": {
     "badge": "Applied intelligence",
