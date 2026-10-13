@@ -41,7 +41,7 @@
     },
     "aid2go": {
       "label": "Protótipo de pesquisa",
-      "note": "Saiba mais"
+      "note": "Solicitar acesso"
     },
     "gppipred": {
       "label": "Publicação · 2026",
@@ -50,21 +50,31 @@
     "paper": {
       "title": "Sincronização circadiana pelo bZIP63",
       "note": "Ler o artigo"
-    }
+    },
+    "lead": "As ferramentas de código aberto, os softwares de pesquisa e os artigos por trás do nosso trabalho."
   },
   "tools": {
-    "eyebrow": "Código aberto da AidBio",
+    "eyebrow": "Coisas que construímos e que são abertas",
     "h2": "Dados de clima e radiação solar, prontos para a sua pesquisa.",
     "lead": "O AidWeather é uma biblioteca Python de código aberto, com CLI, que transforma dados da NASA POWER em tabelas limpas, com cache e prontas para análise — para um ponto, um transecto ou uma região inteira.",
     "copy": "Copiar",
-    "soon": "Em breve",
+    "open": "Código aberto",
+    "demo": "Demo",
     "aidweather": {
       "body": "A biblioteca e a ferramenta de linha de comando. Instale pelo PyPI."
     },
-    "client": {
-      "body": "Ainda não publicado. O comando de instalação aparecerá aqui."
+    "report": {
+      "body": "Nosso produto: um relatório independente do histórico climático do seu local, feito com dados da NASA POWER. Escolha um local e enviaremos uma amostra — seu retorno é bem-vindo.",
+      "lat": "Latitude",
+      "lon": "Longitude",
+      "geo": "Usar minha localização",
+      "email": "Seu e-mail",
+      "name": "Nome ou organização (opcional)",
+      "submit": "Solicitar uma demo",
+      "geoErr": "Não foi possível obter sua localização. Digite as coordenadas manualmente.",
+      "sent": "Seu aplicativo de e-mail deve abrir com a solicitação pronta para envio. Se não abrir, escreva para contact@aidbio.org."
     },
-    "note": "Estes pacotes são desenvolvidos e mantidos pela AidBio e lançados como código aberto. Também desenvolvemos <strong>ferramentas internas</strong> para projetos de clientes — <a href=\"#contact\">entre em contato</a> para saber mais."
+    "note": "O AidWeather é desenvolvido e mantido pela AidBio e lançado como código aberto. Também desenvolvemos <strong>ferramentas internas</strong> para projetos de clientes — <a href=\"#contact\">entre em contato</a> para saber mais."
   },
   "signal": {
     "badge": "Inteligência aplicada",
@@ -114,33 +124,6 @@
       "title": "Ômica, Bioinformática e Sistemas de Dados Científicos",
       "body": "Suporte para dados multi-ômicos — genômica, proteômica e conjuntos de dados biológicos similares — além de análises reprodutíveis construídas rumo a uma publicação ou uma decisão.",
       "tag4": "Bioinformática"
-    }
-  },
-  "projects": {
-    "eyebrow": "Projetos e ferramentas abertas",
-    "h2_lead": "Coisas que construímos em código",
-    "h2_accent": "aberto",
-    "h2_tail": ".",
-    "lead": "Além do trabalho com clientes, a AidBio desenvolve ferramentas para dados de agritech e ciências da vida — algumas open-source, outras disponíveis sob consulta.",
-    "kindLabel": "Biblioteca open-source",
-    "githubCta": "Detalhes técnicos ↗",
-    "aidweather": {
-      "body": "Transforma dados de clima e radiação solar da NASA POWER em tabelas limpas e prontas para uso — para um ponto, uma linha no mapa ou uma região inteira.",
-      "tag3": "Agroclimático",
-      "tag4": "Solar",
-      "cta": "Explorar o AidWeather"
-    },
-    "aid2go": {
-      "kind": "Software de pesquisa",
-      "body": "Prevê a função de proteínas a partir de um único grafo que conecta proteínas, suas interações e termos da Gene Ontology — usando redes neurais de grafos sobre embeddings de modelos de linguagem de proteínas.",
-      "stat": "Protótipo de pesquisa",
-      "cta": "Solicitar acesso"
-    },
-    "aidweatherReport": {
-      "kind": "Gerador de relatórios",
-      "body": "Gera relatórios agronômicos portáteis e autônomos — dashboards de clima a partir da NASA POWER e dashboards de fazenda a partir dos seus próprios dados experimentais.",
-      "tag2": "Dashboards de fazenda",
-      "cta": "Solicitar um relatório de exemplo"
     }
   },
   "process": {
