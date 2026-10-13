@@ -35,19 +35,193 @@
        ============================================================ */
       /* ============================================================ Hero */
       .hero-grid {
-        display: grid;
-        grid-template-columns: minmax(0, 1.12fr) minmax(280px, 0.88fr);
+        display: flex;
+        flex-direction: column;
         align-items: center;
-        gap: var(--space-6);
+        gap: var(--space-5);
+        position: relative;
+        z-index: 1;
+        text-align: center;
+      }
+
+      .hero-copy {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+      }
+
+      .hero-copy .hero-desc {
+        margin-left: auto;
+        margin-right: auto;
+        max-width: 60ch;
+      }
+
+      /* Capabilities graph — grows from the "Explore capabilities" button */
+      .cap-wrap {
+        position: relative;
+        width: 100%;
+        max-width: 720px;
+      }
+
+      .cap-wrap .hero-actions {
+        justify-content: center;
         position: relative;
         z-index: 1;
       }
 
-      .hero-proof {
+      .cap-lines {
+        position: absolute;
+        inset: 0;
+        width: 100%;
+        height: 100%;
+        overflow: visible;
+        pointer-events: none;
+        z-index: 0;
+      }
+
+      .cap-edge {
+        fill: none;
+        stroke: var(--c, var(--accent));
+        stroke-width: 1.5;
+        stroke-linecap: round;
+        opacity: 0;
+        stroke-dasharray: var(--len);
+        stroke-dashoffset: var(--len);
+        transition:
+          stroke-dashoffset 0.6s var(--ease-out) var(--d, 0s),
+          opacity 0.25s var(--ease-out);
+      }
+
+      .cap-wrap.is-open .cap-edge {
+        opacity: 0.55;
+        stroke-dashoffset: 0;
+      }
+
+      .cap-graph {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        position: relative;
+        z-index: 1;
         display: flex;
         flex-wrap: wrap;
+        justify-content: center;
         gap: 6px;
         margin-top: var(--space-4);
+      }
+
+      .cap-node {
+        display: inline-flex;
+        align-items: center;
+        gap: 6px;
+        padding: 6px 12px;
+        border-radius: var(--radius-full);
+        border: 1px solid var(--border-subtle);
+        background: var(--surface-card);
+        color: var(--text-body);
+        font-size: 12.5px;
+        font-weight: 500;
+        line-height: 1.4;
+        white-space: nowrap;
+        text-decoration: none;
+        box-shadow: var(--shadow-sm);
+      }
+
+      .cap-node .proof-dot {
+        background: var(--c);
+      }
+
+      .cap-node:hover,
+      .cap-node:focus-visible {
+        border-color: var(--c);
+        color: var(--text-strong);
+      }
+
+      /* Enhanced mode (JS present): collapsed until opened */
+      .cap-wrap.is-enhanced .cap-graph {
+        height: 0;
+        margin-top: 0;
+        visibility: hidden;
+        transition:
+          height 0.4s var(--ease-out),
+          visibility 0s linear 0.4s;
+      }
+
+      .cap-wrap.is-enhanced.is-open .cap-graph {
+        height: 210px;
+        visibility: visible;
+        transition: height 0.4s var(--ease-out);
+      }
+
+      .cap-wrap.is-enhanced .cap-graph > li {
+        position: absolute;
+        left: var(--x);
+        top: var(--y);
+        transform: translate(-50%, -50%) scale(0.85);
+        opacity: 0;
+        transition:
+          opacity 0.3s var(--ease-out) var(--nd, 0s),
+          transform 0.3s var(--ease-out) var(--nd, 0s);
+      }
+
+      .cap-wrap.is-enhanced.is-open .cap-graph > li {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+      }
+
+      .cap-wrap.is-enhanced #cap-toggle::after {
+        content: "";
+        width: 7px;
+        height: 7px;
+        margin-left: 8px;
+        border-right: 2px solid currentColor;
+        border-bottom: 2px solid currentColor;
+        transform: translateY(-2px) rotate(45deg);
+        transition: transform 0.25s var(--ease-out);
+      }
+
+      .cap-wrap.is-open #cap-toggle::after {
+        transform: translateY(1px) rotate(-135deg);
+      }
+
+      @media (max-width: 640px) {
+        .cap-wrap.is-enhanced .cap-graph {
+          flex-direction: column;
+          align-items: center;
+          flex-wrap: nowrap;
+          gap: 8px;
+          height: auto;
+          max-height: 0;
+          overflow: hidden;
+          padding: 0 0 0 var(--space-5);
+          transition:
+            max-height 0.4s var(--ease-out),
+            visibility 0s linear 0.4s;
+        }
+
+        .cap-wrap.is-enhanced.is-open .cap-graph {
+          height: auto;
+          max-height: 340px;
+          padding-top: var(--space-4);
+          margin-top: var(--space-2);
+          transition: max-height 0.4s var(--ease-out);
+        }
+
+        .cap-wrap.is-enhanced .cap-graph > li {
+          position: static;
+          width: min(100%, 260px);
+          transform: scale(0.9);
+        }
+
+        .cap-wrap.is-enhanced.is-open .cap-graph > li {
+          transform: scale(1);
+        }
+
+        .cap-node {
+          width: 100%;
+          padding: 9px 14px;
+          font-size: 13.5px;
+        }
       }
 
       .proof-pill {
@@ -77,10 +251,11 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        order: -1;
       }
 
       .hero-mark {
-        width: min(100%, 360px);
+        width: min(60%, 240px);
         height: auto;
         animation: mark-float 9s var(--ease-out) infinite alternate;
         will-change: transform;
@@ -96,67 +271,128 @@
         }
       }
 
-      .hero-links {
-        display: flex;
-        gap: var(--space-3);
-        margin-top: var(--space-6);
-        padding-top: var(--space-5);
-        padding-bottom: var(--space-1);
-        border-top: 1px solid var(--border-subtle);
-        overflow-x: auto;
-        scroll-snap-type: x proximity;
-        scrollbar-width: thin;
-        position: relative;
-        z-index: 1;
+      /* ============================================================ Open tools */
+      .tools-head {
+        max-width: 64ch;
+        margin: 0 auto;
+        text-align: center;
       }
 
-      .hero-link-card {
-        display: flex;
-        flex: 0 0 auto;
-        width: 220px;
-        flex-direction: column;
-        gap: var(--space-1);
-        padding: var(--space-4);
-        border-radius: var(--radius-md);
-        background: var(--surface-card);
-        border: 1px solid var(--border-subtle);
-        border-top: 3px solid var(--mini-accent, var(--accent));
-        box-shadow: var(--shadow-sm);
-        text-decoration: none;
-        scroll-snap-align: start;
-        transition:
-          transform 0.2s var(--ease-out),
-          box-shadow 0.2s var(--ease-out);
+      .tools-head .text-lead {
+        margin-left: auto;
+        margin-right: auto;
       }
 
-      .hero-link-card:hover,
-      .hero-link-card:focus-visible {
-        transform: translateY(-3px);
-        box-shadow: var(--shadow-md);
+      .tools-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-4);
+        margin-top: var(--space-5);
       }
 
-      .hero-link-label {
+      .tools-note {
+        max-width: 64ch;
+        margin: var(--space-4) auto 0;
+        text-align: center;
         color: var(--text-muted);
-        font-size: 12px;
-        font-weight: 600;
-        text-transform: uppercase;
-        letter-spacing: 0.06em;
+        font-size: 14.5px;
       }
 
-      .hero-link-title {
-        color: var(--text-strong);
+      .tool-card {
+        padding: var(--space-5);
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        border-top: 3px solid var(--tool-accent, var(--accent));
+        background: var(--surface-card);
+        box-shadow: var(--shadow-sm);
+      }
+
+      .tool-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: var(--space-3);
+        margin-bottom: var(--space-2);
+      }
+
+      .tool-card h3 {
+        margin: 0;
         font-family: var(--font-data);
-        font-size: 16px;
+        font-size: 20px;
         font-weight: 600;
         letter-spacing: -0.02em;
+        color: var(--text-strong);
       }
 
-      .hero-link-note {
-        display: inline-flex;
+      .tool-soon {
+        padding: 3px 10px;
+        border-radius: var(--radius-full);
+        background: var(--accent-warm-tint);
+        color: var(--accent-warm);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+      }
+
+      .tool-card p {
+        margin: 0 0 var(--space-4);
+        color: var(--text-body);
+        font-size: 14.5px;
+      }
+
+      .install-box {
+        display: flex;
         align-items: center;
-        gap: 4px;
-        color: var(--text-muted);
+        gap: var(--space-2);
+        padding: 6px 6px 6px var(--space-4);
+        border-radius: var(--radius-md);
+        border: 1px solid var(--border-default);
+        background: var(--surface-sunken);
+      }
+
+      .install-box code {
+        flex: 1;
+        min-width: 0;
+        overflow-x: auto;
+        white-space: nowrap;
+        font-family: var(--font-data);
         font-size: 13.5px;
+        color: var(--text-strong);
+        scrollbar-width: none;
+      }
+
+      .install-box code::before {
+        content: "$ ";
+        color: var(--text-faint);
+      }
+
+      .install-box button {
+        flex: 0 0 auto;
+        padding: 7px 14px;
+        border: 1px solid var(--border-subtle);
+        border-radius: var(--radius-sm);
+        background: var(--surface-card);
+        color: var(--text-body);
+        font: inherit;
+        font-size: 12.5px;
+        font-weight: 600;
+        cursor: pointer;
+      }
+
+      .install-box button:hover:not(:disabled),
+      .install-box button:focus-visible {
+        color: var(--accent);
+        border-color: var(--accent);
+      }
+
+      .install-box button:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      .install-box.is-pending code {
+        color: var(--text-muted);
       }
 
       /* ============================================================ Signal band */
@@ -330,6 +566,77 @@
         font-size: 12px;
         font-weight: 500;
         white-space: nowrap;
+      }
+
+      /* ============================================================ Selected work (compact list) */
+      .work-list {
+        list-style: none;
+        margin: var(--space-5) 0 0;
+        padding: 0;
+        border-radius: var(--radius-lg);
+        border: 1px solid var(--border-subtle);
+        background: var(--surface-card);
+        box-shadow: var(--shadow-sm);
+        overflow: hidden;
+      }
+
+      .work-row {
+        display: grid;
+        grid-template-columns: 4px 190px minmax(0, 1fr) auto;
+        align-items: center;
+        gap: var(--space-4);
+        padding: var(--space-3) var(--space-4) var(--space-3) 0;
+        border-bottom: 1px solid var(--border-subtle);
+        color: inherit;
+        text-decoration: none;
+        transition: background var(--dur-fast) var(--ease-out);
+      }
+
+      .work-list li:last-child .work-row {
+        border-bottom: 0;
+      }
+
+      .work-row:hover,
+      .work-row:focus-visible {
+        background: var(--surface-sunken);
+      }
+
+      .work-bar {
+        align-self: stretch;
+        background: var(--work-accent, var(--accent));
+      }
+
+      .work-kind {
+        color: var(--text-muted);
+        font-size: 12px;
+        font-weight: 600;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+      }
+
+      .work-title {
+        color: var(--text-strong);
+        font-family: var(--font-data);
+        font-size: 15px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+      }
+
+      .work-note {
+        color: var(--text-muted);
+        font-size: 13.5px;
+        white-space: nowrap;
+      }
+
+      @media (max-width: 780px) {
+        .work-row {
+          grid-template-columns: 4px minmax(0, 1fr);
+          gap: var(--space-1) var(--space-3);
+        }
+
+        .work-row > :nth-child(n + 2) {
+          grid-column: 2;
+        }
       }
 
       /* ============================================================ Projects & Blog — shared compact-card system */
@@ -613,21 +920,12 @@
 
       /* ============================================================ Responsive */
       @media (max-width: 1024px) {
-        .hero-grid {
-          grid-template-columns: 1fr;
-          gap: var(--space-5);
-        }
-
-        .hero-visual {
-          order: -1;
-        }
-
-        .hero-mark {
-          width: min(60%, 280px);
-        }
-
         .signal-grid {
           grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+
+        .tools-grid {
+          grid-template-columns: 1fr;
         }
 
         .workflow-list {
@@ -645,14 +943,6 @@
       }
 
       @media (max-width: 780px) {
-        .hero-links {
-          gap: var(--space-3);
-        }
-
-        .hero-link-card {
-          width: 200px;
-        }
-
         .bento-grid {
           grid-template-columns: minmax(0, 1fr);
         }
@@ -687,6 +977,13 @@
       @media (prefers-reduced-motion: reduce) {
         .hero-mark {
           animation: none !important;
+        }
+
+        .cap-edge,
+        .cap-graph,
+        .cap-graph > li {
+          transition-duration: 0.01s !important;
+          transition-delay: 0s !important;
         }
       }
     </style>
@@ -762,9 +1059,6 @@
       <div class="container">
         <div class="hero-grid">
           <div class="hero-copy reveal">
-            <span class="eyebrow" data-i18n="hero.eyebrow"
-              >Data intelligence for life sciences, pharma and agriculture</span
-            >
             <h1 class="heading-lg">
               <span class="headline-nature" data-i18n="hero.h1_lead"
                 >Nature,</span
@@ -774,70 +1068,49 @@
               >
             </h1>
             <p class="hero-desc" data-i18n="hero.desc">
-              AidBio turns research and field data into results and decisions.
+              AidBio gives molecular and agronomic research the expertise and
+              tools to master its data. From lab experiments to field trials,
+              we turn raw data into results and decisions, for academic and
+              industry teams.
             </p>
 
-            <div class="hero-actions">
-              <a
-                href="#contact"
-                class="btn btn-primary"
-                data-i18n="hero.ctaPrimary"
-                >Engage AidBio</a
-              >
-              <a
-                href="#solutions"
-                class="btn btn-secondary"
-                data-i18n="hero.ctaSecondary"
-                >Explore capabilities</a
-              >
-            </div>
+            <div class="cap-wrap" id="cap-wrap">
+              <svg class="cap-lines" aria-hidden="true" focusable="false"></svg>
 
-            <div class="hero-proof" aria-label="Capabilities summary">
-              <span class="proof-pill"
-                ><span
-                  class="proof-dot"
-                  style="background: var(--spectrum-emerald)"
-                ></span>
-                <span data-i18n="hero.proof1"
-                  >Agronomy &amp; climate</span
-                ></span
-              >
-              <span class="proof-pill"
-                ><span
-                  class="proof-dot"
-                  style="background: var(--spectrum-teal)"
-                ></span>
-                <span data-i18n="hero.proof2"
-                  >Omics &amp; bioinformatics</span
-                ></span
-              >
-              <span class="proof-pill"
-                ><span
-                  class="proof-dot"
-                  style="background: var(--spectrum-violet)"
-                ></span>
-                <span data-i18n="hero.proof3"
-                  >Protein modeling</span
-                ></span
-              >
-              <span class="proof-pill"
-                ><span
-                  class="proof-dot"
-                  style="background: var(--spectrum-coral)"
-                ></span>
-                <span data-i18n="hero.proof4"
-                  >Reproducible delivery</span
-                ></span
-              >
-              <span class="proof-pill"
-                ><span
-                  class="proof-dot"
-                  style="background: var(--spectrum-indigo)"
-                ></span>
-                <span data-i18n="hero.proof5"
-                  >Local, private processing</span
-                ></span
-              >
+              <div class="hero-actions">
+                <a
+                  href="#contact"
+                  class="btn btn-primary"
+                  data-i18n="hero.ctaPrimary"
+                  >Engage AidBio</a
+                >
+                <a
+                  href="#solutions"
+                  class="btn btn-secondary"
+                  id="cap-toggle"
+                  aria-controls="cap-graph"
+                  data-i18n="hero.ctaSecondary"
+                  >Explore capabilities</a
+                >
+              </div>
+
+              <ul class="cap-graph" id="cap-graph" aria-label="Capabilities summary">
+                <li style="--x: 15%; --y: 24%; --c: var(--spectrum-teal)">
+                  <a class="cap-node" data-key="omics" href="#cap-omics"><span class="proof-dot"></span><span data-i18n="hero.proof2">Omics &amp; bioinformatics</span></a>
+                </li>
+                <li style="--x: 22%; --y: 76%; --c: var(--spectrum-violet)">
+                  <a class="cap-node" data-key="protein" href="#projects"><span class="proof-dot"></span><span data-i18n="hero.proof3">Protein modeling</span></a>
+                </li>
+                <li style="--x: 50%; --y: 46%; --c: var(--spectrum-coral)">
+                  <a class="cap-node" data-key="repro" href="#process"><span class="proof-dot"></span><span data-i18n="hero.proof4">Reproducible delivery</span></a>
+                </li>
+                <li style="--x: 50%; --y: 90%; --c: var(--spectrum-indigo)">
+                  <a class="cap-node" data-key="private" href="#contact"><span class="proof-dot"></span><span data-i18n="hero.proof5">Local, private processing</span></a>
+                </li>
+                <li style="--x: 85%; --y: 36%; --c: var(--spectrum-emerald)">
+                  <a class="cap-node" data-key="agri" href="#cap-agri"><span class="proof-dot"></span><span data-i18n="hero.proof1">Agronomy &amp; climate</span></a>
+                </li>
+              </ul>
             </div>
           </div>
 
@@ -858,77 +1131,61 @@
             />
           </div>
         </div>
-
-        <div class="hero-links reveal delay-2">
-          <a
-            href="aidweather.html"
-            class="hero-link-card"
-            style="--mini-accent: var(--spectrum-indigo)"
-          >
-            <span
-              class="hero-link-label"
-              data-i18n="hero.links.aidweather.label"
-              >Open-source library</span
-            >
-            <span class="hero-link-title">AidWeather</span>
-            <span class="hero-link-note"
-              ><span data-i18n="hero.links.aidweather.note"
-                >Explore the project</span
-              >
-              <span aria-hidden="true">→</span></span
-            >
-          </a>
-          <a
-            href="#projects"
-            class="hero-link-card"
-            style="--mini-accent: var(--spectrum-coral)"
-          >
-            <span class="hero-link-label" data-i18n="hero.links.aid2go.label"
-              >Research prototype</span
-            >
-            <span class="hero-link-title">Aid2GO</span>
-            <span class="hero-link-note"
-              ><span data-i18n="hero.links.aid2go.note"
-                >Learn more</span
-              >
-              <span aria-hidden="true">→</span></span
-            >
-          </a>
-          <a
-            href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13109786/"
-            target="_blank"
-            rel="noopener"
-            class="hero-link-card"
-            style="--mini-accent: var(--spectrum-teal)"
-          >
-            <span class="hero-link-label" data-i18n="hero.links.gppipred.label"
-              >Publication · 2026</span
-            >
-            <span class="hero-link-title">gPPIpred</span>
-            <span class="hero-link-note"
-              ><span data-i18n="hero.links.gppipred.note">Read the paper</span>
-              <span aria-hidden="true">→</span></span
-            >
-          </a>
-          <a
-            href="portfolio/pages/01-mechanism.html"
-            class="hero-link-card"
-            style="--mini-accent: var(--spectrum-emerald)"
-          >
-            <span class="hero-link-label">Current Biology · 2018</span>
-            <span class="hero-link-title" data-i18n="hero.links.paper.title"
-              >Circadian entrainment by bZIP63</span
-            >
-            <span class="hero-link-note"
-              ><span data-i18n="hero.links.paper.note">Read the paper</span>
-              <span aria-hidden="true">→</span></span
-            >
-          </a>
-        </div>
       </div>
     </header>
 
     <main>
+      <section id="open-tools" class="section">
+        <div class="container">
+          <div class="tools-head reveal">
+            <span class="eyebrow" style="justify-content: center" data-i18n="tools.eyebrow">Open source by AidBio</span>
+            <h2 class="heading-md" data-i18n="tools.h2">
+              Weather and solar data, ready for your research.
+            </h2>
+            <p class="text-lead" data-i18n="tools.lead">
+              AidWeather is an open-source Python library and CLI that turns
+              NASA POWER data into clean, cached, analysis-ready tables — for a
+              point, a transect, or a whole region.
+            </p>
+          </div>
+
+          <div class="tools-grid">
+            <article class="tool-card reveal delay-1" style="--tool-accent: var(--spectrum-indigo)">
+              <div class="tool-top">
+                <h3>aidweather</h3>
+              </div>
+              <p data-i18n="tools.aidweather.body">
+                The library and command-line tool. Install it from PyPI.
+              </p>
+              <div class="install-box">
+                <code>pip install aidweather</code>
+                <button type="button" data-copy="pip install aidweather" data-i18n="tools.copy">Copy</button>
+              </div>
+            </article>
+
+            <article class="tool-card reveal delay-2" style="--tool-accent: var(--spectrum-coral)">
+              <div class="tool-top">
+                <h3>aidweather-client</h3>
+                <span class="tool-soon" data-i18n="tools.soon">Coming soon</span>
+              </div>
+              <p data-i18n="tools.client.body">
+                Not published yet. The install command will appear here.
+              </p>
+              <div class="install-box is-pending">
+                <code>pip install aidweather-client</code>
+                <button type="button" disabled data-i18n="tools.copy">Copy</button>
+              </div>
+            </article>
+          </div>
+
+          <p class="tools-note reveal delay-2" data-i18n-html="tools.note">
+            These packages are built and maintained by AidBio and released as
+            open source. We also develop <strong>internal tools</strong> for
+            client projects — <a href="#contact">get in touch</a> to learn more.
+          </p>
+        </div>
+      </section>
+
       <section class="signal-band">
         <div class="container reveal">
           <div class="signal-head">
@@ -1018,7 +1275,7 @@
           </div>
 
           <div class="bento-grid">
-            <article class="bento-card card-square reveal delay-1">
+            <article id="cap-agri" class="bento-card card-square reveal delay-1">
               <div
                 class="card-icon"
                 style="background: var(--gradient-aurora)"
@@ -1052,7 +1309,7 @@
               </p>
             </article>
 
-            <article class="bento-card card-wide reveal delay-2">
+            <article id="cap-omics" class="bento-card card-wide reveal delay-2">
               <div
                 class="card-icon"
                 style="background: var(--gradient-flora)"
@@ -1351,6 +1608,53 @@
               </div>
             </article>
           </div>
+        </div>
+      </section>
+
+      <section id="work" class="section">
+        <div class="container">
+          <div class="reveal">
+            <span class="eyebrow" data-i18n="work.eyebrow">Selected work</span>
+            <h2 class="heading-md">
+              <span data-i18n="work.h2_lead">Tools and papers,</span>
+              <span class="accent-spectrum grad-spectrum" data-i18n="work.h2_accent">at a glance</span><span data-i18n="work.h2_tail">.</span>
+            </h2>
+          </div>
+
+          <ul class="work-list reveal delay-1">
+            <li>
+              <a href="aidweather.html" class="work-row" style="--work-accent: var(--spectrum-indigo)">
+                <span class="work-bar" aria-hidden="true"></span>
+                <span class="work-kind" data-i18n="work.aidweather.label">Open-source library</span>
+                <span class="work-title">AidWeather</span>
+                <span class="work-note"><span data-i18n="work.aidweather.note">Explore the project</span> <span aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li>
+              <a href="#projects" class="work-row" style="--work-accent: var(--spectrum-coral)">
+                <span class="work-bar" aria-hidden="true"></span>
+                <span class="work-kind" data-i18n="work.aid2go.label">Research prototype</span>
+                <span class="work-title">Aid2GO</span>
+                <span class="work-note"><span data-i18n="work.aid2go.note">Learn more</span> <span aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li>
+              <a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13109786/" target="_blank" rel="noopener" class="work-row" style="--work-accent: var(--spectrum-teal)">
+                <span class="work-bar" aria-hidden="true"></span>
+                <span class="work-kind" data-i18n="work.gppipred.label">Publication · 2026</span>
+                <span class="work-title">gPPIpred</span>
+                <span class="work-note"><span data-i18n="work.gppipred.note">Read the paper</span> <span aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li>
+              <a href="portfolio/pages/01-mechanism.html" class="work-row" style="--work-accent: var(--spectrum-emerald)">
+                <span class="work-bar" aria-hidden="true"></span>
+                <span class="work-kind">Current Biology · 2018</span>
+                <span class="work-title" data-i18n="work.paper.title">Circadian entrainment by bZIP63</span>
+                <span class="work-note"><span data-i18n="work.paper.note">Read the paper</span> <span aria-hidden="true">→</span></span>
+              </a>
+            </li>
+          </ul>
         </div>
       </section>
 
@@ -1674,5 +1978,141 @@
 
     <script src="assets/js/i18n.js"></script>
     <script src="assets/js/chrome.js"></script>
+    <script>
+      document.querySelectorAll("[data-copy]").forEach(function (btn) {
+        btn.addEventListener("click", function () {
+          var label = btn.textContent;
+          navigator.clipboard
+            .writeText(btn.getAttribute("data-copy"))
+            .then(function () {
+              btn.textContent = "✓";
+              setTimeout(function () {
+                btn.textContent = label;
+              }, 1500);
+            })
+            .catch(function () {});
+        });
+      });
+
+      (function () {
+        var wrap = document.getElementById("cap-wrap");
+        var toggle = document.getElementById("cap-toggle");
+        var graph = document.getElementById("cap-graph");
+        var svg = wrap && wrap.querySelector(".cap-lines");
+        if (!wrap || !toggle || !graph || !svg) return;
+
+        var NS = "http://www.w3.org/2000/svg";
+        var narrow = window.matchMedia("(max-width: 640px)");
+        var canHover = window.matchMedia("(hover: hover) and (pointer: fine)");
+        var EDGES = [
+          ["btn", "omics"],
+          ["btn", "repro"],
+          ["btn", "agri"],
+          ["omics", "protein"],
+          ["omics", "repro"],
+          ["repro", "agri"],
+          ["repro", "private"],
+          ["protein", "private"]
+        ];
+        var pinned = false;
+
+        wrap.classList.add("is-enhanced");
+        toggle.setAttribute("role", "button");
+        toggle.setAttribute("aria-expanded", "false");
+
+        graph.querySelectorAll("li").forEach(function (li, i) {
+          li.style.setProperty("--nd", 0.25 + i * 0.07 + "s");
+        });
+
+        function centre(el, box) {
+          var r = el.getBoundingClientRect();
+          return {
+            x: r.left - box.left + r.width / 2,
+            y: r.top - box.top + r.height / 2,
+            left: r.left - box.left,
+            bottom: r.bottom - box.top
+          };
+        }
+
+        function draw() {
+          var box = wrap.getBoundingClientRect();
+          var pts = { btn: centre(toggle, box) };
+          graph.querySelectorAll(".cap-node").forEach(function (n) {
+            pts[n.getAttribute("data-key")] = centre(n, box);
+          });
+          var color = {};
+          graph.querySelectorAll(".cap-node").forEach(function (n) {
+            color[n.getAttribute("data-key")] = getComputedStyle(n.parentNode).getPropertyValue("--c");
+          });
+          svg.setAttribute("viewBox", "0 0 " + box.width + " " + box.height);
+          svg.textContent = "";
+          var isNarrow = narrow.matches;
+
+          EDGES.forEach(function (e, i) {
+            if (isNarrow && e[0] !== "btn") return;
+            var a = pts[e[0]], b = pts[e[1]], d;
+            if (isNarrow) {
+              var lx = b.left - 26;
+              d = "M" + a.x + "," + a.bottom + " C" + lx + "," + a.bottom + " " + lx + "," + b.y + " " + b.x + "," + b.y;
+            } else {
+              var ay = e[0] === "btn" ? a.bottom - 4 : a.y;
+              var mx = (a.x + b.x) / 2, my = (ay + b.y) / 2;
+              var dx = b.x - a.x, dy = b.y - ay;
+              var k = 0.12;
+              d = "M" + a.x + "," + ay + " Q" + (mx - dy * k) + "," + (my + dx * k) + " " + b.x + "," + b.y;
+            }
+            var path = document.createElementNS(NS, "path");
+            path.setAttribute("d", d);
+            path.setAttribute("class", "cap-edge");
+            path.style.setProperty("--c", color[e[1]]);
+            path.style.setProperty("--d", (e[0] === "btn" ? 0.05 : 0.3) + i * 0.05 + "s");
+            svg.appendChild(path);
+            path.style.setProperty("--len", Math.ceil(path.getTotalLength()) + 2);
+          });
+        }
+
+        function set(open) {
+          wrap.classList.toggle("is-open", open);
+          toggle.setAttribute("aria-expanded", open ? "true" : "false");
+          if (open) draw();
+        }
+
+        // Graph geometry changes with the open height transition; redraw once settled.
+        graph.addEventListener("transitionend", function (e) {
+          if (e.target === graph && wrap.classList.contains("is-open")) draw();
+        });
+        if (window.ResizeObserver) new ResizeObserver(draw).observe(wrap);
+
+        toggle.addEventListener("click", function (e) {
+          e.preventDefault();
+          if (wrap.classList.contains("is-open") && pinned) {
+            pinned = false;
+            set(false);
+          } else {
+            pinned = true;
+            set(true);
+          }
+        });
+        wrap.addEventListener("mouseenter", function () {
+          if (canHover.matches) set(true);
+        });
+        wrap.addEventListener("mouseleave", function () {
+          if (canHover.matches && !pinned) set(false);
+        });
+        document.addEventListener("click", function (e) {
+          if (!wrap.contains(e.target) || e.target.closest(".cap-node")) {
+            pinned = false;
+            set(false);
+          }
+        });
+        document.addEventListener("keydown", function (e) {
+          if (e.key === "Escape" && wrap.classList.contains("is-open")) {
+            pinned = false;
+            set(false);
+            toggle.focus();
+          }
+        });
+      })();
+    </script>
   </body>
 </html>

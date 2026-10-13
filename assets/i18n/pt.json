@@ -19,35 +19,52 @@
     "founderStory": "↳ Portfólio: a trajetória do fundador"
   },
   "hero": {
-    "eyebrow": "Inteligência de dados para ciências da vida, farmacêutica e agricultura",
     "h1_lead": "Natureza,",
     "h1_accent": "Decodificada.",
-    "desc": "A AidBio transforma dados de pesquisa e de campo em resultados e decisões.",
+    "desc": "A AidBio oferece à pesquisa molecular e agronômica a experiência e as ferramentas para dominar seus dados. De experimentos de laboratório a ensaios de campo, transformamos dados brutos em resultados e decisões, para equipes acadêmicas e da indústria.",
     "ctaPrimary": "Fale com a AidBio",
     "ctaSecondary": "Explorar capacidades",
     "proof1": "Agronomia e clima",
     "proof2": "Ômica e bioinformática",
     "proof3": "Modelagem de proteínas",
     "proof4": "Entrega reprodutível",
-    "proof5": "Processamento local e privado",
-    "links": {
-      "aidweather": {
-        "label": "Biblioteca de código aberto",
-        "note": "Explorar o projeto"
-      },
-      "aid2go": {
-        "label": "Protótipo de pesquisa",
-        "note": "Saiba mais"
-      },
-      "gppipred": {
-        "label": "Publicação · 2026",
-        "note": "Ler o artigo"
-      },
-      "paper": {
-        "title": "Sincronização circadiana pelo bZIP63",
-        "note": "Ler o artigo"
-      }
+    "proof5": "Processamento local e privado"
+  },
+  "work": {
+    "eyebrow": "Trabalhos selecionados",
+    "h2_lead": "Ferramentas e artigos,",
+    "h2_accent": "num relance",
+    "h2_tail": ".",
+    "aidweather": {
+      "label": "Biblioteca de código aberto",
+      "note": "Explorar o projeto"
+    },
+    "aid2go": {
+      "label": "Protótipo de pesquisa",
+      "note": "Saiba mais"
+    },
+    "gppipred": {
+      "label": "Publicação · 2026",
+      "note": "Ler o artigo"
+    },
+    "paper": {
+      "title": "Sincronização circadiana pelo bZIP63",
+      "note": "Ler o artigo"
     }
+  },
+  "tools": {
+    "eyebrow": "Código aberto da AidBio",
+    "h2": "Dados de clima e radiação solar, prontos para a sua pesquisa.",
+    "lead": "O AidWeather é uma biblioteca Python de código aberto, com CLI, que transforma dados da NASA POWER em tabelas limpas, com cache e prontas para análise — para um ponto, um transecto ou uma região inteira.",
+    "copy": "Copiar",
+    "soon": "Em breve",
+    "aidweather": {
+      "body": "A biblioteca e a ferramenta de linha de comando. Instale pelo PyPI."
+    },
+    "client": {
+      "body": "Ainda não publicado. O comando de instalação aparecerá aqui."
+    },
+    "note": "Estes pacotes são desenvolvidos e mantidos pela AidBio e lançados como código aberto. Também desenvolvemos <strong>ferramentas internas</strong> para projetos de clientes — <a href=\"#contact\">entre em contato</a> para saber mais."
   },
   "signal": {
     "badge": "Inteligência aplicada",
