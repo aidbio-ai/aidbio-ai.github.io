@@ -308,6 +308,7 @@
       }
 
       .tool-top {
+        flex-wrap: wrap;
         display: flex;
         align-items: center;
         justify-content: space-between;
@@ -325,6 +326,7 @@
       }
 
       .tool-soon {
+        white-space: nowrap;
         padding: 3px 10px;
         border-radius: var(--radius-full);
         background: var(--accent-warm-tint);
@@ -628,6 +630,17 @@
         white-space: nowrap;
       }
 
+      @media (max-width: 560px) {
+        .install-box code {
+          white-space: normal;
+          overflow-wrap: anywhere;
+        }
+
+        .tool-card {
+          padding: var(--space-4);
+        }
+      }
+
       @media (max-width: 780px) {
         .work-row {
           grid-template-columns: 4px minmax(0, 1fr);
@@ -925,7 +938,7 @@
         }
 
         .tools-grid {
-          grid-template-columns: 1fr;
+          grid-template-columns: minmax(0, 1fr);
         }
 
         .workflow-list {
