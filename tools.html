@@ -60,7 +60,7 @@
     <header class="page-head">
       <span class="eyebrow">Open source</span>
       <h1 class="h1" style="font-size:clamp(2rem,5vw,3rem)">Tools you can read, run and reuse.</h1>
-      <p class="lead">We release our own research software as open source, so you can see how every result is produced. Both tools install the same way: clone the repository, then install it with <a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener" style="color:var(--emerald-text)">uv</a>.</p>
+      <p class="lead">We release our own research software as open source, so you can see how every result is produced. AidWeather installs with pip. Aid2GO installs by cloning the repository and using <a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener" style="color:var(--emerald-text)">uv</a>.</p>
     </header>
   </div>
   <section class="section" id="aidweather" style="padding-top:24px">
@@ -70,10 +70,7 @@
         <h2 class="h2 mono">aidweather</h2>
         <p class="body-sm">Gets daily or hourly NASA POWER weather and solar data for a single point, a line of points or a whole region. Results are cached locally in SQLite, so repeated queries do not hit the NASA servers again. It covers 18 parameters, including temperature, rainfall, solar radiation, wind and soil wetness.</p>
         <p class="body-sm">It is in beta: the public interface is stable, but features may still be added.</p>
-        <div class="cmd">
-              <div class="code-line"><code>git clone https://github.com/matiollipt/aidweather.git</code></div>
-              <div class="code-line"><code>uv tool install ./aidweather</code><button class="copy-btn" type="button" data-copy="git clone https://github.com/matiollipt/aidweather.git &amp;&amp; uv tool install ./aidweather">copy both</button></div>
-            </div>
+        <div class="cmd"><div class="code-line"><code>pip install aidweather</code><button class="copy-btn" type="button" data-copy="pip install aidweather">copy</button></div></div>
         <div class="project-links"><a class="link-arrow" href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener">GitHub <span>→</span></a><a class="link-arrow" href="aidweather.html">AidWeather page <span>→</span></a></div>
       </div></article>
       <article class="card card-violet" id="aid2go"><div class="card-body">

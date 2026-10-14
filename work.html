@@ -4,10 +4,10 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Work — AidBio</title>
-  <meta name="description" content="Selected projects: protein interaction prediction, melanoma drug response, 3D-printed bone implants and coffee field experiments.">
+  <meta name="description" content="Selected work: protein interaction prediction with gPPIpred.">
   <link rel="canonical" href="https://aidbio.org/work.html">
   <meta property="og:title" content="Work — AidBio">
-  <meta property="og:description" content="Selected projects: protein interaction prediction, melanoma drug response, 3D-printed bone implants and coffee field experiments.">
+  <meta property="og:description" content="Selected work: protein interaction prediction with gPPIpred.">
   <meta name="theme-color" content="#080B0E">
   <script>
     (function () {
@@ -60,7 +60,7 @@
     <header class="page-head">
       <span class="eyebrow">Selected work</span>
       <h1 class="h1" style="font-size:clamp(2rem,5vw,3rem)">Projects across the lab and the field.</h1>
-      <p class="lead">Four examples of the questions we have worked on. Client details are left out.</p>
+      <p class="lead">A selection of our work. More projects will be added.</p>
     </header>
 
     <article class="project" id="gppipred">
@@ -82,56 +82,6 @@
       </div></div>
     </article>
 
-    <article class="project flip" id="melanoma">
-      <div class="project-copy">
-        <div class="tags"><span class="tag">Transcriptomics</span><span class="tag">Cancer</span></div>
-        <h2 class="h1">Drug response in melanoma</h2>
-        <p class="body-sm">Many melanomas carry BRAF mutations and are treated with kinase inhibitors, yet patients respond very differently. We analysed gene-expression changes under single and combined treatment to see what separates sensitive from resistant samples.</p>
-        <ul>
-          <li>Differential expression, then cleaning of skewed values so a few outlier genes did not dominate.</li>
-          <li>PCA and t-SNE to see how samples group, and gene-set enrichment to name the pathways involved.</li>
-          <li><strong>Finding:</strong> sensitive samples cluster with the dual-drug response; resistant samples split into several groups, which points to more than one resistance mechanism.</li>
-        </ul>
-      </div>
-      <div class="figure-pair">
-        <figure class="figure"><img src="assets/img/melanoma-tsne.webp" alt="t-SNE plot of gene-expression profiles" loading="lazy" width="1200" height="900"><figcaption>t-SNE of expression profiles: how samples group.</figcaption></figure>
-        <figure class="figure"><img src="assets/img/melanoma-bubble.webp" alt="Bubble plot of enriched pathways" loading="lazy" width="1200" height="1466"><figcaption>Enriched pathways: bubble size is the share of genes in the set, colour is significance.</figcaption></figure>
-      </div>
-    </article>
-
-    <article class="project" id="bones">
-      <div class="project-copy">
-        <div class="tags"><span class="tag tag-cyan">Materials and manufacturing</span><span class="tag">Medical devices</span></div>
-        <h2 class="h1">3D-printed lattice bone implants</h2>
-        <p class="body-sm">Titanium implants printed as lattices can be tuned to match bone, but many settings interact. We modelled how lattice type (cubic, diamond, gyroid) and print settings affect strength and stiffness, and also worked backwards from a target strength to the settings needed.</p>
-        <ul>
-          <li>Partial least squares models in both directions: design to mechanics, and mechanics to design.</li>
-          <li><strong>Finding:</strong> pore size matters most overall. For simple cubic lattices it dominates; for diamond, laser power also matters; for the more complex gyroid, all three settings play a part.</li>
-          <li>Datasets were small, so we report which settings matter and how confident to be, rather than promising exact predictions.</li>
-        </ul>
-      </div>
-      <figure class="figure"><img src="assets/img/bones-plsr-gyroid.webp" alt="Panel of model diagnostics for gyroid lattices" loading="lazy" width="1400" height="1107"><figcaption>Model diagnostics for gyroid lattices: fit, predictions and which settings matter.</figcaption></figure>
-    </article>
-
-    <article class="project flip" id="aidfarm">
-      <div class="project-copy">
-        <div class="tags"><span class="tag tag-amber">Agriculture</span><span class="tag">Coffee</span></div>
-        <h2 class="h1">Coffee field experiments with weather history</h2>
-        <p class="body-sm">Agronomists collect yield and quality data in spreadsheets from many plots and seasons. We built a framework that reads those workbooks, tidies them, adds location-based weather history, and produces the statistics, figures and a draft report.</p>
-        <ul>
-          <li>Reads messy Excel workbooks and checks them against an expected structure.</li>
-          <li>Compares treatments with ANOVA, PCA, t-SNE and clustering.</li>
-          <li>Adds weather history for each farm location through AidWeather.</li>
-          <li>Drafts figure legends and a technical report with a locally run AI model, so farm data never leaves the machine.</li>
-        </ul>
-        <p class="note">Data from the farms involved are confidential, so none are shown here.</p>
-      </div>
-      <div class="card card-amber"><div class="card-body">
-        <span class="eyebrow">Pipeline</span>
-        <ol class="body-sm" style="margin:0;padding-left:1.1rem;display:grid;gap:8px"><li>Raw workbooks in</li><li>Tidy tables and a data-quality report</li><li>Statistics and weather history per location</li><li>Figures, legends and a draft report out</li></ol>
-        <a class="link-arrow" href="aidweather.html">See the weather tool <span>→</span></a>
-      </div></div>
-    </article>
   </div>
   <section class="section section-alt">
     <div class="container container-narrow">
