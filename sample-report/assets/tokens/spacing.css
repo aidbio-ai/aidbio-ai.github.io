@@ -1,0 +1,26 @@
+/* ============================================================
+   AidBio · SPACING & SIZING
+   Spacing is a Fibonacci sequence (4·8·13·21·34·55·89·144) — the
+   golden-ratio rhythm that runs through the brand's geometry.
+   ============================================================ */
+:root {
+  --space-0:  0;
+  --space-1:  4px;
+  --space-2:  8px;
+  --space-3:  13px;
+  --space-4:  21px;
+  --space-5:  34px;
+  --space-6:  55px;
+  --space-7:  89px;
+  --space-8:  144px;
+
+  /* Layout */
+  --container-sm: 640px;
+  --container-md: 960px;
+  --container-lg: 1200px;
+  --container-xl: 1440px;
+  --gutter:       var(--space-4);
+
+  /* φ ≈ 1.618 — exposed for golden-ratio compositions */
+  --phi: 1.618; /* @kind other */
+}

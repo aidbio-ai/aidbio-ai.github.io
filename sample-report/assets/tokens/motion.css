@@ -1,0 +1,32 @@
+/* ============================================================
+   AidBio · MOTION
+   Calm, organic easing. A gentle spring nods to the playful
+   geometry; most UI uses a smooth decelerating ease.
+   ============================================================ */
+:root {
+  --ease-out:    cubic-bezier(0.22, 0.8, 0.28, 1);   /* @kind other */ /* default UI */
+  --ease-in-out: cubic-bezier(0.6, 0.04, 0.2, 1);     /* @kind other */
+  --ease-spring: cubic-bezier(0.34, 1.45, 0.5, 1);    /* @kind other */ /* gentle overshoot */
+
+  --dur-instant: 90ms;   /* @kind other */
+  --dur-fast:    150ms;  /* @kind other */
+  --dur-base:    240ms;  /* @kind other */
+  --dur-slow:    400ms;  /* @kind other */
+  --dur-slower:  680ms;  /* @kind other */
+
+  /* Composed transitions */
+  --transition-colors: color var(--dur-fast) var(--ease-out),
+                       background-color var(--dur-fast) var(--ease-out),
+                       border-color var(--dur-fast) var(--ease-out); /* @kind other */
+  --transition-transform: transform var(--dur-base) var(--ease-spring); /* @kind other */
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --dur-instant: 0ms; /* @kind other */
+    --dur-fast: 0ms; /* @kind other */
+    --dur-base: 0ms; /* @kind other */
+    --dur-slow: 0ms; /* @kind other */
+    --dur-slower: 0ms; /* @kind other */
+  }
+}

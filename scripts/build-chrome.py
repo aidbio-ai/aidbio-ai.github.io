@@ -28,7 +28,7 @@ def read(name):
 def render(kind, attrs):
     opts = dict(re.findall(r'([\w-]+)="([^"]*)"', attrs))
     text = read(f"{kind}.html")
-    text = re.sub(r"\{\{mark:(\w+)\}\}", lambda m: read("mark.svg.html").replace("{{id}}", m.group(1)), text)
+    text = re.sub(r"\{\{mark:(\w+)\}\}", lambda m: read("mark.html"), text)
     active = opts.get("active")
     if active:
         text = text.replace(f'data-nav="{active}"', f'data-nav="{active}" aria-current="page"')

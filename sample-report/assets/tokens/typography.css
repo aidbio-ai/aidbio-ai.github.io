@@ -1,0 +1,46 @@
+/* ============================================================
+   AidBio · TYPOGRAPHY
+   Rounded modern sans (warmth) + humanist sans (clarity) + mono (data).
+   Display sizes follow a Fibonacci-leaning scale (21·34·55·89).
+   ============================================================ */
+:root {
+  /* Families */
+  --font-round: 'Baloo 2', 'Segoe UI Rounded', ui-rounded, system-ui, sans-serif;
+  --font-sans:  'Plus Jakarta Sans', ui-sans-serif, system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono:  'IBM Plex Mono', ui-monospace, 'SF Mono', Menlo, monospace;
+
+  /* Semantic family roles */
+  --font-display: var(--font-round);  /* headlines, hero, quotes */
+  --font-ui:      var(--font-sans);    /* body, controls, labels */
+  --font-data:    var(--font-mono);    /* metrics, tables, code */
+
+  /* Type scale (px) — Fibonacci-leaning */
+  --text-2xs: 11px;
+  --text-xs:  12px;
+  --text-sm:  14px;
+  --text-base:16px;
+  --text-md:  18px;
+  --text-lg:  21px;
+  --text-xl:  28px;
+  --text-2xl: 38px;
+  --text-3xl: 55px;
+  --text-4xl: 89px;
+
+  /* Weights */
+  --weight-regular: 400;
+  --weight-medium:  500;
+  --weight-semibold:600;
+  --weight-bold:    700;
+
+  /* Line heights */
+  --leading-tight:  1.08;
+  --leading-snug:   1.25;
+  --leading-normal: 1.5;
+  --leading-relaxed:1.7;
+
+  /* Tracking */
+  --tracking-tight:  -0.02em;
+  --tracking-normal: 0;
+  --tracking-wide:   0.04em;
+  --tracking-caps:   0.12em;  /* eyebrows / overlines */
+}

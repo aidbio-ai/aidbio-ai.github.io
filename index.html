@@ -3,11 +3,11 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>AidBio — Machine learning for biology and agriculture</title>
-  <meta name="description" content="AidBio builds reliable machine learning models, data pipelines and open-source tools for research groups and companies in life sciences and agriculture.">
+  <title>AidBio — Precision data analytics for biology and agriculture</title>
+  <meta name="description" content="AidBio builds data analytics, machine learning models and open-source tools for research groups and companies in life sciences and agriculture.">
   <link rel="canonical" href="https://aidbio.org/">
-  <meta property="og:title" content="AidBio — Machine learning for biology and agriculture">
-  <meta property="og:description" content="Reliable models, pipelines and open-source tools for life sciences and agriculture.">
+  <meta property="og:title" content="AidBio — Precision data analytics for biology and agriculture">
+  <meta property="og:description" content="Precision data analytics and open-source tools for life sciences and agriculture.">
   <meta property="og:url" content="https://aidbio.org/">
   <meta name="theme-color" content="#080B0E">
   <script>
@@ -18,7 +18,8 @@
       document.documentElement.setAttribute('data-theme', t);
     })();
   </script>
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 36 36'%3E%3Crect width='36' height='36' rx='10' fill='%230E1318'/%3E%3Ccircle cx='18' cy='13' r='3' fill='%2334D399'/%3E%3Ccircle cx='12' cy='20' r='2.5' fill='%2334D399'/%3E%3Ccircle cx='24' cy='20' r='2.5' fill='%2334D399'/%3E%3Ccircle cx='18' cy='26' r='3' fill='%2334D399'/%3E%3C/svg%3E">
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
   <link rel="stylesheet" href="assets/css/aidbio.css">
 </head>
 <body>
@@ -26,7 +27,7 @@
 <a class="skip-link" href="#main">Skip to content</a>
 <header class="nav">
   <div class="container nav-inner">
-    <a class="brand" href="index.html" aria-label="AidBio home"><svg class="brand-mark" viewBox="0 0 36 36" aria-hidden="true" focusable="false"><defs><linearGradient id="abgh" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10B981"/><stop offset=".5" stop-color="#14B8A6"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs><rect x="0.75" y="0.75" width="34.5" height="34.5" rx="10" fill="#0E1318" stroke="url(#abgh)" stroke-width="1.5"/><g transform="translate(6 6) scale(1)" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M7 5a5 5 0 0 1 10 0v2a5 5 0 0 1-10 0Z" stroke-opacity=".3"/><circle cx="12" cy="7" r="2.5" fill="#34D399" stroke="none"/><circle cx="6" cy="14" r="2" fill="#34D399" stroke="none"/><circle cx="18" cy="14" r="2" fill="#34D399" stroke="none"/><circle cx="12" cy="20" r="2.5" fill="#34D399" stroke="none"/><path d="M6 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M6 14c0 3.3 2.7 6 6 6s6-2.7 6-6"/></g></svg><span>Aid<span style="color:var(--emerald)">Bio</span></span></a>
+    <a class="brand" href="index.html" aria-label="AidBio home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
     <ul class="nav-links">
       <li><a href="solutions.html" data-nav="solutions">Solutions</a></li>
       <li><a href="tools.html" data-nav="tools">Open source</a></li>
@@ -60,8 +61,8 @@
     <div class="container hero-grid">
       <div class="hero-copy">
         <span class="pill"><span class="pill-dot"></span>Machine learning · Data analytics · Open source</span>
-        <h1 class="display">Reliable machine learning for <span class="gradient-text">biology and agriculture.</span></h1>
-        <p class="lead measure">We turn lab and field data into models and tools your team can trust, check and reuse.</p>
+        <h1 class="display">Precision data analytics for <span class="gradient-text">biology and agriculture.</span></h1>
+        <p class="lead measure">We turn lab and field data into analyses, models and tools your team can trust, check and reuse.</p>
         <ul class="checks">
           <li><span><strong>Built for messy data.</strong> Batch effects, noisy sensors and uneven seasons are part of the job, not an afterthought.</span></li>
           <li><span><strong>Honest results.</strong> We test models the way you will use them, so the numbers hold up outside the lab.</span></li>
@@ -87,9 +88,10 @@
           <div class="panel" role="tabpanel" id="panel-weather" aria-labelledby="tab-weather">
             <div class="panel-head"><span>Weather and growing-degree days</span><span>illustrative data</span></div>
             <div class="terminal">
-              <div class="terminal-bar"><span>terminal</span><button class="copy-btn" type="button" data-copy="pip install aidweather">copy</button></div>
-              <div><span class="prompt">$</span> pip install aidweather</div>
-              <div class="dim"># fetch daily weather for a trial site and compute degree days</div>
+              <div class="terminal-bar"><span>terminal</span><button class="copy-btn" type="button" data-copy="git clone https://github.com/matiollipt/aidweather.git &amp;&amp; uv tool install ./aidweather">copy</button></div>
+              <div><span class="prompt">$</span> git clone https://github.com/matiollipt/aidweather.git</div>
+              <div><span class="prompt">$</span> uv tool install ./aidweather</div>
+              <div class="dim"># daily weather and degree days for any site</div>
             </div>
             <div class="canvas-wrap h-36">
               <canvas id="weatherCanvas" role="img" aria-label="Example chart of daily solar radiation and growing degree days over 30 days"></canvas>
@@ -215,8 +217,7 @@
           <div class="card-body">
             <div class="card-top"><span class="status">Python · Climate data</span><span class="tag tag-amber">Open source</span></div>
             <h3 class="h3 mono">aidweather</h3>
-            <p class="body-sm">Downloads and prepares daily weather data for any location and computes degree days for crop models.</p>
-            <div class="code-line"><code>pip install aidweather</code><button class="copy-btn" type="button" data-copy="pip install aidweather">copy</button></div>
+            <p class="body-sm">Downloads and caches daily NASA POWER weather and solar data for a point, a transect or a region, from the command line or Python.</p>
             <a class="link-arrow" href="aidweather.html">About AidWeather <span>→</span></a>
           </div>
         </article>
@@ -224,21 +225,37 @@
           <div class="card-body">
             <div class="card-top"><span class="status">Python · Functional genomics</span><span class="tag tag-violet">Open source</span></div>
             <h3 class="h3 mono">aid2go</h3>
-            <p class="body-sm">Predicts Gene Ontology terms for proteins using protein interaction networks.</p>
-            <div class="code-line"><code>pip install aid2go</code><button class="copy-btn" type="button" data-copy="pip install aid2go">copy</button></div>
-            <a class="link-arrow" href="tools.html">All tools <span>→</span></a>
+            <p class="body-sm">Predicts Gene Ontology terms for proteins using protein language-model embeddings, similarity networks and the GO hierarchy.</p>
+            <a class="link-arrow" href="tools.html#aid2go">About Aid2GO <span>→</span></a>
           </div>
         </article>
         <article class="card card-cyan">
           <div class="card-body">
-            <div class="card-top"><span class="status">Python · Plotting</span><span class="tag tag-cyan">Open source</span></div>
-            <h3 class="h3 mono">aidviz</h3>
-            <p class="body-sm">Publication-quality plot styles for Manhattan plots, climate ribbons and interaction heatmaps.</p>
-            <div class="code-line"><code>pip install aidviz</code><button class="copy-btn" type="button" data-copy="pip install aidviz">copy</button></div>
-            <a class="link-arrow" href="tools.html">All tools <span>→</span></a>
+            <div class="card-top"><span class="status">Product · Sample available</span><span class="tag tag-cyan">AidWeather Report</span></div>
+            <h3 class="h3">Site weather-history report</h3>
+            <p class="body-sm">A standalone, shareable report on the climate history of a location, built on AidWeather. See a real sample.</p>
+            <a class="link-arrow" href="aidweather.html#sample">View sample report <span>→</span></a>
           </div>
         </article>
       </div>
+    </div>
+  </section>
+
+  <!-- Selected work -->
+  <section class="section" id="work">
+    <div class="container">
+      <div class="section-head">
+        <span class="eyebrow">Selected work</span>
+        <h2 class="h1">Projects across the lab and the field.</h2>
+        <p class="lead">A few examples of the questions we have worked on, from protein interactions to coffee farms.</p>
+      </div>
+      <div class="grid cols-2">
+        <a class="card card-violet" href="work.html#gppipred" style="text-decoration:none"><div class="card-body"><span class="tag tag-violet">Paper and tool · 2026</span><h3 class="h3">gPPIpred</h3><p class="body-sm">Predicting which proteins interact, and where, with an explainable graph model.</p></div></a>
+        <a class="card" href="work.html#melanoma" style="text-decoration:none"><div class="card-body"><span class="tag">Transcriptomics</span><h3 class="h3">Drug response in melanoma</h3><p class="body-sm">Why sensitive and resistant tumours separate, seen in gene expression.</p></div></a>
+        <a class="card card-cyan" href="work.html#bones" style="text-decoration:none"><div class="card-body"><span class="tag tag-cyan">Materials and manufacturing</span><h3 class="h3">3D-printed bone implants</h3><p class="body-sm">Linking lattice design and print settings to mechanical strength, in both directions.</p></div></a>
+        <a class="card card-amber" href="work.html#aidfarm" style="text-decoration:none"><div class="card-body"><span class="tag tag-amber">Agriculture</span><h3 class="h3">Coffee field experiments</h3><p class="body-sm">Field trial data combined with location-based weather history.</p></div></a>
+      </div>
+      <p style="margin-top:32px"><a class="link-arrow" href="work.html">See all projects <span>→</span></a></p>
     </div>
   </section>
 
@@ -262,33 +279,11 @@
   <!-- Contact -->
   <section class="section section-alt" id="contact">
     <div class="container container-narrow">
-      <div class="section-head">
-        <span class="eyebrow">Get in touch</span>
-        <h2 class="h1">Tell us about your data.</h2>
-        <p class="lead">A short description is enough. We will reply to discuss whether and how we can help.</p>
+      <div class="contact-card">
+        <h2 class="h1">Ready to turn your lab, trial or pipeline data into a decision?</h2>
+        <p class="lead measure">Whether you are an academic lab, an R&amp;D group or an agritech company, we work through well-scoped projects that move from messy data to a decision you can act on.</p>
+        <a class="btn btn-primary" href="mailto:contact@aidbio.org">contact@aidbio.org</a>
       </div>
-      <form class="form-card" id="contactForm">
-        <fieldset>
-          <legend>I am working in</legend>
-          <div class="choices">
-            <label class="choice"><input type="radio" name="area" value="Agriculture and climate" checked><span>Agriculture and climate</span></label>
-            <label class="choice"><input type="radio" name="area" value="Biotech and omics"><span>Biotech and omics</span></label>
-            <label class="choice"><input type="radio" name="area" value="Industry (other)"><span>Industry (other)</span></label>
-            <label class="choice"><input type="radio" name="area" value="Academic research"><span>Academic research</span></label>
-          </div>
-        </fieldset>
-        <div class="field-row">
-          <div><label class="field-label" for="f-name">Your name</label><input class="input" id="f-name" name="name" type="text" required autocomplete="name"></div>
-          <div><label class="field-label" for="f-email">Email</label><input class="input" id="f-email" name="email" type="email" required autocomplete="email"></div>
-        </div>
-        <div><label class="field-label" for="f-details">What would you like to do?</label><textarea class="input" id="f-details" name="details" rows="4" required placeholder="For example: the type of data, how many samples or sites, and what you want to predict or understand."></textarea></div>
-        <input class="hp" type="text" name="company" tabindex="-1" autocomplete="off" aria-hidden="true">
-        <div class="form-foot">
-          <span class="form-note">Or write to contact@aidbio.org</span>
-          <button class="btn btn-primary" type="submit">Send message</button>
-        </div>
-        <div class="alert" id="formMsg" role="status" hidden></div>
-      </form>
     </div>
   </section>
 </main>
@@ -296,12 +291,14 @@
 <!--chrome:footer-->
 <footer class="footer">
   <div class="container footer-inner">
-    <div class="footer-brand"><svg class="brand-mark" viewBox="0 0 36 36" aria-hidden="true" focusable="false"><defs><linearGradient id="abgf" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#10B981"/><stop offset=".5" stop-color="#14B8A6"/><stop offset="1" stop-color="#7C3AED"/></linearGradient></defs><rect x="0.75" y="0.75" width="34.5" height="34.5" rx="10" fill="#0E1318" stroke="url(#abgf)" stroke-width="1.5"/><g transform="translate(6 6) scale(1)" fill="none" stroke="#34D399" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M7 5a5 5 0 0 1 10 0v2a5 5 0 0 1-10 0Z" stroke-opacity=".3"/><circle cx="12" cy="7" r="2.5" fill="#34D399" stroke="none"/><circle cx="6" cy="14" r="2" fill="#34D399" stroke="none"/><circle cx="18" cy="14" r="2" fill="#34D399" stroke="none"/><circle cx="12" cy="20" r="2.5" fill="#34D399" stroke="none"/><path d="M6 14c0-3.3 2.7-6 6-6s6 2.7 6 6"/><path d="M6 14c0 3.3 2.7 6 6 6s6-2.7 6-6"/></g></svg><span>AidBio · Machine learning for life sciences</span></div>
+    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span>· Data analytics for life sciences</span></div>
     <nav aria-label="Footer">
       <a href="solutions.html">Solutions</a>
       <a href="tools.html">Open source</a>
       <a href="work.html">Work</a>
       <a href="index.html#contact">Contact</a>
+      <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
       <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
     </nav>
     <div>© <span id="year">2026</span> AidBio</div>

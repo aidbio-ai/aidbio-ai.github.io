@@ -1,0 +1,20 @@
+/* ============================================================
+   AidBio · SIGNATURE GRADIENTS
+   "Proven pleasant" multi-stop blends drawn from the spectrum.
+   ============================================================ */
+:root {
+  /* Linear signatures */
+  --gradient-dawn:   linear-gradient(120deg, #2E4BDF 0%, #6E47D4 48%, #E8772E 100%); /* @kind color */
+  --gradient-flora:  linear-gradient(120deg, #1FA07C 0%, #1F95C4 52%, #6E47D4 100%); /* @kind color */
+  --gradient-ember:  linear-gradient(120deg, #E8772E 0%, #EFA63A 100%); /* @kind color */
+  --gradient-aurora: linear-gradient(135deg, #2E4BDF 0%, #1F95C4 40%, #1FA07C 72%, #8DB23C 100%); /* @kind color */
+  --gradient-iris:   linear-gradient(135deg, #6E47D4 0%, #C13E9D 100%); /* @kind color */
+
+  /* Subtle surface washes */
+  --wash-cool:  linear-gradient(180deg, rgba(46,75,223,0.06), rgba(46,75,223,0)); /* @kind color */
+  --wash-warm:  linear-gradient(180deg, rgba(232,119,46,0.07), rgba(232,119,46,0)); /* @kind color */
+
+  /* Text-on-gradient protection (over imagery) */
+  --scrim-bottom: linear-gradient(180deg, rgba(18,22,31,0) 0%, rgba(18,22,31,0.72) 100%); /* @kind color */
+  --scrim-top:    linear-gradient(180deg, rgba(18,22,31,0.55) 0%, rgba(18,22,31,0) 60%); /* @kind color */
+}

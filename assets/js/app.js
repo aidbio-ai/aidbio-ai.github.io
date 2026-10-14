@@ -75,18 +75,4 @@
       else done();
     });
   });
-
-  // Contact form. Until a form endpoint exists, this opens the visitor's email app (mailto) with the fields filled in.
-  var form = document.getElementById('contactForm');
-  if (form) form.addEventListener('submit', function (e) {
-    e.preventDefault();
-    if (form.elements.company && form.elements.company.value) return; // honeypot
-    var f = form.elements;
-    var body = 'Name: ' + f.name.value + '\nEmail: ' + f.email.value + '\nArea: ' + f.area.value + '\n\n' + f.details.value;
-    var href = 'mailto:contact@aidbio.org?subject=' + encodeURIComponent('AidBio enquiry: ' + f.area.value) + '&body=' + encodeURIComponent(body);
-    var msg = document.getElementById('formMsg');
-    msg.hidden = false;
-    msg.textContent = 'Your email app should open with the message ready to send. If it does not, write to contact@aidbio.org.';
-    window.location.href = href;
-  });
 })();
