@@ -325,16 +325,89 @@
         color: var(--text-strong);
       }
 
-      .tool-soon {
+      .tool-badge {
         white-space: nowrap;
         padding: 3px 10px;
         border-radius: var(--radius-full);
-        background: var(--accent-warm-tint);
-        color: var(--accent-warm);
+        background: var(--accent-tint);
+        color: var(--accent);
         font-size: 11px;
         font-weight: 700;
         letter-spacing: 0.08em;
         text-transform: uppercase;
+      }
+
+      .tool-badge.warm {
+        background: var(--accent-warm-tint);
+        color: var(--accent-warm);
+      }
+
+      .demo-form {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-3);
+      }
+
+      .demo-form label {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        min-width: 0;
+        color: var(--text-muted);
+        font-size: 12.5px;
+        font-weight: 600;
+      }
+
+      .demo-form input {
+        width: 100%;
+        padding: 9px 12px;
+        border-radius: var(--radius-sm);
+        border: 1px solid var(--border-default);
+        background: var(--surface-sunken);
+        color: var(--text-strong);
+        font: inherit;
+        font-size: 14px;
+        font-weight: 400;
+      }
+
+      .demo-form input:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 1px;
+      }
+
+      .demo-row {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: var(--space-3);
+      }
+
+      .demo-link {
+        align-self: flex-start;
+        margin-top: calc(var(--space-1) * -1);
+        padding: 0;
+        border: 0;
+        background: none;
+        color: var(--accent);
+        font: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        cursor: pointer;
+        text-decoration: underline;
+        text-underline-offset: 3px;
+      }
+
+      .demo-form .btn {
+        align-self: flex-start;
+      }
+
+      .demo-msg {
+        margin: 0;
+        color: var(--text-muted);
+        font-size: 13px;
+      }
+
+      .tools-grid {
+        align-items: start;
       }
 
       .tool-card p {
@@ -386,15 +459,6 @@
       .install-box button:focus-visible {
         color: var(--accent);
         border-color: var(--accent);
-      }
-
-      .install-box button:disabled {
-        opacity: 0.5;
-        cursor: not-allowed;
-      }
-
-      .install-box.is-pending code {
-        color: var(--text-muted);
       }
 
       /* ============================================================ Signal band */
@@ -1151,7 +1215,7 @@
       <section id="open-tools" class="section">
         <div class="container">
           <div class="tools-head reveal">
-            <span class="eyebrow" style="justify-content: center" data-i18n="tools.eyebrow">Open source by AidBio</span>
+            <span class="eyebrow" style="justify-content: center" data-i18n="tools.eyebrow">Things we built that are open</span>
             <h2 class="heading-md" data-i18n="tools.h2">
               Weather and solar data, ready for your research.
             </h2>
@@ -1166,6 +1230,7 @@
             <article class="tool-card reveal delay-1" style="--tool-accent: var(--spectrum-indigo)">
               <div class="tool-top">
                 <h3>aidweather</h3>
+                <span class="tool-badge" data-i18n="tools.open">Open source</span>
               </div>
               <p data-i18n="tools.aidweather.body">
                 The library and command-line tool. Install it from PyPI.
@@ -1178,23 +1243,45 @@
 
             <article class="tool-card reveal delay-2" style="--tool-accent: var(--spectrum-coral)">
               <div class="tool-top">
-                <h3>aidweather-client</h3>
-                <span class="tool-soon" data-i18n="tools.soon">Coming soon</span>
+                <h3>AidWeather Report</h3>
+                <span class="tool-badge warm" data-i18n="tools.demo">Demo</span>
               </div>
-              <p data-i18n="tools.client.body">
-                Not published yet. The install command will appear here.
+              <p data-i18n="tools.report.body">
+                Our product: a standalone weather-history report for your site,
+                built from NASA POWER data. Choose a location and we will send
+                you a sample — your feedback is welcome.
               </p>
-              <div class="install-box is-pending">
-                <code>pip install aidweather-client</code>
-                <button type="button" disabled data-i18n="tools.copy">Copy</button>
-              </div>
+              <form class="demo-form" id="demo-form" novalidate>
+                <div class="demo-row">
+                  <label>
+                    <span data-i18n="tools.report.lat">Latitude</span>
+                    <input type="number" name="lat" step="any" min="-90" max="90" required inputmode="decimal" placeholder="-23.55" />
+                  </label>
+                  <label>
+                    <span data-i18n="tools.report.lon">Longitude</span>
+                    <input type="number" name="lon" step="any" min="-180" max="180" required inputmode="decimal" placeholder="-46.63" />
+                  </label>
+                </div>
+                <button type="button" class="demo-link" id="demo-geo" data-i18n="tools.report.geo">Use my location</button>
+                <label>
+                  <span data-i18n="tools.report.email">Your email</span>
+                  <input type="email" name="email" required autocomplete="email" placeholder="you@organization.org" />
+                </label>
+                <label>
+                  <span data-i18n="tools.report.name">Name or organization (optional)</span>
+                  <input type="text" name="name" autocomplete="name" />
+                </label>
+                <button type="submit" class="btn btn-primary" data-i18n="tools.report.submit">Request a demo</button>
+                <p class="demo-msg" id="demo-geo-err" role="status" hidden data-i18n="tools.report.geoErr">Could not get your location. Enter the coordinates by hand.</p>
+                <p class="demo-msg" id="demo-sent" role="status" hidden data-i18n="tools.report.sent">Your email app should open with the request ready to send. If it does not, write to contact@aidbio.org.</p>
+              </form>
             </article>
           </div>
 
           <p class="tools-note reveal delay-2" data-i18n-html="tools.note">
-            These packages are built and maintained by AidBio and released as
-            open source. We also develop <strong>internal tools</strong> for
-            client projects — <a href="#contact">get in touch</a> to learn more.
+            AidWeather is built and maintained by AidBio and released as open
+            source. We also develop <strong>internal tools</strong> for client
+            projects — <a href="#contact">get in touch</a> to learn more.
           </p>
         </div>
       </section>
@@ -1449,189 +1536,14 @@
       <section id="projects" class="section">
         <div class="container">
           <div class="reveal">
-            <span class="eyebrow" data-i18n="projects.eyebrow"
-              >Projects &amp; open tools</span
-            >
-            <h2 class="heading-md">
-              <span data-i18n="projects.h2_lead">Things we build in the</span>
-              <span class="accent-spectrum grad-flora" data-i18n="projects.h2_accent">open</span><span data-i18n="projects.h2_tail">.</span>
-            </h2>
-            <p class="text-lead" data-i18n="projects.lead">
-              Alongside client work, AidBio builds tools for agritech and
-              life-science data — some open source, some available on
-              request.
-            </p>
-          </div>
-
-          <div class="projects-grid">
-            <article class="compact-card project-card reveal delay-1" style="--card-accent: var(--spectrum-emerald)">
-              <div class="card-top">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M17 18a4 4 0 0 0-.9-7.9A6 6 0 1 0 6 15" />
-                  <path d="M8 18h9" />
-                </svg>
-                <span class="card-kind" data-i18n="projects.kindLabel"
-                  >Open-source library</span
-                >
-              </div>
-              <div class="card-body">
-                <h3>AidWeather</h3>
-                <div class="card-stats">
-                  <span class="card-stat">Python 3.10+</span>
-                </div>
-                <p data-i18n="projects.aidweather.body">
-                  Turns NASA POWER weather and solar data into clean,
-                  ready-to-use tables — for one point, a line across a map, or
-                  a whole region.
-                </p>
-                <div class="card-tags">
-                  <span class="tag">NASA POWER</span>
-                  <span class="tag">Python + CLI</span>
-                  <span class="tag" data-i18n="projects.aidweather.tag3"
-                    >Agroclimatic</span
-                  >
-                  <span class="tag" data-i18n="projects.aidweather.tag4"
-                    >Solar</span
-                  >
-                </div>
-                <div class="card-actions">
-                  <a
-                    href="aidweather.html"
-                    class="btn btn-primary"
-                    data-i18n="projects.aidweather.cta"
-                    >Explore AidWeather</a
-                  >
-                  <a
-                    href="https://github.com/matiollipt/aidweather"
-                    target="_blank"
-                    rel="noopener"
-                    class="btn btn-secondary"
-                    data-i18n="projects.githubCta"
-                    >Technical details ↗</a
-                  >
-                </div>
-              </div>
-            </article>
-
-            <article class="compact-card project-card reveal delay-2" style="--card-accent: var(--spectrum-violet)">
-              <div class="card-top">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M17 18a4 4 0 0 0-.9-7.9A6 6 0 1 0 6 15" />
-                  <path d="M8 18h9" />
-                </svg>
-                <span class="card-kind" data-i18n="projects.aid2go.kind"
-                  >Research software</span
-                >
-              </div>
-              <div class="card-body">
-                <h3>Aid2GO</h3>
-                <div class="card-stats">
-                  <span class="card-stat" data-i18n="projects.aid2go.stat"
-                    >Research prototype</span
-                  >
-                </div>
-                <p data-i18n="projects.aid2go.body">
-                  Predicts protein function from one graph that links
-                  proteins, their interactions, and Gene Ontology terms —
-                  using graph neural networks over protein language-model
-                  embeddings.
-                </p>
-                <div class="card-tags">
-                  <span class="tag">PyTorch Geometric</span>
-                  <span class="tag">GraphSAGE</span>
-                  <span class="tag">GAT</span>
-                  <span class="tag">ProtBERT</span>
-                </div>
-                <div class="card-actions">
-                  <a
-                    href="#contact"
-                    class="btn btn-secondary"
-                    data-i18n="projects.aid2go.cta"
-                    >Request access</a
-                  >
-                </div>
-              </div>
-            </article>
-
-            <article class="compact-card project-card reveal delay-1" style="--card-accent: var(--spectrum-teal)">
-              <div class="card-top">
-                <svg
-                  width="14"
-                  height="14"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                  aria-hidden="true"
-                >
-                  <path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z" />
-                  <path d="M14 3v5h5" />
-                  <path d="M9 17v-3M12 17v-5M15 17v-2" />
-                </svg>
-                <span class="card-kind" data-i18n="projects.aidweatherReport.kind"
-                  >Report generator</span
-                >
-              </div>
-              <div class="card-body">
-                <h3>AidWeather Report</h3>
-                <div class="card-stats">
-                  <span class="card-stat">Python + CLI</span>
-                </div>
-                <p data-i18n="projects.aidweatherReport.body">
-                  Generates portable, standalone agronomic reports — weather
-                  dashboards from NASA POWER data and farm dashboards from your
-                  own experimental datasets.
-                </p>
-                <div class="card-tags">
-                  <span class="tag">NASA POWER</span>
-                  <span class="tag" data-i18n="projects.aidweatherReport.tag2"
-                    >Farm dashboards</span
-                  >
-                </div>
-                <div class="card-actions">
-                  <a
-                    href="#contact"
-                    class="btn btn-secondary"
-                    data-i18n="projects.aidweatherReport.cta"
-                    >Request a sample report</a
-                  >
-                </div>
-              </div>
-            </article>
-          </div>
-        </div>
-      </section>
-
-      <section id="work" class="section">
-        <div class="container">
-          <div class="reveal">
             <span class="eyebrow" data-i18n="work.eyebrow">Selected work</span>
             <h2 class="heading-md">
               <span data-i18n="work.h2_lead">Tools and papers,</span>
               <span class="accent-spectrum grad-spectrum" data-i18n="work.h2_accent">at a glance</span><span data-i18n="work.h2_tail">.</span>
             </h2>
+            <p class="text-lead" data-i18n="work.lead">
+              The open-source tools, research software and papers behind our work.
+            </p>
           </div>
 
           <ul class="work-list reveal delay-1">
@@ -1644,11 +1556,11 @@
               </a>
             </li>
             <li>
-              <a href="#projects" class="work-row" style="--work-accent: var(--spectrum-coral)">
+              <a href="#contact" class="work-row" style="--work-accent: var(--spectrum-coral)">
                 <span class="work-bar" aria-hidden="true"></span>
                 <span class="work-kind" data-i18n="work.aid2go.label">Research prototype</span>
                 <span class="work-title">Aid2GO</span>
-                <span class="work-note"><span data-i18n="work.aid2go.note">Learn more</span> <span aria-hidden="true">→</span></span>
+                <span class="work-note"><span data-i18n="work.aid2go.note">Request access</span> <span aria-hidden="true">→</span></span>
               </a>
             </li>
             <li>
@@ -2006,6 +1918,54 @@
             .catch(function () {});
         });
       });
+
+
+      (function () {
+        var form = document.getElementById("demo-form");
+        if (!form) return;
+        var geo = document.getElementById("demo-geo");
+        var geoErr = document.getElementById("demo-geo-err");
+        var sent = document.getElementById("demo-sent");
+
+        geo.addEventListener("click", function () {
+          geoErr.hidden = true;
+          if (!navigator.geolocation) {
+            geoErr.hidden = false;
+            return;
+          }
+          navigator.geolocation.getCurrentPosition(
+            function (pos) {
+              form.lat.value = pos.coords.latitude.toFixed(4);
+              form.lon.value = pos.coords.longitude.toFixed(4);
+            },
+            function () {
+              geoErr.hidden = false;
+            }
+          );
+        });
+
+        form.addEventListener("submit", function (e) {
+          e.preventDefault();
+          sent.hidden = true;
+          if (!form.reportValidity()) return;
+          var body = [
+            "Please send me an AidWeather Report demo.",
+            "",
+            "Location: " + form.lat.value + ", " + form.lon.value,
+            "Email: " + form.email.value,
+            form.name.value ? "Name / organization: " + form.name.value : "",
+            "",
+            "Feedback or questions:",
+            ""
+          ].join("\n");
+          window.location.href =
+            "mailto:contact@aidbio.org?subject=" +
+            encodeURIComponent("AidWeather Report demo request") +
+            "&body=" +
+            encodeURIComponent(body);
+          sent.hidden = false;
+        });
+      })();
 
       (function () {
         var wrap = document.getElementById("cap-wrap");

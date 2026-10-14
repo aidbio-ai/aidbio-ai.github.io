@@ -41,7 +41,7 @@
     },
     "aid2go": {
       "label": "Research prototype",
-      "note": "Learn more"
+      "note": "Request access"
     },
     "gppipred": {
       "label": "Publication · 2026",
@@ -50,21 +50,31 @@
     "paper": {
       "title": "Circadian entrainment by bZIP63",
       "note": "Read the paper"
-    }
+    },
+    "lead": "The open-source tools, research software and papers behind our work."
   },
   "tools": {
-    "eyebrow": "Open source by AidBio",
+    "eyebrow": "Things we built that are open",
     "h2": "Weather and solar data, ready for your research.",
     "lead": "AidWeather is an open-source Python library and CLI that turns NASA POWER data into clean, cached, analysis-ready tables — for a point, a transect, or a whole region.",
     "copy": "Copy",
-    "soon": "Coming soon",
+    "open": "Open source",
+    "demo": "Demo",
     "aidweather": {
       "body": "The library and command-line tool. Install it from PyPI."
     },
-    "client": {
-      "body": "Not published yet. The install command will appear here."
+    "report": {
+      "body": "Our product: a standalone weather-history report for your site, built from NASA POWER data. Choose a location and we will send you a sample — your feedback is welcome.",
+      "lat": "Latitude",
+      "lon": "Longitude",
+      "geo": "Use my location",
+      "email": "Your email",
+      "name": "Name or organization (optional)",
+      "submit": "Request a demo",
+      "geoErr": "Could not get your location. Enter the coordinates by hand.",
+      "sent": "Your email app should open with the request ready to send. If it does not, write to contact@aidbio.org."
     },
-    "note": "These packages are built and maintained by AidBio and released as open source. We also develop <strong>internal tools</strong> for client projects — <a href=\"#contact\">get in touch</a> to learn more."
+    "note": "AidWeather is built and maintained by AidBio and released as open source. We also develop <strong>internal tools</strong> for client projects — <a href=\"#contact\">get in touch</a> to learn more."
   },
   "signal": {
     "badge": "Applied intelligence",
@@ -114,33 +124,6 @@
       "title": "Omics, Bioinformatics & Scientific Data Systems",
       "body": "Support for multi-omics data — genomics, proteomics, and similar large biological datasets — plus reproducible analysis built toward a publication or a decision.",
       "tag4": "Bioinformatics"
-    }
-  },
-  "projects": {
-    "eyebrow": "Projects & open tools",
-    "h2_lead": "Things we build in the",
-    "h2_accent": "open",
-    "h2_tail": ".",
-    "lead": "Alongside client work, AidBio builds tools for agritech and life-science data — some open source, some available on request.",
-    "kindLabel": "Open-source library",
-    "githubCta": "Technical details ↗",
-    "aidweather": {
-      "body": "Turns NASA POWER weather and solar data into clean, ready-to-use tables — for one point, a line across a map, or a whole region.",
-      "tag3": "Agroclimatic",
-      "tag4": "Solar",
-      "cta": "Explore AidWeather"
-    },
-    "aid2go": {
-      "kind": "Research software",
-      "body": "Predicts protein function from one graph that links proteins, their interactions, and Gene Ontology terms — using graph neural networks over protein language-model embeddings.",
-      "stat": "Research prototype",
-      "cta": "Request access"
-    },
-    "aidweatherReport": {
-      "kind": "Report generator",
-      "body": "Generates portable, standalone agronomic reports — weather dashboards from NASA POWER data and farm dashboards from your own experimental datasets.",
-      "tag2": "Farm dashboards",
-      "cta": "Request a sample report"
     }
   },
   "process": {
