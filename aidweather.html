@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -9,86 +9,110 @@
   <meta property="og:title" content="AidWeather — AidBio">
   <meta property="og:description" content="AidWeather gets NASA POWER weather and solar data for any location. AidWeather Report turns it into a shareable site report.">
   <meta name="theme-color" content="#080B0E">
-  <script>
-    (function () {
-      var t = null;
-      try { t = localStorage.getItem('aidbio-theme'); } catch (e) {}
-      if (t !== 'light' && t !== 'dark') t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
+  <script src="assets/js/theme.js"></script>
   <link rel="icon" href="assets/img/favicon.png" type="image/png">
   <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-  <link rel="stylesheet" href="assets/css/aidbio.css">
+  <link rel="stylesheet" href="assets/css/aidbio.css?v=20261026-apps9">
 </head>
-<body>
+<body class="site-refresh">
 <!--chrome:header active="aidweather"-->
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
 <header class="nav">
   <div class="container nav-inner">
-    <a class="brand" href="index.html" aria-label="AidBio home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
-    <ul class="nav-links">
-      <li><a href="solutions.html" data-nav="solutions">Solutions</a></li>
-      <li><a href="tools.html" data-nav="tools">Open source</a></li>
-      <li><a href="aidweather.html" data-nav="aidweather" aria-current="page">AidWeather</a></li>
-      <li><a href="work.html" data-nav="work">Work</a></li>
-    </ul>
+    <a class="brand" href="index.html" aria-label="AidBio home" data-i18n-attr="aria-label:nav.home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
+    <nav class="nav-links" aria-label="Main navigation" data-i18n-attr="aria-label:nav.main">
+      <a href="solutions.html" data-nav="solutions" data-i18n="nav.capabilities">Capabilities</a>
+      <a href="work.html" data-nav="work" data-i18n="nav.work">Work</a>
+      <a href="tools.html" data-nav="tools" data-i18n="nav.software">Software</a>
+      <a href="about.html" data-nav="about" data-i18n="nav.about">About</a>
+    </nav>
     <div class="nav-actions">
-      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme">
-        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
-      </button>
-      <a class="btn btn-primary btn-sm nav-cta" href="index.html#contact">Talk to us</a>
-      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
+      <label class="theme-control"><span class="sr-only" data-i18n="theme.label">Theme preference</span><select data-theme-select aria-label="Theme preference" data-i18n-attr="aria-label:theme.label"><option value="system" data-i18n="theme.auto">Auto</option><option value="light" data-i18n="theme.light">Light</option><option value="dark" data-i18n="theme.dark">Dark</option></select></label>
+      <div class="desktop-language"></div>
+      <a class="btn btn-primary btn-sm nav-cta" href="index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" data-i18n-attr="aria-label:nav.menu" aria-expanded="false" aria-controls="mobileMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="solutions.html">Solutions</a>
-    <a href="tools.html">Open source</a>
-    <a href="aidweather.html">AidWeather</a>
-    <a href="work.html">Work</a>
-    <a class="btn btn-primary" href="index.html#contact">Talk to us</a>
-  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" data-i18n-attr="aria-label:nav.mobile">
+    <a href="solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="work.html" data-i18n="nav.work">Work</a><a href="tools.html" data-i18n="nav.software">Software</a><a href="about.html" data-i18n="nav.about">About</a>
+    <div class="mobile-language"></div>
+    <a class="btn btn-primary" href="index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+  </nav>
 </header>
 <!--/chrome:header-->
 
 <main id="main">
 
-  <div class="container">
-    <header class="page-head">
+
+<div class="container">
+
+<header class="page-head">
       <span class="eyebrow">AidWeather</span>
-      <h1 class="h1" style="font-size:clamp(2rem,5vw,3rem)">Weather history for any field, site or region.</h1>
-      <p class="lead">AidWeather is an open-source tool that gets clean, cached weather and solar data from NASA POWER. AidWeather Report builds on it to produce a single page that shows the climate of a place.</p>
+
+<h1 class="h1" style="font-size:clamp(2rem,5vw,3rem)">Weather history, with its source context.</h1>
+
+<p class="lead">AidWeather is an open-source tool that gets clean, cached weather and solar data from NASA POWER. AidWeather Report builds on it to produce a single page that shows the climate of a place.</p>
     </header>
   </div>
-  <section class="section" style="padding-top:24px">
-    <div class="container"><div class="grid cols-2">
-      <article class="card card-amber"><div class="card-body">
-        <div class="card-top"><span class="tag tag-amber">Open source</span></div>
-        <h2 class="h2">AidWeather</h2>
-        <ul class="checks"><li><span>One point, a line of points or a region, daily or hourly.</span></li><li><span>Local cache, so you do not download the same data twice.</span></li><li><span>Use it from the command line or from Python.</span></li></ul>
-        <div class="cmd"><div class="code-line"><code>pip install aidweather</code><button class="copy-btn" type="button" data-copy="pip install aidweather">copy</button></div></div>
-        <p class="note">NASA POWER returns values for a grid cell, not for the exact coordinate, so nearby points can share one series. AidWeather documents the source and resolution of each parameter.</p>
+
+<section class="section" style="padding-top:24px">
+
+<div class="container">
+<div class="grid cols-2">
+
+<article class="card card-amber">
+<div class="card-body">
+
+<div class="card-top"><span class="tag tag-amber">Open source</span></div>
+
+<h2 class="h2">AidWeather</h2>
+
+<ul class="checks">
+<li><span>One point, a line of points or a region, daily or hourly.</span></li>
+<li><span>Local cache, so you do not download the same data twice.</span></li>
+<li><span>Use it from the command line or from Python.</span></li>
+</ul>
+
+<div class="cmd">
+<div class="code-line"><code>pip install aidweather</code><button class="copy-btn" type="button" data-copy="pip install aidweather">copy</button></div>
+</div>
+
+<p class="note">NASA POWER returns values for a grid cell, not for the exact coordinate, so nearby points can share one series. AidWeather documents the source and resolution of each parameter.</p>
         <a class="link-arrow" href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener">GitHub <span>→</span></a>
-      </div></article>
-      <article class="card card-cyan" id="sample"><div class="card-body">
-        <div class="card-top"><span class="tag tag-cyan">AidWeather Report</span></div>
-        <h2 class="h2">A weather report for your site</h2>
-        <p class="body-sm">Give us a location and a period. You get a self-contained report with charts of temperature, rainfall, solar radiation and growing-degree days, plus a methods page that explains where each number comes from. It runs in any browser and can be printed.</p>
-        <p class="body-sm">AidWeather Report is not public yet. Below is a real sample for a coffee-growing area in Brazil, built from public NASA data.</p>
-        <div class="project-links"><a class="btn btn-primary btn-sm" href="sample-report/index.html" target="_blank" rel="noopener">Open the sample report</a><a class="btn btn-secondary btn-sm" href="sample-report/methods.html" target="_blank" rel="noopener">Methods page</a></div>
-      </div></article>
+      </div>
+</article>
+
+<article class="card card-cyan" id="sample">
+<div class="card-body">
+
+<div class="card-top"><span class="tag tag-cyan">AidWeather Report</span></div>
+
+<h2 class="h2">A weather report for your site</h2>
+
+<p class="body-sm">A location and period become a portable report with temperature, rainfall, solar radiation, and growing-degree-day charts, plus methods describing sources and calculations. Interactive charts use external runtime libraries; print support depends on the report version.</p>
+
+<p class="body-sm">The AidWeather Report application is not a public PyPI package. Below is a real sample for a rainfed maize season near Jaguariúna, Brazil, from 18 February to 5 July 2022, built from public NASA data.</p>
+
+<div class="project-links"><a class="btn btn-primary btn-sm" href="sample-report/index.html?v=b9f14cd3e4de" target="_blank" rel="noopener">Open the sample report</a><a class="btn btn-secondary btn-sm" href="sample-report/methods.html?v=b9f14cd3e4de" target="_blank" rel="noopener">Methods page</a></div>
+      </div>
+</article>
     </div>
-    <figure class="figure" style="margin-top:32px"><img src="assets/img/aidweather-report-example.webp" alt="Screenshot of an AidWeather Report dashboard" loading="lazy" width="1200" height="700"><figcaption>AidWeather Report, sample output.</figcaption></figure>
+
+<figure class="figure" style="margin-top:32px"><img src="assets/img/aidweather-report-example.webp" alt="Screenshot of an AidWeather Report dashboard" loading="lazy" width="1200" height="700">
+<figcaption>AidWeather Report, sample output.</figcaption>
+</figure>
     </div>
   </section>
-  <section class="section section-alt">
-    <div class="container container-narrow">
-      <div class="contact-card">
-        <h2 class="h1">Have a dataset and a question?</h2>
-        <p class="lead measure">Tell us what you are working on. A short email is enough to start.</p>
+
+<section class="section section-alt">
+
+<div class="container container-narrow">
+
+<div class="contact-card">
+
+<h2 class="h1">Have a dataset and a question?</h2>
+
+<p class="lead measure">Tell us what you are working on. A short email is enough to start.</p>
         <a class="btn btn-primary" href="mailto:contact@aidbio.org">contact@aidbio.org</a>
       </div>
     </div>
@@ -98,20 +122,14 @@
 <!--chrome:footer-->
 <footer class="footer">
   <div class="container footer-inner">
-    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span>· Data analytics for life sciences</span></div>
-    <nav aria-label="Footer">
-      <a href="solutions.html">Solutions</a>
-      <a href="tools.html">Open source</a>
-      <a href="work.html">Work</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span data-i18n="footer.tagline">Scientific data, models, and software.</span></div>
+    <nav aria-label="Footer" data-i18n-attr="aria-label:footer.label">
+      <a href="solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="work.html" data-i18n="nav.work">Work</a><a href="tools.html" data-i18n="nav.software">Software</a><a href="about.html" data-i18n="nav.about">About</a><a href="portfolio/index.html" data-i18n="footer.story">Founder story</a><a href="https://github.com/matiollipt" rel="noopener">GitHub</a><a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
     </nav>
     <div>© <span id="year">2026</span> AidBio</div>
   </div>
 </footer>
 <!--/chrome:footer-->
-<script src="assets/js/app.js"></script>
+<script src="assets/js/app.js?v=20261026-apps9"></script>
 </body>
 </html>

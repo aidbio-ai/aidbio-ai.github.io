@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>05 · Models become scientific software | AidBio</title><meta name="description" content="Chapter 5 of the AidBio founder story: from one-off analyses to tailored scientific applications with traceable evidence.">
+<link rel="canonical" href="https://aidbio.org/portfolio/pages/05-software.html"><meta property="og:title" content="05 · Models become scientific software | AidBio"><meta property="og:description" content="Chapter 5 of the AidBio founder story: from one-off analyses to tailored scientific applications with traceable evidence."><meta property="og:url" content="https://aidbio.org/portfolio/pages/05-software.html">
+<meta name="theme-color" content="#F8FAFC"><script src="../../assets/js/theme.js"></script>
+<link rel="icon" href="../../assets/img/favicon.png"><link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/css/aidbio.css"><link rel="stylesheet" href="../../portfolio/assets/site.css">
+</head><body class="has-subnav">
+<!--chrome:header active="about"-->
+<a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="../../index.html" aria-label="AidBio home" data-i18n-attr="aria-label:nav.home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="../../assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="../../assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
+    <nav class="nav-links" aria-label="Main navigation" data-i18n-attr="aria-label:nav.main">
+      <a href="../../solutions.html" data-nav="solutions" data-i18n="nav.capabilities">Capabilities</a>
+      <a href="../../work.html" data-nav="work" data-i18n="nav.work">Work</a>
+      <a href="../../tools.html" data-nav="tools" data-i18n="nav.software">Software</a>
+      <a href="../../about.html" data-nav="about" aria-current="page" data-i18n="nav.about">About</a>
+    </nav>
+    <div class="nav-actions">
+      <label class="theme-control"><span class="sr-only" data-i18n="theme.label">Theme preference</span><select data-theme-select aria-label="Theme preference" data-i18n-attr="aria-label:theme.label"><option value="system" data-i18n="theme.auto">Auto</option><option value="light" data-i18n="theme.light">Light</option><option value="dark" data-i18n="theme.dark">Dark</option></select></label>
+      <div class="desktop-language"></div>
+      <a class="btn btn-primary btn-sm nav-cta" href="../../index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" data-i18n-attr="aria-label:nav.menu" aria-expanded="false" aria-controls="mobileMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" data-i18n-attr="aria-label:nav.mobile">
+    <a href="../../solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="../../work.html" data-i18n="nav.work">Work</a><a href="../../tools.html" data-i18n="nav.software">Software</a><a href="../../about.html" data-i18n="nav.about">About</a>
+    <div class="mobile-language"></div>
+    <a class="btn btn-primary" href="../../index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+  </nav>
+</header>
+<!--/chrome:header-->
+<!--chrome:subnav-->
+<nav class="subnav" aria-label="Founder story chapters"><div class="container"><a href="../../portfolio/index.html">The story</a><a href="../../portfolio/pages/01-mechanism.html">01 Mechanism</a><a href="../../portfolio/pages/02-networks.html">02 Networks</a><a href="../../portfolio/pages/03-data.html">03 Data</a><a href="../../portfolio/pages/04-models.html">04 Models</a><a href="../../portfolio/pages/05-software.html" aria-current="page">05 Software</a><a href="../../portfolio/pages/06-aidbio.html">06 AidBio</a><a href="../../portfolio/pages/07-portfolio.html">Applied work</a></div></nav>
+<!--/chrome:subnav-->
+<main id="main">
+<section class="hero">
+<div class="container">
+<div class="eyebrow">Chapter 05 · Models become scientific software</div>
+<h1>An analysis answers today’s dataset. Software answers the next one too.</h1>
+<p class="hero-desc">AidBio took shape once one-off analysis scripts stopped being enough — and turned into real tools: proper interfaces, installable packages, systems that record where every number came from, and workflows that record the inputs, settings, and methods needed for reproducible analysis.</p>
+</div>
+</section>
+<section class="section section-alt">
+<div class="container">
+<div class="figure figure-media"><img src="../assets/pipeline.svg" alt="Pipeline from raw evidence through deterministic ETL and analysis to evidence bundles and decision support"></div>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="section-title">
+<div class="eyebrow">Current AidBio engineering</div>
+<h2>Four projects show the design <span class="accent-spectrum grad-spectrum">philosophy</span>.</h2>
+</div>
+<div class="project-list">
+<div class="project-card"><span class="tag">NASA POWER</span><span class="tag">Python API</span><span class="tag">CLI</span><span class="tag">SQLite cache</span>
+<h3 style="margin-top:13px">AidWeather — environment becomes a reproducible data layer</h3>
+<p>AidWeather fetches historical weather and solar data from NASA's public POWER dataset and makes it easy to use correctly — for a single field, a line of sites, or a whole region. It caches results, respects the data provider's usage limits, and is upfront about the native resolution limits of the source-grid weather data, so it doesn't overstate precision it doesn't have.</p>
+<a href="https://github.com/matiollipt/aidweather">View public repository →</a></div>
+<div class="project-card"><span class="tag">Visualization</span><span class="tag">Scientific storytelling</span>
+<h3 style="margin-top:13px">AidViz — separate data acquisition from explanation</h3>
+<p>AidViz deliberately does one thing: turn already-clean data into clear visuals — publication-ready figures, interactive dashboards, and charts that tell a scientific story. It doesn't fetch data or train models itself, on purpose, so it's always obvious where a number came from and where it's just being drawn.</p>
+</div>
+<div class="project-card"><span class="tag">GEO</span><span class="tag">SRA</span><span class="tag">Salmon</span><span class="tag">GSEA</span>
+<h3 style="margin-top:13px">AidGSEA — public transcriptomics becomes inspectable evidence</h3>
+<p>AidGSEA takes public gene-expression datasets — whether already processed or raw sequencing reads — through cleanup, simplification and pathway-enrichment analysis, to explore biological processes associated with the ranked genes. It's careful to label quick exploratory results as exploratory, rather than presenting them with the same confidence as a rigorous, publication-grade statistical analysis.</p>
+</div>
+<div class="project-card"><span class="tag">LangGraph</span><span class="tag">Ollama</span><span class="tag">Evidence V2</span><span class="tag">Local-first</span>
+<h3 style="margin-top:13px">AidFarm — deterministic evidence before generative interpretation</h3>
+<p>AidFarm automates an entire agronomic project — from raw field spreadsheets through statistics, weather data, charts, and a documented evidence trail, all the way to an AI-assisted written report. The workflow assembles computed evidence and provenance before model-assisted drafting. Generated text still requires review for scientific interpretation and unsupported claims.</p>
+</div>
+</div>
+</div>
+</section>
+<section class="section section-alt">
+<div class="container">
+<div class="callout">
+<h2>The <span class="accent-spectrum grad-spectrum">engineering</span> thesis</h2>
+<p><strong>AI should only speak after the evidence is already established — never before.</strong> The data has to be parsed, checked, and statistically analyzed by reliable, repeatable code first; only then does an AI model get to describe or interpret it. This isn't just a software preference — it's the same discipline as the scientific method, just built directly into how the system is engineered.</p>
+</div>
+</div>
+</section>
+</main>
+<!--chrome:footer-->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="../../assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="../../assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span data-i18n="footer.tagline">Scientific data, models, and software.</span></div>
+    <nav aria-label="Footer" data-i18n-attr="aria-label:footer.label">
+      <a href="../../solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="../../work.html" data-i18n="nav.work">Work</a><a href="../../tools.html" data-i18n="nav.software">Software</a><a href="../../about.html" data-i18n="nav.about">About</a><a href="../../portfolio/index.html" data-i18n="footer.story">Founder story</a><a href="https://github.com/matiollipt" rel="noopener">GitHub</a><a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+    </nav>
+    <div>© <span id="year">2026</span> AidBio</div>
+  </div>
+</footer>
+<!--/chrome:footer-->
+<script src="../../assets/js/app.js"></script>
+</body></html>

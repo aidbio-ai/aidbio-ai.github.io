@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "40d63172-04ae-44b2-b296-076663010288",
+  "status": "current",
+  "command": "deliver",
+  "type": "dataflow",
+  "input": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidwiki-pt/candidate.json",
+  "output": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidwiki-pt/diagram.html",
+  "specification": {
+    "sha256": "b8e2720fddafb46e67843de8e6cb2a14a0a90edc2fedbc570f700df20562367c",
+    "bytes": 34379
+  },
+  "artifact": {
+    "sha256": "749d4d403f41c963c012da44e08b66e36c33f754430bb5ef1fbe4e61a99e0184",
+    "bytes": 832795
+  }
+}

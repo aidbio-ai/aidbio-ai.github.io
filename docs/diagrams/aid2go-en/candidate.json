@@ -1,0 +1,161 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "Aid2GO: protein evidence to predicted GO terms",
+    "locale": "en",
+    "output": "docs/diagrams/aid2go-en/diagram.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "git@github.com:matiollipt/aid2go.git",
+      "revision": "f8f5db2864bfe2fdf827f2744c790b8b64d67c9c",
+      "link_mode": "local-only"
+    }
+  },
+  "stages": [
+    {
+      "label": "Inputs"
+    },
+    {
+      "label": "Represent"
+    },
+    {
+      "label": "Model"
+    },
+    {
+      "label": "Deliver"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "proteins",
+      "type": "external",
+      "label": "Proteins",
+      "stage": 0,
+      "row": 0,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 5,
+          "end_line": 8
+        }
+      ]
+    },
+    {
+      "id": "go",
+      "type": "external",
+      "label": "Known GO",
+      "stage": 0,
+      "row": 3,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 5,
+          "end_line": 9
+        }
+      ]
+    },
+    {
+      "id": "embeddings",
+      "type": "backend",
+      "label": "Embeddings",
+      "stage": 1,
+      "row": 0,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 54,
+          "end_line": 56
+        }
+      ]
+    },
+    {
+      "id": "graph",
+      "type": "backend",
+      "label": "GO graph",
+      "stage": 1,
+      "row": 3,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 55,
+          "end_line": 58
+        }
+      ]
+    },
+    {
+      "id": "predict",
+      "type": "backend",
+      "label": "GNN scores",
+      "stage": 2,
+      "row": 1,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 36,
+          "end_line": 48
+        }
+      ]
+    },
+    {
+      "id": "terms",
+      "type": "database",
+      "label": "Predicted GO",
+      "stage": 3,
+      "row": 0,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 179,
+          "end_line": 184
+        }
+      ]
+    },
+    {
+      "id": "eval",
+      "type": "database",
+      "label": "Internal test",
+      "stage": 3,
+      "row": 3,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 171,
+          "end_line": 176
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "proteins",
+      "to": "embeddings",
+      "label": "sequences"
+    },
+    {
+      "from": "go",
+      "to": "graph",
+      "label": "GO + labels"
+    },
+    {
+      "from": "embeddings",
+      "to": "graph",
+      "label": "similarity"
+    },
+    {
+      "from": "graph",
+      "to": "predict",
+      "label": "typed edges"
+    },
+    {
+      "from": "predict",
+      "to": "terms",
+      "label": "scores"
+    },
+    {
+      "from": "predict",
+      "to": "eval",
+      "label": "held-out scores"
+    }
+  ]
+}

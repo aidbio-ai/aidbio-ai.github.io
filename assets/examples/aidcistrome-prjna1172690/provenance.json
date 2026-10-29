@@ -1,0 +1,34 @@
+{
+  "study": "PRJNA1172690 / GSE279431",
+  "organism": "Arabidopsis thaliana",
+  "design": "~treatment; three biological replicates each for 0.1% DMSO mock, 10 µM ABA, and 10 µM iCB; separately contrasted to mock",
+  "source": "AidCistrome saved analysis at /home/clever/aidbio/site/PRJNA1172690, snapshot 2026-10-26",
+  "source_files_sha256": {
+    "results/plots/10uM_ABA_vs_0_1_DMSO_mock/pca_condition_time.png": "ef24b1fba63a909690c64f676738974fc01d78c430cb248ca77afb665961129f",
+    "results/plots/10uM_iCB_vs_0_1_DMSO_mock/pca_condition_time.png": "cb47cf4a51d52a0ad674588b467fac2593b5474d30a8ceac8e9425a5cb2804be",
+    "results/plots/10uM_ABA_vs_0_1_DMSO_mock/pca_loadings_pc1.png": "aa75c833e4cf1b25f5f3280732d52e528f17ae2180e7139157779ac74005ce5a",
+    "results/plots/10uM_iCB_vs_0_1_DMSO_mock/pca_loadings_pc1.png": "50d4bd315a6be403102b58804bb17bd942d72775f5b4cb200acaf793be3fc819",
+    "results/plots/10uM_ABA_vs_0_1_DMSO_mock/volcano_10uM_ABA_vs_0_1_DMSO_mock.png": "34ad26ce3a3b63a3be7ac38e6ddee41bb6caffff9b85fa82af338ade924cae04",
+    "results/plots/10uM_iCB_vs_0_1_DMSO_mock/volcano_10uM_iCB_vs_0_1_DMSO_mock.png": "11e3e9bda7c71ac1d45db6b2e798572c04c9eb2526b625bcfe62f2bd045b3dce",
+    "results/plots/10uM_ABA_vs_0_1_DMSO_mock/volcano_10uM_ABA_vs_0_1_DMSO_mock_zoom.png": "d2fc51a8e646c05e4676a9ca66fcafbe0733cc87ffd5ddccaa06eebf78e1c6c5",
+    "results/plots/10uM_iCB_vs_0_1_DMSO_mock/volcano_10uM_iCB_vs_0_1_DMSO_mock_zoom.png": "d3851981213197eb74be3c0257613be6677b81f00858e8ed7652f0cd1fb9c9e1",
+    "results/gene_sets/gene_view_10uM_ABA_vs_0_1_DMSO_mock_up.png": "10322459c9732e6df9331321473c5c2214644a7781e31629c010ba636ff746ac",
+    "results/gene_sets/gene_view_10uM_iCB_vs_0_1_DMSO_mock_up.png": "2f7e0b6851912c52186a075a28ffbe067ae247582918e2abf827052d57550942",
+    "results/gsea/10uM_ABA_vs_0_1_DMSO_mock/10uM_ABA_vs_0_1_DMSO_mock_prerank_dotplot.png": "8893ea129a1d01f6c12c756378e2c80cb64aa4c172d5181e21a086f034761bf7",
+    "results/gsea/10uM_iCB_vs_0_1_DMSO_mock/10uM_iCB_vs_0_1_DMSO_mock_prerank_dotplot.png": "fe4fad940e420a3f4200da5c8e73cd1bae0d497f4be25783344effd25fd1dfc3",
+    "results/gsea/_compare/nes_landscape.png": "84d3961d117d7de467e9f779f134f86fbf4bf93cc2eb989655c7ea88dd0693d1",
+    "metadata/design.yaml": "cd0f4a0d0ca50f29b5d80795be51b6ad61d37dfe7b12acb699e880142f730005",
+    "results/gene_sets/percentile_heatmap.png": "6d5eca57ef8118ed78082d7ee02dc597c03915e41a1fa94be68c584e64b166dc",
+    "results/gsea/10uM_ABA_vs_0_1_DMSO_mock/10uM_ABA_vs_0_1_DMSO_mock_prerank_significant.csv": "bc67934b69e39d28c3d7accac900310616f89ace422b8c31c182613023334f8e",
+    "results/gsea/10uM_iCB_vs_0_1_DMSO_mock/10uM_iCB_vs_0_1_DMSO_mock_prerank_significant.csv": "4a601a239c60b377b449945c5881397dec7c9341a94f57617de10ae9c36bc86c",
+    "results/plots/pca_blind.pdf": "d967c8907ceaea05d7712d19f78d83bb6d34f54a48e61d6e90bbddd76a10419f"
+  },
+  "publication": "Mar Bono et al. (2025), Molecular Plant 18(9):1526-1548, doi:10.1016/j.molp.2025.07.014",
+  "publication_url": "https://pubmed.ncbi.nlm.nih.gov/40714839/",
+  "geo_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE279431",
+  "rights": "Original AidCistrome figures from public sequencing data; not reproduced paper figures.",
+  "limitation": "No direct ABA-versus-iCB differential-expression contrast. The blind VST PCA includes all nine samples, with visible replicate spread; contrast-specific PCA panels were calculated separately and their axes are not interchangeable. GSEA is exploratory and FDR thresholds are shown on source figures.",
+  "derived_media": {
+    "pca-all-groups.png": "Rendered at 160 dpi from saved results/plots/pca_blind.pdf with pdftoppm; plot data and labels were not altered."
+  }
+}

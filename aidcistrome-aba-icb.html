@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>ABA and iCB in Arabidopsis — AidCistrome | AidBio</title>
+<meta name="description" content="An inspectable AidCistrome analysis of public Arabidopsis RNA-seq study PRJNA1172690: ABA and iCB, each compared with DMSO mock.">
+<link rel="canonical" href="https://aidbio.org/aidcistrome-aba-icb.html">
+<meta property="og:title" content="ABA and iCB in Arabidopsis — AidCistrome | AidBio">
+<meta property="og:description" content="A public RNA-seq study through sample structure, differential expression, genes, and gene sets.">
+<meta property="og:url" content="https://aidbio.org/aidcistrome-aba-icb.html">
+<meta name="theme-color" content="#F8FAFC"><script src="assets/js/theme.js"></script>
+<link rel="icon" href="assets/img/favicon.png"><link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/aidbio.css?v=20261026-apps9">
+</head><body class="site-refresh">
+<!--chrome:header active="work"-->
+<a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html" aria-label="AidBio home" data-i18n-attr="aria-label:nav.home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
+    <nav class="nav-links" aria-label="Main navigation" data-i18n-attr="aria-label:nav.main">
+      <a href="solutions.html" data-nav="solutions" data-i18n="nav.capabilities">Capabilities</a>
+      <a href="work.html" data-nav="work" aria-current="page" data-i18n="nav.work">Work</a>
+      <a href="tools.html" data-nav="tools" data-i18n="nav.software">Software</a>
+      <a href="about.html" data-nav="about" data-i18n="nav.about">About</a>
+    </nav>
+    <div class="nav-actions">
+      <label class="theme-control"><span class="sr-only" data-i18n="theme.label">Theme preference</span><select data-theme-select aria-label="Theme preference" data-i18n-attr="aria-label:theme.label"><option value="system" data-i18n="theme.auto">Auto</option><option value="light" data-i18n="theme.light">Light</option><option value="dark" data-i18n="theme.dark">Dark</option></select></label>
+      <div class="desktop-language"></div>
+      <a class="btn btn-primary btn-sm nav-cta" href="index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" data-i18n-attr="aria-label:nav.menu" aria-expanded="false" aria-controls="mobileMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" data-i18n-attr="aria-label:nav.mobile">
+    <a href="solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="work.html" data-i18n="nav.work">Work</a><a href="tools.html" data-i18n="nav.software">Software</a><a href="about.html" data-i18n="nav.about">About</a>
+    <div class="mobile-language"></div>
+    <a class="btn btn-primary" href="index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+  </nav>
+</header>
+<!--/chrome:header-->
+<main id="main">
+<header class="page-head container case-intro">
+<span class="eyebrow">AidCistrome · Public study PRJNA1172690</span>
+<h1 class="h1">How do ABA and iCB shape the same seedling transcriptome?</h1>
+<p class="lead measure">A saved AidCistrome analysis follows Arabidopsis samples from experimental design to gene expression and gene-set patterns. ABA and iCB are each compared with a shared DMSO mock group.</p>
+<div class="project-links"><a class="btn btn-primary" href="#samples">Explore the figures</a><a class="link-arrow" href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE279431">GEO GSE279431 →</a><a class="link-arrow" href="https://pubmed.ncbi.nlm.nih.gov/40714839/">Mar Bono et al., <em>Molecular Plant</em> (2025) →</a></div>
+</header>
+<section class="section section-alt case-overview"><div class="container">
+<div class="section-head"><span class="eyebrow">Question and evidence</span><h2 class="h1">From public SRA reads to candidate regulators.</h2><p class="lead">AidCistrome connects the public sequencing runs to a human-reviewed sample design, quantification, differential expression, gene sets, GO relationships and promoter-motif analysis. The resulting figures document each step without turning exploratory patterns into a direct ABA-versus-iCB test.</p></div>
+<div class="grid cols-3">
+<article class="card"><div class="card-body"><span class="eyebrow">Design</span><h3 class="h3">Arabidopsis seedlings</h3><p class="body-sm">Three biological replicates per group: 0.1% DMSO mock, 10 µM ABA, and 10 µM iCB. Samples were collected after three hours of treatment.</p></div></article>
+<article class="card card-violet"><div class="card-body"><span class="eyebrow">What the paper reports</span><h3 class="h3">An ABA-like response</h3><p class="body-sm">The authors report that iCB elicits ABA-responsive gene expression and investigate the receptor interactions behind its activity. This site does not reproduce their figures.</p></div></article>
+<article class="card card-amber"><div class="card-body"><span class="eyebrow">What this analysis can test</span><h3 class="h3">Each treatment versus mock</h3><p class="body-sm">The reviewed model is <code>~treatment</code>. It contains ABA–mock and iCB–mock contrasts. Similarity between their outputs is descriptive; no direct ABA–iCB test was run here.</p></div></article>
+</div>
+<p class="note case-source">Source: <a href="https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE279431">GEO GSE279431</a>, reviewed <a href="assets/examples/aidcistrome-prjna1172690/design.yaml">design</a>, and <a href="assets/examples/aidcistrome-prjna1172690/provenance.json">figure provenance</a>. GEO's title, organism, and overall design identify Arabidopsis; its summary contains inconsistent tomato wording, which is not used to label these samples.</p>
+</div></section>
+<section class="section case-chapter" id="samples"><div class="container">
+<div class="section-head"><span class="eyebrow">01 / Sample structure</span><h2 class="h1">Check the samples before interpreting the genes.</h2><p class="lead">The blind variance-stabilized PCA includes mock, ABA, and iCB samples together. Inspect the visible replicate spread before attributing separation to treatment; contrast-specific views are available below.</p></div>
+<figure class="case-figure case-wide"><a href="assets/examples/aidcistrome-prjna1172690/pca-all-groups.pdf"><img src="assets/examples/aidcistrome-prjna1172690/pca-all-groups.png" alt="Blind VST PCA of all nine Arabidopsis samples across mock, ABA, and iCB groups" loading="lazy"></a><figcaption>All three groups · nine samples · <a href="assets/examples/aidcistrome-prjna1172690/pca-all-groups.pdf">open original PDF</a>. Some replicates sit far apart; this plot alone does not establish treatment separation.</figcaption></figure>
+<details class="case-secondary"><summary>Inspect the two contrast-specific PCA views</summary><p class="note">These panels were calculated separately. Their axes and variance percentages cannot be compared directly.</p><div class="case-grid"><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/pca-aba.png"><img src="assets/examples/aidcistrome-prjna1172690/pca-aba.png" alt="PCA of three ABA and three mock samples" loading="lazy"></a><figcaption>ABA versus mock · open full-size PCA</figcaption></figure><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/pca-icb.png"><img src="assets/examples/aidcistrome-prjna1172690/pca-icb.png" alt="PCA of three iCB and three mock samples" loading="lazy"></a><figcaption>iCB versus mock · open full-size PCA</figcaption></figure></div></details>
+</div></section>
+<section class="section section-alt case-chapter" id="expression"><div class="container">
+<div class="section-head"><span class="eyebrow">02 / Differential expression</span><h2 class="h1">Two responses, each measured against the control.</h2><p class="lead">The volcano views show direction, effect size, and adjusted significance for the two specified contrasts. The zoomed views cap the displayed vertical range; full-range plots are also available.</p></div>
+<div class="case-grid"><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/volcano-aba-zoom.png"><img src="assets/examples/aidcistrome-prjna1172690/volcano-aba-zoom.png" alt="Zoomed differential-expression volcano plot for ABA versus mock" loading="lazy"></a><figcaption>ABA versus mock · <a href="assets/examples/aidcistrome-prjna1172690/volcano-aba.png">full range</a></figcaption></figure><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/volcano-icb-zoom.png"><img src="assets/examples/aidcistrome-prjna1172690/volcano-icb-zoom.png" alt="Zoomed differential-expression volcano plot for iCB versus mock" loading="lazy"></a><figcaption>iCB versus mock · <a href="assets/examples/aidcistrome-prjna1172690/volcano-icb.png">full range</a></figcaption></figure></div>
+</div></section>
+<section class="section case-chapter" id="genes"><div class="container">
+<div class="section-head"><span class="eyebrow">03 / Gene sets and gene view</span><h2 class="h1">Look past a single ranked gene.</h2><p class="lead">The percentile overview makes the shared direction readable at page width. The original gene-view figures retain individual gene context and can be opened at full resolution.</p></div>
+<figure class="case-figure case-wide"><a href="assets/examples/aidcistrome-prjna1172690/gene-percentiles.png"><img src="assets/examples/aidcistrome-prjna1172690/gene-percentiles.png" alt="Median genome-wide percentiles for up and down gene sets across ABA and iCB contrasts" loading="lazy"></a><figcaption>Saved percentile overview · descriptive ranking, not a direct treatment contrast</figcaption></figure>
+<div class="case-grid"><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/gene-view-aba-up.png"><img src="assets/examples/aidcistrome-prjna1172690/gene-view-aba-up.png" alt="AidCistrome gene view for the ABA-up set across both contrasts" loading="lazy"></a><figcaption>ABA-up gene view · full-width source figure</figcaption></figure><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/gene-view-icb-up.png"><img src="assets/examples/aidcistrome-prjna1172690/gene-view-icb-up.png" alt="AidCistrome gene view for the iCB-up set across both contrasts" loading="lazy"></a><figcaption>iCB-up gene view · full-width source figure</figcaption></figure></div>
+</div></section>
+<section class="section section-alt case-chapter" id="pathways"><div class="container">
+<div class="section-head"><span class="eyebrow">04 / GO bubble plots</span><h2 class="h1">Ask which biological themes move with each response.</h2><p class="lead">In the saved preranked GSEA tables, “response to abscisic acid” and “response to water deprivation” have positive enrichment scores in both treatment-versus-mock contrasts. Terms and thresholds are shown on the original plots.</p></div>
+<div class="case-grid"><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/gsea-aba-dot.png"><img src="assets/examples/aidcistrome-prjna1172690/gsea-aba-dot.png" alt="Preranked GO bubble plot for ABA versus mock" loading="lazy"></a><figcaption>ABA versus mock · <a href="assets/examples/aidcistrome-prjna1172690/gsea-aba-significant.csv">saved significant-term table</a></figcaption></figure><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/gsea-icb-dot.png"><img src="assets/examples/aidcistrome-prjna1172690/gsea-icb-dot.png" alt="Preranked GO bubble plot for iCB versus mock" loading="lazy"></a><figcaption>iCB versus mock · <a href="assets/examples/aidcistrome-prjna1172690/gsea-icb-significant.csv">saved significant-term table</a></figcaption></figure></div>
+<p class="note">A displayed FDR value of zero is an unresolved permutation estimate, not a claim of zero uncertainty. Enrichment describes ranked gene sets; it does not establish receptor binding or a causal pathway.</p>
+</div></section>
+<section class="section case-chapter" id="networks"><div class="container">
+<div class="section-head"><span class="eyebrow">05 / GO networks</span><h2 class="h1">Which enriched terms share leading-edge genes?</h2><p class="lead">These selected views use only GO terms and Jaccard-overlap edges saved by AidCistrome. The full interactive networks let you search terms and inspect overlap details; links do not imply direct gene regulation.</p></div>
+<div class="case-grid"><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/term-network-aba.html"><img src="assets/examples/aidcistrome-prjna1172690/network-aba-focus.svg" alt="Selected GO leading-edge network for ABA versus mock" loading="lazy"></a><figcaption>ABA versus mock · <a href="assets/examples/aidcistrome-prjna1172690/term-network-aba.html">explore the complete saved network</a></figcaption></figure><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/term-network-icb.html"><img src="assets/examples/aidcistrome-prjna1172690/network-icb-focus.svg" alt="Selected GO leading-edge network for iCB versus mock" loading="lazy"></a><figcaption>iCB versus mock · <a href="assets/examples/aidcistrome-prjna1172690/term-network-icb.html">explore the complete saved network</a></figcaption></figure></div>
+<p class="note">The selected SVG previews preserve observed nodes, NES values and edges from the saved network tables. The source network filters broad and near-duplicate GO terms for display; the enrichment tables are unchanged.</p>
+</div></section>
+<section class="section section-alt case-chapter" id="promoters"><div class="container">
+<div class="section-head"><span class="eyebrow">06 / Promoter motifs and TF families</span><h2 class="h1">From reviewed gene sets to candidate motifs.</h2><p class="lead">AidCistrome tests known plant transcription-factor motifs in promoters of the selected up-regulated gene sets. bZIP motifs rank prominently in both saved treatment-versus-mock outputs. Motif enrichment suggests candidates for follow-up; it does not identify binding events or establish which factor caused the expression change.</p></div>
+<div class="case-grid"><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/motif-aba-up.png"><img src="assets/examples/aidcistrome-prjna1172690/motif-aba-up.png" alt="Known plant TF motif enrichment in promoters of the ABA-up gene set" loading="lazy"></a><figcaption>ABA-up promoters · <a href="assets/examples/aidcistrome-prjna1172690/motif-aba-up.tsv">saved motif table</a></figcaption></figure><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/motif-icb-up.png"><img src="assets/examples/aidcistrome-prjna1172690/motif-icb-up.png" alt="Known plant TF motif enrichment in promoters of the iCB-up gene set" loading="lazy"></a><figcaption>iCB-up promoters · <a href="assets/examples/aidcistrome-prjna1172690/motif-icb-up.tsv">saved motif table</a></figcaption></figure></div>
+<p class="note">The motif library and promoter background affect these rankings. ABA-up and iCB-up are separate selected sets, so similar family rankings do not measure a direct treatment difference.</p>
+</div></section>
+<section class="section case-chapter" id="landscape"><div class="container">
+<div class="section-head"><span class="eyebrow">07 / NES landscape</span><h2 class="h1">See shared and distinct enrichment patterns.</h2><p class="lead">The landscape places GO normalized enrichment scores from the two separate contrasts on the same plane. Points near the diagonal share a direction and similar score; their separation is an exploratory comparison.</p></div>
+<figure class="case-figure case-wide"><a href="assets/examples/aidcistrome-prjna1172690/nes-landscape.png"><img src="assets/examples/aidcistrome-prjna1172690/nes-landscape.png" alt="GO NES landscape comparing ABA-versus-mock and iCB-versus-mock scores" loading="lazy"></a><figcaption>Open the full-size landscape to read individual GO labels. The source figure uses FDR &lt; 0.25 for highlighted terms.</figcaption></figure>
+</div></section>
+<section class="section section-alt case-chapter" id="loadings"><div class="container">
+<div class="section-head"><span class="eyebrow">08 / How to read the separation</span><h2 class="h1">Which genes contribute to each PCA axis?</h2><p class="lead">PC1 loading figures identify the largest positive and negative contributors within each separately calculated PCA. These are exploratory contributors, not independently validated biomarkers.</p></div>
+<details class="case-secondary"><summary>What drives the separation? Inspect PC1 loadings</summary><div class="case-grid"><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/pca-loadings-aba.png"><img src="assets/examples/aidcistrome-prjna1172690/pca-loadings-aba.png" alt="Top PC1 gene loadings for ABA versus mock PCA" loading="lazy"></a><figcaption>ABA versus mock · PC1 loadings</figcaption></figure><figure class="case-figure"><a href="assets/examples/aidcistrome-prjna1172690/pca-loadings-icb.png"><img src="assets/examples/aidcistrome-prjna1172690/pca-loadings-icb.png" alt="Top PC1 gene loadings for iCB versus mock PCA" loading="lazy"></a><figcaption>iCB versus mock · PC1 loadings</figcaption></figure></div></details>
+<p class="note">The older <a href="arabidopsis.html">PRJNA968041 Arabidopsis case study</a> remains available as a separate archived example.</p>
+</div></section>
+</main>
+<!--chrome:footer-->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span data-i18n="footer.tagline">Scientific data, models, and software.</span></div>
+    <nav aria-label="Footer" data-i18n-attr="aria-label:footer.label">
+      <a href="solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="work.html" data-i18n="nav.work">Work</a><a href="tools.html" data-i18n="nav.software">Software</a><a href="about.html" data-i18n="nav.about">About</a><a href="portfolio/index.html" data-i18n="footer.story">Founder story</a><a href="https://github.com/matiollipt" rel="noopener">GitHub</a><a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+    </nav>
+    <div>© <span id="year">2026</span> AidBio</div>
+  </div>
+</footer>
+<!--/chrome:footer-->
+<script src="assets/js/app.js?v=20261026-apps9"></script>
+</body></html>

@@ -1,0 +1,39 @@
+# Reviewed with the aidcistrome experiment assistant. Every value was accepted or edited by a human;
+# see decisions.json for the evidence and model behind each choice.
+project: PRJNA1172690
+reference_assembly: arabidopsis_thaliana
+selection_hash: 184c53b5429c9a6a717d5ccaefc411a89cdbc39a49e7789d1e9747d42a303606
+metadata_hash: a46a30a87f1e94de0e6f6e9f5bb754285703fb77a4889fa2835413166a502825
+sanity_checks:
+  expected_n_samples: 9
+  expected_layout: paired
+colData:
+  source: conditions_csv
+  conditions_csv: PRJNA1172690_conditions.csv
+  factors:
+  - name: treatment
+    column: treatment
+    levels:
+    - 0_1_DMSO_mock
+    - 10uM_ABA
+    - 10uM_iCB
+design: ~treatment
+min_group_size: 3
+contrasts:
+- id: 10uM_ABA_vs_0_1_DMSO_mock
+  variable: treatment
+  reference: 0_1_DMSO_mock
+  target: 10uM_ABA
+- id: 10uM_iCB_vs_0_1_DMSO_mock
+  variable: treatment
+  reference: 0_1_DMSO_mock
+  target: 10uM_iCB
+outputs:
+  contrast_table: separate
+caveats:
+- Factor 'treatment' taken from treatment; reference level '0.1% DMSO' chosen by generalist,
+  confirmed by a human reviewer.
+- 'Factor ''treatment'' has the same sample grouping as: sample_title_token-2 [token
+  -2 of ''sample title'']: ABA(3), DMSO(3), iCB(3). These variables cannot have their
+  effects estimated separately with these samples. Interpret the contrast as a comparison
+  of joint sample groups.'

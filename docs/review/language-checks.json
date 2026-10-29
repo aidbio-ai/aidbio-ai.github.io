@@ -1,0 +1,39 @@
+{
+  "portugueseChecks": [
+    {
+      "language": "pt-BR",
+      "scroll": 305,
+      "title": "AidBio — Natureza, Decodificada.",
+      "width": 320
+    },
+    {
+      "language": "pt-BR",
+      "scroll": 375,
+      "title": "AidBio — Natureza, Decodificada.",
+      "width": 390
+    },
+    {
+      "language": "pt-BR",
+      "scroll": 753,
+      "title": "AidBio — Natureza, Decodificada.",
+      "width": 768
+    },
+    {
+      "language": "pt-BR",
+      "scroll": 1009,
+      "title": "AidBio — Natureza, Decodificada.",
+      "width": 1024
+    },
+    {
+      "language": "pt-BR",
+      "scroll": 1425,
+      "title": "AidBio — Natureza, Decodificada.",
+      "width": 1440
+    }
+  ],
+  "englishPage": {
+    "language": "en",
+    "languageControls": 0
+  },
+  "restoredLanguage": "pt-BR"
+}

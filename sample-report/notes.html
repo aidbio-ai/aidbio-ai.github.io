@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes · Weather report</title>
+    <meta name="theme-color" content="#F8FAFC"><script src="../assets/js/theme.js"></script>
+    <link rel="stylesheet" href="assets/styles.css">
+    <link rel="stylesheet" href="assets/dashboard.css">
+    <link rel="stylesheet" href="assets/story.css">
+
+</head>
+<body class="st-body ">
+    <header class="st-top">
+        <div class="st-top__bar">
+            <a class="st-brand" href="index.html?v=b9f14cd3e4de" aria-label="Weather report">
+                <img class="st-brand__logo" src="assets/assets/aidbio-logo-transparent.png" alt="" width="56" height="28">
+                <strong>AidBio</strong><span>Weather report</span></a>
+            <div class="st-top__actions">
+                <a class="db-button db-button--secondary" href="index.html?v=b9f14cd3e4de">← Report</a>
+
+
+                <a class="db-button db-button--secondary" href="methods.html?v=b9f14cd3e4de">Methods &amp; references</a>
+                <button type="button" id="theme-toggle" class="db-topbar__pill db-theme-toggle"
+                    aria-label="Toggle theme"><span class="db-icon--sun" aria-hidden="true">☀</span>
+                    <span class="db-icon--moon" aria-hidden="true">☾</span><span>Theme</span></button>
+            </div>
+        </div>
+        <nav class="st-nav" aria-label="Report chapters"><a href="#notes-warmth">Warmth</a><a href="#notes-water">Water</a><a href="#notes-demand">Atmospheric demand</a><a href="#notes-events">Stress events</a><a href="#notes-solar">Solar radiation</a><a href="#notes-wind">Wind speed</a><a href="#notes-windrose">Wind direction and speed</a><a href="#notes-crop">Crop context</a><a href="#notes-reading">Reading this report</a></nav>
+    </header>
+    <main class="st-page">
+
+        <section class="st-hero st-notes" id="notes-top" aria-labelledby="notes-title">
+        <h1 id="notes-title">Notes</h1><p class="st-lede">The definitions, data limits and caveats behind each chart, grouped by chapter. Each chart links here.</p>
+    </section><section class="st-notes__section" id="notes-warmth"><h2>Warmth · Temperature and accumulated heat</h2><ul><li><strong>How to read it.</strong> Top panel: daily maximum (orange) and minimum (blue) air temperature. Bottom panel: growing degree-days, the heat above 10 °C (Maize base) added up day by day. Grey bands show 1991–2020: the normal daily range on top, and the middle half of baseline years below, with the median year as a dashed line. A season line above its band ran warmer than usual.</li><li>Growing degree-days use a 10&nbsp;°C base and 30 °C cutoff; the report's method is <em>hourly</em><sup><a href="methods.html?v=b9f14cd3e4de#ref-3" title="McMaster, G.S., Wilhelm, W.W. (1997). Growing degree-days: one equation, two interpretations. Agricultural and Forest Meteorology 87(4):291-300.">[3]</a></sup>.</li><li>The baseline comparison recomputes heat with the single-sine method for the season and every baseline year<sup><a href="methods.html?v=b9f14cd3e4de#ref-4" title="Baskerville, G.L., Emin, P. (1969). Rapid estimation of heat accumulation from maximum and minimum temperatures. Ecology 50:514-517.">[4]</a></sup>, so the two are comparable whichever method the report uses.</li><li>The report's own hourly method gives 1,464 °C·day for the same season (the exported CUM_GDD).</li><li>Thermal time measures heat available for development; it does not by itself establish crop stage or harvest timing.</li><li>NASA POWER temperatures describe a ~0.5° grid cell and smooth local extremes<sup><a href="methods.html?v=b9f14cd3e4de#ref-1" title="NASA POWER Project. Data methodology: MERRA-2 grid-cell averages, solar-local-time days.">[1]</a></sup>.</li></ul></section><section class="st-notes__section" id="notes-water"><h2>Water · Rain and water demand</h2><ul><li><strong>How to read it.</strong> Both lines add up from the first day of the period. The blue line is cumulative rain; the orange line is cumulative estimated crop water need (ETc), the reference demand scaled by the crop&#x27;s coefficient for each stage. Blue shading marks stretches where rain was ahead of demand, orange shading where demand was ahead. The dashed line is the cumulative rain of the median season in 1991–2020.</li><li>Dry day = under 1&nbsp;mm; dry spell = at least 7 consecutive dry days<sup><a href="methods.html?v=b9f14cd3e4de#ref-6" title="Zhang, X. et al. (2011). Indices for monitoring changes in extremes based on daily temperature and precipitation data. WIREs Climate Change 2:851-870 (ETCCDI indices).">[6]</a></sup>.</li><li>ET0 is FAO-56 Penman–Monteith<sup><a href="methods.html?v=b9f14cd3e4de#ref-2" title="Allen, R.G., Pereira, L.S., Raes, D., Smith, M. (1998). Crop evapotranspiration: guidelines for computing crop water requirements. FAO Irrigation and Drainage Paper 56.">[2]</a></sup>; ETc = Kc × ET0 with the staged single-Kc curve<sup><a href="methods.html?v=b9f14cd3e4de#ref-5" title="FAO-56 Tables 11 and 12: crop growth-stage lengths and single crop coefficients (Kc ini, mid, end).">[5]</a></sup>. FAO-56 staged single Kc: 0.30 → 1.20 → 0.60; default stage lengths scaled to supplied planting–harvest window; initial 22.08 days, development 38.64 days, mid 44.16 days, late 33.12 days. FAO-56 Table 11, maize grain, Nigeria humid, June; indicative timing only, scaled to supplied planting–harvest window, not local calibration. FAO-56 Table 12, field maize (grain), Kc end 0.60 for harvest at high grain moisture.</li><li>Rain minus crop water need is a climatic balance, not soil moisture: it excludes soil storage, runoff, drainage, irrigation and rooting depth.</li><li>The normal-rain line is the median of 30 seasons (1991–2020) for the same window.</li><li>NASA POWER rainfall is a grid-cell estimate and can miss local showers; an on-farm rain gauge is the better record for a single field.</li></ul></section><section class="st-notes__section" id="notes-demand"><h2>Atmospheric demand · Atmospheric drying demand (VPD)</h2><ul><li><strong>How to read it.</strong> The violet line is each day&#x27;s estimated peak-demand VPD, in kilopascals (kPa). The dashed line marks 2 kPa, a generic reference level; amber shading shows how far demand rose above it.</li><li>Peak-demand VPD pairs saturation vapour pressure at the daily maximum temperature with the day's mean vapour pressure, so it estimates the strongest demand of the day rather than measuring afternoon VPD<sup><a href="methods.html?v=b9f14cd3e4de#ref-2" title="Allen, R.G., Pereira, L.S., Raes, D., Smith, M. (1998). Crop evapotranspiration: guidelines for computing crop water requirements. FAO Irrigation and Drainage Paper 56.">[2]</a></sup>.</li><li>The 2&nbsp;kPa line is a generic reference, not a crop threshold: the VPD at which stomata close is species-specific<sup><a href="methods.html?v=b9f14cd3e4de#ref-7" title="Grossiord, C. et al. (2020). Plant responses to rising vapor pressure deficit. New Phytologist 226:1550-1566.">[7]</a></sup>.</li><li>VPD describes the atmosphere; it is not a measurement of plant water status or soil water.</li></ul></section><section class="st-notes__section" id="notes-events"><h2>Stress events · Stress-event calendar</h2><ul><li><strong>How to read it.</strong> Each row is one condition and each column one day; an orange cell means the condition occurred that day. A dry spell is a run of at least 7 days with under 1 mm of rain.</li><li>Event definitions follow the ETCCDI climate-extreme indices where one exists (dry days, consecutive dry days, maximum and minimum temperature)<sup><a href="methods.html?v=b9f14cd3e4de#ref-6" title="Zhang, X. et al. (2011). Indices for monitoring changes in extremes based on daily temperature and precipitation data. WIREs Climate Change 2:851-870 (ETCCDI indices).">[6]</a></sup>.</li><li>35 °C is a generic heat reference, not crop-specific.</li><li>The cool-night threshold is the Maize base (10&nbsp;°C).</li><li>A near-freezing minimum does not by itself establish canopy-level frost, and a hot day does not by itself establish heat injury.</li></ul></section><section class="st-notes__section" id="notes-solar"><h2>Appendix · Solar radiation</h2><ul><li><strong>How to read it.</strong> The line is the daily all-sky shortwave radiation reaching the surface, in MJ/m² per day.</li><li>Radiation is the all-sky value for the grid cell; it does not by itself establish photosynthetic performance.</li></ul></section><section class="st-notes__section" id="notes-wind"><h2>Appendix · Wind speed</h2><ul><li><strong>How to read it.</strong> The solid line is the daily mean wind speed at 10 m, in m/s.</li><li>Daily mean wind at 10 m is not a gust and does not by itself establish lodging risk; the reference evapotranspiration converts it to 2 m (FAO-56 Eq. 47).</li></ul></section><section class="st-notes__section" id="notes-windrose"><h2>Appendix · Wind direction and speed</h2><ul><li><strong>How to read it.</strong> Each spoke is a compass direction the wind came from; its length is the share of days, split into speed classes from light (pale) to strong (dark).</li><li>Days with a missing speed, or a direction missing or outside 0–360°, are left out of the counts, so the percentages sum to 100.</li></ul></section><section class="st-notes__section" id="notes-crop"><h2>Crop context</h2><ul><li>Missing crop information is unknown, not assumed. Cultivar, irrigation system, soil type, phenological stage and management are not inferred beyond what was supplied.</li></ul></section><section class="st-notes__section" id="notes-reading"><h2>Reading this report</h2><ul><li>Compare these values with an on-farm rain gauge: a ~0.5° grid cell can miss local showers.</li><li>Soil water, crop stage and management are unknown to this report; it does not say how the crop responded.</li><li>NASA POWER is a roughly 0.5° gridded product (resolution varies by variable). It smooths local extremes of rainfall and temperature and is not a substitute for a station measurement.</li><li>Point values represent the surrounding grid cell, not necessarily conditions at the exact coordinates.</li></ul></section>
+        <footer class="st-footer">AidBio AI · Turning Data into Evidence for Agriculture</footer>
+    </main>
+    <script>
+        function resizePanelCharts() {
+            if (!window.Plotly) return;
+            document.querySelectorAll('.st-plot .plotly-graph-div').forEach(function (plot) {
+                if (!plot._fullLayout) return;
+                var width = plot.parentElement.clientWidth;
+                if (width > 0) {
+                    plot.style.width = width + 'px';
+                    Plotly.relayout(plot, {width: width});
+                }
+            });
+        }
+        window.addEventListener('load', function () {
+            requestAnimationFrame(resizePanelCharts);
+            setTimeout(resizePanelCharts, 500);
+        });
+        window.addEventListener('resize', resizePanelCharts);
+        document.querySelectorAll('details').forEach(function (el) {
+            el.addEventListener('toggle', function () { setTimeout(resizePanelCharts, 50); });
+        });
+        document.getElementById('theme-toggle').addEventListener('click', function () {
+            window.__aidbioTheme.setPreference(document.documentElement.dataset.theme === 'dark' ? 'light' : 'dark');
+        });
+        document.addEventListener('keydown', function (event) {
+            if (event.key !== 'Escape') return;
+            document.querySelectorAll('.st-term:hover, .st-term:focus, .st-hover__tip:hover, .st-hover__tip:focus').forEach(function (term) {
+                term.classList.add('is-dismissed');
+                term.blur();
+            });
+        });
+        document.querySelectorAll('.st-term, .st-hover__tip').forEach(function (term) {
+            term.addEventListener('mouseleave', function () { term.classList.remove('is-dismissed'); });
+            term.addEventListener('focus', function () { term.classList.remove('is-dismissed'); });
+        });
+        var navLinks = document.querySelectorAll('.st-nav a');
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (!entry.isIntersecting) return;
+                navLinks.forEach(function (link) {
+                    link.classList.toggle('is-active', link.getAttribute('href') === '#' + entry.target.id);
+                });
+            });
+        }, { rootMargin: '-20% 0px -70% 0px' });
+        document.querySelectorAll('main section[id], main details[id]').forEach(function (el) { observer.observe(el); });
+    </script>
+</body>
+</html>

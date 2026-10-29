@@ -1,0 +1,142 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "AidBio Weather Report: a portable field-season report",
+    "locale": "en",
+    "output": "docs/diagrams/report-en/diagram.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "git@github.com:matiollipt/aidweather-report.git",
+      "revision": "07af8bb33557c90e028eb98a06df4165a790afb5",
+      "link_mode": "local-only"
+    }
+  },
+  "stages": [
+    {
+      "label": "Inputs"
+    },
+    {
+      "label": "Weather"
+    },
+    {
+      "label": "Interpret"
+    },
+    {
+      "label": "Deliver"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "config",
+      "type": "external",
+      "label": "Site + season",
+      "stage": 0,
+      "row": 1,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 50,
+          "end_line": 55
+        }
+      ]
+    },
+    {
+      "id": "power",
+      "type": "external",
+      "label": "POWER series",
+      "stage": 0,
+      "row": 3,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 7,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "features",
+      "type": "backend",
+      "label": "Daily metrics",
+      "stage": 1,
+      "row": 1,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 57,
+          "end_line": 65
+        }
+      ]
+    },
+    {
+      "id": "story",
+      "type": "backend",
+      "label": "Charts + context",
+      "stage": 2,
+      "row": 1,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 66,
+          "end_line": 77
+        }
+      ]
+    },
+    {
+      "id": "dashboard",
+      "type": "frontend",
+      "label": "Web report",
+      "stage": 3,
+      "row": 0,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 307,
+          "end_line": 313
+        }
+      ]
+    },
+    {
+      "id": "methods",
+      "type": "database",
+      "label": "Methods + data",
+      "stage": 3,
+      "row": 3,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 309,
+          "end_line": 317
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "config",
+      "to": "features",
+      "label": "place + dates"
+    },
+    {
+      "from": "power",
+      "to": "features",
+      "label": "daily grid data"
+    },
+    {
+      "from": "features",
+      "to": "story",
+      "label": "derived series"
+    },
+    {
+      "from": "story",
+      "to": "dashboard",
+      "label": "chapters"
+    },
+    {
+      "from": "story",
+      "to": "methods",
+      "label": "methods + charts"
+    }
+  ]
+}

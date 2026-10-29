@@ -1,93 +1,50 @@
 # AGENTS.md
 
-This file provides guidance to Codex (Codex.ai/code) when working with code in this repository.
+## Repository
 
-## What this repo is
+AidBio's public site at aidbio.org. Static HTML on GitHub Pages: no framework, package manager, or build pipeline. Serve with `python3 -m http.server 8000`.
 
-`aidbio-ai.github.io` — the public marketing site for AidBio (AI & data science for life sciences and agritech),
-served directly by GitHub Pages. There is no build step, no package manager, and no test suite: every page is a
-plain `.html` file. Page-specific styles stay inline; the header, footer, buttons and type helpers are shared
-(see "Shared chrome" below).
+Marketing pages: `index.html`, `solutions.html`, `work.html`, `tools.html`, `about.html`, `aidweather.html`, `404.html`. `portfolio/` is the restored eight-page scientific narrative. `sample-report/` is an existing generated report and is excluded from chrome generation.
 
-- `index.html` — main marketing site (hero, sections; header and footer are stamped from `assets/partials/`).
-- `aidweather.html` — standalone page for the AidWeather project.
-- `assets/` — logomarks, favicon, hero network graphics (WebP/PNG). See table in `README.md` for what each file is.
-- `portfolio/` — a separate, self-contained static site (its own `README.md`, `AGENTS.md`, `index.html`, `pages/`,
-  `assets/`, `docs/`), tracked in git and merged into `main` — part of the deployed site. Treat it as an
-  independent project with its own rules (see below).
+## Approved design and content
 
-## Running locally
+The October 2026 redesign follows the supplied `../examples/aidbio_design_system.md` (v2.4) and `../examples/aidbio_landing_page.html`. These user-approved references supersede the former Baloo/Jakarta/spectrum presentation. Do not copy unsupported claims, percentages, or prototype internals from the example.
 
-No build step required. Serve the directory root and open in a browser:
+- Shared semantic tokens and component styles: `assets/css/aidbio.css`.
+- Inter / JetBrains Mono are self-hosted. Preserve the established infinity mark + Aid (blue) / Bio (orange) wordmark in shared chrome only.
+- Use restrained emerald, amber, violet, and cyan accents, 4px spacing, fine borders, and light/dark surfaces. Keep heroes solid-text.
+- Copy is precise, calm, and scientifically grounded. Explain domain vocabulary through questions, methods, and outputs; do not erase scientific specificity.
+- Never invent clients, results, metrics, maturity, publication status, or installation commands. Distinguish predictions, annotations, exploratory analysis, measured results, and interpretation.
+- Public examples use public sources or clearly labeled synthetic data. Client material stays private.
+
+## Shared implementation
+
+Edit chrome only in `assets/partials/`, then run `python3 scripts/build-chrome.py`. Header/footer/subnav marker pairs are generated. The script handles root and portfolio pages, correct relative paths, active navigation, and homepage-only language controls. New pages need a unique `main` ID and one h1.
+
+All pages load blocking `assets/js/theme.js` after the theme-color meta and before styles. The preference key is `aidbio-theme-preference`, with legacy `aidbio-theme` fallback. Values are `system`, `light`, and `dark`; Auto follows OS changes live. Do not introduce another theme controller. `assets/js/app.js` wires controls, menu, tabs, and copy buttons.
+
+Only the homepage is translated. Its strings are in `assets/i18n/home.js`; `assets/js/i18n.js` updates text, metadata, and accessibility labels. EN/PT controls appear only where translations exist; use natural Brazilian Portuguese. Other pages remain English.
+
+## Portfolio and examples
+
+Read `portfolio/AGENTS.md` before changing narrative content. Preserve mechanism → regulatory systems → biological networks → data → computational models → reusable scientific software → AidBio. Numerical claims require `portfolio/docs/evidence-map.md`; reproduced figures require `portfolio/docs/figure-rights.md`.
+
+`scripts/collect-site-examples.py` extracts existing outputs only. Asset provenance and checksums live in `assets/examples/manifest.json`. Never silently replace archived outputs with a different application's current capabilities. Server and local checkouts differ: see `docs/application-examples.md`. Do not launch application downloads/training/model runs as part of ordinary site work.
+
+## Verification
 
 ```bash
-python -m http.server 8000
+python3 scripts/build-chrome.py --check
+python3 scripts/check-site.py
+node scripts/theme.test.cjs
+node --check assets/js/theme.js
+node --check assets/js/app.js
+node --check assets/js/i18n.js
+git diff --check
 ```
 
-There is no linter, formatter, or automated test command configured in this repo — verify changes by opening the
-page in a browser (check both light and dark themes, and mobile width ~320px).
+Open pages in both themes and at mobile width 320px. Check keyboard focus, Auto mode, language controls, image loading, and no horizontal page overflow. Record actual checks in `docs/verification.md`. Preserve graceful navigation and OS-theme fallback when JavaScript fails.
 
-## Architecture notes (top-level site)
+## Domain
 
-- **Shared chrome (single source of truth)**: the fixed header (logo, links, theme/language switchers, mobile
-  menu), the optional local sub-nav, and the footer are identical on every page. Edit them only in
-  `assets/partials/*.html`, then run `python3 scripts/sync-chrome.py` (use `--check` to verify). Pages contain
-  `<!--chrome:header|subnav|footer ...-->` marker pairs that the script fills in; never hand-edit inside them.
-  Shared CSS lives in `assets/css/chrome.css`, shared JS in `assets/js/chrome.js`. New pages: add the markers,
-  link `assets/ds/styles.css` then `assets/css/chrome.css`, load `assets/js/theme.js` in `<head>` (after the
-  `theme-color` meta) and `assets/js/chrome.js` at the end of `<body>`.
-- **Local navigation**: page families (portfolio chapters, AidWeather sections) add a sticky `.subnav` strip
-  under the header via `<!--chrome:subnav set="...">` and `<body class="has-subnav">`. The header never changes.
-- **Language switcher**: `i18n="1"` on the header marker adds EN/PT. Only `index.html` has translated content,
-  so only it sets the flag; flip it on a page only once that page has PT strings in `assets/i18n/`.
-- **Theme system**: `assets/js/theme.js` (blocking, in `<head>`) reads `localStorage` key
-  `aidbio-theme-preference` (legacy `aidbio-theme`), resolves `system` via `prefers-color-scheme`, sets
-  `data-theme` + `color-scheme` on `<html>` before first paint, and exposes `window.__aidbioTheme`.
-- **Design system**: visual identity (spectrum infinity logomark, 8-hue synesthetic palette, Baloo 2 /
-  Plus Jakarta Sans / IBM Plex Mono typography, Fibonacci spacing, light+dark themes) follows the external
-  `matiollipt/aidbio-design` repo (vendored into `assets/ds/` by `scripts/sync-design-system.sh`) — that repo is the source of truth for brand tokens; don't redefine them
-  ad hoc here without checking it.
-- Pages are long, single-file documents (2000+ lines for `index.html`) — sections are organized by HTML comments
-  and id-anchored `<section>` blocks; search for the relevant section heading/id rather than reading top to bottom.
-
-## Consistency rules
-
-- Logo lockup is fixed everywhere: spectrum mark + wordmark with "Aid" in `--brand-blue` and "Bio" in
-  `--brand-orange`, no caption. Only the header/footer partials may render it.
-- Heading scale: hero `--fs-h1`, editorial page title `--fs-page-title`, section `--fs-h2`, card `--fs-h3`
-  (all in `chrome.css`). One gradient accent word per section heading (`.accent-spectrum`), never in a hero.
-- Buttons are `.btn .btn-primary|.btn-secondary|.btn-warm`; eyebrows are `.eyebrow`; alternate section bands
-  are `.section-alt`; figures use `.figure` / `.figure-media`; cards use `--radius-lg`, `--shadow-sm`.
-- Copy: sentence case, plain and de-hyped (Field Notes voice); no "AI" wording outside the Agentic AI card
-  and the portfolio founder narrative; domain is aidbio.org.
-
-## `portfolio/` subproject
-
-This is a distinct narrative site ("why AidBio exists," told through founder Cleverson Carlos Matiolli's scientific
-trajectory) with its own strict content rules in `portfolio/AGENTS.md`. If you're asked to work inside `portfolio/`,
-read `portfolio/AGENTS.md` in full first — key constraints:
-
-- Narrative must follow: mechanism → regulatory systems → biological networks → data → computational models →
-  reusable scientific software → AidBio. Every included project/paper/visual must map to a step in that chain.
-- Never invent scientific claims, metrics, publications, roles, clients, citations, DOIs, or results. Distinguish
-  measured result vs. interpretation vs. inference vs. current software capability.
-- Numerical metrics must be sourced in `portfolio/docs/evidence-map.md`.
-- Reused paper figures require a documented redistribution licence in `portfolio/docs/figure-rights.md`; otherwise
-  make an original diagram explicitly labelled "Adapted from ...".
-- Must stay deployable as static GitHub Pages (no framework migration without documenting rationale in
-  `portfolio/README.md` and updating it).
-- Mobile width 320px must not overflow; keep semantic HTML and keyboard-accessible controls; JS enhancements must
-  degrade gracefully.
-
-Run locally the same way (`python -m http.server 8000` from inside `portfolio/`).
-
-## Domain, DNS, and email (aidbio.org)
-
-The custom domain `aidbio.org` is registered and DNS-managed on Cloudflare (Cloudflare Registrar + Cloudflare
-DNS), pointed at this repo's GitHub Pages hosting, with Cloudflare Email Routing forwarding `contact@aidbio.org`.
-This repo has no `CNAME` file to touch for that — DNS is managed entirely on Cloudflare's side, not in-repo.
-
-For anything involving DNS records, SPF/DKIM/DMARC, email forwarding rules, or registrar/WHOIS status, use the
-`aidbio-domain` Codex skill rather than guessing — it has the current zone setup and known gotchas (e.g.
-the Cloudflare API token in use is read-only; writes must go through the dashboard). Account IDs and other
-infra specifics are intentionally kept out of this public repo; see that skill instead.
+DNS, registrar, and email routing are managed on Cloudflare. Do not change DNS or the existing CNAME as part of a visual/content update. For DNS/email work, locate and read the `aidbio-domain` skill before acting; infrastructure credentials and account identifiers do not belong in this public repository.

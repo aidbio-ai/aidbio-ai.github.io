@@ -1,0 +1,11 @@
+<svg viewBox="0 0 980 420" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="t d">
+<title id="t">From metabolic signals to gene regulation</title><desc id="d">A schematic adapted from Matiolli et al. 2011 showing glucose and ABA converging on bZIP63 and downstream transcription.</desc>
+<defs><marker id="a" markerWidth="9" markerHeight="9" refX="8" refY="4.5" orient="auto"><path d="M0,0 L9,4.5 L0,9 Z" fill="#536274"/></marker></defs>
+<style>.n{fill:#fff;stroke:#d9e0e9;stroke-width:2}.tx{font:600 20px system-ui;fill:#202735}.sm{font:14px system-ui;fill:#64748b}.ln{stroke:#536274;stroke-width:3;fill:none;marker-end:url(#a)}</style>
+<rect class="n" x="45" y="120" rx="22" width="180" height="90"/><text class="tx" x="135" y="160" text-anchor="middle">Glucose</text><text class="sm" x="135" y="186" text-anchor="middle">energy status</text>
+<rect class="n" x="45" y="250" rx="22" width="180" height="90"/><text class="tx" x="135" y="290" text-anchor="middle">ABA</text><text class="sm" x="135" y="316" text-anchor="middle">stress hormone</text>
+<rect x="365" y="165" rx="28" width="210" height="125" fill="#eef2ff" stroke="#8c9cf2" stroke-width="3"/><text class="tx" x="470" y="217" text-anchor="middle">bZIP63</text><text class="sm" x="470" y="246" text-anchor="middle">signal integrator</text>
+<rect class="n" x="730" y="180" rx="22" width="190" height="95"/><text class="tx" x="825" y="220" text-anchor="middle">Gene expression</text><text class="sm" x="825" y="247" text-anchor="middle">adaptive response</text>
+<path class="ln" d="M225 165 C300 165,310 200,365 215"/><path class="ln" d="M225 295 C300 295,310 260,365 240"/><path class="ln" d="M575 228 L730 228"/>
+<text class="sm" x="490" y="370" text-anchor="middle">Conceptual diagram — adapted from Matiolli et al., Plant Physiology (2011)</text>
+</svg>

@@ -1,0 +1,3 @@
+# Preserve upstream licence text and generated diagrams with recorded SHA-256 receipts.
+assets/fonts/LICENSE-*.txt whitespace=-blank-at-eol
+docs/diagrams/*/diagram.html whitespace=-blank-at-eol

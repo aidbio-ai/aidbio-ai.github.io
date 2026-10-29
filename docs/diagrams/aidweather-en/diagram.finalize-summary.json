@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "dataflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidweather-en/candidate.json",
+    "sha256": "937154a63c6c0ac269f80fd2c31c2ebce7ec7c37718dde35160d43066b9ef081",
+    "bytes": 2672
+  },
+  "artifact": {
+    "path": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidweather-en/diagram.html",
+    "sha256": "54b025e3b540f8b8df1d16c3652864c33e807b46a50f7662b1e874590ef7eef3",
+    "bytes": 829941
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidweather-en/diagram.finalize.json",
+    "summaryReceipt": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidweather-en/diagram.finalize-summary.json",
+    "browserCheckReceipt": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidweather-en/diagram.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-26T22:32:11.973Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2356,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

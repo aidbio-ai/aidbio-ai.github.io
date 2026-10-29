@@ -1,0 +1,59 @@
+{
+  "project": "PRJNA968041",
+  "reference_assembly": "arabidopsis_thaliana",
+  "n_samples": 6,
+  "n_genes_raw": 27588,
+  "n_genes_post_filter": 20707,
+  "design": "~age",
+  "min_group_size": 3,
+  "mapping_rate_pc_correlation": {
+    "PC1": -0.193667313969228,
+    "PC2": -0.958509657449316
+  },
+  "caveats": "Factor 'age' taken from age; reference level '2-week' chosen by user, confirmed by a human reviewer.",
+  "samples": [
+    {
+      "sample_id": "SRR24459684",
+      "layout": "paired",
+      "mapping_rate": 96.1511,
+      "age": "4_week"
+    },
+    {
+      "sample_id": "SRR24459685",
+      "layout": "paired",
+      "mapping_rate": 97.0684,
+      "age": "4_week"
+    },
+    {
+      "sample_id": "SRR24459686",
+      "layout": "paired",
+      "mapping_rate": 96.9543,
+      "age": "4_week"
+    },
+    {
+      "sample_id": "SRR24459687",
+      "layout": "paired",
+      "mapping_rate": 95.9458,
+      "age": "2_week"
+    },
+    {
+      "sample_id": "SRR24459688",
+      "layout": "paired",
+      "mapping_rate": 96.2362,
+      "age": "2_week"
+    },
+    {
+      "sample_id": "SRR24459689",
+      "layout": "paired",
+      "mapping_rate": 97.3888,
+      "age": "2_week"
+    }
+  ],
+  "age_levels": ["2_week", "4_week"],
+  "contrast": {
+    "factor": "age",
+    "numerator": "4_week",
+    "denominator": "2_week"
+  },
+  "n_significant_padj0.05": 11688
+}

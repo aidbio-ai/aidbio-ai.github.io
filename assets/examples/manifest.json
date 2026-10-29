@@ -1,0 +1,216 @@
+{
+  "policy": "Public data only. AidWeather fetch, saved Aid2GO test artifacts, completed AidCistrome analysis. No retraining or private datasets.",
+  "weather": {
+    "source": "NASA POWER via AidWeather",
+    "source_sha256": "bca119d1cc9ed3e33955e502c1e8a6e463e4f2624f104935878ce4d71ce23137",
+    "period": "2024-01-01/2024-12-31",
+    "rows": 366,
+    "coordinate": [
+      -22.72547,
+      -47.011603
+    ],
+    "limitation": "Grid data; VPD estimated from daily means. No smoothing or station observation claim."
+  },
+  "aid2go": {
+    "gallery_sha256": "2172f5a7bf9a8f2906703d908b9456f9cab236f50d46e5a20708d1fc861b906d",
+    "test_scores_sha256": "0a0b4aae36f0da464bab2ffdc5ac4c6062c9efc4fcd4e17e4cca918e0ccef611",
+    "metrics_sha256": "bffa634b72b2b9f31f62fd0d87d69851b8697580b646059ff94a61483e61bbb3",
+    "sample": "v2_unique_pairs_sample_1000x100_seed42",
+    "protocol": "internal protein-held-out, observed annotations as targets; not CAFA",
+    "limitation": "Internal protein-held-out evaluation, not CAFA/external certification. Model in development. Projection/network are exploratory."
+  },
+  "aidcistrome": {
+    "bioproject": "PRJNA968041",
+    "study": "https://www.ncbi.nlm.nih.gov/bioproject/968041",
+    "publication": "https://doi.org/10.1073/pnas.2221181120",
+    "authors": [
+      "Tieqiang Hu",
+      "Xiaohui Li",
+      "Liren Du",
+      "Darren Manuela",
+      "Mingli Xu"
+    ],
+    "citation": "Hu et al. (2023), PNAS 120(22): e2221181120",
+    "contrast": "4-week inflorescence / 2-week shoot apex, Col-0; three replicates per group",
+    "source_files": {
+      "metadata.json": "52b8cb15d9a7a4e250a9fff00b94534a50d12f68863dec114c2b849bf57fe1f6",
+      "deseq2_4_week_vs_2_week.csv": "d8af916e1003fbb601c99f8ddeb8a6095ba4431fe916eb1e4392fff7ee797ddf",
+      "4_week_vs_2_week_prerank_all.csv": "641dfab64422ebe8d9fe0fe38741ab4368109b51524018989cf0518bf7194f91"
+    },
+    "rights": "Original AidCistrome/AidBio figures and site redraws from public sequencing data; no figures copied from the paper.",
+    "limitation": "Age and tissue confounded. Differential expression and enrichment do not establish causation. Overview volcano display-capped; full output supplied."
+  },
+  "collection_checkouts": {
+    "aid2go": {
+      "head": "3cf41d746f7a609c0cc3a54c2e9b39f91bb4f1b5",
+      "dirty": true,
+      "scope": "HEAD at collection, not proof of generating revision"
+    },
+    "aidweather": {
+      "head": "e7da3580ca042e607f64dc5233298be5a38735cd",
+      "dirty": false,
+      "scope": "HEAD at collection, not proof of generating revision"
+    },
+    "aidweather-report": {
+      "head": "5963e36918171f76a0d48264132a26e490f753dd",
+      "dirty": true,
+      "scope": "HEAD at collection, not proof of generating revision"
+    },
+    "aidcistrome_server": {
+      "head": "cd7a886",
+      "dirty": true,
+      "scope": "Read-only server snapshot on 2026-10-15; not proof of the revision that generated the saved analysis."
+    }
+  },
+  "outputs": {
+    "aid2go-network.svg": "cd18cb0f98ca68f1f45c555d3d6fa69595aa0287f258090fb0ba4c78becddaa9",
+    "aid2go-ontology.svg": "85889a3b46de40554bd3fe674874ab50f2d54fb33c5af39403ba75ccd583777c",
+    "aid2go-test.svg": "67ae4ae41b2e500f990e09e1363e8c90df3a8e86e100ba4a3992c81e2cca07c2",
+    "aid2go-tsne.svg": "5482ce979367fa5b34d2222915354baa6706646af8a73ebc779fcff8674e4190",
+    "aid2go.json": "e7ee095cee217e0fb097adc4b6a22243a9f34aadef400044d4dda8403d613adc",
+    "aidcistrome-volcano.png": "8c4ca4b15ce194ef825d10f9f5409e186b3d742061424ac2a98cf2df4e6ca4de",
+    "arabidopsis/4_week_vs_2_week_prerank_all.csv": "641dfab64422ebe8d9fe0fe38741ab4368109b51524018989cf0518bf7194f91",
+    "arabidopsis/deseq2_4_week_vs_2_week.csv": "d8af916e1003fbb601c99f8ddeb8a6095ba4431fe916eb1e4392fff7ee797ddf",
+    "arabidopsis/gsea-running.png": "b5d4d2ee24233e309e3b391cccc792c3dfb43134e88e34a67d5fdaf905bc72fe",
+    "arabidopsis/gsea.png": "182070304a12da135a1b984696f8df9d63c92b23d1a30f37119c24905adf37a1",
+    "arabidopsis/heatmap.png": "5eec36d18fc0235019b38406777f3cee9e7ac4b8cfffc2f7ec87f4bf450a3d3e",
+    "arabidopsis/ma.png": "a6b8763d3219f9719da5ff74cfe26a427e97ce252c190344bbd2760178da7c54",
+    "arabidopsis/metadata.json": "52b8cb15d9a7a4e250a9fff00b94534a50d12f68863dec114c2b849bf57fe1f6",
+    "arabidopsis/pca.png": "b7ae9d8a09d3562ad574e7ffdc47dbb2689dd7c17678c7127c425d8b48add1f0",
+    "arabidopsis/top-genes.png": "6bb8bf249cd669d60501c2311c93e086c74d3e91cd8c6204dadf33e0e21d10fb",
+    "arabidopsis/volcano.png": "37db417382cd0f41beed43ec92a20d18ed246d7ddd16c6cb12fa47b6ffec7303",
+    "arabidopsis-gsea.svg": "faf2b1f40a59c5195b684dc780049bd2ecec8f243615239d805e92dcc60411d6",
+    "arabidopsis-top.svg": "393b59c10472c52fbeeca0f16e58931f6560c017e9354a0a6b6876d84a177f9a",
+    "arabidopsis-volcano.svg": "5f59fc10eb74478c2c6a0729079749e47ae65f0c04e7edc42da4f597011a68b1",
+    "protein-go.json": "9292280dfc73aec14135cb0a278cf702e6d60ac9a8cc82099acca696610efe4f",
+    "protein-go.svg": "9e19a6150d4e81b5ef4a0311273666e7a0372a902a23fa2641f8ba20c748841b",
+    "weather-atmosphere.svg": "218aa2f89ea7b57175d7252311d3b202fab62e9b1cf973aa69c2666c67b0a3d9",
+    "weather-soil.svg": "073aaaf948251abdb356782a41864ac11e4d773d390582c6a3532e06eace2648",
+    "weather-temperature.svg": "931204a3f432daed4cc5d430c1427e9c2f8a8b55d7f7aedb88fe33eb20eb489a",
+    "weather.csv": "bca119d1cc9ed3e33955e502c1e8a6e463e4f2624f104935878ce4d71ce23137",
+    "weather.json": "9bf84175b80c26f620af24ca896110297ee3f9c4e41df326f503c201a3273c54",
+    "weather.svg": "f27b81954b768e82bcc133e9a515c5b8a26a1b634c5b7f20a79c44d069428d8b",
+    "aidcistrome-prjna1172690/provenance.json": "0f1ef5ee62a5181f437331172f01d3929edf441e90e5f72db5d041253c9f97c4",
+    "aidcistrome-prjna1172690/gene-view-aba-up.png": "10322459c9732e6df9331321473c5c2214644a7781e31629c010ba636ff746ac",
+    "aidcistrome-prjna1172690/pca-loadings-icb.png": "50d4bd315a6be403102b58804bb17bd942d72775f5b4cb200acaf793be3fc819",
+    "aidcistrome-prjna1172690/pca-loadings-aba.png": "aa75c833e4cf1b25f5f3280732d52e528f17ae2180e7139157779ac74005ce5a",
+    "aidcistrome-prjna1172690/pca-icb.png": "cb47cf4a51d52a0ad674588b467fac2593b5474d30a8ceac8e9425a5cb2804be",
+    "aidcistrome-prjna1172690/volcano-icb-zoom.png": "d3851981213197eb74be3c0257613be6677b81f00858e8ed7652f0cd1fb9c9e1",
+    "aidcistrome-prjna1172690/design.yaml": "cd0f4a0d0ca50f29b5d80795be51b6ad61d37dfe7b12acb699e880142f730005",
+    "aidcistrome-prjna1172690/volcano-aba.png": "34ad26ce3a3b63a3be7ac38e6ddee41bb6caffff9b85fa82af338ade924cae04",
+    "aidcistrome-prjna1172690/pca-aba.png": "ef24b1fba63a909690c64f676738974fc01d78c430cb248ca77afb665961129f",
+    "aidcistrome-prjna1172690/volcano-icb.png": "11e3e9bda7c71ac1d45db6b2e798572c04c9eb2526b625bcfe62f2bd045b3dce",
+    "aidcistrome-prjna1172690/gsea-aba-dot.png": "8893ea129a1d01f6c12c756378e2c80cb64aa4c172d5181e21a086f034761bf7",
+    "aidcistrome-prjna1172690/volcano-aba-zoom.png": "d2fc51a8e646c05e4676a9ca66fcafbe0733cc87ffd5ddccaa06eebf78e1c6c5",
+    "aidcistrome-prjna1172690/nes-landscape.png": "84d3961d117d7de467e9f779f134f86fbf4bf93cc2eb989655c7ea88dd0693d1",
+    "aidcistrome-prjna1172690/gsea-icb-dot.png": "fe4fad940e420a3f4200da5c8e73cd1bae0d497f4be25783344effd25fd1dfc3",
+    "aidcistrome-prjna1172690/gene-view-icb-up.png": "2f7e0b6851912c52186a075a28ffbe067ae247582918e2abf827052d57550942",
+    "aidfarm-synthetic.csv": "6db144c2ba2105c1cbd9149f88ac4dd913c655b928428d85a660a6b907d81e00",
+    "aidcistrome-prjna1172690/gene-percentiles.png": "6d5eca57ef8118ed78082d7ee02dc597c03915e41a1fa94be68c584e64b166dc",
+    "aidcistrome-prjna1172690/gsea-aba-significant.csv": "bc67934b69e39d28c3d7accac900310616f89ace422b8c31c182613023334f8e",
+    "aidcistrome-prjna1172690/gsea-icb-significant.csv": "4a601a239c60b377b449945c5881397dec7c9341a94f57617de10ae9c36bc86c",
+    "aidfarm-synthetic.svg": "c98a9815c4b1d93be57650e4016ea6526e6269b5f452f1f2b44de490f6887435",
+    "aidweather-cli-transcript.txt": "53a51417fa3d26705bafda8f87ae65ac8ec1bbe27593107204ae6c5d6719a2fa",
+    "aidweather-cli-poster.png": "5dde419aba528fbf106003572ea6d1dc0afbf0bd636d562049c3d5e9ad70b9e0",
+    "aidweather-cli.gif": "a85ed4b9a8af0d47d97aee9581d1526634e610c9e7e94f3f15e3e186037e4a1f",
+    "aidcistrome-prjna1172690/pca-all-groups.pdf": "d967c8907ceaea05d7712d19f78d83bb6d34f54a48e61d6e90bbddd76a10419f",
+    "aidcistrome-prjna1172690/pca-all-groups.png": "df423ff15715bae992d345801d460602c47993e6ec2c5da2d2612bd3886620fc",
+    "aid2go-network-card.svg": "50d9f9cf87cb073c7c28dc29dfc1bb74f2aaf9e20997bcf395dabb1aff6bd2dd",
+    "aid2go-ontology-card.svg": "0a2ca0bf2606ca92c3c87bb0ebfffd8a750ca0de1be1be3a09f874113332db5f",
+    "aid2go-test-card.svg": "1fe60cf158b31a0cd5433b480a847b90e3f64413687e2f6da84c74317cfac9b8",
+    "aidcistrome-prjna1172690/term-network-aba-nodes.csv": "e0b3e55992297d32264e2771c2664ab58d41418d4c8cfc19720b256878817c25",
+    "aidcistrome-prjna1172690/term-network-aba-edges.csv": "7ed9be58290a68d2cd4a737c2fd7280063986f59c42b9aa4d183a9b2aadae682",
+    "aidcistrome-prjna1172690/term-network-aba.html": "72a6048806883ffbadd5e3c001f5326df09d46209fa58f1fd7e7b96e53a2789b",
+    "aidcistrome-prjna1172690/motif-aba-up.png": "753fe61980055e6eff893083d8e2972bdd97ec7277b71332511246c500bb9d4d",
+    "aidcistrome-prjna1172690/motif-aba-up.tsv": "2baecc17e9d72898d9c95d78654b5303f5224c912f474aaf6ba804cc5cb6dc51",
+    "aidcistrome-prjna1172690/term-network-icb-nodes.csv": "e0623008c9ba799a261c41e1c478b315e0b2c7e3bf4787f7c132f87a93d7742d",
+    "aidcistrome-prjna1172690/term-network-icb-edges.csv": "c485e75ae62c74c0532110593725e5ad9487f2fb59fef70c5b8cb0782f83e3fa",
+    "aidcistrome-prjna1172690/term-network-icb.html": "bed12c80dc30e1adf15a2430b62fe5c7847605cb2956b9a957f05b9e32a44e70",
+    "aidcistrome-prjna1172690/motif-icb-up.png": "3c31bff1341325a879feac000b70f41af9bdc79c3f58492dad355a3043eee120",
+    "aidcistrome-prjna1172690/motif-icb-up.tsv": "0873f9723649fca08b005bd0b714ec265cfd02b6c19c0c84291c5f8bf58d1769",
+    "aidcistrome-prjna1172690/network-aba-focus.svg": "c377f8517d04e0553a3a1528dae1d2666e20b3308278c785d2f39bc9de6c0583",
+    "aidcistrome-prjna1172690/network-icb-focus.svg": "0088c237d03388e8dfd77d61ba7ffcff21c749a3f839cc88c8f3d7e13a9dbaac"
+  },
+  "aidcistrome_prjna1172690": {
+    "study": "PRJNA1172690 / GSE279431",
+    "organism": "Arabidopsis thaliana",
+    "design": "~treatment; three biological replicates each for 0.1% DMSO mock, 10 µM ABA, and 10 µM iCB; separately contrasted to mock",
+    "source": "AidCistrome saved analysis at /home/clever/aidbio/site/PRJNA1172690, snapshot 2026-10-26",
+    "publication": "Mar Bono et al. (2025), Molecular Plant 18(9):1526-1548, doi:10.1016/j.molp.2025.07.014",
+    "publication_url": "https://pubmed.ncbi.nlm.nih.gov/40714839/",
+    "geo_url": "https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE279431",
+    "rights": "Original AidCistrome figures from public sequencing data; not reproduced paper figures.",
+    "limitation": "No direct ABA-versus-iCB differential-expression contrast. The blind VST PCA includes all nine samples, with visible replicate spread; contrast-specific PCA panels were calculated separately and their axes are not interchangeable. GSEA is exploratory and FDR thresholds are shown on source figures.",
+    "source_files_sha256": {
+      "results/plots/10uM_ABA_vs_0_1_DMSO_mock/pca_condition_time.png": "ef24b1fba63a909690c64f676738974fc01d78c430cb248ca77afb665961129f",
+      "results/plots/10uM_iCB_vs_0_1_DMSO_mock/pca_condition_time.png": "cb47cf4a51d52a0ad674588b467fac2593b5474d30a8ceac8e9425a5cb2804be",
+      "results/plots/10uM_ABA_vs_0_1_DMSO_mock/pca_loadings_pc1.png": "aa75c833e4cf1b25f5f3280732d52e528f17ae2180e7139157779ac74005ce5a",
+      "results/plots/10uM_iCB_vs_0_1_DMSO_mock/pca_loadings_pc1.png": "50d4bd315a6be403102b58804bb17bd942d72775f5b4cb200acaf793be3fc819",
+      "results/plots/10uM_ABA_vs_0_1_DMSO_mock/volcano_10uM_ABA_vs_0_1_DMSO_mock.png": "34ad26ce3a3b63a3be7ac38e6ddee41bb6caffff9b85fa82af338ade924cae04",
+      "results/plots/10uM_iCB_vs_0_1_DMSO_mock/volcano_10uM_iCB_vs_0_1_DMSO_mock.png": "11e3e9bda7c71ac1d45db6b2e798572c04c9eb2526b625bcfe62f2bd045b3dce",
+      "results/plots/10uM_ABA_vs_0_1_DMSO_mock/volcano_10uM_ABA_vs_0_1_DMSO_mock_zoom.png": "d2fc51a8e646c05e4676a9ca66fcafbe0733cc87ffd5ddccaa06eebf78e1c6c5",
+      "results/plots/10uM_iCB_vs_0_1_DMSO_mock/volcano_10uM_iCB_vs_0_1_DMSO_mock_zoom.png": "d3851981213197eb74be3c0257613be6677b81f00858e8ed7652f0cd1fb9c9e1",
+      "results/gene_sets/gene_view_10uM_ABA_vs_0_1_DMSO_mock_up.png": "10322459c9732e6df9331321473c5c2214644a7781e31629c010ba636ff746ac",
+      "results/gene_sets/gene_view_10uM_iCB_vs_0_1_DMSO_mock_up.png": "2f7e0b6851912c52186a075a28ffbe067ae247582918e2abf827052d57550942",
+      "results/gsea/10uM_ABA_vs_0_1_DMSO_mock/10uM_ABA_vs_0_1_DMSO_mock_prerank_dotplot.png": "8893ea129a1d01f6c12c756378e2c80cb64aa4c172d5181e21a086f034761bf7",
+      "results/gsea/10uM_iCB_vs_0_1_DMSO_mock/10uM_iCB_vs_0_1_DMSO_mock_prerank_dotplot.png": "fe4fad940e420a3f4200da5c8e73cd1bae0d497f4be25783344effd25fd1dfc3",
+      "results/gsea/_compare/nes_landscape.png": "84d3961d117d7de467e9f779f134f86fbf4bf93cc2eb989655c7ea88dd0693d1",
+      "metadata/design.yaml": "cd0f4a0d0ca50f29b5d80795be51b6ad61d37dfe7b12acb699e880142f730005",
+      "results/gene_sets/percentile_heatmap.png": "6d5eca57ef8118ed78082d7ee02dc597c03915e41a1fa94be68c584e64b166dc",
+      "results/gsea/10uM_ABA_vs_0_1_DMSO_mock/10uM_ABA_vs_0_1_DMSO_mock_prerank_significant.csv": "bc67934b69e39d28c3d7accac900310616f89ace422b8c31c182613023334f8e",
+      "results/gsea/10uM_iCB_vs_0_1_DMSO_mock/10uM_iCB_vs_0_1_DMSO_mock_prerank_significant.csv": "4a601a239c60b377b449945c5881397dec7c9341a94f57617de10ae9c36bc86c",
+      "results/plots/pca_blind.pdf": "d967c8907ceaea05d7712d19f78d83bb6d34f54a48e61d6e90bbddd76a10419f",
+      "results/gsea/10uM_ABA_vs_0_1_DMSO_mock/term_network_nodes.csv": "e0b3e55992297d32264e2771c2664ab58d41418d4c8cfc19720b256878817c25",
+      "results/gsea/10uM_ABA_vs_0_1_DMSO_mock/term_network_edges.csv": "7ed9be58290a68d2cd4a737c2fd7280063986f59c42b9aa4d183a9b2aadae682",
+      "results/gsea/10uM_ABA_vs_0_1_DMSO_mock/term_network.html": "72a6048806883ffbadd5e3c001f5326df09d46209fa58f1fd7e7b96e53a2789b",
+      "results/promoters/10uM_ABA_vs_0_1_DMSO_mock_up/motif_enrichment.png": "753fe61980055e6eff893083d8e2972bdd97ec7277b71332511246c500bb9d4d",
+      "results/promoters/10uM_ABA_vs_0_1_DMSO_mock_up/motif_enrichment.tsv": "6ac26ef358975143230ca61caf483154d82e4900696571fcad5be1148b65f1ba",
+      "results/gsea/10uM_iCB_vs_0_1_DMSO_mock/term_network_nodes.csv": "e0623008c9ba799a261c41e1c478b315e0b2c7e3bf4787f7c132f87a93d7742d",
+      "results/gsea/10uM_iCB_vs_0_1_DMSO_mock/term_network_edges.csv": "c485e75ae62c74c0532110593725e5ad9487f2fb59fef70c5b8cb0782f83e3fa",
+      "results/gsea/10uM_iCB_vs_0_1_DMSO_mock/term_network.html": "bed12c80dc30e1adf15a2430b62fe5c7847605cb2956b9a957f05b9e32a44e70",
+      "results/promoters/10uM_iCB_vs_0_1_DMSO_mock_up/motif_enrichment.png": "3c31bff1341325a879feac000b70f41af9bdc79c3f58492dad355a3043eee120",
+      "results/promoters/10uM_iCB_vs_0_1_DMSO_mock_up/motif_enrichment.tsv": "81abb0a8d2dc421ce808c453afcd1dba03ee3ac8c162c251574943498d74ab3c"
+    },
+    "derived_media": {
+      "pca-all-groups.png": "Rendered at 160 dpi from saved results/plots/pca_blind.pdf with pdftoppm; plot data and labels were not altered.",
+      "network-aba-focus.svg": "Selected GO nodes and observed leading-edge Jaccard edges from the saved contrast-specific term_network_nodes.csv and term_network_edges.csv; no enrichment or links recomputed.",
+      "network-icb-focus.svg": "Selected GO nodes and observed leading-edge Jaccard edges from the saved contrast-specific term_network_nodes.csv and term_network_edges.csv; no enrichment or links recomputed.",
+      "motif-aba-up.tsv": "Saved motif enrichment table with motif_DB reduced from an internal absolute path to its library filename; all result values, rankings, and annotations are unchanged.",
+      "motif-icb-up.tsv": "Saved motif enrichment table with motif_DB reduced from an internal absolute path to its library filename; all result values, rankings, and annotations are unchanged."
+    }
+  },
+  "aidfarm_synthetic": {
+    "source": "AidFarm examples/data/generic_trial.csv",
+    "source_sha256": "6db144c2ba2105c1cbd9149f88ac4dd913c655b928428d85a660a6b907d81e00",
+    "label": "Synthetic demonstration data; 12 plot-level records; no agronomic inference."
+  },
+  "aidweather_cli_demo": {
+    "version": "aidweather 0.1.4 (installed local CLI, 2026-10-26)",
+    "commands": [
+      "aidweather params describe T2M",
+      "aidweather cache info"
+    ],
+    "recording": "Real offline command output excerpt; local cache path and longer description omitted. No request to NASA POWER.",
+    "source": "assets/examples/aidweather-cli-transcript.txt",
+    "rights": "AidBio rendering of its own CLI session"
+  },
+  "aid2go_card_previews": {
+    "derivation": "Display-only copies of saved Aid2GO SVGs with CSS theme variables replaced by fixed high-contrast palette colors. Network structure, GO relationships, test scores, labels, and evaluation wording are unchanged.",
+    "source_files": [
+      "aid2go-network.svg",
+      "aid2go-ontology.svg",
+      "aid2go-test.svg"
+    ],
+    "source_sha256": {
+      "aid2go-network.svg": "cd18cb0f98ca68f1f45c555d3d6fa69595aa0287f258090fb0ba4c78becddaa9",
+      "aid2go-ontology.svg": "85889a3b46de40554bd3fe674874ab50f2d54fb33c5af39403ba75ccd583777c",
+      "aid2go-test.svg": "67ae4ae41b2e500f990e09e1363e8c90df3a8e86e100ba4a3992c81e2cca07c2"
+    }
+  },
+  "aidweather_logo": {
+    "site_path": "assets/img/aidweather-logo-transparent.png",
+    "source": "AidWeather docs/img/aidweather-logo-transparent.png",
+    "sha256": "14b379bdfd8961e0143ae00520905cf6ca6da35c9a982281a0191193d7e2da33",
+    "rights": "AidWeather project logo"
+  }
+}

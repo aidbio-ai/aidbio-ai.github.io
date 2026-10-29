@@ -1,7 +1,19 @@
-<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-<url><loc>https://aidbio.org/</loc></url>
-<url><loc>https://aidbio.org/solutions.html</loc></url>
-<url><loc>https://aidbio.org/tools.html</loc></url>
-<url><loc>https://aidbio.org/aidweather.html</loc></url>
-<url><loc>https://aidbio.org/work.html</loc></url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url><loc>https://aidbio.org/</loc></url>
+  <url><loc>https://aidbio.org/solutions.html</loc></url>
+  <url><loc>https://aidbio.org/tools.html</loc></url>
+  <url><loc>https://aidbio.org/aidweather.html</loc></url>
+  <url><loc>https://aidbio.org/work.html</loc></url>
+  <url><loc>https://aidbio.org/about.html</loc></url>
+  <url><loc>https://aidbio.org/portfolio/index.html</loc></url>
+  <url><loc>https://aidbio.org/portfolio/pages/01-mechanism.html</loc></url>
+  <url><loc>https://aidbio.org/portfolio/pages/02-networks.html</loc></url>
+  <url><loc>https://aidbio.org/portfolio/pages/03-data.html</loc></url>
+  <url><loc>https://aidbio.org/portfolio/pages/04-models.html</loc></url>
+  <url><loc>https://aidbio.org/portfolio/pages/05-software.html</loc></url>
+  <url><loc>https://aidbio.org/portfolio/pages/06-aidbio.html</loc></url>
+  <url><loc>https://aidbio.org/portfolio/pages/07-portfolio.html</loc></url>
+  <url><loc>https://aidbio.org/aidcistrome-aba-icb.html</loc></url>
+  <url><loc>https://aidbio.org/arabidopsis.html</loc></url>
 </urlset>
