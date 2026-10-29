@@ -181,3 +181,5 @@ Full pending-site commit review — 29 October 2026:
 - Passing checks: chrome, application-card synchronization, site links/fragments/alt text/one h1/EN-PT keys (23 pages), scientific-example and report-export checksums/data consistency, six theme tests, JavaScript syntax, Python syntax and diff whitespace.
 - Browser evidence remains the typography review recorded above and the existing review files; no new browser audit was performed for this commit-only request. The existing marketing font-family override differs from the Inter guidance in AGENTS.md, as disclosed by the comparison; this commit preserves the supplied site edits.
 - Scope: commit and push the pending site tree on `new-look`; no DNS changes or application-analysis reruns.
+
+- Full staged-file whitespace check revealed upstream trailing spaces in two font licences and ten hash-pinned generated diagram HTML files. `.gitattributes` exempts only their trailing-space checks, preserving original bytes and provenance receipts. All ten diagram SHA-256 hashes match their delivery receipts. Other paths retain normal Git whitespace checks.
