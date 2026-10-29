@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Methods &amp; interpretation · AidWeather Report</title>
+<script>(function(){document.documentElement.setAttribute("data-theme",localStorage.getItem("ab-theme")||"light")})();</script>
+<link rel="stylesheet" href="assets/styles.css"><link rel="stylesheet" href="assets/dashboard.css"></head>
+<body><main class="db-methods-shell"><header class="db-methods-header">
+<a href="index.html" class="db-methods-back">← Back to dashboard</a><img src="assets/assets/aidbio-logo-transparent.png" alt="AidBio" class="db-methods-logo">
+<div><h1>How this report works</h1><p>A plain-language guide for agronomists and technical personnel.</p></div></header>
+<section class="ab-card db-methods-hero"><span class="db-methods-kicker">AidWeather Report · Methods</span>
+<h2>From weather observations to usable evidence</h2><p>This companion explains what was measured, how summaries were calculated, and what the results can—and cannot—support.</p><div class="db-methods-source">
+        <span class="db-provenance"><img src="assets/assets/aidweather-logo-transparent.png" alt="AidWeather" class="db-provenance__logo"><span aria-hidden="true">◈</span> NASA POWER via AidBio aidweather</span>
+        <a class="db-button db-button--secondary" href="https://github.com/matiollipt/aidweather"
+            target="_blank" rel="noopener"><span aria-hidden="true">◉</span>
+            Download & Install</a></div></section>
+<div class="db-methods-grid">
+<section class="ab-card db-methods-card"><h2>What this dashboard summarizes</h2><p>The report describes daily environmental conditions for <strong>Jan 01, 2010 – Jul 30, 2026</strong> at the configured coordinates. Available variables in this report include <strong>T2M, T2M_MAX, T2M_MIN, PRECTOTCORR, RH2M, WS10M, WD10M, ALLSKY_SFC_SW_DWN, ALLSKY_SFC_PAR_TOT, VPD, GDD, CUM_GDD</strong>.</p><p>Missing variables are omitted rather than estimated.</p></section>
+<section class="ab-card db-methods-card"><h2>Data retrieval</h2><p>NASA POWER observations are fetched through AidBio’s <code>aidweather</code> application. The report preserves the requested location, period, parameters, and retrieval result as the basis for every metric.</p><p><a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener">View aidweather on GitHub ↗</a></p></section>
+<section class="ab-card db-methods-card"><h2>Environmental metrics</h2><dl><dt>VPD</dt><dd>Atmospheric drying demand; higher values can indicate greater plant water stress.</dd><dt>Precipitation</dt><dd>Accumulated rainfall during the report period.</dd><dt>Humidity</dt><dd>Relative atmospheric moisture.</dd><dt>Soil wetness</dt><dd>NASA POWER modeled wetness indicators where available.</dd><dt>Stability score</dt><dd>A transparent composite of available stress signals, not a crop-yield prediction.</dd></dl></section>
+<section class="ab-card db-methods-card"><h2>Crop thermal accumulation</h2><p>Crop-specific GDD uses daily <code>max(((Tmax + Tmin) / 2) − base temperature, 0)</code> with literature-based representative defaults for soybean, sugarcane/RB867515, Arabica coffee/Mundo Novo, sweet orange/Folha Murcha, and Mombaça pasture.</p><p>Without planting, emergence, flowering, or cutting dates, GDD describes thermal conditions during this report period only. It does not indicate developmental stage, maturity, remaining heat units, or harvest timing.</p></section>
+<section class="ab-card db-methods-card"><h2>Historical comparison</h2><p>When a complete location-specific climatology is available, the current thermal accumulation is compared with the historical distribution for the same calendar period. Percentiles describe substantially below normal, below normal, near normal, above normal, or substantially above normal.</p><p>If climatology is unavailable, the report shows measured accumulation and daily rate only.</p></section>
+<section class="ab-card db-methods-card"><h2>AI summaries and limitations</h2><p>AI text is grounded in computed statistics supplied to the summary model. It is a concise interpretation aid, not an independent measurement. If the local model is unavailable, a deterministic fallback is used. Always review the underlying charts and data coverage.</p></section>
+<section class="ab-card db-methods-card"><h2>Location map</h2><p>The map uses MapLibre GL JS with OpenFreeMap’s OpenStreetMap-derived style. It displays the configured point and never invents a field boundary. If coordinates or map tiles are unavailable, the report retains the coordinates and shows a neutral fallback.</p><p class="db-map-attribution">© OpenStreetMap contributors · © OpenMapTiles · OpenFreeMap</p></section>
+<section class="ab-card db-methods-card"><h2>For technical interpretation</h2><p>Use the dashboard to identify patterns, compare the current period with a valid baseline, and decide what deserves field follow-up. Treat anomalies as departures from a reference distribution, not as automatic agronomic recommendations. Interpret every result alongside crop, soil, management, and observation context.</p></section>
+</div><footer class="db-footer"><span class="db-provenance" title="NASA POWER via AidBio aidweather">
+        <img src="assets/assets/aidweather-logo-transparent.png" alt="AidWeather" class="db-provenance__logo">
+        <span aria-hidden="true">◈</span> NASA POWER via AidBio aidweather
+        <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener"
+            aria-label="Open aidweather on GitHub">GitHub ↗</a></span> · <a href="index.html">Return to report</a></footer></main>
+<script>document.querySelectorAll("a").forEach(function(a){a.addEventListener("click",function(){localStorage.setItem("ab-theme",document.documentElement.getAttribute("data-theme"))})});</script>
+</body></html>

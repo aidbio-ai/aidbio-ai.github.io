@@ -1,1004 +1,117 @@
-<!DOCTYPE html>
-<html lang="en" data-theme="light">
-
+<!doctype html>
+<html lang="en" data-theme="dark">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title data-i18n="aw.meta.title">AidWeather | Agroclimatic &amp; Solar Data from NASA POWER — AidBio</title>
-  <meta name="description" data-i18n-attr="content:aw.meta.description"
-    content="AidWeather is an open-source Python library and CLI that turns NASA POWER weather and solar data into clean, cached, analysis-ready tables — for a point, a transect, or a whole region." />
-  <link rel="canonical" href="https://aidbio.org/aidweather" />
-
-  <meta property="og:type" content="website" />
-  <meta property="og:site_name" content="AidBio" />
-  <meta property="og:url" content="https://aidbio.org/aidweather" />
-  <meta property="og:title" content="AidWeather | Agroclimatic &amp; Solar Data from NASA POWER" />
-  <meta property="og:description"
-    content="Weather data infrastructure for agricultural science: reliable NASA POWER weather and solar data for Python, CLI workflows, and scientific applications." />
-  <meta property="og:image" content="https://raw.githubusercontent.com/matiollipt/aidweather/main/docs/img/aidweather-logo-transparent.png" />
-
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="AidWeather | Agroclimatic &amp; Solar Data from NASA POWER" />
-  <meta name="twitter:description"
-    content="Weather data infrastructure for agricultural science: reliable NASA POWER weather and solar data for Python, CLI workflows, and scientific applications." />
-  <meta name="twitter:image" content="https://raw.githubusercontent.com/matiollipt/aidweather/main/docs/img/aidweather-logo-transparent.png" />
-
-  <meta name="theme-color" content="#FBFCFE" />
-  <link rel="icon" type="image/png" href="assets/favicon.png" />
-  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png" />
-
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Baloo+2:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
-    rel="stylesheet" />
-
-  <script src="assets/js/theme.js"></script>
-
-  <link rel="stylesheet" href="assets/ds/styles.css" />
-  <link rel="stylesheet" href="assets/css/chrome.css" />
-
-  <style>
-    /* ============================================================
-       Page-specific tokens. Layout constants, header, footer, buttons
-       and type helpers live in assets/css/chrome.css (shared by every
-       page); brand tokens come from assets/ds/styles.css.
-       ============================================================ */
-    :root {
-      /* AidWeather-only gradients (not in the DS token set) */
-      --gradient-sky: linear-gradient(135deg, #1F95C4 0%, #2E4BDF 55%, #6E47D4 100%);
-      --gradient-solar: linear-gradient(120deg, #E8772E 0%, #EFA63A 100%);
-    }
-
-    /* Hero */
-    .hero-inner { position: relative; z-index: 1; }
-
-    .hero-logo {
-      height: 56px;
-      width: auto;
-      margin-bottom: var(--space-4);
-    }
-
-    .kicker-row {
-      display: flex;
-      align-items: center;
-      gap: var(--space-3);
-      flex-wrap: wrap;
-      margin-bottom: var(--space-4);
-    }
-
-    .back-link {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      font-size: 13px;
-      font-weight: 600;
-      color: var(--text-muted);
-    }
-
-    .back-link:hover { color: var(--accent); }
-
-    .badge-beta {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 11px;
-      border-radius: var(--radius-full);
-      background: var(--accent-warm-tint);
-      color: var(--accent-warm);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-    }
-
-    .badge-beta::before {
-      content: "";
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: currentColor;
-    }
-
-    .hero-stats {
-      display: grid;
-      grid-template-columns: repeat(4, minmax(0, 1fr));
-      gap: var(--space-4);
-      margin-top: var(--space-6);
-      padding-top: var(--space-5);
-      border-top: 1px solid var(--border-subtle);
-    }
-
-    .stat-val {
-      display: block;
-      margin-bottom: var(--space-1);
-      font-family: var(--font-data);
-      color: var(--text-strong);
-      font-size: 24px;
-      font-weight: 600;
-      letter-spacing: -0.02em;
-    }
-
-    .stat-label { color: var(--text-muted); font-size: 14px; }
-
-    /* Feature cards */
-    .feature-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-4);
-      margin-top: var(--space-5);
-    }
-
-    .feature-card {
-      padding: var(--space-5);
-      border-radius: var(--radius-lg);
-      background: var(--surface-card);
-      border: 1px solid var(--border-subtle);
-      box-shadow: var(--shadow-sm);
-      transition:
-        transform var(--dur-base) var(--ease-spring),
-        border-color var(--dur-fast) var(--ease-out),
-        box-shadow var(--dur-fast) var(--ease-out);
-    }
-
-    .feature-card:hover {
-      transform: translateY(-3px);
-      box-shadow: var(--shadow-lg);
-      border-color: var(--border-default);
-    }
-
-    .feature-icon {
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      width: 48px;
-      height: 48px;
-      border-radius: var(--radius-md);
-      color: #fff;
-      margin-bottom: var(--space-4);
-    }
-
-    .feature-card h3 {
-      margin: 0 0 var(--space-2);
-      font-family: var(--font-display);
-      font-size: 20px;
-      font-weight: 600;
-      line-height: 1.25;
-      color: var(--text-strong);
-    }
-
-    .feature-card p { margin: 0; color: var(--text-body); font-size: 14.5px; }
-
-    /* Steps / how it works */
-    .how-section {
-      border-top: 1px solid var(--border-subtle);
-      border-bottom: 1px solid var(--border-subtle);
-      background: var(--surface-sunken);
-    }
-
-    .scope-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-4);
-      margin-top: var(--space-5);
-    }
-
-    .scope-card {
-      padding: var(--space-5);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-subtle);
-      border-top: 3px solid var(--scope-accent, var(--accent));
-      background: var(--surface-card);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .scope-card h4 {
-      margin: 0 0 var(--space-2);
-      font-family: var(--font-display);
-      font-size: 19px;
-      font-weight: 600;
-      color: var(--text-strong);
-    }
-
-    .scope-card p { margin: 0; color: var(--text-body); font-size: 14px; }
-
-    .scope-tag {
-      display: inline-block;
-      margin-bottom: var(--space-3);
-      font-family: var(--font-data);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.08em;
-      text-transform: uppercase;
-      color: var(--scope-accent, var(--accent));
-    }
-
-    /* Code blocks */
-    .code-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-4);
-      margin-top: var(--space-5);
-    }
-
-    .code-block {
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      background: var(--surface-card);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-    }
-
-    .code-head {
-      display: flex;
-      align-items: center;
-      gap: var(--space-2);
-      padding: 11px var(--space-4);
-      border-bottom: 1px solid var(--border-subtle);
-      background: var(--surface-sunken);
-      font-family: var(--font-data);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.04em;
-      color: var(--text-muted);
-    }
-
-    .code-head .dot {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      flex: 0 0 auto;
-    }
-
-    .code-block pre {
-      margin: 0;
-      padding: var(--space-4);
-      overflow-x: auto;
-      font-family: var(--font-data);
-      font-size: 13px;
-      line-height: 1.65;
-      color: var(--text-body);
-      -webkit-overflow-scrolling: touch;
-    }
-
-    .code-block pre::-webkit-scrollbar { height: 8px; }
-    .code-block pre::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; }
-
-    .code-block .c-com { color: var(--text-faint); }
-    .code-block .c-key { color: var(--spectrum-violet); }
-    .code-block .c-str { color: var(--spectrum-emerald); }
-    .code-block .c-fn { color: var(--spectrum-teal); }
-    .code-block .c-num { color: var(--spectrum-coral); }
-    .code-block .c-flag { color: var(--spectrum-amber); }
-
-    .single-code { margin-top: var(--space-5); }
-    .single-code .code-block { max-width: 760px; }
-
-    /* Parameters */
-    .param-section {
-      border-top: 1px solid var(--border-subtle);
-      background: var(--surface-sunken);
-    }
-
-    .param-wrap {
-      margin-top: var(--space-5);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      background: var(--surface-card);
-      box-shadow: var(--shadow-sm);
-      overflow: hidden;
-    }
-
-    .param-scroll { overflow-x: auto; -webkit-overflow-scrolling: touch; }
-
-    table.param-table {
-      width: 100%;
-      border-collapse: collapse;
-      font-size: 13.5px;
-      min-width: 640px;
-    }
-
-    .param-table thead th {
-      text-align: left;
-      padding: 13px var(--space-4);
-      background: var(--surface-sunken);
-      color: var(--text-muted);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      border-bottom: 1px solid var(--border-default);
-      white-space: nowrap;
-    }
-
-    .param-table tbody td {
-      padding: 12px var(--space-4);
-      border-bottom: 1px solid var(--border-subtle);
-      color: var(--text-body);
-      vertical-align: top;
-    }
-
-    .param-table tbody tr:last-child td { border-bottom: 0; }
-    .param-table tbody tr:hover { background: var(--surface-sunken); }
-
-    .param-table code {
-      font-family: var(--font-data);
-      font-size: 12.5px;
-      font-weight: 600;
-      color: var(--accent);
-      background: var(--accent-tint);
-      padding: 2px 7px;
-      border-radius: var(--radius-sm);
-      white-space: nowrap;
-    }
-
-    .param-table .src-pill {
-      display: inline-block;
-      font-family: var(--font-data);
-      font-size: 11px;
-      color: var(--text-muted);
-      white-space: nowrap;
-    }
-
-    .group-tag {
-      display: inline-block;
-      padding: 2px 9px;
-      border-radius: var(--radius-full);
-      font-size: 11px;
-      font-weight: 600;
-      letter-spacing: 0.02em;
-    }
-
-    .group-met { background: rgba(46, 75, 223, 0.12); color: var(--spectrum-indigo); }
-    .group-sol { background: rgba(232, 119, 46, 0.14); color: var(--spectrum-coral); }
-    .group-soil { background: rgba(30, 204, 114, 0.14); color: var(--spectrum-emerald); }
-
-    /* Provenance callout */
-    .callout {
-      margin-top: var(--space-5);
-      display: grid;
-      grid-template-columns: 48px 1fr;
-      gap: var(--space-4);
-      padding: var(--space-4) var(--space-5);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border-subtle);
-      border-left: 3px solid var(--accent-warm);
-      background: var(--surface-card);
-      box-shadow: var(--shadow-sm);
-    }
-
-    .callout .callout-ico {
-      width: 40px;
-      height: 40px;
-      border-radius: var(--radius-md);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      background: var(--accent-warm-tint);
-      color: var(--accent-warm);
-    }
-
-    .callout h4 {
-      margin: 0 0 var(--space-1);
-      font-family: var(--font-display);
-      font-size: 18px;
-      font-weight: 600;
-      color: var(--text-strong);
-    }
-
-    .callout p { margin: 0; font-size: 14.5px; color: var(--text-body); }
-    .callout p + p { margin-top: var(--space-2); }
-
-    /* Guides list */
-    .guide-grid {
-      display: grid;
-      grid-template-columns: repeat(2, minmax(0, 1fr));
-      gap: var(--space-3);
-      margin-top: var(--space-5);
-    }
-
-    .guide-link {
-      display: flex;
-      justify-content: space-between;
-      gap: var(--space-3);
-      align-items: center;
-      padding: var(--space-3) var(--space-4);
-      border-radius: var(--radius-md);
-      border: 1px solid var(--border-subtle);
-      background: var(--surface-card);
-      color: var(--text-body);
-      font-weight: 500;
-      font-size: 15px;
-      box-shadow: var(--shadow-sm);
-      transition:
-        transform var(--dur-base) var(--ease-spring),
-        border-color var(--dur-fast) var(--ease-out),
-        color var(--dur-fast) var(--ease-out),
-        box-shadow var(--dur-fast) var(--ease-out);
-    }
-
-    .guide-link:hover {
-      transform: translateY(-2px);
-      color: var(--text-strong);
-      border-color: var(--border-default);
-      box-shadow: var(--shadow-md);
-    }
-
-    .guide-link .g-ico { color: var(--accent); flex: 0 0 auto; }
-    .guide-link .g-name { display: block; }
-    .guide-link .g-desc { display: block; font-size: 12.5px; color: var(--text-muted); font-weight: 400; margin-top: 2px; }
-
-    /* CTA */
-    .cta-section { text-align: center; }
-
-    .cta-card {
-      position: relative;
-      overflow: hidden;
-      padding: var(--space-6) var(--space-5);
-      border-radius: var(--radius-xl);
-      border: 1px solid var(--border-subtle);
-      background: var(--surface-card);
-      box-shadow: var(--shadow-lg);
-    }
-
-    .cta-card::before {
-      content: "";
-      position: absolute;
-      inset: 0 0 auto 0;
-      height: 4px;
-      background: var(--gradient-spectrum);
-    }
-
-    .cta-card .btn-row {
-      display: flex;
-      gap: var(--space-3);
-      justify-content: center;
-      flex-wrap: wrap;
-      margin-top: var(--space-5);
-    }
-
-    /* Responsive */
-    @media (max-width: 1024px) {
-      .feature-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .scope-grid { grid-template-columns: 1fr; }
-      .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    }
-
-    @media (max-width: 780px) {
-      .code-grid { grid-template-columns: 1fr; }
-      .guide-grid { grid-template-columns: 1fr; }
-      .feature-grid { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 560px) {
-      .hero-stats { grid-template-columns: 1fr; }
-      .callout { grid-template-columns: 1fr; }
-      .callout .callout-ico { display: none; }
-    }
-  </style>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>AidWeather — AidBio</title>
+  <meta name="description" content="AidWeather gets NASA POWER weather and solar data for any location. AidWeather Report turns it into a shareable site report.">
+  <link rel="canonical" href="https://aidbio.org/aidweather.html">
+  <meta property="og:title" content="AidWeather — AidBio">
+  <meta property="og:description" content="AidWeather gets NASA POWER weather and solar data for any location. AidWeather Report turns it into a shareable site report.">
+  <meta name="theme-color" content="#080B0E">
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('aidbio-theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/aidbio.css">
 </head>
-
-<body class="has-subnav">
-  <!--chrome:header active="projects" i18n="1"-->
-  <nav class="nav" id="site-nav">
-    <div class="container nav-inner">
-      <a href="index.html" class="brand" aria-label="AidBio home">
-        <img src="assets/aidbio-mark-light.webp" alt="" class="brand-mark mark-light" width="63" height="30" />
-        <img src="assets/aidbio-mark-dark.webp" alt="" class="brand-mark mark-dark" width="62" height="30" />
-        <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
-      </a>
-
-      <div class="nav-actions">
-        <ul class="nav-links" aria-label="Primary">
-          <li><a href="index.html#solutions" data-i18n="nav.solutions">Solutions</a></li>
-          <li><a href="index.html#projects" data-i18n="nav.projects" aria-current="page">Projects</a></li>
-          <li><a href="index.html#blog" data-i18n="nav.blog">Blog</a></li>
-          <li><a href="index.html#process" data-i18n="nav.process">Process</a></li>
-          <li class="has-submenu">
-            <a href="index.html#founder" data-i18n="nav.founder">Founder</a>
-            <ul class="submenu">
-              <li><a href="index.html#founder" data-i18n="nav.founderOverview">Founder overview</a></li>
-              <li><a href="portfolio/index.html" data-i18n="nav.founderStory">Portfolio: the founder story →</a></li>
-            </ul>
-          </li>
-          <li><a href="index.html#contact" class="nav-cta" data-i18n="nav.cta">Start a project</a></li>
-        </ul>
-
-        <div class="theme-switcher" role="group" aria-label="Theme preference">
-          <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
-          <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
-          <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
-        </div>
-        <div class="theme-switcher lang-switcher" role="group" aria-label="Language">
-          <button class="theme-option" type="button" data-lang-choice="en" aria-pressed="false">EN</button>
-          <button class="theme-option" type="button" data-lang-choice="pt" aria-pressed="false">PT</button>
-        </div>
-        <button class="menu-toggle" type="button" id="menu-toggle" aria-expanded="false" aria-controls="mobile-menu" aria-label="Open menu">
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true">
-            <line x1="4" y1="7" x2="20" y2="7" />
-            <line x1="4" y1="12" x2="20" y2="12" />
-            <line x1="4" y1="17" x2="20" y2="17" />
-          </svg>
-        </button>
-      </div>
-    </div>
-  </nav>
-
-  <div class="mobile-menu" id="mobile-menu">
-    <a href="index.html#solutions" data-i18n="nav.solutions">Solutions</a>
-    <a href="index.html#projects" data-i18n="nav.projects">Projects</a>
-    <a href="index.html#blog" data-i18n="nav.blog">Blog</a>
-    <a href="index.html#process" data-i18n="nav.process">Process</a>
-    <a href="index.html#founder" data-i18n="nav.founder">Founder</a>
-    <a href="portfolio/index.html" class="mobile-sublink" data-i18n="mobile.founderStory">↳ Portfolio: the founder story</a>
-    <a href="index.html#contact" class="btn btn-primary" data-i18n="nav.cta">Start a project</a>
-    <div class="theme-switcher" role="group" aria-label="Theme preference">
-      <button class="theme-option" type="button" data-theme-choice="system" aria-pressed="false">Auto</button>
-      <button class="theme-option" type="button" data-theme-choice="light" aria-pressed="false">Light</button>
-      <button class="theme-option" type="button" data-theme-choice="dark" aria-pressed="false">Dark</button>
-    </div>
-    <div class="theme-switcher lang-switcher" role="group" aria-label="Language">
-      <button class="theme-option" type="button" data-lang-choice="en" aria-pressed="false">EN</button>
-      <button class="theme-option" type="button" data-lang-choice="pt" aria-pressed="false">PT</button>
+<body>
+<!--chrome:header active="aidweather"-->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html" aria-label="AidBio home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
+    <ul class="nav-links">
+      <li><a href="solutions.html" data-nav="solutions">Solutions</a></li>
+      <li><a href="tools.html" data-nav="tools">Open source</a></li>
+      <li><a href="aidweather.html" data-nav="aidweather" aria-current="page">AidWeather</a></li>
+      <li><a href="work.html" data-nav="work">Work</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme">
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm nav-cta" href="index.html#contact">Talk to us</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
     </div>
   </div>
-  <!--/chrome:header-->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="solutions.html">Solutions</a>
+    <a href="tools.html">Open source</a>
+    <a href="aidweather.html">AidWeather</a>
+    <a href="work.html">Work</a>
+    <a class="btn btn-primary" href="index.html#contact">Talk to us</a>
+  </div>
+</header>
+<!--/chrome:header-->
 
-  <!--chrome:subnav set="aidweather"-->
-  <nav class="subnav" aria-label="AidWeather sections">
-    <div class="container subnav-inner">
-      <span class="subnav-label">AidWeather</span>
-      <div class="subnav-links">
-        <a href="#what" data-i18n="aw.sub.what">What it does</a>
-        <a href="#quickstart" data-i18n="aw.sub.quick">Quick start</a>
-        <a href="#install" data-i18n="aw.sub.install">Install</a>
-        <a href="#parameters" data-i18n="aw.sub.params">Parameters</a>
-        <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="subnav-ext">GitHub ↗</a>
+<main id="main">
+
+  <div class="container">
+    <header class="page-head">
+      <span class="eyebrow">AidWeather</span>
+      <h1 class="h1" style="font-size:clamp(2rem,5vw,3rem)">Weather history for any field, site or region.</h1>
+      <p class="lead">AidWeather is an open-source tool that gets clean, cached weather and solar data from NASA POWER. AidWeather Report builds on it to produce a single page that shows the climate of a place.</p>
+    </header>
+  </div>
+  <section class="section" style="padding-top:24px">
+    <div class="container"><div class="grid cols-2">
+      <article class="card card-amber"><div class="card-body">
+        <div class="card-top"><span class="tag tag-amber">Open source</span></div>
+        <h2 class="h2">AidWeather</h2>
+        <ul class="checks"><li><span>One point, a line of points or a region, daily or hourly.</span></li><li><span>Local cache, so you do not download the same data twice.</span></li><li><span>Use it from the command line or from Python.</span></li></ul>
+        <div class="cmd"><div class="code-line"><code>pip install aidweather</code><button class="copy-btn" type="button" data-copy="pip install aidweather">copy</button></div></div>
+        <p class="note">NASA POWER returns values for a grid cell, not for the exact coordinate, so nearby points can share one series. AidWeather documents the source and resolution of each parameter.</p>
+        <a class="link-arrow" href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener">GitHub <span>→</span></a>
+      </div></article>
+      <article class="card card-cyan" id="sample"><div class="card-body">
+        <div class="card-top"><span class="tag tag-cyan">AidWeather Report</span></div>
+        <h2 class="h2">A weather report for your site</h2>
+        <p class="body-sm">Give us a location and a period. You get a self-contained report with charts of temperature, rainfall, solar radiation and growing-degree days, plus a methods page that explains where each number comes from. It runs in any browser and can be printed.</p>
+        <p class="body-sm">AidWeather Report is not public yet. Below is a real sample for a coffee-growing area in Brazil, built from public NASA data.</p>
+        <div class="project-links"><a class="btn btn-primary btn-sm" href="sample-report/index.html" target="_blank" rel="noopener">Open the sample report</a><a class="btn btn-secondary btn-sm" href="sample-report/methods.html" target="_blank" rel="noopener">Methods page</a></div>
+      </div></article>
+    </div>
+    <figure class="figure" style="margin-top:32px"><img src="assets/img/aidweather-report-example.webp" alt="Screenshot of an AidWeather Report dashboard" loading="lazy" width="1200" height="700"><figcaption>AidWeather Report, sample output.</figcaption></figure>
+    </div>
+  </section>
+  <section class="section section-alt">
+    <div class="container container-narrow">
+      <div class="contact-card">
+        <h2 class="h1">Have a dataset and a question?</h2>
+        <p class="lead measure">Tell us what you are working on. A short email is enough to start.</p>
+        <a class="btn btn-primary" href="mailto:contact@aidbio.org">contact@aidbio.org</a>
       </div>
     </div>
-  </nav>
-  <!--/chrome:subnav-->
+  </section>
+</main>
 
-  <header class="hero">
-    <div class="container hero-inner">
-      <div class="reveal">
-        <img src="assets/aidweather-logo.png" alt="AidWeather logo" class="hero-logo" width="270" height="188" />
-        <div class="kicker-row">
-          <a href="index.html#projects" class="back-link" data-i18n="aw.hero.back">← Back to AidBio</a>
-          <span class="badge-beta" data-i18n="aw.hero.badge">Open source · Beta</span>
-        </div>
-        <span class="eyebrow" data-i18n="aw.hero.eyebrow">AidBio open tools · AidWeather</span>
-        <h1 class="heading-lg" data-i18n-html="aw.hero.h1">Weather and solar data, <span class="accent-italic">already cleaned up.</span></h1>
-        <p class="hero-desc" data-i18n-html="aw.hero.desc">
-          AidWeather is a small Python library and command-line tool that pulls agroclimatic and solar-radiation data straight from <strong>NASA's POWER API</strong> — and hands it back as tidy, analysis-ready tables for data analytics and machine-learning workflows. You ask for a place and a date range; it deals with the requests, retries, caching, and units so you don't have to.
-        </p>
-
-        <div class="hero-actions">
-          <a href="#install" class="btn btn-primary" data-i18n="aw.hero.ctaInstall">Install AidWeather</a>
-          <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="aw.hero.ctaGithub">View on GitHub ↗</a>
-        </div>
-      </div>
-
-      <div class="hero-stats reveal delay-2">
-        <div>
-          <span class="stat-val">18</span>
-          <span class="stat-label" data-i18n="aw.stats.s1">Weather, solar &amp; soil parameters, unit-validated</span>
-        </div>
-        <div>
-          <span class="stat-val" data-i18n="aw.stats.v2">3 shapes</span>
-          <span class="stat-label" data-i18n="aw.stats.s2">Point, transect, and regional sampling</span>
-        </div>
-        <div>
-          <span class="stat-val">SQLite</span>
-          <span class="stat-label" data-i18n="aw.stats.s3">Built-in caching, no repeat downloads</span>
-        </div>
-        <div>
-          <span class="stat-val">Python + CLI</span>
-          <span class="stat-label" data-i18n="aw.stats.s4">Use it in a notebook or the terminal</span>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <!-- What it does -->
-    <section id="what" class="section">
-      <div class="container">
-        <div class="reveal">
-          <span class="eyebrow" data-i18n="aw.what.eyebrow">What it does</span>
-          <h2 class="heading-md" data-i18n="aw.what.h2">The awkward parts of NASA POWER, handled for you.</h2>
-          <p class="text-lead" data-i18n="aw.what.lead">
-            NASA POWER is a free public dataset, but talking to it directly means building request URLs, handling timeouts and retries, checking payload shapes, and reconciling units and grids yourself. AidWeather does that work for you, so what you get back is a table you can start analyzing right away — in a statistical model, a machine-learning pipeline, or an AI-assisted workflow.
-          </p>
-        </div>
-
-        <div class="feature-grid">
-          <article class="feature-card reveal">
-            <div class="feature-icon" style="background: var(--gradient-sky);" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M17 18a4 4 0 0 0-.9-7.9A6 6 0 1 0 6 15" />
-                <path d="M8 18h9" />
-              </svg>
-            </div>
-            <h3 data-i18n="aw.f1.t">Direct NASA POWER access</h3>
-            <p data-i18n="aw.f1.b">Builds the request, handles timeouts and retries, and checks the response shape — so you call one method instead of writing that logic yourself.</p>
-          </article>
-
-          <article class="feature-card reveal delay-1">
-            <div class="feature-icon" style="background: var(--gradient-flora);" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 21s-7-5.5-7-11a7 7 0 0 1 14 0c0 5.5-7 11-7 11z" />
-                <circle cx="12" cy="10" r="2.4" />
-              </svg>
-            </div>
-            <h3 data-i18n="aw.f2.t">Point, path, or region</h3>
-            <p data-i18n="aw.f2.b">Fetch a single coordinate, sample along a 1D transect, or pull a 2D bounding box — with internal tuning so the spatial sampling stays accurate and consistent.</p>
-          </article>
-
-          <article class="feature-card reveal delay-2">
-            <div class="feature-icon" style="background: var(--gradient-iris);" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <ellipse cx="12" cy="6" rx="7" ry="3" />
-                <path d="M5 6v6c0 1.7 3.1 3 7 3s7-1.3 7-3V6" />
-                <path d="M5 12v6c0 1.7 3.1 3 7 3s7-1.3 7-3v-6" />
-              </svg>
-            </div>
-            <h3 data-i18n="aw.f3.t">Caching &amp; API compliance</h3>
-            <p data-i18n="aw.f3.b">A built-in SQLite cache means the same query is never downloaded twice — saving bandwidth and respecting NASA POWER's rate limits and usage policy.</p>
-          </article>
-
-          <article class="feature-card reveal">
-            <div class="feature-icon" style="background: var(--gradient-dawn);" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="8 6 3 12 8 18" />
-                <polyline points="16 6 21 12 16 18" />
-              </svg>
-            </div>
-            <h3 data-i18n="aw.f4.t">Python API + full CLI</h3>
-            <p data-i18n="aw.f4.b">Two ways in: a Python API for notebooks and scripts, and a command-line tool for quick, scriptable extractions.</p>
-          </article>
-
-          <article class="feature-card reveal delay-1">
-            <div class="feature-icon" style="background: var(--gradient-aurora);" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M12 9v4" />
-                <path d="M12 17h.01" />
-                <path d="M10.3 4.3 2.4 18a2 2 0 0 0 1.7 3h15.8a2 2 0 0 0 1.7-3L13.7 4.3a2 2 0 0 0-3.4 0z" />
-              </svg>
-            </div>
-            <h3 data-i18n="aw.f5.t">Clear errors &amp; logging</h3>
-            <p data-i18n="aw.f5.b">Logs what each query did, and raises specific error types with a plain-language message — instead of a raw stack trace.</p>
-          </article>
-
-          <article class="feature-card reveal delay-2">
-            <div class="feature-icon" style="background: var(--gradient-solar);" aria-hidden="true">
-              <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="4" />
-                <path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9l2.1 2.1M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1" />
-              </svg>
-            </div>
-            <h3 data-i18n="aw.f6.t">Weather, solar &amp; soil together</h3>
-            <p data-i18n="aw.f6.b">Temperature, humidity, wind, precipitation, pressure, solar irradiance / PAR, and soil wetness (surface, root-zone, profile) — the meteorological, energy, and soil-moisture variables agritech work usually needs, side by side.</p>
-          </article>
-        </div>
-      </div>
-    </section>
-
-    <!-- How you fetch -->
-    <section class="section how-section">
-      <div class="container">
-        <div class="reveal">
-          <span class="eyebrow warm" data-i18n="aw.scope.eyebrow">Three ways to sample space</span>
-          <h2 class="heading-md" data-i18n="aw.scope.h2">Match the query to the question.</h2>
-          <p class="text-lead" data-i18n="aw.scope.lead">
-            The same client fetches a single site, a line across a landscape, or a filled-in region — each respecting the native grid spacing of the parameters you ask for.
-          </p>
-        </div>
-
-        <div class="scope-grid reveal delay-1">
-          <div class="scope-card" style="--scope-accent: var(--spectrum-indigo);">
-            <span class="scope-tag">get_point_data</span>
-            <h4 data-i18n="aw.s1.t">A single point</h4>
-            <p data-i18n="aw.s1.b">One latitude/longitude and a date range returns a clean daily or hourly series for that site — the everyday case for a field, a station, or a trial plot.</p>
-          </div>
-          <div class="scope-card" style="--scope-accent: var(--spectrum-teal);">
-            <span class="scope-tag">get_transect_data</span>
-            <h4 data-i18n="aw.s2.t">Along a transect</h4>
-            <p data-i18n="aw.s2.b">Give a start and end coordinate and a spacing in kilometres; AidWeather samples evenly along the line, respecting each parameter's real grid resolution.</p>
-          </div>
-          <div class="scope-card" style="--scope-accent: var(--spectrum-emerald);">
-            <span class="scope-tag">fetch-regional</span>
-            <h4 data-i18n="aw.s3.t">Across a region</h4>
-            <p data-i18n="aw.s3.b">Define a bounding box (up to 4.5° × 4.5°) and pull a gridded field over the whole area — one parameter per request, cached like everything else.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Quick start -->
-    <section id="quickstart" class="section">
-      <div class="container">
-        <div class="reveal">
-          <span class="eyebrow" data-i18n="aw.quick.eyebrow">Quick start</span>
-          <h2 class="heading-md" data-i18n="aw.quick.h2">A few lines to your first dataset.</h2>
-          <p class="text-lead" data-i18n="aw.quick.lead">
-            Whether you live in notebooks or the terminal, getting a table of weather and solar data is a short trip.
-          </p>
-        </div>
-
-        <div class="code-grid">
-          <div class="code-block reveal">
-            <div class="code-head"><span class="dot" style="background: var(--spectrum-indigo);"></span> Python</div>
-<pre><span class="c-key">from</span> aidweather <span class="c-key">import</span> PowerClient, GeoCoordinate
-
-<span class="c-com"># Daily temporal resolution</span>
-client = <span class="c-fn">PowerClient</span>(temporal_api=<span class="c-str">"daily"</span>)
-
-<span class="c-com"># 1 · single-point weather + solar</span>
-df = client.<span class="c-fn">get_point_data</span>(
-    lat=<span class="c-num">-23.55</span>, lon=<span class="c-num">-46.63</span>,
-    start=<span class="c-str">"2023-01-01"</span>, end=<span class="c-str">"2023-01-31"</span>,
-    params=[<span class="c-str">"T2M"</span>, <span class="c-str">"ALLSKY_SFC_SW_DWN"</span>, <span class="c-str">"PRECTOTCORR"</span>],
-)
-<span class="c-fn">print</span>(df.head())
-
-<span class="c-com"># 2 · sample along a 1D transect</span>
-a = GeoCoordinate.<span class="c-fn">from_decimal</span>(<span class="c-num">-25.0</span>, <span class="c-num">-48.0</span>)
-b = GeoCoordinate.<span class="c-fn">from_decimal</span>(<span class="c-num">-20.0</span>, <span class="c-num">-48.0</span>)
-
-df_t = client.<span class="c-fn">get_transect_data</span>(
-    start_coord=a, end_coord=b,
-    start=<span class="c-str">"2023-01-01"</span>, end=<span class="c-str">"2023-01-07"</span>,
-    params=[<span class="c-str">"T2M"</span>], spacing_km=<span class="c-num">100.0</span>,
-)</pre>
-          </div>
-
-          <div class="code-block reveal delay-1">
-            <div class="code-head"><span class="dot" style="background: var(--spectrum-coral);"></span> <span data-i18n="aw.quick.cli">Command line</span></div>
-<pre><span class="c-com"># single-point data → CSV</span>
-aidweather fetch <span class="c-flag">--lat</span> <span class="c-num">-23.55</span> <span class="c-flag">--lon</span> <span class="c-num">-46.63</span> \
-    <span class="c-flag">--start</span> 2023-01-01 <span class="c-flag">--end</span> 2023-01-31 \
-    <span class="c-flag">--params</span> T2M,PRECTOTCORR <span class="c-flag">--output</span> point.csv
-
-<span class="c-com"># sample along a 1D transect</span>
-aidweather fetch-transect \
-    <span class="c-flag">--lat-start</span> <span class="c-num">-25.0</span> <span class="c-flag">--lon-start</span> <span class="c-num">-48.0</span> \
-    <span class="c-flag">--lat-end</span>   <span class="c-num">-20.0</span> <span class="c-flag">--lon-end</span>   <span class="c-num">-48.0</span> \
-    <span class="c-flag">--start</span> 2023-01-01 <span class="c-flag">--end</span> 2023-01-31 \
-    <span class="c-flag">--spacing-km</span> <span class="c-num">100.0</span>
-
-<span class="c-com"># regional box (max 4.5° × 4.5°, 1 param)</span>
-aidweather fetch-regional <span class="c-flag">--lat-min</span> <span class="c-num">-23.5</span> <span class="c-flag">--lat-max</span> <span class="c-num">-20.0</span> \
-    <span class="c-flag">--lon-min</span> <span class="c-num">-47.0</span> <span class="c-flag">--lon-max</span> <span class="c-num">-44.0</span> \
-    <span class="c-flag">--start</span> 2023-01-01 <span class="c-flag">--end</span> 2023-01-31 \
-    <span class="c-flag">--params</span> T2M <span class="c-flag">--output</span> regional.csv
-
-<span class="c-com"># inspect metadata &amp; local cache</span>
-aidweather params list <span class="c-flag">--group</span> all
-aidweather params describe T2M
-aidweather cache info</pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Install -->
-    <section id="install" class="section how-section">
-      <div class="container">
-        <div class="reveal">
-          <span class="eyebrow warm" data-i18n="aw.install.eyebrow">Installation</span>
-          <h2 class="heading-md" data-i18n="aw.install.h2">One command to get going.</h2>
-          <p class="text-lead" data-i18n-html="aw.install.lead">
-            AidWeather is published on <a href="https://pypi.org/project/aidweather/" target="_blank" rel="noopener">PyPI</a>. Use <span class="mono">pip</span> for the Python library, or <span class="mono">uv tool</span> to get the CLI as an isolated tool.
-          </p>
-        </div>
-
-        <div class="code-grid single-code-grid" style="margin-top: var(--space-5);">
-          <div class="code-block reveal">
-            <div class="code-head"><span class="dot" style="background: var(--spectrum-emerald);"></span> Python (pip)</div>
-<pre><span class="c-com"># install the library</span>
-pip install aidweather</pre>
-          </div>
-
-          <div class="code-block reveal delay-1">
-            <div class="code-head"><span class="dot" style="background: var(--spectrum-teal);"></span> CLI (uv tool)</div>
-<pre><span class="c-com"># install the CLI as an isolated tool</span>
-uv tool install aidweather</pre>
-          </div>
-        </div>
-
-        <div class="reveal delay-1" style="margin-top: var(--space-5);">
-          <p class="text-lead" style="margin: 0;" data-i18n="aw.install.source">
-            From source / development install:
-          </p>
-        </div>
-
-        <div class="code-grid single-code-grid" style="margin-top: var(--space-4);">
-          <div class="code-block reveal">
-            <div class="code-head"><span class="dot" style="background: var(--spectrum-violet);"></span> Unix / macOS</div>
-<pre><span class="c-com"># install script (clones from GitHub, adds dev tooling)</span>
-<span class="c-fn">curl</span> -fsSL https://raw.githubusercontent.com/\
-matiollipt/aidweather/main/install.sh | bash
-
-<span class="c-com"># …or latest unreleased main via uv tool</span>
-uv tool install \
-  git+https://github.com/matiollipt/aidweather.git</pre>
-          </div>
-
-          <div class="code-block reveal delay-1">
-            <div class="code-head"><span class="dot" style="background: var(--spectrum-magenta);"></span> Windows · PowerShell</div>
-<pre>&amp; ([scriptblock]::<span class="c-fn">Create</span>((irm https://raw\
-.githubusercontent.com/matiollipt/aidweather/\
-main/install.ps1))) <span class="c-flag">-Yes</span></pre>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Parameters -->
-    <section id="parameters" class="section param-section">
-      <div class="container">
-        <div class="reveal">
-          <span class="eyebrow" data-i18n="aw.params.eyebrow">Parameter catalogue</span>
-          <h2 class="heading-md" data-i18n="aw.params.h2">18 core parameters, with the grid facts built in.</h2>
-          <p class="text-lead" data-i18n="aw.params.lead">
-            Each parameter ships with metadata, unit validation, and its native NASA source-grid resolution — so you always know what a value means and where it came from. Weather, solar, and soil-moisture parameters are all daily; the three soil parameters (GWETTOP, GWETROOT, GWETPROF) aren't available at hourly resolution.
-          </p>
-        </div>
-
-        <div class="param-wrap reveal delay-1">
-          <div class="param-scroll">
-            <table class="param-table">
-              <thead>
-                <tr>
-                  <th data-i18n="aw.th1">Code</th>
-                  <th data-i18n="aw.th2">Parameter</th>
-                  <th data-i18n="aw.th3">Group</th>
-                  <th data-i18n="aw.th4">Source product</th>
-                  <th data-i18n="aw.th5">Native grid</th>
-                  <th data-i18n="aw.th6">Daily unit</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr><td><code>T2M</code></td><td data-i18n="aw.par.T2M">Temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>T2M_MAX</code></td><td data-i18n="aw.par.T2M_MAX">Maximum temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>T2M_MIN</code></td><td data-i18n="aw.par.T2M_MIN">Minimum temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>T2M_RANGE</code></td><td data-i18n="aw.par.T2M_RANGE">Diurnal temperature range at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>T2MWET</code></td><td data-i18n="aw.par.T2MWET">Wet-bulb temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>T2MDEW</code></td><td data-i18n="aw.par.T2MDEW">Dew-point temperature at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>TS</code></td><td data-i18n="aw.par.TS">Surface skin temperature</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>°C</td></tr>
-                <tr><td><code>RH2M</code></td><td data-i18n="aw.par.RH2M">Relative humidity at 2 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>%</td></tr>
-                <tr><td><code>PRECTOTCORR</code></td><td data-i18n="aw.par.PRECTOTCORR">Corrected total precipitation</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td data-i18n="aw.unit.mmday">mm/day</td></tr>
-                <tr><td><code>ALLSKY_SFC_SW_DWN</code></td><td data-i18n="aw.par.ALLSKY_SFC_SW_DWN">Surface shortwave downward irradiance</td><td><span class="group-tag group-sol">Solar</span></td><td><span class="src-pill">CERES SYN1deg / SRB</span></td><td class="mono">1.00° × 1.00°</td><td data-i18n="aw.unit.kwh">kWh/m²/day</td></tr>
-                <tr><td><code>ALLSKY_SFC_PAR_TOT</code></td><td data-i18n="aw.par.ALLSKY_SFC_PAR_TOT">Surface PAR total</td><td><span class="group-tag group-sol">Solar</span></td><td><span class="src-pill">CERES SYN1deg / SRB</span></td><td class="mono">1.00° × 1.00°</td><td data-i18n="aw.unit.mj">MJ/m²/day</td></tr>
-                <tr><td><code>WS10M</code></td><td data-i18n="aw.par.WS10M">Wind speed at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>m/s</td></tr>
-                <tr><td><code>WS10M_MAX</code></td><td data-i18n="aw.par.WS10M_MAX">Maximum wind speed at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>m/s</td></tr>
-                <tr><td><code>WD10M</code></td><td data-i18n="aw.par.WD10M">Wind direction at 10 m</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td data-i18n="aw.unit.deg">degrees</td></tr>
-                <tr><td><code>PS</code></td><td data-i18n="aw.par.PS">Surface pressure</td><td><span class="group-tag group-met">Meteo</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>kPa</td></tr>
-                <tr><td><code>GWETTOP</code></td><td data-i18n="aw.par.GWETTOP">Surface soil wetness</td><td><span class="group-tag group-soil" data-i18n="aw.group.soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
-                <tr><td><code>GWETROOT</code></td><td data-i18n="aw.par.GWETROOT">Root-zone soil wetness</td><td><span class="group-tag group-soil" data-i18n="aw.group.soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
-                <tr><td><code>GWETPROF</code></td><td data-i18n="aw.par.GWETPROF">Profile soil moisture</td><td><span class="group-tag group-soil" data-i18n="aw.group.soil">Soil</span></td><td><span class="src-pill">MERRA-2 / GEOS-IT</span></td><td class="mono">0.50° × 0.625°</td><td>0–1</td></tr>
-              </tbody>
-            </table>
-          </div>
-        </div>
-
-        <div class="callout reveal delay-1">
-          <div class="callout-ico" aria-hidden="true">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <circle cx="12" cy="12" r="9" />
-              <path d="M12 8h.01" /><path d="M11 12h1v4h1" />
-            </svg>
-          </div>
-          <div>
-            <h4 data-i18n="aw.callout.h">A coordinate is a grid cell, not a pinpoint</h4>
-            <p data-i18n="aw.callout.p1">
-              A coordinate you submit resolves to a source-product grid cell — it isn't a point measurement at your exact latitude and longitude. Different parameters come from different source products (MERRA-2 at 0.5° × 0.625°, CERES solar radiation at 1.0° × 1.0°), so nearby coordinates that map to the same cell return identical series.
-            </p>
-            <p data-i18n="aw.callout.p2">AidWeather keeps this provenance visible so your spatial interpretation stays honest.</p>
-          </div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Guides -->
-    <section class="section">
-      <div class="container">
-        <div class="reveal">
-          <span class="eyebrow" data-i18n="aw.guides.eyebrow">Documentation</span>
-          <h2 class="heading-md" data-i18n="aw.guides.h2">Guides for scientists and developers.</h2>
-          <p class="text-lead" data-i18n="aw.guides.lead">
-            The docs are split into focused guides — start with the user guide, dip into provenance and spatial interpretation when you need the details.
-          </p>
-        </div>
-
-        <div class="guide-grid reveal delay-1">
-          <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/user_guide.md" target="_blank" rel="noopener">
-            <span><span class="g-name" data-i18n="aw.g1.n">User Guide</span><span class="g-desc" data-i18n="aw.g1.d">Step-by-step intro to fetching &amp; analyzing data</span></span>
-            <span class="g-ico" aria-hidden="true">↗</span>
-          </a>
-          <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/spatial_interpretation.md" target="_blank" rel="noopener">
-            <span><span class="g-name" data-i18n="aw.g2.n">Spatial Interpretation</span><span class="g-desc" data-i18n="aw.g2.d">Grids, transects, regional boxes, station comparisons</span></span>
-            <span class="g-ico" aria-hidden="true">↗</span>
-          </a>
-          <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/parameter_provenance.md" target="_blank" rel="noopener">
-            <span><span class="g-name" data-i18n="aw.g3.n">Parameter &amp; Provenance</span><span class="g-desc" data-i18n="aw.g3.d">Catalogue, NASA source models, time standards</span></span>
-            <span class="g-ico" aria-hidden="true">↗</span>
-          </a>
-          <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/geo_reference.md" target="_blank" rel="noopener">
-            <span><span class="g-name" data-i18n="aw.g4.n">Geospatial Coordinates</span><span class="g-desc" data-i18n="aw.g4.d">DD, DDM, DMS notation and GeoCoordinate usage</span></span>
-            <span class="g-ico" aria-hidden="true">↗</span>
-          </a>
-          <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/api_reference.md" target="_blank" rel="noopener">
-            <span><span class="g-name" data-i18n="aw.g5.n">API Reference</span><span class="g-desc" data-i18n="aw.g5.d">PowerClient, GeoCoordinate, query functions</span></span>
-            <span class="g-ico" aria-hidden="true">↗</span>
-          </a>
-          <a class="guide-link" href="https://github.com/matiollipt/aidweather/blob/main/docs/config_reference.md" target="_blank" rel="noopener">
-            <span><span class="g-name" data-i18n="aw.g6.n">Configuration</span><span class="g-desc" data-i18n="aw.g6.d">Env vars, JSON config, SQLite cache settings</span></span>
-            <span class="g-ico" aria-hidden="true">↗</span>
-          </a>
-        </div>
-      </div>
-    </section>
-
-    <!-- Attribution / CTA -->
-    <section class="section cta-section">
-      <div class="container">
-        <div class="cta-card reveal">
-          <span class="eyebrow" style="justify-content:center;" data-i18n="aw.cta.eyebrow">Open access · Apache-2.0</span>
-          <h2 class="heading-md" data-i18n="aw.cta.h2">Free data, with the attribution it deserves.</h2>
-          <p class="text-lead" style="margin: 0 auto;" data-i18n="aw.cta.lead">
-            NASA POWER data are open access and free of charge. Work that uses AidWeather should cite the NASA POWER project and acknowledge the underlying MERRA-2 / GEOS-IT and CERES / FLASHFlux / SRB source products, per the NASA Earthdata Data Use and Attribution Policy.
-          </p>
-          <div class="btn-row">
-            <a href="https://pypi.org/project/aidweather/" target="_blank" rel="noopener" class="btn btn-primary" data-i18n="aw.cta.b1">View on PyPI ↗</a>
-            <a href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="aw.cta.b2">Explore the repository ↗</a>
-            <a href="https://power.larc.nasa.gov/" target="_blank" rel="noopener" class="btn btn-secondary" data-i18n="aw.cta.b3">NASA POWER project ↗</a>
-          </div>
-        </div>
-      </div>
-    </section>
-  </main>
-
-  <!--chrome:footer tagline="AidWeather · Apache-2.0 · Data © NASA POWER" taglinekey="aw.footer.tagline"-->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer-top">
-        <div>
-          <div class="footer-brand">
-            <img src="assets/aidbio-mark-dark.webp" alt="" aria-hidden="true" />
-            <span class="brand-word"><span class="brand-aid">Aid</span><span class="brand-bio">Bio</span></span>
-          </div>
-          <p class="footer-blurb" data-i18n="footer.blurb">Data science for life sciences, pharma, and agritech.</p>
-        </div>
-        <div class="footer-col">
-          <span class="footer-col-h" data-i18n="footer.exploreHeading">Explore</span>
-          <a href="index.html#solutions" data-i18n="nav.solutions">Solutions</a>
-          <a href="index.html#projects" data-i18n="nav.projects">Projects</a>
-          <a href="aidweather.html">AidWeather</a>
-          <a href="index.html#blog" data-i18n="nav.blog">Blog</a>
-          <a href="index.html#process" data-i18n="nav.process">Process</a>
-          <a href="index.html#founder" data-i18n="nav.founder">Founder</a>
-          <a href="portfolio/index.html" data-i18n="footer.founderStory">Founder story</a>
-          <a href="index.html#contact" data-i18n="footer.contact">Contact</a>
-        </div>
-        <div class="footer-col">
-          <span class="footer-col-h" data-i18n="footer.connectHeading">Connect</span>
-          <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
-          <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
-          <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
-        </div>
-      </div>
-      <div class="footer-bar">
-        <span data-i18n="footer.copyright">© 2026 AidBio. Built for the future of scientific decision-making.</span>
-        <span data-i18n="aw.footer.tagline">AidWeather · Apache-2.0 · Data © NASA POWER</span>
-      </div>
-    </div>
-  </footer>
-  <!--/chrome:footer-->
-
-  <script src="assets/js/i18n.js"></script>
-  <script src="assets/js/chrome.js"></script>
+<!--chrome:footer-->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span>· Data analytics for life sciences</span></div>
+    <nav aria-label="Footer">
+      <a href="solutions.html">Solutions</a>
+      <a href="tools.html">Open source</a>
+      <a href="work.html">Work</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+    </nav>
+    <div>© <span id="year">2026</span> AidBio</div>
+  </div>
+</footer>
+<!--/chrome:footer-->
+<script src="assets/js/app.js"></script>
 </body>
-
 </html>

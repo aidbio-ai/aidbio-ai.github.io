@@ -1,26 +1,14 @@
 # aidbio-ai.github.io
 
-AidBio's public site — AI & data science for life sciences and agritech.
+Public site for AidBio (aidbio.org): data analytics and machine learning for life sciences and agriculture.
+Plain static HTML on GitHub Pages, no build step beyond one small script.
 
-Static single-page site (GitHub Pages), no build step. Visual identity follows the
-[AidBio Design System](https://github.com/matiollipt/aidbio-design-system):
-spectrum infinity logomark, synesthetic 8-hue palette, Newsreader / Hanken Grotesk /
-IBM Plex Mono typography, Fibonacci spacing, and light + dark themes.
+- Pages: `index.html`, `solutions.html`, `tools.html`, `aidweather.html`, `work.html`, `404.html`
+- Styles: `assets/css/aidbio.css` (AidBio Design System v2.4 tokens, light and dark)
+- Scripts: `assets/js/app.js` (theme, menu, tabs, copy buttons), `assets/js/viz.js` (hero charts)
+- Fonts: self-hosted Inter and JetBrains Mono in `assets/fonts/`
+- `sample-report/`: a real AidWeather Report output, shown as a sample (loads Plotly/MapLibre from CDNs)
+- Header and footer live in `assets/partials/`; run `python3 scripts/build-chrome.py` after editing them
+  (`--check` verifies). Pages contain `<!--chrome:header-->` / `<!--chrome:footer-->` marker pairs.
 
-## Assets
-
-| File | Purpose |
-| --- | --- |
-| `assets/aidbio-mark-light.webp` | Infinity logomark for light surfaces (nav, hero, brand) |
-| `assets/aidbio-mark-dark.webp` | Infinity logomark for dark surfaces (dark theme, footer) |
-| `assets/favicon.png` | Favicon derived from the logomark |
-| `assets/apple-touch-icon.png` | iOS home-screen icon (opaque cloud background) |
-
-Marks were derived from the design system's `project/assets/aidbio-logo-{light,dark}.png`
-(background removed, trimmed, downscaled, converted to WebP).
-
-## Shared chrome
-
-The header, footer and local sub-nav are generated from `assets/partials/` into every page by
-`python3 scripts/sync-chrome.py` (run with `--check` in CI or before committing). Shared styles and scripts:
-`assets/css/chrome.css`, `assets/js/theme.js`, `assets/js/chrome.js`. See `CLAUDE.md` for the page contract.
+Run locally: `python3 -m http.server 8000`. The previous site is kept outside the repo in `aidbio-ai.github.io-backup-2026-10-14/`.

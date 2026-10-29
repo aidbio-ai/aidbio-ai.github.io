@@ -1,0 +1,124 @@
+/* ============================================================
+   AidBio · COLOR SYSTEM
+   Core UI accent colors (blue/orange/ink/cloud), plus the
+   synesthetic "data spectrum": each hue maps to a data
+   dimension. The primary logomark now carries the full
+   spectrum + leaf/molecule motif — these core colors remain
+   the system's UI accents (buttons, links, focus states).
+   ============================================================ */
+:root {
+  /* ---- Core UI accents (independent of the full-spectrum logomark) ---- */
+  --brand-blue:    #2E4BDF;  /* "AID" · primary accent */
+  --brand-orange:  #E8772E;  /* "BIO" · warm accent */
+  --brand-ink:     #28303F;  /* graphite navy · text */
+  --brand-cloud:   #F4F6FA;  /* light surface */
+
+  --brand-blue-press:   #2138C2;
+  --brand-blue-tint:    #EAEDFC;
+  --brand-orange-press: #CF6320;
+  --brand-orange-tint:  #FCEEE2;
+
+  /* ---- Synesthetic data spectrum (cyclic; chart series order) ---- */
+  --spectrum-indigo:  #2E4BDF;
+  --spectrum-violet:  #6E47D4;
+  --spectrum-magenta: #C13E9D;
+  --spectrum-coral:   #E8772E;
+  --spectrum-amber:   #EFA63A;
+  --spectrum-lime:    #8DB23C;
+  --spectrum-emerald: #1FA07C;
+  --spectrum-teal:    #1F95C4;
+
+  /* ---- Neutral ink ramp (cool, navy-tinted) ---- */
+  --ink-950: #12161F;
+  --ink-900: #1B2230;
+  --ink-800: #28303F;
+  --ink-700: #3A4355;
+  --ink-600: #515B6E;
+  --ink-500: #6B7588;
+  --ink-400: #8E97A8;
+  --ink-300: #B4BCC9;
+  --ink-200: #D6DBE3;
+  --ink-100: #E9ECF1;
+  --ink-50:  #F4F6FA;
+  --white:   #FFFFFF;
+
+  /* ---- Semantic status ---- */
+  --positive: #1FA07C;
+  --positive-tint: #E4F4EE;
+  --caution:  #EFA63A;
+  --caution-tint: #FCF1DD;
+  --critical: #D8456A;
+  --critical-tint: #FBE7EC;
+  --info:     #2E4BDF;
+  --info-tint: #EAEDFC;
+
+  /* ============ SEMANTIC ALIASES · LIGHT (default) ============ */
+  --surface-base:    #FBFCFE;  /* page */
+  --surface-card:    #FFFFFF;
+  --surface-sunken:  #F4F6FA;
+  --surface-inset:   #EEF1F7;
+  --surface-overlay: rgba(27, 34, 48, 0.45);
+
+  --text-strong:  var(--ink-900);
+  --text-body:    var(--ink-700);
+  --text-muted:   var(--ink-500);
+  --text-faint:   var(--ink-400);
+  --text-on-accent: #FFFFFF;
+  --text-link:    var(--brand-blue);
+
+  --border-subtle: var(--ink-100);
+  --border-default: var(--ink-200);
+  --border-strong:  var(--ink-300);
+
+  --accent:        var(--brand-blue);
+  --accent-press:  var(--brand-blue-press);
+  --accent-tint:   var(--brand-blue-tint);
+  --accent-warm:   var(--brand-orange);
+  --accent-warm-tint: var(--brand-orange-tint);
+
+  --focus-ring: 0 0 0 3px rgba(46, 75, 223, 0.32);
+}
+
+/* ============ SEMANTIC ALIASES · DARK ============ */
+:root[data-theme="dark"],
+.theme-dark {
+  --surface-base:    #0E1219;
+  --surface-card:    #181E29;
+  --surface-sunken:  #12161F;
+  --surface-inset:   #1F2734;
+  --surface-overlay: rgba(6, 9, 14, 0.62);
+
+  --text-strong:  #F4F6FA;
+  --text-body:    #C4CCD9;
+  --text-muted:   #8E97A8;
+  --text-faint:   #6B7588;
+  --text-on-accent: #FFFFFF;
+  --text-link:    #8FA2F2;
+
+  --border-subtle: #232B39;
+  --border-default: #2C3545;
+  --border-strong:  #3A4557;
+
+  --accent:        #5C74EC;
+  --accent-press:  #485FE0;
+  --accent-tint:   #1C2540;
+  --accent-warm:   #F08A45;
+  --accent-warm-tint: #34261C;
+
+  /* lift spectrum a touch for dark surfaces */
+  --spectrum-indigo:  #5C74EC;
+  --spectrum-violet:  #8E6CEA;
+  --spectrum-magenta: #DB64B6;
+  --spectrum-coral:   #F08A45;
+  --spectrum-amber:   #F2B658;
+  --spectrum-lime:    #A6C957;
+  --spectrum-emerald: #34BC95;
+  --spectrum-teal:    #41AEDB;
+
+  --positive-tint: #152A24;
+  --caution-tint:  #2E2616;
+  --critical-tint: #2E1820;
+  --info-tint:     #1C2540;
+
+  --focus-ring: 0 0 0 3px rgba(92, 116, 236, 0.40);
+}

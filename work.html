@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Work — AidBio</title>
+  <meta name="description" content="Selected work: protein interaction prediction with gPPIpred.">
+  <link rel="canonical" href="https://aidbio.org/work.html">
+  <meta property="og:title" content="Work — AidBio">
+  <meta property="og:description" content="Selected work: protein interaction prediction with gPPIpred.">
+  <meta name="theme-color" content="#080B0E">
+  <script>
+    (function () {
+      var t = null;
+      try { t = localStorage.getItem('aidbio-theme'); } catch (e) {}
+      if (t !== 'light' && t !== 'dark') t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', t);
+    })();
+  </script>
+  <link rel="icon" href="assets/img/favicon.png" type="image/png">
+  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+  <link rel="stylesheet" href="assets/css/aidbio.css">
+</head>
+<body>
+<!--chrome:header active="work"-->
+<a class="skip-link" href="#main">Skip to content</a>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html" aria-label="AidBio home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
+    <ul class="nav-links">
+      <li><a href="solutions.html" data-nav="solutions">Solutions</a></li>
+      <li><a href="tools.html" data-nav="tools">Open source</a></li>
+      <li><a href="aidweather.html" data-nav="aidweather">AidWeather</a></li>
+      <li><a href="work.html" data-nav="work" aria-current="page">Work</a></li>
+    </ul>
+    <div class="nav-actions">
+      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme">
+        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
+        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
+      </button>
+      <a class="btn btn-primary btn-sm nav-cta" href="index.html#contact">Talk to us</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+      </button>
+    </div>
+  </div>
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="solutions.html">Solutions</a>
+    <a href="tools.html">Open source</a>
+    <a href="aidweather.html">AidWeather</a>
+    <a href="work.html">Work</a>
+    <a class="btn btn-primary" href="index.html#contact">Talk to us</a>
+  </div>
+</header>
+<!--/chrome:header-->
+
+<main id="main">
+
+  <div class="container">
+    <header class="page-head">
+      <span class="eyebrow">Selected work</span>
+      <h1 class="h1" style="font-size:clamp(2rem,5vw,3rem)">Projects across the lab and the field.</h1>
+      <p class="lead">A selection of our work. More projects will be added.</p>
+    </header>
+
+    <article class="project" id="gppipred">
+      <div class="project-copy">
+        <div class="tags"><span class="tag tag-violet">Paper and tool · 2026</span><span class="tag">Protein interactions</span></div>
+        <h2 class="h1">gPPIpred: predicting protein interactions</h2>
+        <p class="body-sm">Proteins work by binding to each other, but testing which ones do is slow and costly in the lab. gPPIpred predicts interactions from protein structure, and points to the residues likely to be involved.</p>
+        <ul>
+          <li>Each protein is turned into a graph that keeps its 3D shape and chemical properties.</li>
+          <li>A graph neural network with attention scores the pair and highlights key residues, so predictions can be inspected.</li>
+          <li>Trained and validated on curated structural datasets, with a pipeline for large-scale screening.</li>
+        </ul>
+        <div class="project-links"><a class="link-arrow" href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13109786/" target="_blank" rel="noopener">Read the paper <span>→</span></a></div>
+        <p class="note">Matiolli CC, Marques J, Abreu IA. <em>gPPIpred: A User-Friendly PPI Predictor Based on Protein Molecular Graphs.</em> 2026.</p>
+      </div>
+      <div class="card card-violet"><div class="card-body">
+        <span class="eyebrow">How it works</span>
+        <ol class="body-sm" style="margin:0;padding-left:1.1rem;display:grid;gap:8px"><li>Fetch the two protein structures.</li><li>Build a molecular graph for each.</li><li>Score the pair with a graph neural network.</li><li>Report the prediction and the residues behind it.</li></ol>
+      </div></div>
+    </article>
+
+  </div>
+  <section class="section section-alt">
+    <div class="container container-narrow">
+      <div class="contact-card">
+        <h2 class="h1">Have a dataset and a question?</h2>
+        <p class="lead measure">Tell us what you are working on. A short email is enough to start.</p>
+        <a class="btn btn-primary" href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!--chrome:footer-->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span>· Data analytics for life sciences</span></div>
+    <nav aria-label="Footer">
+      <a href="solutions.html">Solutions</a>
+      <a href="tools.html">Open source</a>
+      <a href="work.html">Work</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
+      <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
+      <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+    </nav>
+    <div>© <span id="year">2026</span> AidBio</div>
+  </div>
+</footer>
+<!--/chrome:footer-->
+<script src="assets/js/app.js"></script>
+</body>
+</html>
