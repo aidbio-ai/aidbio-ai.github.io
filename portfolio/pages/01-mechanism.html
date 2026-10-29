@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>01 · Learn the mechanism | AidBio</title><meta name="description" content="Chapter 1 of the AidBio founder story: how one regulatory protein, bZIP63, showed that signals interact rather than act alone.">
+<link rel="canonical" href="https://aidbio.org/portfolio/pages/01-mechanism.html"><meta property="og:title" content="01 · Learn the mechanism | AidBio"><meta property="og:description" content="Chapter 1 of the AidBio founder story: how one regulatory protein, bZIP63, showed that signals interact rather than act alone."><meta property="og:url" content="https://aidbio.org/portfolio/pages/01-mechanism.html">
+<meta name="theme-color" content="#F8FAFC"><script src="../../assets/js/theme.js"></script>
+<link rel="icon" href="../../assets/img/favicon.png"><link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/css/aidbio.css"><link rel="stylesheet" href="../../portfolio/assets/site.css">
+</head><body class="has-subnav">
+<!--chrome:header active="about"-->
+<a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="../../index.html" aria-label="AidBio home" data-i18n-attr="aria-label:nav.home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="../../assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="../../assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
+    <nav class="nav-links" aria-label="Main navigation" data-i18n-attr="aria-label:nav.main">
+      <a href="../../solutions.html" data-nav="solutions" data-i18n="nav.capabilities">Capabilities</a>
+      <a href="../../work.html" data-nav="work" data-i18n="nav.work">Work</a>
+      <a href="../../tools.html" data-nav="tools" data-i18n="nav.software">Software</a>
+      <a href="../../about.html" data-nav="about" aria-current="page" data-i18n="nav.about">About</a>
+    </nav>
+    <div class="nav-actions">
+      <label class="theme-control"><span class="sr-only" data-i18n="theme.label">Theme preference</span><select data-theme-select aria-label="Theme preference" data-i18n-attr="aria-label:theme.label"><option value="system" data-i18n="theme.auto">Auto</option><option value="light" data-i18n="theme.light">Light</option><option value="dark" data-i18n="theme.dark">Dark</option></select></label>
+      <div class="desktop-language"></div>
+      <a class="btn btn-primary btn-sm nav-cta" href="../../index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" data-i18n-attr="aria-label:nav.menu" aria-expanded="false" aria-controls="mobileMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" data-i18n-attr="aria-label:nav.mobile">
+    <a href="../../solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="../../work.html" data-i18n="nav.work">Work</a><a href="../../tools.html" data-i18n="nav.software">Software</a><a href="../../about.html" data-i18n="nav.about">About</a>
+    <div class="mobile-language"></div>
+    <a class="btn btn-primary" href="../../index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+  </nav>
+</header>
+<!--/chrome:header-->
+<!--chrome:subnav-->
+<nav class="subnav" aria-label="Founder story chapters"><div class="container"><a href="../../portfolio/index.html">The story</a><a href="../../portfolio/pages/01-mechanism.html" aria-current="page">01 Mechanism</a><a href="../../portfolio/pages/02-networks.html">02 Networks</a><a href="../../portfolio/pages/03-data.html">03 Data</a><a href="../../portfolio/pages/04-models.html">04 Models</a><a href="../../portfolio/pages/05-software.html">05 Software</a><a href="../../portfolio/pages/06-aidbio.html">06 AidBio</a><a href="../../portfolio/pages/07-portfolio.html">Applied work</a></div></nav>
+<!--/chrome:subnav-->
+<main id="main">
+<section class="hero">
+<div class="container">
+<div class="eyebrow">Chapter 01 · Learn the mechanism</div>
+<h1>Before prediction, understand regulation.</h1>
+<p class="hero-desc">The founder story begins with a small lab plant, Arabidopsis, and one regulatory protein called <strong>bZIP63</strong> — a molecular "switch" that turns genes on or off. The real lesson wasn't about that one protein; it was about how to think about signals that interact rather than act alone.</p>
+</div>
+</section>
+<section class="section section-alt">
+<div class="container grid-2">
+<div>
+<div class="eyebrow">Doctoral research · UNICAMP</div>
+<h2>A gene is rarely an isolated <span class="accent-spectrum">switch</span>.</h2>
+<p>A 2011 study in <em>Plant Physiology</em> showed that AtbZIP63 reads two signals at once — how much sugar (glucose) is available, and how much of the stress hormone ABA is present — and combines them into a single decision about which genes to turn on. In plain terms: the plant's energy status and its stress alarm aren't separate conversations. They converge on the same switch.</p>
+<p>That's the template this whole story follows, later translated into code: find the inputs, find the point where they combine, find what comes out the other end, and find the conditions where that relationship changes.</p>
+<div class="takeaway"><b>Tutorial takeaway.</b> Ask six questions: What are the variables? Which interact? What is directly measured? What is inferred? What is plausibly causal? What could confound the result?</div>
+</div>
+<div class="figure figure-media"><img src="../assets/mechanism.svg" alt="Glucose and ABA converge on bZIP63, leading to changes in gene expression"></div>
+</div>
+</section>
+
+<section class="section">
+<div class="container">
+<div class="section-title">
+<div class="eyebrow">Primary evidence</div>
+<h2>From metabolic state to the plant <span class="accent-spectrum">clock</span></h2>
+</div>
+<div class="grid-2">
+<article class="paper-card">
+<div class="paper-image">
+<img src="../assets/figures/frank2018-graphical-abstract.png" alt="Graphical abstract from Frank et al. 2018 showing sugar-dependent circadian entrainment through bZIP63 and PRR7"></div>
+<div class="paper-body">
+<div class="meta">CURRENT BIOLOGY · 2018 · CC BY 4.0</div>
+<h3>Circadian entrainment by sugars</h3>
+<p>This study showed that bZIP63 also controls a clock gene called <em>PRR7</em> — so sugar levels in the plant can nudge its internal circadian clock earlier or later, through a short chain of energy-sensing signals (a sugar-derived molecule called Tre6P, an energy-sensing enzyme called SnRK1/KIN10, and bZIP63 itself).</p>
+<p class="citation">Frank A, Matiolli CC†, et al. <em>Circadian Entrainment in Arabidopsis by the Sugar-Responsive Transcription Factor bZIP63.</em> Current Biology 28, 2597–2606.e6 (2018). DOI: 10.1016/j.cub.2018.05.092.</p>
+<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6108399/">Open article →</a></div>
+</article>
+<div>
+<h3>Why this matters to the AidBio story</h3>
+<p>A single molecular switch turned out to be one link in a longer chain, one that connects sunlight to plant growth:</p>
+<div class="chain">
+<div><b>1</b> light drives photosynthesis</div>
+<div><b>2</b> photosynthesis changes sugar availability</div>
+<div><b>3</b> sugar/energy signalling regulates bZIP63</div>
+<div><b>4</b> bZIP63 regulates PRR7</div>
+<div><b>5</b> the circadian phase changes</div>
+<div><b>6</b> timing affects metabolism and growth</div>
+</div>
+<p>The problem now spans molecules, timing and a visible outcome all at once — exactly the kind of many-layered picture that eventually needs a computer, not a whiteboard, to keep straight.</p>
+</div>
+</div>
+</div>
+</section>
+
+<section class="section section-alt">
+<div class="container">
+<div class="grid-2">
+<div>
+<h2>The same mechanism, but now it shows up in how <span class="accent-spectrum">big</span> the plant gets.</h2>
+<p>A 2021 study in <em>New Phytologist</em> found that plants missing working bZIP63 mismanage their overnight starch reserves and grow poorly when days are short. Their leaf area and dry weight both dropped substantially — turning an invisible timing problem into a plant that is visibly smaller than it should be.</p>
+</div>
+<article class="paper-card">
+<div class="paper-image">
+<img src="../assets/figures/viana2021-fig5.png" alt="Model figure from Viana et al. 2021 showing bZIP63 linking the circadian clock, sugar signalling and starch degradation rate to plant growth"></div>
+<div class="paper-body">
+<div class="meta">NEW PHYTOLOGIST · 2021 · CC BY</div>
+<h3>bZIP63 modulates plant growth</h3>
+<p>Energy status ↔ internal clock ↔ overnight starch use ↔ how much the plant grows.</p>
+<p class="citation">Viana AJC†, Matiolli CC†, et al. <em>The sugar-responsive circadian clock regulator bZIP63 modulates plant growth.</em> New Phytologist 231, 1875–1889 (2021). DOI: 10.1111/nph.17518.</p>
+<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC9292441/">Open article →</a></div>
+</article>
+</div>
+</div>
+</section>
+</main>
+<!--chrome:footer-->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="../../assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="../../assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span data-i18n="footer.tagline">Scientific data, models, and software.</span></div>
+    <nav aria-label="Footer" data-i18n-attr="aria-label:footer.label">
+      <a href="../../solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="../../work.html" data-i18n="nav.work">Work</a><a href="../../tools.html" data-i18n="nav.software">Software</a><a href="../../about.html" data-i18n="nav.about">About</a><a href="../../portfolio/index.html" data-i18n="footer.story">Founder story</a><a href="https://github.com/matiollipt" rel="noopener">GitHub</a><a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+    </nav>
+    <div>© <span id="year">2026</span> AidBio</div>
+  </div>
+</footer>
+<!--/chrome:footer-->
+<script src="../../assets/js/app.js"></script>
+</body></html>

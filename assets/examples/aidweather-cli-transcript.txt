@@ -1,0 +1,11 @@
+$ aidweather params describe T2M
+Average Air Temperature at 2 m (°C): Modeled daily average air temperature.
+Data is obtained from the NASA MERRA-2 assimilation model
+(1981-Present, ~0.5°x0.625° resolution).
+
+$ aidweather cache info
+Cache Enabled: True
+Cached Entries: 75
+
+Recorded from the installed AidWeather CLI on 2026-10-26.
+This is an excerpt: the local cache path and longer description are omitted.

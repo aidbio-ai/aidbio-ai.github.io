@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "dataflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidcistrome-pt/candidate.json",
+    "sha256": "a0a5603424eb392b0362dc8be7aef32017def021eab0da8cae76537ae397ca57",
+    "bytes": 35087
+  },
+  "artifact": {
+    "path": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidcistrome-pt/diagram.html",
+    "sha256": "761d6bcd2550ed47e7561fcbb583020c9de4555abd2fddd43e5f397ea530c684",
+    "bytes": 836153
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidcistrome-pt/diagram.finalize.json",
+    "summaryReceipt": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidcistrome-pt/diagram.finalize-summary.json",
+    "browserCheckReceipt": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidcistrome-pt/diagram.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-26T22:32:11.973Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2328,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

@@ -1,0 +1,51 @@
+{
+  "schemaVersion": 1,
+  "ok": true,
+  "command": "finalize",
+  "status": "pass",
+  "type": "dataflow",
+  "quality": "showcase",
+  "specification": {
+    "path": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidwiki-pt/candidate.json",
+    "sha256": "b8e2720fddafb46e67843de8e6cb2a14a0a90edc2fedbc570f700df20562367c",
+    "bytes": 34379
+  },
+  "artifact": {
+    "path": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidwiki-pt/diagram.html",
+    "sha256": "749d4d403f41c963c012da44e08b66e36c33f754430bb5ef1fbe4e61a99e0184",
+    "bytes": 832795
+  },
+  "gates": {
+    "validate": "pass",
+    "deliver": "pass",
+    "check": "pass",
+    "browser-check": "pass"
+  },
+  "diagnostics": [],
+  "diagnosticSummary": {
+    "total": 0,
+    "shown": 0,
+    "truncated": false
+  },
+  "evidence": {
+    "receipt": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidwiki-pt/diagram.finalize.json",
+    "summaryReceipt": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidwiki-pt/diagram.finalize-summary.json",
+    "browserCheckReceipt": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidwiki-pt/diagram.browser-check.json"
+  },
+  "update": {
+    "status": "current",
+    "installedVersion": "3.2.0",
+    "availableVersion": "3.2.0",
+    "releaseNotes": null,
+    "checkedAt": "2026-10-26T22:32:11.973Z",
+    "source": "cache",
+    "noticeRequired": false,
+    "noticeText": null
+  },
+  "visualReview": "not-requested",
+  "durationMs": 2361,
+  "browserCheck": {
+    "requested": true,
+    "ran": true
+  }
+}

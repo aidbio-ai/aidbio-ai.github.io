@@ -1,0 +1,17 @@
+{
+  "schemaVersion": 1,
+  "receiptId": "f4db4db8-270e-4585-8578-4185b2d2639f",
+  "status": "current",
+  "command": "deliver",
+  "type": "dataflow",
+  "input": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidweather-pt/candidate.json",
+  "output": "/home/clever/aidbio/site/aidbio-ai.github.io/docs/diagrams/aidweather-pt/diagram.html",
+  "specification": {
+    "sha256": "58f66947b5e2307fbede61f468a0426cfef57b2a4a465d058ef3dc2c2d2fa652",
+    "bytes": 34402
+  },
+  "artifact": {
+    "sha256": "659b4566b857beb97a526c701e939d8e60e427f6e106645e84bcf305ae6a1c68",
+    "bytes": 832912
+  }
+}

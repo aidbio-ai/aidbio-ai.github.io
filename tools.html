@@ -1,119 +1,119 @@
 <!doctype html>
-<html lang="en" data-theme="dark">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Open-source tools — AidBio</title>
-  <meta name="description" content="AidWeather and Aid2GO: open-source Python tools for climate data and protein function prediction.">
-  <link rel="canonical" href="https://aidbio.org/tools.html">
-  <meta property="og:title" content="Open-source tools — AidBio">
-  <meta property="og:description" content="AidWeather and Aid2GO: open-source Python tools for climate data and protein function prediction.">
-  <meta name="theme-color" content="#080B0E">
-  <script>
-    (function () {
-      var t = null;
-      try { t = localStorage.getItem('aidbio-theme'); } catch (e) {}
-      if (t !== 'light' && t !== 'dark') t = (window.matchMedia && window.matchMedia('(prefers-color-scheme: light)').matches) ? 'light' : 'dark';
-      document.documentElement.setAttribute('data-theme', t);
-    })();
-  </script>
-  <link rel="icon" href="assets/img/favicon.png" type="image/png">
-  <link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
-  <link rel="stylesheet" href="assets/css/aidbio.css">
-</head>
-<body>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>AidBio — Scientific software</title><meta name="description" content="AidWeather, AidWeather Report, AidCistrome, AidFarm, AidWiki, and Aid2GO.">
+<link rel="canonical" href="https://aidbio.org/tools.html"><meta property="og:title" content="AidBio — Scientific software"><meta property="og:description" content="AidWeather, AidWeather Report, AidCistrome, AidFarm, AidWiki, and Aid2GO."><meta property="og:url" content="https://aidbio.org/tools.html">
+<meta name="theme-color" content="#F8FAFC"><script src="assets/js/theme.js"></script>
+<link rel="icon" href="assets/img/favicon.png"><link rel="apple-touch-icon" href="assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="assets/css/aidbio.css?v=20261026-apps9">
+</head><body class="site-refresh">
 <!--chrome:header active="tools"-->
-<a class="skip-link" href="#main">Skip to content</a>
+<a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
 <header class="nav">
   <div class="container nav-inner">
-    <a class="brand" href="index.html" aria-label="AidBio home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
-    <ul class="nav-links">
-      <li><a href="solutions.html" data-nav="solutions">Solutions</a></li>
-      <li><a href="tools.html" data-nav="tools" aria-current="page">Open source</a></li>
-      <li><a href="aidweather.html" data-nav="aidweather">AidWeather</a></li>
-      <li><a href="work.html" data-nav="work">Work</a></li>
-    </ul>
+    <a class="brand" href="index.html" aria-label="AidBio home" data-i18n-attr="aria-label:nav.home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
+    <nav class="nav-links" aria-label="Main navigation" data-i18n-attr="aria-label:nav.main">
+      <a href="solutions.html" data-nav="solutions" data-i18n="nav.capabilities">Capabilities</a>
+      <a href="work.html" data-nav="work" data-i18n="nav.work">Work</a>
+      <a href="tools.html" data-nav="tools" aria-current="page" data-i18n="nav.software">Software</a>
+      <a href="about.html" data-nav="about" data-i18n="nav.about">About</a>
+    </nav>
     <div class="nav-actions">
-      <button class="icon-btn" id="themeToggle" type="button" aria-label="Toggle light and dark theme">
-        <svg class="theme-icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg>
-        <svg class="theme-icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.8A9 9 0 1111.2 3a7 7 0 009.8 9.8z"/></svg>
-      </button>
-      <a class="btn btn-primary btn-sm nav-cta" href="index.html#contact">Talk to us</a>
-      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobileMenu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
-      </button>
+      <label class="theme-control"><span class="sr-only" data-i18n="theme.label">Theme preference</span><select data-theme-select aria-label="Theme preference" data-i18n-attr="aria-label:theme.label"><option value="system" data-i18n="theme.auto">Auto</option><option value="light" data-i18n="theme.light">Light</option><option value="dark" data-i18n="theme.dark">Dark</option></select></label>
+      <div class="desktop-language"></div>
+      <a class="btn btn-primary btn-sm nav-cta" href="index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" data-i18n-attr="aria-label:nav.menu" aria-expanded="false" aria-controls="mobileMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
     </div>
   </div>
-  <div class="mobile-menu" id="mobileMenu">
-    <a href="solutions.html">Solutions</a>
-    <a href="tools.html">Open source</a>
-    <a href="aidweather.html">AidWeather</a>
-    <a href="work.html">Work</a>
-    <a class="btn btn-primary" href="index.html#contact">Talk to us</a>
-  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" data-i18n-attr="aria-label:nav.mobile">
+    <a href="solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="work.html" data-i18n="nav.work">Work</a><a href="tools.html" data-i18n="nav.software">Software</a><a href="about.html" data-i18n="nav.about">About</a>
+    <div class="mobile-language"></div>
+    <a class="btn btn-primary" href="index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+  </nav>
 </header>
 <!--/chrome:header-->
 
 <main id="main">
-
-  <div class="container">
-    <header class="page-head">
-      <span class="eyebrow">Open source</span>
-      <h1 class="h1" style="font-size:clamp(2rem,5vw,3rem)">Tools you can read, run and reuse.</h1>
-      <p class="lead">We release our own research software as open source, so you can see how every result is produced. AidWeather installs with pip. Aid2GO installs by cloning the repository and using <a href="https://docs.astral.sh/uv/" target="_blank" rel="noopener" style="color:var(--emerald-text)">uv</a>.</p>
-    </header>
-  </div>
-  <section class="section" id="aidweather" style="padding-top:24px">
-    <div class="container"><div class="grid cols-2">
-      <article class="card card-amber"><div class="card-body">
-        <div class="card-top"><span class="status">Python · command line and library</span><span class="tag tag-amber">Open source · Apache-2.0</span></div>
-        <h2 class="h2 mono">aidweather</h2>
-        <p class="body-sm">Gets daily or hourly NASA POWER weather and solar data for a single point, a line of points or a whole region. Results are cached locally in SQLite, so repeated queries do not hit the NASA servers again. It covers 18 parameters, including temperature, rainfall, solar radiation, wind and soil wetness.</p>
-        <p class="body-sm">It is in beta: the public interface is stable, but features may still be added.</p>
-        <div class="cmd"><div class="code-line"><code>pip install aidweather</code><button class="copy-btn" type="button" data-copy="pip install aidweather">copy</button></div></div>
-        <div class="project-links"><a class="link-arrow" href="https://github.com/matiollipt/aidweather" target="_blank" rel="noopener">GitHub <span>→</span></a><a class="link-arrow" href="aidweather.html">AidWeather page <span>→</span></a></div>
-      </div></article>
-      <article class="card card-violet" id="aid2go"><div class="card-body">
-        <div class="card-top"><span class="status">Python · command line</span><span class="tag tag-violet">Open source</span></div>
-        <h2 class="h2 mono">aid2go</h2>
-        <p class="body-sm">Predicts what a protein does, as Gene Ontology terms, across biological process, molecular function and cellular component. It combines protein language-model embeddings, protein similarity networks and the Gene Ontology hierarchy in a graph neural network, and keeps predictions consistent with that hierarchy.</p>
-        <p class="body-sm">One command runs the pipeline end to end, from downloading data to evaluation, and it reuses saved intermediate files so reruns are fast.</p>
-        <div class="cmd">
-              <div class="code-line"><code>git clone https://github.com/matiollipt/aid2go.git</code></div>
-              <div class="code-line"><code>uv tool install ./aid2go</code><button class="copy-btn" type="button" data-copy="git clone https://github.com/matiollipt/aid2go.git &amp;&amp; uv tool install ./aid2go">copy both</button></div>
-            </div>
-        <div class="project-links"><a class="link-arrow" href="https://github.com/matiollipt/aid2go" target="_blank" rel="noopener">GitHub <span>→</span></a></div>
-      </div></article>
-    </div></div>
-  </section>
-  <section class="section section-alt">
-    <div class="container container-narrow">
-      <div class="contact-card">
-        <h2 class="h1">Have a dataset and a question?</h2>
-        <p class="lead measure">Tell us what you are working on. A short email is enough to start.</p>
-        <a class="btn btn-primary" href="mailto:contact@aidbio.org">contact@aidbio.org</a>
-      </div>
-    </div>
-  </section>
+<header class="page-head container"><span class="eyebrow">Software</span>
+<h1 class="h1">Tools with a scientific purpose.</h1>
+<p class="lead">Availability and interfaces vary. A research application, a public library, and a sample report are different kinds of deliverable.</p>
+</header>
+<div class="container">
+<article class="software-detail" id="aidweather">
+<div><span class="eyebrow">Public Python package</span>
+<h2 class="h2 mono">AidWeather</h2>
+</div>
+<div class="prose">
+<p class="lead">Retrieves and caches NASA POWER weather and solar-radiation data for points, transects, and regions. Includes a Python API and CLI.</p>
+<p class="note">NASA values follow the native source grid. Nearby coordinates may share a series.</p>
+<a class="link-arrow" href="https://github.com/matiollipt/aidweather">Repository and documentation →</a>
+<div class="code-line"><code>pip install aidweather</code><button class="copy-btn" data-copy="pip install aidweather" type="button" aria-label="Copy AidWeather install command">Copy</button></div>
+</div>
+</article>
+<article class="software-detail" id="aidweather-report">
+<div><span class="eyebrow">Sample available · Workspace application</span>
+<h2 class="h2 mono">AidWeather Report</h2>
+</div>
+<div class="prose">
+<p class="lead">Produces portable weather dashboards with charts, methods, and print-oriented assets, built on AidWeather.</p>
+<p class="note">The report application is a workspace package, not a PyPI distribution. A sample is publicly inspectable.</p>
+<div class="project-links"><a class="link-arrow" href="sample-report/index.html?v=b9f14cd3e4de">Sample report →</a><a class="link-arrow" href="sample-report/methods.html?v=b9f14cd3e4de">Methods →</a></div>
+</div>
+</article>
+<article class="software-detail" id="aidfarm">
+<div><span class="eyebrow">Research application</span>
+<h2 class="h2 mono">AidFarm</h2>
+</div>
+<div class="prose">
+<p class="lead">Organizes structured agricultural data, exploratory analysis, figures, evidence records, and reports. Workflows are configured for the project.</p>
+<p class="note">Client data stay private. Public demonstrations use explicitly labeled synthetic data.</p>
+</div>
+</article>
+<article class="software-detail" id="aidcistrome">
+<div><span class="eyebrow">Research application</span>
+<h2 class="h2 mono">AidCistrome</h2>
+</div>
+<div class="prose">
+<p class="lead">Connects raw SRA reads, quantification, reviewed DESeq2 design, gene sets, and promoter-motif analysis. A public ABA/iCB study shows the analysis from samples to interpretable outputs.</p>
+<p class="note">Profiles and experimental designs require review. Motif enrichment supports regulatory hypotheses; it does not demonstrate binding.</p>
+<a class="link-arrow" href="aidcistrome-aba-icb.html">ABA and iCB figure story →</a></div>
+</article>
+<article class="software-detail" id="aid2go">
+<div><span class="eyebrow">Public research repository</span>
+<h2 class="h2 mono">Aid2GO</h2>
+</div>
+<div class="prose">
+<p class="lead">Combines protein representations, similarity networks, and the Gene Ontology hierarchy to investigate protein function. Saved outputs can be explored in a local gallery.</p>
+<p class="note">Predictions are not experimental annotations. Internal evaluation and full-graph exploration have different scopes.</p>
+<a class="link-arrow" href="https://github.com/matiollipt/aid2go">Repository and documentation →</a></div>
+</article>
+<article class="software-detail" id="aidwiki">
+<div><span class="eyebrow">Research application · Local first</span>
+<h2 class="h2 mono">AidWiki</h2>
+</div>
+<div class="prose">
+<p class="lead">Builds linked Markdown knowledge from registered sources. Claims are connected to evidence records and source locators; quotations can be verified against the originals.</p>
+<p class="note">Generated synthesis remains derived knowledge. Uncertainty and conflicting evidence must remain visible.</p>
+</div>
+</article>
+</div>
+<section class="section section-alt">
+<div class="container container-narrow contact-card"><span class="eyebrow">Start a conversation</span>
+<h2 class="h1">Have a dataset and a question?</h2>
+<p class="lead measure">Tell us what you want to understand, the data you have, and the output your team needs.</p>
+<a class="btn btn-primary" href="mailto:contact@aidbio.org">contact@aidbio.org</a></div>
+</section>
 </main>
-
 <!--chrome:footer-->
 <footer class="footer">
   <div class="container footer-inner">
-    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span>· Data analytics for life sciences</span></div>
-    <nav aria-label="Footer">
-      <a href="solutions.html">Solutions</a>
-      <a href="tools.html">Open source</a>
-      <a href="work.html">Work</a>
-      <a href="index.html#contact">Contact</a>
-      <a href="https://github.com/matiollipt" target="_blank" rel="noopener">GitHub</a>
-      <a href="https://linkedin.com/in/cleversonmatiolli" target="_blank" rel="noopener">LinkedIn</a>
-      <a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span data-i18n="footer.tagline">Scientific data, models, and software.</span></div>
+    <nav aria-label="Footer" data-i18n-attr="aria-label:footer.label">
+      <a href="solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="work.html" data-i18n="nav.work">Work</a><a href="tools.html" data-i18n="nav.software">Software</a><a href="about.html" data-i18n="nav.about">About</a><a href="portfolio/index.html" data-i18n="footer.story">Founder story</a><a href="https://github.com/matiollipt" rel="noopener">GitHub</a><a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
     </nav>
     <div>© <span id="year">2026</span> AidBio</div>
   </div>
 </footer>
 <!--/chrome:footer-->
-<script src="assets/js/app.js"></script>
-</body>
-</html>
+<script src="assets/js/app.js?v=20261026-apps9"></script>
+</body></html>

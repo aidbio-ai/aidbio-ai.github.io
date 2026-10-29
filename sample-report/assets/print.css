@@ -1,0 +1,94 @@
+/* A4 portrait presentation for the static weather report. */
+@page {
+  size: A4 portrait;
+  margin: 14mm 13mm 16mm;
+}
+
+.print-report {
+  background: #fbfcfe;
+  color: #3a4355;
+  font-size: 10.5pt;
+}
+
+.print-report::before,
+.print-report .db-ai-action,
+.print-report .db-glossary .db-card-title a {
+  display: none;
+}
+
+.print-page {
+  width: 100%;
+  max-width: 190mm;
+  margin: 0 auto;
+}
+
+.print-header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding-bottom: 1.2rem;
+  border-bottom: 2px solid #2e4bdf;
+}
+
+.print-brand {
+  display: flex;
+  align-items: center;
+  gap: .85rem;
+}
+
+.print-brand img { width: 3.3rem; height: 3.3rem; object-fit: contain; }
+.print-brand h1 { margin: .15rem 0 .2rem; color: #1b2230; font-size: 1.55rem; line-height: 1.1; }
+.print-brand p { margin: 0; color: #6b7588; font-size: .85rem; }
+.print-kicker,
+.print-card-kicker,
+.print-section-heading span {
+  color: #6e47d4;
+  font-size: .68rem;
+  font-weight: 700;
+  letter-spacing: .1em;
+  text-transform: uppercase;
+}
+
+.print-header-note {
+  color: #6b7588;
+  font-family: var(--font-data);
+  font-size: .72rem;
+  line-height: 1.5;
+  text-align: right;
+}
+
+.print-header-note strong { color: #1b2230; font-weight: 600; }
+.print-intro { padding: 1.15rem 0 .9rem; }
+.print-intro h2 { margin: 0 0 .35rem; color: #1b2230; font-family: var(--font-display); font-size: 1.45rem; }
+.print-intro p { max-width: 78ch; margin: 0; color: #515b6e; line-height: 1.55; }
+
+.print-report .st-hero h1 { max-width: none; margin: 1rem 0 .75rem; font-size: 1.55rem; }
+.print-report .st-numbers { grid-template-columns: repeat(3, 1fr); gap: .55rem; }
+.print-report .st-number { padding: .7rem .8rem; border-radius: 8px; }
+.print-report .st-number__value { font-size: 1.45rem; }
+.print-report .st-number__detail { font-size: .72rem; }
+.print-report .st-chapter { margin-top: 1.1rem; padding-top: 1rem; }
+/* Chapters flow across pages; their parts stay whole and headings stay with what follows. */
+.print-report .st-kicker, .print-report .st-chapter h2, .print-report .st-purpose { break-after: avoid; }
+.print-report .st-figure, .print-report .st-callouts, .print-report .print-panel-stats,
+.print-report .st-howto { break-inside: avoid; }
+.print-report .st-chapter h2 { font-size: 1.15rem; }
+.print-report .st-lede,
+.print-report .st-callout { font-size: .8rem; }
+.print-report .st-purpose { margin: .2rem 0 .5rem; padding: .45rem .7rem; font-size: .8rem; break-inside: avoid; }
+.print-report .st-howto, .print-report .st-notes-link { font-size: .74rem; }
+.print-report .st-callout--key { font-size: .85rem; }
+.print-report .st-notes { margin-top: 1.4rem; }
+.print-report .st-notes__section { margin-top: .8rem; padding-top: .6rem; break-inside: avoid; }
+.print-report .st-notes__section li { font-size: .76rem; }
+.print-report .st-figure { padding: .5rem; border-radius: 8px; }
+.print-report .st-card { padding: .75rem .9rem; border-radius: 8px; break-inside: avoid; }
+.print-report .st-appendix--print { margin-top: 1.4rem; padding: 0; border: 0; }
+.print-chart { display: block; width: 100%; height: auto; max-height: 120mm; object-fit: contain; }
+.print-panel-stats { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin: .45rem 0 0; padding: .45rem 0 0 1rem; border-top: 1px solid #e9ecf1; color: #6b7588; font-size: .7rem; }
+.print-panel-stats li { margin: 0; }
+.print-report .st-glossary { grid-template-columns: repeat(2, 1fr); }
+.print-report .st-term { break-inside: avoid; }
+.print-report .st-term__pop { position: static; margin: .3rem 0 0; padding: 0; border: 0; box-shadow: none; background: none; opacity: 1; visibility: visible; font-size: .72rem; }
+.print-report .st-term__pop::before { display: none; }

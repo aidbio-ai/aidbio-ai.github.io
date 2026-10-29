@@ -1,0 +1,149 @@
+src,tgt,w
+GO:1990904 ribonucleoprotein complex,GO:0022627 cytosolic small ribosomal subunit,0.25901639344262295
+GO:1990904 ribonucleoprotein complex,GO:0003735 structural constituent of ribosome,0.728125
+GO:1990904 ribonucleoprotein complex,GO:0005840 ribosome,0.7919254658385093
+GO:1990904 ribonucleoprotein complex,GO:0022625 cytosolic large ribosomal subunit,0.21753246753246752
+GO:1990904 ribonucleoprotein complex,GO:0019843 rRNA binding,0.11764705882352941
+GO:1990904 ribonucleoprotein complex,GO:0022626 cytosolic ribosome,0.2939297124600639
+GO:0022627 cytosolic small ribosomal subunit,GO:0003735 structural constituent of ribosome,0.3185483870967742
+GO:0022627 cytosolic small ribosomal subunit,GO:0005840 ribosome,0.29044117647058826
+GO:0022627 cytosolic small ribosomal subunit,GO:0015935 small ribosomal subunit,0.27380952380952384
+GO:0022627 cytosolic small ribosomal subunit,GO:0022626 cytosolic ribosome,0.432
+GO:0022627 cytosolic small ribosomal subunit,GO:0000028 ribosomal small subunit assembly,0.14457831325301204
+GO:0006364 rRNA processing,GO:0032040 small-subunit processome,0.21138211382113822
+GO:0006364 rRNA processing,GO:0042254 ribosome biogenesis,0.272108843537415
+GO:0003735 structural constituent of ribosome,GO:0005840 ribosome,0.8840579710144928
+GO:0003735 structural constituent of ribosome,GO:0022625 cytosolic large ribosomal subunit,0.27710843373493976
+GO:0003735 structural constituent of ribosome,GO:0019843 rRNA binding,0.1471698113207547
+GO:0003735 structural constituent of ribosome,GO:0002181 cytoplasmic translation,0.10358565737051793
+GO:0003735 structural constituent of ribosome,GO:0015935 small ribosomal subunit,0.104
+GO:0003735 structural constituent of ribosome,GO:0022626 cytosolic ribosome,0.3700787401574803
+GO:0003735 structural constituent of ribosome,GO:0015934 large ribosomal subunit,0.10080645161290322
+GO:0005840 ribosome,GO:0022625 cytosolic large ribosomal subunit,0.25274725274725274
+GO:0005840 ribosome,GO:0019843 rRNA binding,0.13494809688581316
+GO:0005840 ribosome,GO:0022626 cytosolic ribosome,0.3333333333333333
+GO:0022625 cytosolic large ribosomal subunit,GO:0002181 cytoplasmic translation,0.2375
+GO:0022625 cytosolic large ribosomal subunit,GO:0022626 cytosolic ribosome,0.26865671641791045
+GO:0022625 cytosolic large ribosomal subunit,GO:0070180 large ribosomal subunit rRNA binding,0.1095890410958904
+GO:0032040 small-subunit processome,GO:0042254 ribosome biogenesis,0.1919191919191919
+GO:0032040 small-subunit processome,"GO:0000462 maturation of SSU-rRNA from tricistronic rRNA transcript (SSU-rRNA, 5.8S rRNA, LSU-rRNA)",0.20833333333333334
+GO:0032040 small-subunit processome,GO:0030515 snoRNA binding,0.2857142857142857
+GO:0032040 small-subunit processome,GO:0042274 ribosomal small subunit biogenesis,0.10204081632653061
+GO:0032040 small-subunit processome,GO:0031428 box C/D methylation guide snoRNP complex,0.225
+GO:0032040 small-subunit processome,GO:0030490 maturation of SSU-rRNA,0.1111111111111111
+GO:0042254 ribosome biogenesis,GO:0042273 ribosomal large subunit biogenesis,0.13793103448275862
+GO:0042254 ribosome biogenesis,"GO:0030687 preribosome, large subunit precursor",0.10975609756097561
+GO:0019843 rRNA binding,GO:0015935 small ribosomal subunit,0.10526315789473684
+GO:0002181 cytoplasmic translation,GO:0022626 cytosolic ribosome,0.12173913043478261
+GO:0015935 small ribosomal subunit,GO:0022626 cytosolic ribosome,0.15315315315315314
+GO:0022626 cytosolic ribosome,GO:0000028 ribosomal small subunit assembly,0.10476190476190476
+GO:0008033 tRNA processing,GO:0030488 tRNA methylation,0.22033898305084745
+GO:0008033 tRNA processing,GO:0006400 tRNA modification,0.14754098360655737
+GO:0008033 tRNA processing,GO:0000049 tRNA binding,0.1518987341772152
+GO:0003724 RNA helicase activity,GO:0004386 helicase activity,0.6666666666666666
+GO:0042273 ribosomal large subunit biogenesis,"GO:0030687 preribosome, large subunit precursor",0.4166666666666667
+GO:0042273 ribosomal large subunit biogenesis,"GO:0000463 maturation of LSU-rRNA from tricistronic rRNA transcript (SSU-rRNA, 5.8S rRNA, LSU-rRNA)",0.1
+"GO:0030687 preribosome, large subunit precursor","GO:0000463 maturation of LSU-rRNA from tricistronic rRNA transcript (SSU-rRNA, 5.8S rRNA, LSU-rRNA)",0.19047619047619047
+"GO:0030687 preribosome, large subunit precursor",GO:0000460 maturation of 5.8S rRNA,0.19047619047619047
+"GO:0030687 preribosome, large subunit precursor",GO:0000470 maturation of LSU-rRNA,0.2
+GO:0030515 snoRNA binding,GO:0031428 box C/D methylation guide snoRNP complex,0.35294117647058826
+GO:0030515 snoRNA binding,GO:0031167 rRNA methylation,0.10526315789473684
+GO:0016070 RNA metabolic process,GO:0080156 mitochondrial mRNA modification,0.1891891891891892
+GO:0016070 RNA metabolic process,GO:0016554 cytidine to uridine editing,0.18421052631578946
+GO:0009082 branched-chain amino acid biosynthetic process,GO:0009098 L-leucine biosynthetic process,0.625
+GO:0009082 branched-chain amino acid biosynthetic process,GO:0008652 amino acid biosynthetic process,0.2459016393442623
+GO:0009082 branched-chain amino acid biosynthetic process,GO:0009097 isoleucine biosynthetic process,0.47058823529411764
+GO:0006396 RNA processing,GO:0008173 RNA methyltransferase activity,0.125
+GO:0006396 RNA processing,GO:0006397 mRNA processing,0.10606060606060606
+GO:0030488 tRNA methylation,GO:0006400 tRNA modification,0.14285714285714285
+GO:0030488 tRNA methylation,GO:0008173 RNA methyltransferase activity,0.1724137931034483
+GO:0030488 tRNA methylation,GO:0001510 RNA methylation,0.1111111111111111
+GO:0030488 tRNA methylation,GO:0008168 methyltransferase activity,0.10077519379844961
+GO:0030488 tRNA methylation,GO:0032259 methylation,0.10236220472440945
+GO:0006400 tRNA modification,GO:0000049 tRNA binding,0.10869565217391304
+GO:0006164 purine nucleotide biosynthetic process,GO:0006189 'de novo' IMP biosynthetic process,0.5
+GO:0031428 box C/D methylation guide snoRNP complex,GO:0046540 U4/U6 x U5 tri-snRNP complex,0.13636363636363635
+GO:0031428 box C/D methylation guide snoRNP complex,GO:0030490 maturation of SSU-rRNA,0.1875
+GO:0031428 box C/D methylation guide snoRNP complex,GO:0071011 precatalytic spliceosome,0.13043478260869565
+GO:0031428 box C/D methylation guide snoRNP complex,GO:0031167 rRNA methylation,0.14285714285714285
+GO:0008173 RNA methyltransferase activity,GO:0001510 RNA methylation,0.42857142857142855
+GO:0008173 RNA methyltransferase activity,GO:0008168 methyltransferase activity,0.136
+GO:0008173 RNA methyltransferase activity,GO:0032259 methylation,0.13821138211382114
+GO:0008173 RNA methyltransferase activity,GO:0070475 rRNA base methylation,0.2
+GO:0009414 response to water deprivation,GO:0009737 response to abscisic acid,0.2555066079295154
+GO:0009414 response to water deprivation,GO:0006970 response to osmotic stress,0.11242603550295859
+GO:0009414 response to water deprivation,GO:0009651 response to salt stress,0.21808510638297873
+GO:0000178 exosome (RNase complex),GO:0000177 cytoplasmic exosome (RNase complex),0.8461538461538461
+GO:0000178 exosome (RNase complex),GO:0000176 nuclear exosome (RNase complex),0.8571428571428571
+GO:0000178 exosome (RNase complex),GO:0034475 U4 snRNA 3'-end processing,0.7692307692307693
+GO:0009098 L-leucine biosynthetic process,GO:0008652 amino acid biosynthetic process,0.16129032258064516
+GO:0009098 L-leucine biosynthetic process,GO:0009097 isoleucine biosynthetic process,0.16666666666666666
+GO:0004864 protein phosphatase inhibitor activity,GO:0009755 hormone-mediated signaling pathway,0.25
+GO:0009737 response to abscisic acid,GO:0006970 response to osmotic stress,0.12206572769953052
+GO:0009737 response to abscisic acid,GO:0009651 response to salt stress,0.21212121212121213
+GO:0046540 U4/U6 x U5 tri-snRNP complex,GO:0008380 RNA splicing,0.14423076923076922
+GO:0046540 U4/U6 x U5 tri-snRNP complex,GO:0030490 maturation of SSU-rRNA,0.13043478260869565
+GO:0046540 U4/U6 x U5 tri-snRNP complex,GO:0071011 precatalytic spliceosome,0.32
+GO:0046540 U4/U6 x U5 tri-snRNP complex,GO:0000387 spliceosomal snRNP assembly,0.11538461538461539
+GO:0033290 eukaryotic 48S preinitiation complex,GO:0005852 eukaryotic translation initiation factor 3 complex,0.8823529411764706
+GO:0033290 eukaryotic 48S preinitiation complex,GO:0016282 eukaryotic 43S preinitiation complex,0.8823529411764706
+GO:0033290 eukaryotic 48S preinitiation complex,GO:0002183 cytoplasmic translational initiation,0.75
+GO:0000460 maturation of 5.8S rRNA,GO:0000470 maturation of LSU-rRNA,0.35294117647058826
+GO:0001510 RNA methylation,GO:0008168 methyltransferase activity,0.104
+GO:0001510 RNA methylation,GO:0032259 methylation,0.10569105691056911
+GO:0001510 RNA methylation,GO:0070475 rRNA base methylation,0.17647058823529413
+GO:0001510 RNA methylation,GO:0031167 rRNA methylation,0.17647058823529413
+GO:0000049 tRNA binding,GO:0004812 aminoacyl-tRNA ligase activity,0.14516129032258066
+GO:0000049 tRNA binding,GO:0006418 tRNA aminoacylation for protein translation,0.10344827586206896
+GO:0008380 RNA splicing,GO:0071011 precatalytic spliceosome,0.15384615384615385
+GO:0008380 RNA splicing,GO:0006397 mRNA processing,0.5
+GO:0001522 pseudouridine synthesis,GO:0031429 box H/ACA snoRNP complex,0.21428571428571427
+GO:0001522 pseudouridine synthesis,GO:0009982 pseudouridine synthase activity,0.6923076923076923
+GO:0005736 RNA polymerase I complex,GO:0000428 DNA-directed RNA polymerase complex,0.3333333333333333
+GO:0005736 RNA polymerase I complex,GO:0005666 RNA polymerase III complex,0.36
+GO:0005736 RNA polymerase I complex,GO:0003899 DNA-directed RNA polymerase activity,0.41379310344827586
+GO:0000428 DNA-directed RNA polymerase complex,GO:0005666 RNA polymerase III complex,0.35
+GO:0000428 DNA-directed RNA polymerase complex,GO:0003899 DNA-directed RNA polymerase activity,0.6052631578947368
+GO:0000177 cytoplasmic exosome (RNase complex),GO:0000176 nuclear exosome (RNase complex),0.8461538461538461
+GO:0000177 cytoplasmic exosome (RNase complex),GO:0034475 U4 snRNA 3'-end processing,0.9090909090909091
+GO:0030490 maturation of SSU-rRNA,GO:0071011 precatalytic spliceosome,0.125
+GO:0007005 mitochondrion organization,GO:0045039 protein insertion into mitochondrial inner membrane,0.10714285714285714
+GO:1902531 regulation of intracellular signal transduction,GO:0006470 protein dephosphorylation,0.6818181818181818
+GO:1902531 regulation of intracellular signal transduction,GO:0043169 cation binding,0.4090909090909091
+GO:1902531 regulation of intracellular signal transduction,GO:0009788 negative regulation of abscisic acid-activated signaling pathway,0.2222222222222222
+GO:1902531 regulation of intracellular signal transduction,GO:0004722 protein serine/threonine phosphatase activity,0.7142857142857143
+GO:0000470 maturation of LSU-rRNA,GO:0070475 rRNA base methylation,0.125
+GO:0008168 methyltransferase activity,GO:0032259 methylation,0.984
+GO:0071011 precatalytic spliceosome,GO:0006397 mRNA processing,0.10256410256410256
+GO:0071011 precatalytic spliceosome,GO:0000387 spliceosomal snRNP assembly,0.36363636363636365
+GO:0009269 response to desiccation,GO:0050821,0.125
+GO:0000176 nuclear exosome (RNase complex),GO:0034475 U4 snRNA 3'-end processing,0.7692307692307693
+GO:0006914 autophagy,GO:0000407 phagophore assembly site,0.34375
+GO:0006914 autophagy,GO:0000045 autophagosome assembly,0.5294117647058824
+GO:0006914 autophagy,GO:0005776 autophagosome,0.32558139534883723
+GO:0005666 RNA polymerase III complex,GO:0003899 DNA-directed RNA polymerase activity,0.34285714285714286
+GO:0080156 mitochondrial mRNA modification,GO:0016554 cytidine to uridine editing,0.32
+GO:0005852 eukaryotic translation initiation factor 3 complex,GO:0016282 eukaryotic 43S preinitiation complex,1.0
+GO:0005852 eukaryotic translation initiation factor 3 complex,GO:0002183 cytoplasmic translational initiation,0.8333333333333334
+GO:0016282 eukaryotic 43S preinitiation complex,GO:0002183 cytoplasmic translational initiation,0.8333333333333334
+GO:0004812 aminoacyl-tRNA ligase activity,GO:0006418 tRNA aminoacylation for protein translation,0.8
+GO:0140662,GO:0005832 chaperonin-containing T-complex,0.42105263157894735
+GO:0009922 fatty acid elongase activity,GO:0160062,0.3333333333333333
+GO:0071806 protein transmembrane transport,GO:0045039 protein insertion into mitochondrial inner membrane,0.3
+GO:0009631 cold acclimation,GO:0050821,0.1724137931034483
+GO:0006635 fatty acid beta-oxidation,"GO:0016627 oxidoreductase activity, acting on the CH-CH group of donors",0.14285714285714285
+GO:0006635 fatty acid beta-oxidation,GO:0001676 long-chain fatty acid metabolic process,0.10714285714285714
+GO:0006970 response to osmotic stress,GO:0009651 response to salt stress,0.11585365853658537
+GO:0006470 protein dephosphorylation,GO:0043169 cation binding,0.52
+GO:0006470 protein dephosphorylation,GO:0009788 negative regulation of abscisic acid-activated signaling pathway,0.17647058823529413
+GO:0006470 protein dephosphorylation,GO:0004722 protein serine/threonine phosphatase activity,0.8695652173913043
+GO:0043169 cation binding,GO:0009788 negative regulation of abscisic acid-activated signaling pathway,0.1724137931034483
+GO:0043169 cation binding,GO:0004722 protein serine/threonine phosphatase activity,0.5416666666666666
+GO:0016274 protein-arginine N-methyltransferase activity,GO:0018216 peptidyl-arginine methylation,0.875
+GO:0000407 phagophore assembly site,GO:0000045 autophagosome assembly,0.32
+GO:0000407 phagophore assembly site,GO:0005776 autophagosome,0.11764705882352941
+GO:0000045 autophagosome assembly,GO:0005776 autophagosome,0.3055555555555556
+"GO:0016627 oxidoreductase activity, acting on the CH-CH group of donors",GO:0001676 long-chain fatty acid metabolic process,0.16666666666666666
+GO:0009788 negative regulation of abscisic acid-activated signaling pathway,GO:0004722 protein serine/threonine phosphatase activity,0.18181818181818182
+GO:0008652 amino acid biosynthetic process,GO:0009089 lysine biosynthetic process via diaminopimelate,0.10606060606060606
+GO:0008652 amino acid biosynthetic process,GO:0009097 isoleucine biosynthetic process,0.16393442622950818

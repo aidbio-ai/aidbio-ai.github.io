@@ -1,0 +1,13 @@
+plot,treatment,biomass_kg,quality_score
+P01,Control,41.2,6.8
+P02,Treatment A,46.9,7.1
+P03,Treatment B,43.0,7.4
+P04,Control,39.8,6.5
+P05,Treatment B,44.1,7.6
+P06,Treatment A,47.8,6.9
+P07,Control,42.5,7.0
+P08,Treatment A,45.6,7.2
+P09,Treatment B,42.2,7.3
+P10,Treatment B,44.7,7.7
+P11,Control,40.6,6.7
+P12,Treatment A,48.3,7.0

@@ -1,0 +1,240 @@
+/* Story layout for the weather report: verdict, chapters, appendix.
+   Uses the shared AidBio tokens only; no separate design language. */
+.st-body {
+  margin: 0;
+  background: var(--surface-base);
+  color: var(--text-body);
+  font-family: var(--font-body, "Hanken Grotesk", system-ui, sans-serif);
+  line-height: 1.55;
+}
+
+.st-top {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background: color-mix(in srgb, var(--surface-base) 92%, transparent);
+  backdrop-filter: blur(8px);
+  border-bottom: 1px solid var(--border-subtle);
+}
+.st-top__bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem 1rem;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: .6rem 1rem;
+}
+.st-brand { display: inline-flex; align-items: center; gap: .55rem; color: var(--text-strong); text-decoration: none; }
+.st-brand span { color: var(--text-muted); font-weight: 500; }
+/* The mark is ~2:1 (1172x582); fix the height and let the width follow. */
+.st-brand__logo { height: 28px; width: auto; flex: 0 0 auto; }
+.st-top__actions { display: flex; flex-wrap: wrap; align-items: center; gap: .5rem; }
+.st-nav {
+  display: flex;
+  gap: .25rem;
+  max-width: 64rem;
+  margin: 0 auto;
+  padding: .25rem 1rem .5rem;
+  overflow-x: auto;
+}
+.st-nav a {
+  white-space: nowrap;
+  padding: .2rem .65rem;
+  border-radius: 999px;
+  color: var(--text-muted);
+  font-size: .85rem;
+  font-weight: 600;
+  text-decoration: none;
+}
+.st-nav a:hover, .st-nav a.is-active { background: var(--surface-sunken); color: var(--text-strong); }
+.st-nav a:focus-visible { outline: 2px solid var(--text-link); outline-offset: 2px; }
+
+.st-page { max-width: 64rem; margin: 0 auto; padding: 1.25rem 1rem 4rem; }
+.st-context { margin: 0 0 .25rem; color: var(--text-muted); font-size: .85rem; font-weight: 600; }
+
+.st-hero h1 {
+  max-width: 26ch;
+  margin: .25rem 0 1.25rem;
+  color: var(--text-strong);
+  font-size: clamp(1.7rem, 3.4vw, 2.4rem);
+  line-height: 1.15;
+  letter-spacing: -.02em;
+}
+.st-numbers { display: grid; grid-template-columns: repeat(auto-fit, minmax(14rem, 1fr)); gap: .75rem; }
+.st-number {
+  padding: 1rem 1.15rem;
+  border: 1px solid var(--border-subtle);
+  border-top: 3px solid var(--st-accent, var(--brand-blue));
+  border-radius: 12px;
+  background: var(--surface-card);
+}
+.st-number__value { color: var(--text-strong); font-size: 2.1rem; font-weight: 700; line-height: 1.1; letter-spacing: -.02em; }
+.st-number__value small { margin-left: .3rem; color: var(--text-muted); font-size: 1rem; font-weight: 600; letter-spacing: 0; }
+.st-number__label { margin-top: .25rem; color: var(--text-strong); font-weight: 600; }
+.st-number__detail { margin-top: .15rem; color: var(--text-muted); font-size: .88rem; }
+.st-chips { display: flex; flex-wrap: wrap; gap: .5rem; margin-top: .85rem; }
+.st-chip {
+  padding: .15rem .65rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 999px;
+  background: var(--surface-sunken);
+  color: var(--text-muted);
+  font-size: .8rem;
+  font-weight: 600;
+}
+.st-chip--good { border-color: transparent; background: var(--positive-tint); color: var(--positive); }
+.st-chip--warn { border-color: transparent; background: color-mix(in srgb, var(--spectrum-amber) 18%, transparent); color: var(--text-strong); }
+.st-model { max-width: 70ch; margin: 1rem 0 0; padding-left: .85rem; border-left: 3px solid var(--spectrum-violet); }
+
+.st-chapter { margin-top: 2.75rem; padding-top: 2rem; border-top: 1px solid var(--border-subtle); }
+.st-kicker { color: var(--text-muted); font-size: .78rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase; }
+.st-chapter h2 { max-width: 36ch; margin: .25rem 0 .5rem; color: var(--text-strong); font-size: clamp(1.3rem, 2.4vw, 1.7rem); line-height: 1.25; letter-spacing: -.01em; }
+.st-lede { max-width: 66ch; margin: 0 0 1rem; }
+.st-figure { padding: .5rem .5rem 0; border: 1px solid var(--border-subtle); border-radius: 18px; background: var(--surface-card); }
+.st-plot { width: 100%; }
+.st-callouts { display: flex; flex-wrap: wrap; gap: .75rem; margin-top: .85rem; }
+.st-callout { flex: 1 1 15rem; padding-left: .75rem; border-left: 3px solid var(--border-strong); font-size: .92rem; }
+.st-callout b { color: var(--text-strong); }
+.st-note { max-width: 80ch; margin: .75rem 0 0; color: var(--text-muted); font-size: .84rem; }
+.st-note sup a { font-weight: 700; text-decoration: none; }
+/* Chapter anatomy: purpose card, figure, how-to-read caption, key finding,
+   model interpretation, then a link to the chart's notes. */
+.st-purpose {
+  max-width: 70ch;
+  margin: .25rem 0 1rem;
+  padding: .75rem 1rem;
+  border-left: 3px solid var(--st-accent, var(--brand-blue));
+  border-radius: 0 12px 12px 0;
+  background: var(--surface-sunken);
+}
+.st-purpose strong { display: block; margin-bottom: .15rem; color: var(--text-strong); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; }
+.st-purpose p { margin: 0; }
+.st-howto { max-width: 80ch; margin: .6rem .25rem 0; color: var(--text-muted); font-size: .88rem; }
+.st-howto strong { color: var(--text-body); }
+.st-callout--key { flex-basis: 100%; padding: .55rem .85rem; border-left-color: var(--st-accent, var(--brand-blue)); border-radius: 0 10px 10px 0; background: var(--surface-card); color: var(--text-strong); font-size: 1rem; font-weight: 600; }
+.st-interpretation { max-width: 70ch; margin: 1rem 0 0; padding-left: .85rem; border-left: 3px solid var(--spectrum-violet); }
+.st-notes-link { margin: .75rem 0 0; font-size: .84rem; }
+.st-notes-link a { color: var(--text-link); font-weight: 600; text-decoration: none; }
+.st-notes-link a:hover { text-decoration: underline; }
+.st-notes__section { margin-top: 2rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle); }
+.st-notes__section h2, .st-notes__section h3 { margin: 0 0 .5rem; color: var(--text-strong); font-size: 1.15rem; }
+.st-notes__section ul { max-width: 80ch; margin: 0; padding-left: 1.1rem; }
+.st-notes__section li { margin: .35rem 0; }
+.st-notes__section sup a { font-weight: 700; text-decoration: none; }
+.st-card { margin-top: .85rem; padding: 1rem 1.25rem; border: 1px solid var(--border-subtle); border-radius: 18px; background: var(--surface-card); }
+.st-card h3 { margin: 0 0 .5rem; color: var(--text-strong); font-size: 1.05rem; }
+.st-card ul { margin: .25rem 0 0; padding-left: 1.1rem; }
+.st-card li { margin: .3rem 0; }
+.st-meta { display: grid; grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr)); gap: .75rem; margin: .5rem 0; }
+.st-meta span { display: block; color: var(--text-muted); font-size: .72rem; }
+.st-meta strong { color: var(--text-strong); font-size: .9rem; }
+.st-stats { display: flex; flex-wrap: wrap; gap: .25rem 1.25rem; margin: .5rem 0 0; padding: .5rem 0 0 1rem; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: .8rem; }
+
+.st-block { margin-top: 2rem; }
+.st-block:first-of-type { margin-top: 1rem; }
+.st-h3 { max-width: 40ch; margin: .2rem 0 .4rem; color: var(--text-strong); font-size: 1.3rem; line-height: 1.25; }
+.st-figure__title { display: flex; flex-wrap: wrap; gap: .25rem .75rem; padding: .35rem .5rem 0; color: var(--text-strong); }
+.st-figure__title span { color: var(--text-muted); font-size: .85rem; }
+.st-table { padding: .5rem; overflow-x: auto; }
+.st-table table { width: 100%; border-collapse: collapse; font-size: .9rem; }
+.st-table th, .st-table td { padding: .45rem .6rem; border-bottom: 1px solid var(--border-subtle); text-align: left; }
+.st-table h4 { margin: 0; color: var(--text-strong); }
+.st-table p { margin: .1rem 0 .6rem; color: var(--text-muted); font-size: .85rem; }
+
+.st-card--third { flex: 1 1 18rem; margin-top: 0; }
+
+.st-appendix { margin-top: 3rem; border: 1px solid var(--border-subtle); border-radius: 12px; background: var(--surface-card); }
+.st-appendix > summary { cursor: pointer; padding: .9rem 1.15rem; color: var(--text-strong); font-weight: 600; }
+.st-appendix > summary:focus-visible { outline: 2px solid var(--text-link); outline-offset: 2px; }
+.st-appendix__body, .st-appendix--print { padding: 0 1.15rem 1.15rem; }
+.st-glossary { display: grid; grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr)); gap: .5rem; }
+/* Glossary terms: the description pops up on hover, keyboard focus or tap
+   (focus), and stays while the pointer is over it; Escape dismisses it. */
+.st-term {
+  position: relative;
+  display: block;
+  padding: .5rem .75rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  cursor: help;
+}
+.st-term:hover, .st-term:focus-visible { border-color: var(--text-link); }
+.st-term:focus { outline: none; }
+.st-term:focus-visible { outline: 2px solid var(--text-link); outline-offset: 2px; }
+.st-term em { display: block; color: var(--text-muted); font-size: .8rem; font-style: normal; }
+.st-term__pop {
+  position: absolute;
+  z-index: 15;
+  top: 100%;
+  left: 0;
+  right: 0;
+  display: block;
+  margin-top: 4px;
+  padding: .6rem .75rem;
+  background: var(--surface-card);
+  border: 1px solid var(--border-subtle);
+  border-radius: 8px;
+  box-shadow: 0 8px 24px rgba(18, 22, 31, .14);
+  color: var(--text-body);
+  font-size: .88rem;
+  line-height: 1.45;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity .12s ease, visibility .12s;
+}
+/* Transparent bridge so the pointer can move from the term onto the popup. */
+.st-term__pop::before { content: ""; position: absolute; left: 0; right: 0; top: -6px; height: 6px; }
+.st-term:hover .st-term__pop, .st-term:focus .st-term__pop { opacity: 1; visibility: visible; }
+.st-term.is-dismissed .st-term__pop { opacity: 0; visibility: hidden; }
+.st-term__pop small { display: block; margin-top: .35rem; color: var(--text-muted); font-size: .78rem; }
+
+.st-footer { margin-top: 3rem; padding-top: 1.25rem; border-top: 1px solid var(--border-subtle); color: var(--text-muted); font-size: .84rem; }
+.db-reference-list { columns: 2 22rem; column-gap: 2rem; padding-left: 1.2rem; font-size: .88rem; }
+.db-reference-list li { break-inside: avoid; margin-bottom: .6rem; }
+.db-methods-card--wide { grid-column: 1 / -1; }
+
+@media (max-width: 720px) {
+  .st-top { position: static; }
+}
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+}
+@media print {
+  .st-top, .st-nav { display: none; }
+}
+
+/* location map: a pre-rendered image with one pin (aidreport.location) */
+.st-location__map { display: block; width: 100%; height: auto; margin-top: .75rem; border: 1px solid var(--border-subtle); border-radius: 18px; background: var(--surface-sunken); }
+.st-location__source { display: flex; flex-wrap: wrap; align-items: center; gap: .3rem .9rem; margin-top: .5rem; }
+
+/* chart hover box: an "i" in the figure's top-left corner (Plotly's mode bar is top right) opens the AId Summary and the computed
+   comparisons on hover, keyboard focus or tap; Escape closes it. The plot is never covered. */
+.st-hover { position: relative; }
+.st-hover .st-figure__title { padding-left: 2.4rem; }  /* clears the "i" */
+.st-hover__tip {
+  position: absolute; z-index: 6; top: .55rem; left: .55rem;
+  display: grid; place-items: center; width: 1.6rem; height: 1.6rem;
+  border: 1px solid var(--border-strong); border-radius: 50%;
+  background: var(--surface-card); color: var(--text-muted);
+  font: italic 700 .85rem/1 Georgia, serif; cursor: help;
+}
+.st-hover__tip:hover, .st-hover__tip:focus-visible { border-color: var(--text-link); color: var(--text-link); }
+.st-hover__tip:focus { outline: none; }
+.st-hover__tip:focus-visible { outline: 2px solid var(--text-link); outline-offset: 2px; }
+.st-hover__pop {
+  position: absolute; top: 100%; left: 0; width: min(26rem, 82vw); margin-top: 6px; padding: .7rem .85rem;
+  border: 1px solid var(--border-subtle); border-radius: 8px; background: var(--surface-card);
+  box-shadow: 0 8px 24px rgba(18, 22, 31, .14); color: var(--text-body);
+  font-size: .86rem; font-style: normal; font-weight: 400; line-height: 1.45; text-align: left; cursor: auto;
+  opacity: 0; visibility: hidden; transition: opacity .12s ease, visibility .12s;
+}
+.st-hover__pop::before { content: ""; position: absolute; left: 0; right: 0; top: -8px; height: 8px; }
+.st-hover__tip:hover .st-hover__pop, .st-hover__tip:focus .st-hover__pop { opacity: 1; visibility: visible; }
+.st-hover__tip.is-dismissed .st-hover__pop { opacity: 0; visibility: hidden; }
+.st-hover__pop .st-interpretation { margin: 0 0 .6rem; }
+.st-hover__label { margin: 0 0 .25rem; color: var(--text-muted); font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; }
+.st-hover__stats { margin: 0; padding-left: 1.05rem; }
+.st-hover__stats li { margin: .2rem 0; }
+@media print { .st-hover__tip { display: none; } }

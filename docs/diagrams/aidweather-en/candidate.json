@@ -1,0 +1,147 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "AidWeather: weather data with source context",
+    "locale": "en",
+    "output": "docs/diagrams/aidweather-en/diagram.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "git@github.com:matiollipt/aidweather.git",
+      "revision": "e7da3580ca042e607f64dc5233298be5a38735cd",
+      "link_mode": "local-only"
+    }
+  },
+  "stages": [
+    {
+      "label": "Inputs"
+    },
+    {
+      "label": "Retrieve"
+    },
+    {
+      "label": "Prepare"
+    },
+    {
+      "label": "Deliver"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "query",
+      "type": "external",
+      "label": "Place + dates",
+      "stage": 0,
+      "row": 1,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 227,
+          "end_line": 230
+        }
+      ]
+    },
+    {
+      "id": "power",
+      "type": "external",
+      "label": "POWER grid",
+      "stage": 0,
+      "row": 3,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 11,
+          "end_line": 15
+        }
+      ]
+    },
+    {
+      "id": "client",
+      "type": "backend",
+      "label": "AidWeather",
+      "stage": 1,
+      "row": 1,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 11,
+          "end_line": 17
+        }
+      ]
+    },
+    {
+      "id": "metadata",
+      "type": "backend",
+      "label": "Grid + units",
+      "stage": 2,
+      "row": 0,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 37,
+          "end_line": 44
+        }
+      ]
+    },
+    {
+      "id": "cache",
+      "type": "database",
+      "label": "SQLite cache",
+      "stage": 2,
+      "row": 3,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 13,
+          "end_line": 16
+        }
+      ]
+    },
+    {
+      "id": "series",
+      "type": "database",
+      "label": "CSV + Python",
+      "stage": 3,
+      "row": 1,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 227,
+          "end_line": 249
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "query",
+      "to": "client",
+      "label": "request"
+    },
+    {
+      "from": "power",
+      "to": "client",
+      "label": "grid values"
+    },
+    {
+      "from": "client",
+      "to": "metadata",
+      "label": "source details"
+    },
+    {
+      "from": "client",
+      "to": "cache",
+      "label": "reusable series"
+    },
+    {
+      "from": "metadata",
+      "to": "series",
+      "label": "units + provenance"
+    },
+    {
+      "from": "cache",
+      "to": "series",
+      "label": "cached values"
+    }
+  ]
+}

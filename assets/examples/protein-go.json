@@ -1,0 +1,54 @@
+{
+  "protein": "P10417",
+  "relation": "saved experimental annotation; not a new prediction",
+  "nodes": [
+    {
+      "id": "P10417",
+      "kind": "protein",
+      "name": "P10417"
+    },
+    {
+      "id": "GO:0005515",
+      "kind": "go",
+      "name": "protein binding",
+      "aspect": "MF"
+    },
+    {
+      "id": "GO:0008284",
+      "kind": "go",
+      "name": "positive regulation of cell population proliferation",
+      "aspect": "BP"
+    },
+    {
+      "id": "GO:0005737",
+      "kind": "go",
+      "name": "cytoplasm",
+      "aspect": "CC"
+    },
+    {
+      "id": "GO:0008285",
+      "kind": "go",
+      "name": "negative regulation of cell population proliferation",
+      "aspect": "BP"
+    }
+  ],
+  "edges": [
+    {
+      "source": "P10417",
+      "target": "GO:0005737"
+    },
+    {
+      "source": "P10417",
+      "target": "GO:0005515"
+    },
+    {
+      "source": "P10417",
+      "target": "GO:0008284"
+    },
+    {
+      "source": "P10417",
+      "target": "GO:0008285"
+    }
+  ],
+  "scope": "Bounded exploratory extract; no held-out performance claim."
+}

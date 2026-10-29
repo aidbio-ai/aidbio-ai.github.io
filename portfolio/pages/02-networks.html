@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>02 · Complexity becomes a network | AidBio</title><meta name="description" content="Chapter 2 of the AidBio founder story: from single genes to protein-interaction networks in crop biology.">
+<link rel="canonical" href="https://aidbio.org/portfolio/pages/02-networks.html"><meta property="og:title" content="02 · Complexity becomes a network | AidBio"><meta property="og:description" content="Chapter 2 of the AidBio founder story: from single genes to protein-interaction networks in crop biology."><meta property="og:url" content="https://aidbio.org/portfolio/pages/02-networks.html">
+<meta name="theme-color" content="#F8FAFC"><script src="../../assets/js/theme.js"></script>
+<link rel="icon" href="../../assets/img/favicon.png"><link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/css/aidbio.css"><link rel="stylesheet" href="../../portfolio/assets/site.css">
+</head><body class="has-subnav">
+<!--chrome:header active="about"-->
+<a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="../../index.html" aria-label="AidBio home" data-i18n-attr="aria-label:nav.home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="../../assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="../../assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
+    <nav class="nav-links" aria-label="Main navigation" data-i18n-attr="aria-label:nav.main">
+      <a href="../../solutions.html" data-nav="solutions" data-i18n="nav.capabilities">Capabilities</a>
+      <a href="../../work.html" data-nav="work" data-i18n="nav.work">Work</a>
+      <a href="../../tools.html" data-nav="tools" data-i18n="nav.software">Software</a>
+      <a href="../../about.html" data-nav="about" aria-current="page" data-i18n="nav.about">About</a>
+    </nav>
+    <div class="nav-actions">
+      <label class="theme-control"><span class="sr-only" data-i18n="theme.label">Theme preference</span><select data-theme-select aria-label="Theme preference" data-i18n-attr="aria-label:theme.label"><option value="system" data-i18n="theme.auto">Auto</option><option value="light" data-i18n="theme.light">Light</option><option value="dark" data-i18n="theme.dark">Dark</option></select></label>
+      <div class="desktop-language"></div>
+      <a class="btn btn-primary btn-sm nav-cta" href="../../index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" data-i18n-attr="aria-label:nav.menu" aria-expanded="false" aria-controls="mobileMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" data-i18n-attr="aria-label:nav.mobile">
+    <a href="../../solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="../../work.html" data-i18n="nav.work">Work</a><a href="../../tools.html" data-i18n="nav.software">Software</a><a href="../../about.html" data-i18n="nav.about">About</a>
+    <div class="mobile-language"></div>
+    <a class="btn btn-primary" href="../../index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+  </nav>
+</header>
+<!--/chrome:header-->
+<!--chrome:subnav-->
+<nav class="subnav" aria-label="Founder story chapters"><div class="container"><a href="../../portfolio/index.html">The story</a><a href="../../portfolio/pages/01-mechanism.html">01 Mechanism</a><a href="../../portfolio/pages/02-networks.html" aria-current="page">02 Networks</a><a href="../../portfolio/pages/03-data.html">03 Data</a><a href="../../portfolio/pages/04-models.html">04 Models</a><a href="../../portfolio/pages/05-software.html">05 Software</a><a href="../../portfolio/pages/06-aidbio.html">06 AidBio</a><a href="../../portfolio/pages/07-portfolio.html">Applied work</a></div></nav>
+<!--/chrome:subnav-->
+<main id="main">
+<section class="hero">
+<div class="container">
+<div class="eyebrow">Chapter 02 · Complexity becomes a network</div>
+<h1>One regulator became many interacting parts.</h1>
+<p class="hero-desc">Studying which proteins physically touch and influence each other changed the unit of reasoning. Instead of asking only "what does this one gene do?", the question became: <strong>what pattern emerges once you map out how hundreds of these relationships connect?</strong></p>
+</div>
+</section>
+<section class="section section-alt">
+<div class="container grid-2">
+<div>
+<div class="eyebrow">UC Davis · 2017–2019</div>
+<h2>Experimental interaction maps are <span class="accent-spectrum grad-flora">graphs</span> in disguise.</h2>
+<p>At UC Davis, the work centered on a lab technique called yeast two-hybrid (Y2H) — essentially a way of testing, pair by pair, whether two proteins physically stick together inside a cell. Do that at scale across thousands of pairs, and what you get is a map: proteins are the dots, and a "yes, they interact" result is a line connecting two dots.</p>
+<p>That map is really the same object a computer scientist calls a graph — dots and lines, or in that vocabulary, nodes and edges. Recognizing that a lab experiment and a graph are the same thing is what made the later move into graph-based machine learning possible.</p>
+</div>
+<div class="figure figure-media"><img src="../assets/network.svg" alt="Network diagram showing proteins as graph nodes and interactions as edges"></div>
+</div>
+</section>
+<section class="section">
+<div class="container grid-2">
+<div class="card accent">
+<div class="meta">MOLECULAR PLANT-MICROBE INTERACTIONS · 2018</div>
+<h3>A reusable Arabidopsis Y2H resource</h3>
+<p>Rather than running one experiment to test one pair of proteins, this project built the reusable lab toolkit that lets any researcher run that kind of test systematically, at scale.</p>
+<p class="citation">Matiolli CC, Melotto M. <em>A Comprehensive Arabidopsis Yeast Two-Hybrid Library for Protein-Protein Interaction Studies: A Resource to the Plant Research Community.</em> MPMI 31, 899–902 (2018). DOI: 10.1094/MPMI-02-18-0047-A.</p>
+</div>
+<div class="card accent orange">
+<div class="meta">BMC PLANT BIOLOGY · 2020 · CC BY 4.0</div>
+<h3>Networks meet food safety</h3>
+<p>This work studied how a plant defends itself against two foodborne pathogens, <em>Salmonella</em> and <em>E. coli</em> O157:H7 — the same bacteria that cause produce-linked food-safety outbreaks in humans. It identified specific plant defense genes (EXO70H4, NPR1, ICS1) that close the plant's leaf pores and reinforce cell walls to keep the bacteria out, some shared across both pathogens and some specific to one.</p>
+<p class="citation">Oblessuc PR, Matiolli CC, Melotto M. <em>Novel molecular components involved in callose-mediated Arabidopsis defense...</em> BMC Plant Biology 20, 16 (2020). DOI: 10.1186/s12870-019-2232-x.</p>
+<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC6950905/">Open article →</a></div>
+</div>
+</section>
+<section class="section section-alt">
+<div class="container">
+<div class="section-title">
+<div class="eyebrow">ITQB NOVA · 2019–2024</div>
+<h2>Networks move into <span class="accent-spectrum grad-flora">crop biology</span>.</h2>
+</div>
+<div class="grid-2">
+<article class="paper-card">
+<div class="paper-image">
+<img src="../assets/figures/alves2021-fig2.png" alt="Representative model from Alves et al. 2021 integrating calcium-dependent protein kinases and SnRK1 to balance growth and stress responses"></div>
+<div class="paper-body">
+<div class="meta">JOURNAL OF EXPERIMENTAL BOTANY · 2021 · CC BY</div>
+<h3>Integrating carbon/nitrogen and stress signalling</h3>
+<p>A review proposing how two families of "sensor" enzymes inside plant cells — calcium-dependent protein kinases (CDPKs) and SnRK1 — work together to balance normal growth metabolism against the plant's response to environmental stress, so it can keep functioning under pressure instead of shutting down.</p>
+<p class="citation">Alves HLS†, Matiolli CC†, Soares RC, Almadanim MC, Oliveira MM, Abreu IA. <em>Carbon/nitrogen metabolism and stress response networks – calcium-dependent protein kinases as the missing link?</em> Journal of Experimental Botany 72, 4190–4201 (2021). DOI: 10.1093/jxb/erab136.</p>
+<a href="https://doi.org/10.1093/jxb/erab136">Open article →</a></div>
+</article>
+<article class="paper-card">
+<div class="paper-image">
+<img src="../assets/figures/matiolli2022-fig5.png" alt="Pathway diagram from Matiolli et al. 2022 showing post-translational modifications modulating carbon flow through glycolysis"></div>
+<div class="paper-body">
+<div class="meta">FRONTIERS IN PLANT SCIENCE · 2022 · CC BY</div>
+<h3>Post-translational regulation</h3>
+<p>Genes being "turned on" is only part of the story — proteins also get chemically tagged after they're built (phosphorylation, ubiquitination, SUMOylation, and others), and those tags can switch a protein on, off, or redirect what it does. This review makes the case that regulation happens on that layer too, not just at the gene level.</p>
+<p class="citation">Matiolli CC†, Soares RC†, et al. Frontiers in Plant Science 12, 781508. DOI: 10.3389/fpls.2021.781508.</p>
+<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8787203/">Open article →</a></div>
+</article>
+<article class="paper-card">
+<div class="paper-image">
+<img src="../assets/figures/marques2022-fig1.png" alt="Rice CDPK protein-protein interaction network from Marques et al. 2022"></div>
+<div class="paper-body">
+<div class="meta">MICROPUBLICATION BIOLOGY · 2022 · CC BY</div>
+<h3>CDPK-OsPPIN</h3>
+<p>A hand-curated map of how the same "sensor" enzyme family interacts inside rice plants, used to generate testable hypotheses about how rice balances its nutrient use against stress.</p>
+<p class="citation">Marques J, Matiolli CC, Abreu IA. microPublication Biology (2022). DOI: 10.17912/micropub.biology.000513.</p>
+<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC8792674/">Open article →</a></div>
+</article>
+<article class="paper-card">
+<div class="paper-image">
+<img src="../assets/figures/fernandes2024-fig4a.png" alt="PCA plot from Fernandes et al. 2024 separating rice SLR1 and SUMO1-SLR1 lines by genotype and salt treatment"></div>
+<div class="paper-body">
+<div class="meta">PLANTA · 2024 · CC BY</div>
+<h3>Rice stress &amp; yield</h3>
+<p>This study showed that a small chemical tag (SUMO) attached to a key rice growth-control protein (DELLA/SLR1) changes how the plant responds to salt stress — and that the tagged version actually produced better yield under salty conditions. It's a direct line from a molecular detail to a trait a farmer would care about.</p>
+<p class="citation">Fernandes T, Gonçalves NM, Matiolli CC, Rodrigues MAA, Barros PM, Oliveira MM, Abreu IA. SUMOylation of Rice DELLA SLR1 Modulates Transcriptional Responses and Improves Yield Under Salt Stress. Planta 260 (2024). DOI: 10.1007/s00425-024-04565-1.</p>
+<a href="https://doi.org/10.1007/s00425-024-04565-1">Open article →</a></div>
+</article>
+</div>
+</div>
+</section>
+</main>
+<!--chrome:footer-->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="../../assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="../../assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span data-i18n="footer.tagline">Scientific data, models, and software.</span></div>
+    <nav aria-label="Footer" data-i18n-attr="aria-label:footer.label">
+      <a href="../../solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="../../work.html" data-i18n="nav.work">Work</a><a href="../../tools.html" data-i18n="nav.software">Software</a><a href="../../about.html" data-i18n="nav.about">About</a><a href="../../portfolio/index.html" data-i18n="footer.story">Founder story</a><a href="https://github.com/matiollipt" rel="noopener">GitHub</a><a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+    </nav>
+    <div>© <span id="year">2026</span> AidBio</div>
+  </div>
+</footer>
+<!--/chrome:footer-->
+<script src="../../assets/js/app.js"></script>
+</body></html>

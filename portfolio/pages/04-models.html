@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en"><head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>04 · Data becomes models | AidBio</title><meta name="description" content="Chapter 4 of the AidBio founder story: graph-based models that keep biological structure in the prediction.">
+<link rel="canonical" href="https://aidbio.org/portfolio/pages/04-models.html"><meta property="og:title" content="04 · Data becomes models | AidBio"><meta property="og:description" content="Chapter 4 of the AidBio founder story: graph-based models that keep biological structure in the prediction."><meta property="og:url" content="https://aidbio.org/portfolio/pages/04-models.html">
+<meta name="theme-color" content="#F8FAFC"><script src="../../assets/js/theme.js"></script>
+<link rel="icon" href="../../assets/img/favicon.png"><link rel="apple-touch-icon" href="../../assets/img/apple-touch-icon.png">
+<link rel="stylesheet" href="../../assets/css/aidbio.css"><link rel="stylesheet" href="../../portfolio/assets/site.css">
+</head><body class="has-subnav">
+<!--chrome:header active="about"-->
+<a class="skip-link" href="#main" data-i18n="nav.skip">Skip to content</a>
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="../../index.html" aria-label="AidBio home" data-i18n-attr="aria-label:nav.home"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="../../assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="../../assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span></a>
+    <nav class="nav-links" aria-label="Main navigation" data-i18n-attr="aria-label:nav.main">
+      <a href="../../solutions.html" data-nav="solutions" data-i18n="nav.capabilities">Capabilities</a>
+      <a href="../../work.html" data-nav="work" data-i18n="nav.work">Work</a>
+      <a href="../../tools.html" data-nav="tools" data-i18n="nav.software">Software</a>
+      <a href="../../about.html" data-nav="about" aria-current="page" data-i18n="nav.about">About</a>
+    </nav>
+    <div class="nav-actions">
+      <label class="theme-control"><span class="sr-only" data-i18n="theme.label">Theme preference</span><select data-theme-select aria-label="Theme preference" data-i18n-attr="aria-label:theme.label"><option value="system" data-i18n="theme.auto">Auto</option><option value="light" data-i18n="theme.light">Light</option><option value="dark" data-i18n="theme.dark">Dark</option></select></label>
+      <div class="desktop-language"></div>
+      <a class="btn btn-primary btn-sm nav-cta" href="../../index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+      <button class="icon-btn menu-btn" id="menuBtn" type="button" aria-label="Menu" data-i18n-attr="aria-label:nav.menu" aria-expanded="false" aria-controls="mobileMenu"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg></button>
+    </div>
+  </div>
+  <nav class="mobile-menu" id="mobileMenu" aria-label="Mobile navigation" data-i18n-attr="aria-label:nav.mobile">
+    <a href="../../solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="../../work.html" data-i18n="nav.work">Work</a><a href="../../tools.html" data-i18n="nav.software">Software</a><a href="../../about.html" data-i18n="nav.about">About</a>
+    <div class="mobile-language"></div>
+    <a class="btn btn-primary" href="../../index.html#contact" data-i18n="nav.contact">Discuss a project</a>
+  </nav>
+</header>
+<!--/chrome:header-->
+<!--chrome:subnav-->
+<nav class="subnav" aria-label="Founder story chapters"><div class="container"><a href="../../portfolio/index.html">The story</a><a href="../../portfolio/pages/01-mechanism.html">01 Mechanism</a><a href="../../portfolio/pages/02-networks.html">02 Networks</a><a href="../../portfolio/pages/03-data.html">03 Data</a><a href="../../portfolio/pages/04-models.html" aria-current="page">04 Models</a><a href="../../portfolio/pages/05-software.html">05 Software</a><a href="../../portfolio/pages/06-aidbio.html">06 AidBio</a><a href="../../portfolio/pages/07-portfolio.html">Applied work</a></div></nav>
+<!--/chrome:subnav-->
+<main id="main">
+<section class="hero">
+<div class="container">
+<div class="eyebrow">Chapter 04 · Data becomes models</div>
+<h1>Prediction should preserve biological structure.</h1>
+<p class="hero-desc">The strongest machine-learning work in this trajectory doesn't flatten biology into arbitrary spreadsheet rows and columns. It builds the relationships directly into how the model "sees" the data — as protein shapes, interaction networks, and organized biological categories.</p>
+</div>
+</section>
+<section class="section section-alt">
+<div class="container grid-2">
+<div>
+<div class="eyebrow">2026 · gPPIpred</div>
+<h2>Return to the protein-interaction question — now with <span class="accent-spectrum grad-iris">graphs</span>.</h2>
+<p>Years after running Y2H experiments by hand in the lab, gPPIpred answers the same kind of question — will these two proteins interact? — computationally instead. Each protein is represented as a 3D graph, where the building blocks (amino acids) are dots and physical closeness between them is the connecting lines. A machine-learning model then compares two of these protein graphs side by side and predicts whether they'll stick together, with attention-based views that can guide inspection. These computational attributions do not establish a binding mechanism or experimentally confirmed interface.</p>
+<p>The publication reports an independent validation set of 72,358 protein pairs, a Matthews correlation coefficient (MCC) of 0.4641, and 96% sensitivity at the selected threshold. These results belong to the paper's evaluation protocol; MCC is not an accuracy percentage, and the numbers do not establish performance on every new biological setting.</p>
+</div>
+<article class="paper-card">
+<div class="paper-image"><img src="../assets/figures/gppipred2026-fig1d.png" alt="ROC curve from the gPPIpred paper, AUC 0.8451"></div>
+<div class="paper-body">
+<div class="meta">MICROPUBLICATION BIOLOGY · 2026 · CC BY</div>
+<h3>gPPIpred</h3>
+<p class="citation">Matiolli CC†, Marques J†, Abreu IA. <em>gPPIpred: A User-Friendly PPI Predictor Based on Protein Molecular Graphs.</em> (2026). DOI: 10.17912/micropub.biology.001796.</p>
+<a href="https://pmc.ncbi.nlm.nih.gov/articles/PMC13109786/">Open article →</a></div>
+</article>
+</div>
+</section>
+<section class="section">
+<div class="container">
+<div class="section-title">
+<div class="eyebrow">Current graph-learning work</div>
+<h2>Aid2Go extends the <span class="accent-spectrum grad-iris">representation</span> problem.</h2>
+</div>
+<div class="grid-2">
+<div class="project-card"><span class="tag">PyTorch Geometric</span><span class="tag">ESM-2</span><span class="tag">Similarity graph</span><span class="tag">GO hierarchy</span>
+<h3 style="margin-top:13px">Protein function prediction as a heterogeneous graph</h3>
+<p>Aid2Go connects several kinds of protein information — ESM-2 sequence representations, a protein-similarity graph, the Gene Ontology hierarchy, and experimentally supported function annotations — into a single network. A protein's amino-acid sequence becomes just one input feeding that network, instead of being asked to explain everything on its own.</p>
+</div>
+<div class="figure figure-media"><svg viewBox="0 0 850 440" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Heterogeneous graph for protein function prediction"><style>.l{stroke:#cbd5e1;stroke-width:3}.t{font:600 16px system-ui;fill:#202735}.s{font:13px system-ui;fill:#64748b}</style><line class="l" x1="180" y1="130" x2="420" y2="100"/><line class="l" x1="180" y1="130" x2="420" y2="255"/><line class="l" x1="420" y1="100" x2="670" y2="165"/><line class="l" x1="420" y1="255" x2="670" y2="165"/><circle cx="180" cy="130" r="70" fill="#4d55c7"/><circle cx="420" cy="100" r="62" fill="#3aa879"/><circle cx="420" cy="255" r="62" fill="#3aa879"/><circle cx="670" cy="165" r="78" fill="#e7a83e"/><text class="t" x="180" y="136" text-anchor="middle" fill="white">Protein</text><text class="t" x="420" y="106" text-anchor="middle">Similarity</text><text class="t" x="420" y="261" text-anchor="middle">Sequence</text><text class="t" x="670" y="171" text-anchor="middle">GO terms</text><text class="s" x="425" y="380" text-anchor="middle">Biological structure is encoded in the representation before learning begins.</text></svg></div>
+</div>
+</div>
+</section>
+</main>
+<!--chrome:footer-->
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="footer-brand"><span class="brand-mark" aria-hidden="true"><img class="mark-light" src="../../assets/img/aidbio-mark-light.webp" alt=""><img class="mark-dark" src="../../assets/img/aidbio-mark-dark.webp" alt=""></span><span class="wordmark"><span class="w-aid">Aid</span><span class="w-bio">Bio</span></span><span data-i18n="footer.tagline">Scientific data, models, and software.</span></div>
+    <nav aria-label="Footer" data-i18n-attr="aria-label:footer.label">
+      <a href="../../solutions.html" data-i18n="nav.capabilities">Capabilities</a><a href="../../work.html" data-i18n="nav.work">Work</a><a href="../../tools.html" data-i18n="nav.software">Software</a><a href="../../about.html" data-i18n="nav.about">About</a><a href="../../portfolio/index.html" data-i18n="footer.story">Founder story</a><a href="https://github.com/matiollipt" rel="noopener">GitHub</a><a href="mailto:contact@aidbio.org">contact@aidbio.org</a>
+    </nav>
+    <div>© <span id="year">2026</span> AidBio</div>
+  </div>
+</footer>
+<!--/chrome:footer-->
+<script src="../../assets/js/app.js"></script>
+</body></html>

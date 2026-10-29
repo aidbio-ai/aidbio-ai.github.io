@@ -1,0 +1,814 @@
+{
+  "homepage": [
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "weather-temperature",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "weather-atmosphere",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "weather-soil",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "protein-ontology",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "protein-test",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "protein-tsne",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "protein-network",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "study-volcano",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "study-gsea",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "study-genes",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "study-pca",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "study-heatmap",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "weather-temperature",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "weather-atmosphere",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "weather-soil",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "protein-ontology",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "protein-test",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "protein-tsne",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "protein-network",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "study-volcano",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "study-gsea",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "study-genes",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "study-pca",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 239,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "study-heatmap",
+      "width": 305
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "weather-temperature",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "weather-atmosphere",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "weather-soil",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "protein-ontology",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "protein-test",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "protein-tsne",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "protein-network",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "study-volcano",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "study-gsea",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "study-genes",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "study-pca",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "light",
+      "view": "study-heatmap",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "weather-temperature",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "weather-atmosphere",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "weather-soil",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "protein-ontology",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "protein-test",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "protein-tsne",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "protein-network",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "study-volcano",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "study-gsea",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "study-genes",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "study-pca",
+      "width": 1425
+    },
+    {
+      "hidden": false,
+      "mediaWidth": 542,
+      "missing": 0,
+      "overflow": false,
+      "selected": "true",
+      "theme": "dark",
+      "view": "study-heatmap",
+      "width": 1425
+    }
+  ],
+  "portuguese": [
+    {
+      "caption": "T2M diária, máxima e mínima (°C, à esquerda); chuva (mm/dia, à direita). Os 366 dias, sem suavização.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "weather-temperature"
+    },
+    {
+      "caption": "DPV (kPa, à esquerda) e RH2M (%, à direita). A pressão (PS, kPa) aparece em uma faixa alinhada. DPV estimado da temperatura e umidade médias diárias.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "weather-atmosphere"
+    },
+    {
+      "caption": "GWETTOP, GWETROOT e GWETPROF: superfície, zona radicular e perfil completo. Mesma escala de saturação de 0 a 1; valores modelados, não sensores de campo.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "weather-soil"
+    },
+    {
+      "caption": "Uma mitocôndria e seu contexto na ontologia. Setas apontam aos termos pais; is_a contínuo, part_of tracejado. São relações da GO.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "protein-ontology"
+    },
+    {
+      "caption": "Q9NT62: os quatro maiores escores e as cinco anotações conhecidas no teste. Verde = conhecida; roxo = ausente, não um negativo confirmado. Inclui três anotações não recuperadas. Exemplo interno, não uma medida geral de desempenho.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "protein-test"
+    },
+    {
+      "caption": "Os 1.000 embeddings salvos de termos GO. Cores: processo biológico (BP), função molecular (MF) e componente celular (CC). Projeção exploratória com eixos arbitrários; não valida o modelo.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "protein-tsne"
+    },
+    {
+      "caption": "35 proteínas e 153 arestas de similaridade de embeddings ao redor de Q80Y84. Tamanho por grau. As arestas são similaridades computacionais, não interações experimentais.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "protein-network"
+    },
+    {
+      "caption": "Todos os resultados gênicos finitos. Cor: p ajustado < 0,05 e |log₂FC| ≥ 1. Visão limitada a ±20 e −log₁₀(padj) = 100; figura completa e dados no link abaixo.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "study-volcano"
+    },
+    {
+      "caption": "Os quatro maiores escores de enriquecimento GO (NES) em cada direção, entre termos com FDR < 0,05. Negativos favorecem ápices de duas semanas; positivos, inflorescências de quatro semanas.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "study-gsea"
+    },
+    {
+      "caption": "Cinco genes em cada direção, ordenados pela estatística de Wald do DESeq2 com sinal. Valores positivos favorecem inflorescências de quatro semanas. Tabelas completas acompanham as figuras.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "study-genes"
+    },
+    {
+      "caption": "Visão das seis amostras da análise salva do AidCistrome. Idade e tecido variam juntos neste contraste; a separação não identifica seus efeitos independentes.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "study-pca"
+    },
+    {
+      "caption": "Genes mais variáveis entre as seis amostras. Esta visão exploratória complementa a análise formal de expressão diferencial.",
+      "language": "pt-BR",
+      "overflow": false,
+      "view": "study-heatmap"
+    }
+  ],
+  "study": [
+    {
+      "caption": 173,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "volcano",
+      "width": 305
+    },
+    {
+      "caption": 190,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "gsea",
+      "width": 305
+    },
+    {
+      "caption": 157,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "top-genes",
+      "width": 305
+    },
+    {
+      "caption": 187,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "pca",
+      "width": 305
+    },
+    {
+      "caption": 162,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "heatmap",
+      "width": 305
+    },
+    {
+      "caption": 174,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "ma",
+      "width": 305
+    },
+    {
+      "caption": 154,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "gsea-running",
+      "width": 305
+    },
+    {
+      "caption": 173,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "volcano",
+      "width": 305
+    },
+    {
+      "caption": 190,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "gsea",
+      "width": 305
+    },
+    {
+      "caption": 157,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "top-genes",
+      "width": 305
+    },
+    {
+      "caption": 187,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "pca",
+      "width": 305
+    },
+    {
+      "caption": 162,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "heatmap",
+      "width": 305
+    },
+    {
+      "caption": 174,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "ma",
+      "width": 305
+    },
+    {
+      "caption": 154,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "gsea-running",
+      "width": 305
+    },
+    {
+      "caption": 173,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "volcano",
+      "width": 1425
+    },
+    {
+      "caption": 190,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "gsea",
+      "width": 1425
+    },
+    {
+      "caption": 157,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "top-genes",
+      "width": 1425
+    },
+    {
+      "caption": 187,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "pca",
+      "width": 1425
+    },
+    {
+      "caption": 162,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "heatmap",
+      "width": 1425
+    },
+    {
+      "caption": 174,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "ma",
+      "width": 1425
+    },
+    {
+      "caption": 154,
+      "missing": 0,
+      "overflow": false,
+      "theme": "light",
+      "view": "gsea-running",
+      "width": 1425
+    },
+    {
+      "caption": 173,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "volcano",
+      "width": 1425
+    },
+    {
+      "caption": 190,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "gsea",
+      "width": 1425
+    },
+    {
+      "caption": 157,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "top-genes",
+      "width": 1425
+    },
+    {
+      "caption": 187,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "pca",
+      "width": 1425
+    },
+    {
+      "caption": 162,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "heatmap",
+      "width": 1425
+    },
+    {
+      "caption": 174,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "ma",
+      "width": 1425
+    },
+    {
+      "caption": 154,
+      "missing": 0,
+      "overflow": false,
+      "theme": "dark",
+      "view": "gsea-running",
+      "width": 1425
+    }
+  ],
+  "report": [
+    {
+      "charts": 6,
+      "overflow": false,
+      "theme": "dark",
+      "tickColors": [
+        "rgb(180, 188, 201)",
+        "rgb(180, 188, 201)"
+      ],
+      "width": 305
+    },
+    {
+      "charts": 6,
+      "overflow": false,
+      "theme": "dark",
+      "width": 1425
+    },
+    {
+      "charts": 6,
+      "overflow": false,
+      "theme": "light",
+      "width": 1425
+    }
+  ],
+  "auto": {
+    "actualOS": "light",
+    "resolved": "light"
+  },
+  "crossTabReport": "dark synchronized from homepage",
+  "reload": "dark persisted"
+}

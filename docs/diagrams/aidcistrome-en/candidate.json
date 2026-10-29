@@ -1,0 +1,188 @@
+{
+  "schema_version": 1,
+  "diagram_type": "dataflow",
+  "meta": {
+    "title": "AidCistrome: SRA reads to candidate TF motifs",
+    "locale": "en",
+    "output": "docs/diagrams/aidcistrome-en/diagram.html",
+    "quality_profile": "showcase",
+    "repository": {
+      "url": "git@github.com:matiollipt/aidcistrome.git",
+      "revision": "679e0d6d72782f9a3783b77c23255f46d8915854",
+      "link_mode": "local-only"
+    }
+  },
+  "stages": [
+    {
+      "label": "Inputs"
+    },
+    {
+      "label": "Prepare"
+    },
+    {
+      "label": "Review + DE"
+    },
+    {
+      "label": "Interpret"
+    },
+    {
+      "label": "Deliver"
+    }
+  ],
+  "nodes": [
+    {
+      "id": "sra",
+      "type": "external",
+      "label": "Public SRA",
+      "stage": 0,
+      "row": 0,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 3,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "profile",
+      "type": "database",
+      "label": "Genome + GO",
+      "stage": 0,
+      "row": 3,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 13,
+          "end_line": 23
+        }
+      ]
+    },
+    {
+      "id": "quant",
+      "type": "backend",
+      "label": "QC + counts",
+      "stage": 1,
+      "row": 0,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 3,
+          "end_line": 10
+        }
+      ]
+    },
+    {
+      "id": "design",
+      "type": "backend",
+      "label": "Review design",
+      "stage": 2,
+      "row": 0,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 30,
+          "end_line": 36
+        }
+      ]
+    },
+    {
+      "id": "de",
+      "type": "backend",
+      "label": "DESeq2",
+      "stage": 2,
+      "row": 3,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 44,
+          "end_line": 49
+        }
+      ]
+    },
+    {
+      "id": "sets",
+      "type": "backend",
+      "label": "GO gene sets",
+      "stage": 3,
+      "row": 0,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 44,
+          "end_line": 49
+        }
+      ]
+    },
+    {
+      "id": "motifs",
+      "type": "backend",
+      "label": "TF motifs",
+      "stage": 3,
+      "row": 3,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 51,
+          "end_line": 54
+        }
+      ]
+    },
+    {
+      "id": "figures",
+      "type": "database",
+      "label": "Plots + TFs",
+      "stage": 4,
+      "row": 1,
+      "sources": [
+        {
+          "path": "README.md",
+          "line": 44,
+          "end_line": 54
+        }
+      ]
+    }
+  ],
+  "flows": [
+    {
+      "from": "sra",
+      "to": "quant",
+      "label": "reads"
+    },
+    {
+      "from": "profile",
+      "to": "quant",
+      "label": "reference"
+    },
+    {
+      "from": "quant",
+      "to": "design",
+      "label": "sample counts"
+    },
+    {
+      "from": "design",
+      "to": "de",
+      "label": "approved contrasts"
+    },
+    {
+      "from": "de",
+      "to": "sets",
+      "label": "ranked genes"
+    },
+    {
+      "from": "sets",
+      "to": "motifs",
+      "label": "selected sets"
+    },
+    {
+      "from": "sets",
+      "to": "figures",
+      "label": "GO results"
+    },
+    {
+      "from": "motifs",
+      "to": "figures",
+      "label": "motif candidates"
+    }
+  ]
+}
