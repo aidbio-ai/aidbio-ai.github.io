@@ -1,5 +1,25 @@
 # Verification record
 
+## Homepage services and interactive workflow — 30 October 2026
+
+Replaced the three hero bullets with four service cards: scientific consulting, AI and data science, scientific software and reporting, and training and knowledge transfer. The cards use small inline SVG icons, semantic theme tokens, 16px titles and 15px descriptions; their two-column grid becomes one column below 480px. Hero headline, introductory copy, delivery promise and CTAs are preserved.
+
+Consolidated the former process section into a compact four-stage workflow immediately before Applications, retaining `#process`. Native buttons preview a stage on pointer hover or keyboard focus; click, Enter and Space save the selection. Leaving the controls restores the selected description. `aria-pressed` identifies the saved selection; the visible preview has an accent border and keyboard focus has a 3px outline. All descriptions stay in the DOM and use the existing EN/PT text-only translation mechanism. Their shared grid cell reserves the tallest description, including hidden panels, to keep stage changes stable. No new animation or dependencies were added; the existing reduced-motion rule suppresses border/background transitions.
+
+When scripts fail to load, the workflow controls remain hidden and all four descriptions are readable. Existing translation keys used by the retained design mock remain available. The referenced `../examples/` design files are absent in this checkout; implementation follows the task brief and current shared CSS tokens without changing global fonts or branding.
+
+Checks completed:
+
+- Chrome and application-card generation checks, site checker (23 pages), scientific-example checksums/data checks, all six theme tests, JavaScript syntax checks for theme/app/i18n/home, and `git diff --check` pass.
+- In-app browser: EN and PT at 320, 375, 768 and 1440px in Light and Dark (16 combinations). Each has four service cards, no horizontal document overflow and no completed visible broken image. All four workflow stages were selected in every combination. Panel height remained identical across stages at each language/width/theme; [measurements](review/homepage-services-workflow/layout-checks.json) are retained. Final spacing changes affect the introduction only.
+- Real mouse pointer movement previewed Discover & Predict without changing the saved Analyze selection; leaving restored Analyze. Tab focus previewed Analyze while Design remained selected. Enter and Space saved selection. Switching EN to PT preserved stage 3 and translated its active title and description. In the accessibility tree, only the visible description is exposed. Mobile menu Escape closes the menu and returns focus to its button. The `#process` link reaches the new component.
+- Existing Aid2GO/AidCistrome/AidWeather preview selection, expanded scientific figure opening/closing, and AidWeather card opening/closing with its matching diagram source work. Generated header/footer, application markup and hero scientific examples are byte-identical to the starting commit. Browser console showed no warnings or errors during these checks.
+- A temporary copy with all script tags removed showed four readable workflow descriptions, hidden controls, no mobile overflow and the CSS light fallback matching the browser's light OS preference. The temporary file was removed. English and Auto were restored after browser checks; the viewport override was reset. Existing theme tests cover live OS preference changes.
+
+Screenshots: [desktop services](review/homepage-services-workflow/desktop-services-en.jpg), [desktop workflow](review/homepage-services-workflow/desktop-workflow-en.jpg), [Portuguese mobile services in dark theme](review/homepage-services-workflow/mobile-services-pt-dark.jpg), [Portuguese mobile workflow in dark theme](review/homepage-services-workflow/mobile-workflow-pt-dark.jpg).
+
+Limits: viewport emulation and mouse/keyboard checks, not a physical touch-device or screen-reader test. The fallback check removed scripts rather than changing browser JavaScript settings. The live OS theme and reduced-motion preference were not changed. No deployment, DNS changes or scientific analysis runs were performed.
+
 ## Application card follow-up — 26 October 2026
 
 AidWeather now uses its project logo and a light terminal animation that loops when the card opens. The GIF and install commands no longer show recording notes or Play/Pause controls. Reduced-motion visitors see the still poster in place of the GIF. Command boxes use the page's light or dark surface tokens. The redundant introduction above the cards is gone. AidFarm's content was left as previously reviewed.
