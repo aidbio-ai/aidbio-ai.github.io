@@ -1,5 +1,26 @@
 # Verification record
 
+## Homepage release finishing and animated workflow — 30 October 2026
+
+Removed the hero topic pill and delivery-promise paragraph; moved the bench-to-field sentence below the service cards. The existing decorative logo sits behind and above the headline with empty alternative text. Hero plots now have one concise caption per view, including translated SVG descriptions, with no expansion buttons, raw-data links or window footer. The weather preview links to the AidWeather-Report application card and identifies its use of open-source AidWeather. Updated the report card name and its generated source, including the retained design mock.
+
+Adapted the supplied infinity-loop implementation into local, dependency-free HTML/CSS/JavaScript. It includes animated SVG streams and canvas particles, automatic progression, pause/resume, one-cycle playback, full-loop/spotlight modes, vector and card stage selection, method details and four interactive schematic examples. Viewport visibility suspends the animation. Manual selection stops automatic progression; keyboard navigation is scoped to the workflow. Reduced motion disables automatic playback and keeps manual selection. The template's random power values, biomarker scores and validation/reproducibility guarantees were excluded. See [implementation and source notes](homepage-interactive-workflow.md).
+
+Added an illustrated AidWiki preview after inspecting its current MCP, reference matching and reporting documentation. It shows a report-agent request, retrieval of candidate claims/passages/references, a quotation-location check, and review before citation. It is an illustration, with no live query or invented scientific claim/reference.
+
+Actual checks:
+
+- Chrome and application-card synchronization; site links/fragments/alt text/one h1/EN-PT keys (23 pages); unchanged scientific-asset checksums and example data checks; all six theme tests; syntax checks for theme/app/i18n/home/home-workflow; Python parsing and Git whitespace checks pass. Running the preview generator again produced identical homepage bytes.
+- Workflow: EN/PT, Light/Dark, 320/375/768/1440px (16 combinations), selecting all four stages in each. No document overflow or completed visible broken image; exactly one description exposed. All four panels have equal height within each combination. [Measurements](review/homepage-release/layout-checks.json).
+- Inspected the desktop hero and full infinity component, and Portuguese mobile in dark theme. All twelve plot views plus AidWiki were checked at 1440px/English/Light and 320px/Portuguese/Dark (26 completed observations): no overflow, expansion controls or completed visible broken images. [Measurements](review/homepage-release/preview-checks.json). The visual checks include the four service cards, decorative logo, wrapped tab bar and concise captions.
+- Arrow-key navigation moves selection and focus; Enter selects a vector region; focus outline is 3px. All twelve method buttons change the corresponding description without changing panel height. Block randomization retains C/T1/T2/T3 once in each block; processing toggles its illustrative view; the network action changes the highlighted node; delivery returns selection and focus to Design.
+- Full-loop mode illuminates all four quadrants. One-cycle playback progresses through the stages, returns to Design and stops. Canvas sizes to the component. The workflow enters its offscreen-paused state when the hero is in view. AidWiki replay advances through its four steps; EN/PT changes its text and preserves workflow selection. No browser console warnings or errors were observed in the completed checks.
+- A temporary deterministic media-change fixture exercised the reduced-motion controller: animation paused, playback controls disabled and manual stage selection still worked. Fixture CSS supplied the corresponding visual media state; the actual OS preference was not changed. A separate script-free copy exposed all four descriptions, hid playback controls and SVG keyboard targets, and had no animation or desktop overflow. Both fixture files were removed.
+
+Screenshots: [hero and AidWiki](review/homepage-release/hero-aidwiki-en.jpg), [complete desktop workflow](review/homepage-release/workflow-desktop-en.jpg), [mobile workflow in Portuguese](review/homepage-release/workflow-mobile-pt-dark.jpg), [mobile AidWiki in Portuguese](review/homepage-release/aidwiki-mobile-pt-dark.jpg).
+
+Limits: browser viewport checks rather than physical touch-device or screen-reader testing; reduced motion was exercised with a deterministic fixture rather than a live OS setting. The script-free check covers script failure, not a browser-wide JavaScript preference change. No upstream scientific application, training or analysis was run. This revision has not been committed, pushed or deployed.
+
 ## Homepage services and interactive workflow — 30 October 2026
 
 Replaced the three hero bullets with four service cards: scientific consulting, AI and data science, scientific software and reporting, and training and knowledge transfer. The cards use small inline SVG icons, semantic theme tokens, 16px titles and 15px descriptions; their two-column grid becomes one column below 480px. Hero headline, introductory copy, delivery promise and CTAs are preserved.
@@ -203,3 +224,16 @@ Full pending-site commit review — 29 October 2026:
 - Scope: commit and push the pending site tree on `new-look`; no DNS changes or application-analysis reruns.
 
 - Full staged-file whitespace check revealed upstream trailing spaces in two font licences and ten hash-pinned generated diagram HTML files. `.gitattributes` exempts only their trailing-space checks, preserving original bytes and provenance receipts. All ten diagram SHA-256 hashes match their delivery receipts. Other paths retain normal Git whitespace checks.
+
+Homepage simplification — 31 October 2026:
+- Removed the watermark behind the hero headline, the four duplicate stage cards below the infinity animation, and the standalone homepage Capabilities section. Retained the top service descriptions, animation, stage information panels, application examples, and navigation to `solutions.html`.
+- Moved keyboard focus destinations from the removed cards to the stage labels beside the animation; removed card progress updates and unused watermark/card CSS. Stage controls identify their corresponding information panels with `aria-controls`.
+- Browser checks at 1440px and 320px: EN/PT in light and dark themes; no horizontal document overflow. Confirmed the removed elements are absent, completed images have no loading failures, and the mobile menu exposes the language selector. Visually inspected the workflow in desktop dark and mobile light/dark layouts.
+- Passed stage-label clicks, a pointer click on the discovery logo segment, SVG Enter activation, Left/Right arrows, Home/End, visible keyboard focus, and the delivery panel's return-to-design action. English and Auto were restored. No browser console warnings or errors were captured.
+- Passed: local HTTP 200; chrome generation check; site checker (23 pages); all six theme tests (including live OS-change behavior); syntax checks for theme/app/i18n/home-workflow; Git whitespace check. The script-failure fallback was inspected in source: all four descriptions remain in HTML and enhanced controls are hidden until initialization. A JavaScript-disabled browser run, physical touch, and live OS-theme switching were not performed.
+- Changes remain local and uncommitted; no deployment performed.
+
+Commit preparation — 31 October 2026:
+- Reviewed the complete 18-file pending homepage update, including the workflow controller/styles, preview generator, EN/PT strings, generated application cards, implementation notes, and retained 30 October browser evidence. The 31 October simplification checks above describe the final layout; the older screenshots document the preceding revision.
+- Re-ran chrome and application-card synchronization, the 23-page site checker, scientific-example checksums/data checks, six theme tests, JavaScript syntax checks, Python parsing, and Git whitespace checks: all passed. Preview regeneration preserved identical homepage and translation bytes. Pending-file size and credential-pattern checks passed.
+- Fetched `origin`; local `main` matched `origin/main` before the commit. GitHub Pages configuration confirms publication from `main` at `/`. Browser checks from the preceding edit remain applicable; no additional browser audit was run for this commit request.

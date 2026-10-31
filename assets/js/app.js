@@ -33,41 +33,6 @@
   var year = document.getElementById('year');
   if (year) year.textContent = new Date().getFullYear();
 
-  // Service lifecycle: hover/focus preview a stage; activation saves the selection.
-  // All descriptions stay in the DOM so i18n and the no-script fallback share copy.
-  document.querySelectorAll('.workflow').forEach(function (workflow) {
-    var buttons = Array.prototype.slice.call(workflow.querySelectorAll('[data-workflow-step]'));
-    var panels = Array.prototype.slice.call(workflow.querySelectorAll('.workflow-detail'));
-    if (!buttons.length || buttons.length !== panels.length) return;
-    var selected = buttons[0];
-    function show(button) {
-      buttons.forEach(function (item) {
-        var active = item === button;
-        item.classList.toggle('is-active', active);
-        item.setAttribute('aria-pressed', String(item === selected));
-        document.getElementById(item.getAttribute('aria-controls')).hidden = !active;
-      });
-    }
-    function restore() {
-      var focused = buttons.find(function (button) { return button === document.activeElement; });
-      show(focused || selected);
-    }
-    buttons.forEach(function (button) {
-      button.disabled = false;
-      button.addEventListener('pointerenter', function (event) {
-        if (event.pointerType !== 'touch') show(button);
-      });
-      button.addEventListener('focus', function () { show(button); });
-      button.addEventListener('click', function () { selected = button; show(button); });
-    });
-    workflow.querySelector('.workflow-steps').addEventListener('pointerleave', restore);
-    workflow.addEventListener('focusout', function (event) {
-      if (buttons.indexOf(event.relatedTarget) === -1) show(selected);
-    });
-    show(selected);
-    workflow.classList.add('is-interactive');
-  });
-
   // Nested scientific examples. Cross-dissolve, with immediate reduced-motion fallback.
   document.querySelectorAll('[role="tablist"]').forEach(function (list) {
     var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
