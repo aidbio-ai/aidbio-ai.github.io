@@ -173,3 +173,60 @@
   .workflow-blocks > div > div { gap: 4px; }
 }
 @media (prefers-reduced-motion: reduce) { .workflow *, .wiki-demo * { animation: none !important; transition: none !important; } .workflow-particles { display: none; } }
+
+/* Partnership copy and discrete, scannable service outputs. */
+.life-sciences { color: var(--emerald-text); font-weight: 800; }
+.together { color: var(--brand-blue-deep); font-weight: 800; text-decoration: underline; text-decoration-color: var(--brand-orange); text-underline-offset: .18em; }
+.service-points { grid-column: 1 / -1; margin: 0; padding-left: 1.05rem; display: grid; gap: 6px; color: var(--text-secondary); font-size: .9375rem; line-height: 1.45; }
+.service-points li::marker { color: var(--service-accent); }
+.plot-playback { display: flex; justify-content: flex-end; }
+.plot-playback .btn { font: 500 .75rem/1.5 var(--font-sans); min-height: 36px; padding: 6px 10px; }
+
+/* A connected evidence pathway; numbers retain sequence without color. */
+.wiki-pathway { width: 100%; }
+.wiki-botanical { display: block; width: 100%; height: 44px; margin-bottom: 16px; opacity: .65; }
+.wiki-exchange { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 28px 24px; }
+.wiki-exchange li { grid-template-columns: 1fr; align-content: start; gap: 10px; padding: 16px; border: 1px solid var(--border-subtle); border-top: 3px solid var(--brand-blue); border-radius: 12px; background: var(--surface-elevated); }
+.wiki-exchange li:nth-child(3) { grid-column: 2; grid-row: 2; border-top-color: var(--emerald-text); }
+.wiki-exchange li:nth-child(4) { grid-column: 1; grid-row: 2; border-top-color: var(--brand-orange); }
+.wiki-exchange li::after { position: absolute; border: 0 !important; color: var(--brand-blue-deep); font: 1.4rem/1 var(--font-sans); }
+.wiki-exchange li:nth-child(1)::after { content: '→'; top: 50%; left: calc(100% + 3px); bottom: auto; }
+.wiki-exchange li:nth-child(2)::after { content: '↓'; top: calc(100% + 3px); left: 50%; bottom: auto; }
+.wiki-exchange li:nth-child(3)::after { content: '←'; top: 50%; right: calc(100% + 3px); left: auto; bottom: auto; color: var(--emerald-text); }
+.wiki-node { width: 38px; height: 34px; background: var(--surface-card); }
+.wiki-node svg { width: 24px; height: 24px; }
+.wiki-brand img { width: 32px; height: auto; }
+.wiki-step { float: right; font: .6875rem/1.6 var(--font-mono); color: var(--text-muted); margin-left: 6px; }
+.wiki-exchange strong { display: block; font-size: .875rem; }
+.wiki-exchange p { font-size: .8125rem; }
+.wiki-return { display: flex; align-items: center; justify-content: center; gap: 10px; margin-top: 16px; padding: 10px; border-top: 1px dashed var(--brand-orange); color: var(--brand-orange-deep); font: .75rem/1.5 var(--font-sans); text-align: center; }
+
+/* Infinity left, stage banner right. Each existing workbench stays interactive. */
+.workflow-layout { display: grid; gap: 24px; align-items: start; }
+.workflow-centerpiece { margin-bottom: 0; min-width: 0; }
+.workflow-details { min-width: 0; }
+.workflow-detail { grid-template-columns: minmax(0, 1fr); gap: 20px; padding: 24px; }
+.workflow-next { margin-top: 16px; width: 100%; justify-content: space-between; border-color: var(--stage-accent); color: var(--stage-accent); }
+.workflow-detail .workflow-methods-label { margin-top: 18px; }
+@media (min-width: 1100px) {
+  .workflow-layout { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 28px; }
+  .workflow-centerpiece { position: sticky; top: 100px; }
+  .workflow-topline { padding: 20px 20px 8px; }
+  .workflow-art { margin-block: 20px; }
+  .workflow-pill { font-size: .6875rem; padding-inline: 8px; }
+  .workflow-pill-number { display: none; }
+  .workflow-live { border-radius: 8px; }
+}
+@media (max-width: 767px) {
+  .workflow-detail { padding: 16px; }
+}
+@media (max-width: 420px) {
+  .service-points { grid-column: 2; }
+  .wiki-exchange { grid-template-columns: minmax(0, 1fr); gap: 24px; }
+  .wiki-exchange li { grid-template-columns: 34px minmax(0, 1fr); padding: 12px; }
+  .wiki-exchange li:nth-child(n) { grid-column: auto; grid-row: auto; }
+  .wiki-exchange li:nth-child(-n+3)::after { content: '↓'; top: calc(100% + 1px); left: 50%; right: auto; }
+  .wiki-node { width: 30px; }
+}
+.app-wiki-workflow { min-width: 0; }
+.app-wiki-workflow .wiki-demo { max-width: 680px; margin-inline: auto; }

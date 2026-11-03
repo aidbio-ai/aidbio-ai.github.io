@@ -19,13 +19,13 @@
         if (copy[parts[1]] !== undefined) element.setAttribute(parts[0], copy[parts[1]]);
       });
     });
-    document.title = copy['meta.title'];
+    document.title = copy[document.documentElement.getAttribute('data-title-key') || 'meta.title'] || copy['meta.title'];
     ['description', 'og:description'].forEach(function (name) {
       var meta = document.querySelector('meta[name="' + name + '"],meta[property="' + name + '"]');
       if (meta) meta.content = copy['meta.description'];
     });
     var title = document.querySelector('meta[property="og:title"]');
-    if (title) title.content = copy['meta.title'];
+    if (title) title.content = document.title;
     document.querySelectorAll('[data-language-select]').forEach(function (select) { select.value = language; });
     try { localStorage.setItem('aidbio-lang', language); } catch (error) {}
     document.dispatchEvent(new CustomEvent('aidbio:language', { detail: language }));

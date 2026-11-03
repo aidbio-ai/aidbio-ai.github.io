@@ -143,6 +143,19 @@
     play.addEventListener('click', function () { playing = !playing; elapsed = 0; last = null; render(); schedule(); });
     mode.addEventListener('click', function () { full = !full; render(); });
     wave.addEventListener('click', pulseCycle);
+    root.querySelectorAll('[data-flow-next]').forEach(function (button) {
+      button.hidden = false;
+      button.addEventListener('click', function () {
+        var stage = Number(button.dataset.flowNext);
+        select(stage, true);
+        // Keep focus on the newly exposed banner, so the next action stays nearby.
+        var next = details[stage - 1].querySelector('[data-flow-next]');
+        setTimeout(function () {
+          if (selected === stage) next.focus({ preventScroll: true });
+        }, reduced.matches ? 0 : 350);
+        if (stage === 1) pulseCycle();
+      });
+    });
     root.querySelectorAll('[data-flow-cap]').forEach(function (button) {
       button.addEventListener('click', function () {
         var panel = button.closest('.workflow-detail');
@@ -221,6 +234,6 @@
     });
     function motionChange() { if (reduced.matches) reset(); }
     if (reduced.addEventListener) reduced.addEventListener('change', motionChange);
-    document.addEventListener('aidbio:tab', function () { if (document.querySelector('#tab-wiki').getAttribute('aria-selected') !== 'true') reset(); });
+    document.addEventListener('aidbio:tab', function () { var tab = document.querySelector('#tab-wiki'); if (!tab || tab.getAttribute('aria-selected') !== 'true') reset(); });
   });
 })();

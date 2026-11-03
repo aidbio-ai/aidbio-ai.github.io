@@ -30,7 +30,8 @@ def previews(family, views):
         else:
             media = f'<img src="assets/examples/{image}" alt="{html.escape(label)} · PRJNA968041" loading="lazy" width="900" height="650">'
         panels += f'<div role="tabpanel" class="plot-panel" id="panel-{tid}" aria-labelledby="tab-{tid}"{ " hidden" if i else ""}><div class="preview-plot">{media}</div>'+translated('caption.'+tid,caption,caption_pt,'p','class="note plot-caption"')+'</div>'
-    return tabs+'</div><div class="plot-stage">'+panels+'</div>'
+    controls = '<div class="plot-playback"><button type="button" class="btn btn-secondary btn-sm" data-plot-play aria-pressed="true" hidden>'+translated('plot.pause','Pause figures','Pausar figuras')+'</button></div>'
+    return tabs+'</div><div class="plot-stage">'+panels+'</div>'+controls
 
 
 weather = [('temperature',

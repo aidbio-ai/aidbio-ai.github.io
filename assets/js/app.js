@@ -37,6 +37,31 @@
   document.querySelectorAll('[role="tablist"]').forEach(function (list) {
     var tabs = Array.prototype.slice.call(list.querySelectorAll('[role="tab"]'));
     var animations = [];
+    var timer = 0;
+    var family = list.closest('.hero-preview .family-stage > .panel');
+    var playback = family && family.querySelector('[data-plot-play]');
+    var motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+    var playing = !motion.matches;
+    var inView = false;
+    function schedule() {
+      clearTimeout(timer);
+      if (!playback || !playing || motion.matches || !inView || document.hidden || family.hidden || family.inert || document.querySelector('dialog[open]') || family.matches(':hover') || family.contains(document.activeElement)) return;
+      timer = setTimeout(function () {
+        var current = tabs.findIndex(function (tab) { return tab.getAttribute('aria-selected') === 'true'; });
+        select(tabs[(current + 1) % tabs.length]);
+      }, 6500);
+    }
+    function syncPlayback() {
+      if (!playback) return;
+      var lang = document.documentElement.lang === 'pt-BR' ? 'pt' : 'en';
+      var key = playing ? 'plot.pause' : 'plot.play';
+      var label = playback.querySelector('[data-i18n]');
+      label.setAttribute('data-i18n', key);
+      label.textContent = window.AIDBIO_STRINGS && window.AIDBIO_STRINGS[lang][key] || (playing ? 'Pause figures' : 'Play figures');
+      playback.setAttribute('aria-pressed', String(playing));
+      playback.disabled = motion.matches;
+      schedule();
+    }
     function select(tab) {
       if (tab.getAttribute('aria-selected') === 'true') return;
       animations.forEach(function (animation) { animation.cancel(); });
@@ -70,13 +95,30 @@
     tabs.forEach(function (t, i) {
       t.addEventListener('click', function () { select(t); });
       t.addEventListener('keydown', function (e) {
-        var n = e.key === 'ArrowRight' ? i + 1 : e.key === 'ArrowLeft' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : null;
+        var vertical = list.getAttribute('aria-orientation') === 'vertical';
+        var n = e.key === 'ArrowRight' || vertical && e.key === 'ArrowDown' ? i + 1 : e.key === 'ArrowLeft' || vertical && e.key === 'ArrowUp' ? i - 1 : e.key === 'Home' ? 0 : e.key === 'End' ? tabs.length - 1 : null;
         if (n === null) return;
         e.preventDefault();
         var target = tabs[(n + tabs.length) % tabs.length];
         select(target); target.focus();
       });
     });
+    if (playback) {
+      playback.hidden = false;
+      playback.addEventListener('click', function () { playing = !playing; syncPlayback(); });
+      ['pointerenter', 'pointerleave', 'focusin'].forEach(function (event) { family.addEventListener(event, schedule); });
+      family.addEventListener('focusout', function () { setTimeout(schedule, 0); });
+      document.addEventListener('aidbio:tab', schedule);
+      document.addEventListener('visibilitychange', schedule);
+      document.addEventListener('aidbio:language', syncPlayback);
+      function motionChange() { if (motion.matches) playing = false; syncPlayback(); }
+      if (motion.addEventListener) motion.addEventListener('change', motionChange);
+      else motion.addListener(motionChange);
+      if ('IntersectionObserver' in window) {
+        new IntersectionObserver(function (entries) { inView = entries[0].isIntersecting; schedule(); }, { threshold: .15 }).observe(family);
+      } else { inView = true; }
+      syncPlayback();
+    }
   });
 
   // Full-size scientific figures remain readable on narrow screens.
@@ -147,8 +189,20 @@
   function openApplicationHash() {
     var target = document.getElementById(location.hash.slice(1));
     if (target && target.classList.contains('app-card')) target.open = true;
+    if (target && target.classList.contains('application-sheet')) {
+      var tab = document.getElementById(target.getAttribute('aria-labelledby'));
+      if (tab) tab.click();
+      // Reveal hidden destinations before positioning an incoming deep link.
+      requestAnimationFrame(function () { target.scrollIntoView({ block: 'start', behavior: 'instant' }); });
+    }
   }
   window.addEventListener('hashchange', openApplicationHash);
+  document.querySelectorAll('a[href^="#app-"]').forEach(function (link) {
+    link.addEventListener('click', function () {
+      // A repeated link does not emit hashchange after the reader switches panels.
+      if (link.hash === location.hash) openApplicationHash();
+    });
+  });
   openApplicationHash();
 
   // Copy-to-clipboard buttons: <button class="copy-btn" data-copy="text">.
