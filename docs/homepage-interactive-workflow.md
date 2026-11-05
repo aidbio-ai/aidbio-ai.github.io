@@ -27,6 +27,12 @@ The graphic illustrates a successful retrieval-and-review path, not a live execu
 
 See [verification](verification.md) for actual browser checks and their limitations.
 
+## Workflow controls — 5 November 2026
+
+The workflow heading now reads “From experimental design to results” in English, with matching Portuguese copy. A single “Animate” action (“Animar” in Portuguese) sits at the upper right inside the infinity panel. It replaces the Auto-cycle, view-mode and full-cycle pulse controls. The leaf and node motifs retain their geometry and click targets but no longer scale or rotate; ribbon streams and particles continue moving.
+
+Automatic stage progression starts on page load unless reduced motion is requested. Clicking a stage, capability or workbench control pauses progression until Animate is activated. Keyboard stage navigation and Enter/Space activation inside a workbench also pause progression. Animate resumes a paused cycle and leaves an already running cycle and its timer unchanged. Hover can still preview a stage; keyboard focus within stage controls or a workbench temporarily holds progression so focused content is not hidden. Viewport, document visibility, reduced-motion and script-failure guards remain.
+
 ## Homepage simplification — 31 October 2026
 
 The decorative hero watermark, duplicated stage-card row, and standalone Capabilities section were removed. The infinity regions and their adjacent stage labels select the existing information panel. Arrow keys, Home/End, and the delivery panel’s next-cycle action focus those labels. All four descriptions remain readable when scripts fail. The Capabilities navigation still opens the dedicated solutions page.

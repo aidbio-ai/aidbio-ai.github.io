@@ -13,9 +13,9 @@
     var controls = Array.from(root.querySelectorAll('[data-flow-stage]'));
     var stageButtons = [1, 2, 3, 4].map(function (i) { return root.querySelector('.workflow-pill[data-flow-stage="' + i + '"]'); });
     var details = Array.from(root.querySelectorAll('.workflow-detail'));
-    var play = root.querySelector('[data-flow-play]'), mode = root.querySelector('[data-flow-mode]'), wave = root.querySelector('[data-flow-wave]');
+    var animate = root.querySelector('[data-flow-animate]');
     var canvas = root.querySelector('canvas'), ctx = canvas.getContext && canvas.getContext('2d');
-    var selected = 1, preview = null, playing = !reduced.matches, full = false;
+    var selected = 1, preview = null, playing = !reduced.matches;
     var visible = false, frame = 0, last = null, elapsed = 0, phase = 0;
     var duration = 6500, burstParticles = [], waveAge = -1, waveStage = 0;
     var colors = ['#22c55e', '#0284c7', '#d946ef', '#f97316'];
@@ -37,16 +37,16 @@
       root.dataset.focusStage = String(focus);
       for (var i = 1; i <= 4; i++) {
         var quad = root.querySelector('#wf-svg-quad-' + i), active = i === focus;
-        quad.style.opacity = full || active ? '1' : '.42';
-        quad.style.filter = active ? 'url(#wf-stage-glow)' : full ? 'url(#wf-subtle-shadow)' : 'none';
-        root.querySelector('#wf-nodes-overlay-' + (i - 1)).style.opacity = active ? '1' : full ? '.55' : '.2';
+        quad.style.opacity = active ? '1' : '.42';
+        quad.style.filter = active ? 'url(#wf-stage-glow)' : 'none';
+        root.querySelector('#wf-nodes-overlay-' + (i - 1)).style.opacity = active ? '1' : '.2';
       }
-      root.querySelector('#wf-svg-central-overpass').style.opacity = full || focus !== 2 ? '1' : '.55';
+      root.querySelector('#wf-svg-central-overpass').style.opacity = focus !== 2 ? '1' : '.55';
       draw();
     }
     function render() {
       root.dataset.stage = String(selected);
-      root.dataset.fullLoop = String(full);
+      root.dataset.autoCycle = String(playing);
       controls.forEach(function (control) {
         var active = Number(control.dataset.flowStage) === selected;
         control.classList.toggle('is-active', active);
@@ -54,10 +54,8 @@
       });
       details.forEach(function (panel, i) { panel.hidden = i + 1 !== selected; });
       text(root.querySelector('[data-flow-status]'), 'flow.' + selected + '.telemetry');
-      text(play, reduced.matches ? 'flow.reduced' : playing ? 'flow.play' : 'flow.pause');
-      play.setAttribute('aria-pressed', String(playing)); play.disabled = reduced.matches;
-      wave.disabled = reduced.matches;
-      mode.setAttribute('aria-pressed', String(full)); text(mode, full ? 'flow.full' : 'flow.spotlight');
+      text(animate, 'flow.animate');
+      animate.disabled = reduced.matches;
       highlight();
     }
     function burst(stage) {
@@ -78,7 +76,7 @@
       var panel = details[stage - 1];
       panel.querySelectorAll('[data-flow-cap]').forEach(function (button, i) { button.setAttribute('aria-pressed', String(i === 0)); });
       panel.querySelectorAll('[data-flow-cap-panel]').forEach(function (note, i) { note.hidden = i !== 0; });
-      // Like the reference, manual selection resets progression without disabling Auto.
+      if (user) playing = false;
       render(); if (user) burst(stage); schedule();
     }
     function draw() {
@@ -89,7 +87,7 @@
       routes.forEach(function (route, j) {
         for (var k = 0; k < 11; k++) {
           var distance = ((phase / 6500 + k / 11) % 1) * route.length;
-          var point = route.path.getPointAtLength(distance), active = full || j + 1 === focus;
+          var point = route.path.getPointAtLength(distance), active = j + 1 === focus;
           ctx.beginPath(); ctx.arc(point.x, point.y, active ? 3.4 : 2.2, 0, Math.PI * 2);
           ctx.fillStyle = active ? '#ffffff' : colors[j]; ctx.globalAlpha = active ? .92 : .28;
           ctx.shadowColor = colors[j]; ctx.shadowBlur = active ? 10 : 0; ctx.fill();
@@ -119,7 +117,7 @@
       burstParticles.forEach(function (p) { p.x += p.vx * delta / 1000; p.y += p.vy * delta / 1000; p.life -= delta; });
       burstParticles = burstParticles.filter(function (p) { return p.life > 0; });
       var focused = document.activeElement.closest && document.activeElement.closest('[data-flow-stage], .workflow-detail');
-      var reading = (focused && root.contains(focused)) || root.querySelector('.workflow-detail:hover');
+      var reading = focused && root.contains(focused);
       if (playing && !preview && !reading) {
         elapsed += delta;
         if (elapsed >= duration) select(selected % 4 + 1, false);
@@ -140,9 +138,21 @@
         else if (control.tagName.toLowerCase() !== 'button' && (event.key === 'Enter' || event.key === ' ')) { event.preventDefault(); select(stage, true); }
       });
     });
-    play.addEventListener('click', function () { playing = !playing; elapsed = 0; last = null; render(); schedule(); });
-    mode.addEventListener('click', function () { full = !full; render(); });
-    wave.addEventListener('click', pulseCycle);
+    function pauseCycle() {
+      playing = false; elapsed = 0;
+      root.dataset.autoCycle = 'false';
+    }
+    // Any stage or workbench activation leaves the chosen stage under user control.
+    root.addEventListener('click', function (event) {
+      if (event.target.closest('[data-flow-stage], .workflow-detail')) pauseCycle();
+    }, true);
+    root.addEventListener('keydown', function (event) {
+      if ((event.key === 'Enter' || event.key === ' ') && event.target.closest('.workflow-detail')) pauseCycle();
+    }, true);
+    animate.addEventListener('click', function () {
+      if (playing || reduced.matches) return;
+      playing = true; elapsed = 0; last = null; render(); schedule();
+    });
     root.querySelectorAll('[data-flow-next]').forEach(function (button) {
       button.hidden = false;
       button.addEventListener('click', function () {
@@ -196,7 +206,7 @@
       if (event.key === 'Enter' || event.key === ' ') { event.preventDefault(); simulate(3); }
     });
     root.querySelectorAll('.workflow-cap-notes').forEach(function (notes) { notes.querySelectorAll('[data-flow-cap-panel]').forEach(function (note, i) { note.hidden = i !== 0; }); });
-    root.querySelector('.workflow-controls').hidden = false;
+    animate.hidden = false;
     root.querySelectorAll('.workflow-blocks button').forEach(function (button) { button.disabled = false; });
     root.classList.add('is-interactive', 'is-outside-view');
     if ('IntersectionObserver' in window) {
