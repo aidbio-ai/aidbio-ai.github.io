@@ -2,4 +2,83 @@
 
 Read [AGENTS.md](AGENTS.md) for the current architecture, user-approved design direction, scientific content rules, and verification commands. Read [portfolio/AGENTS.md](portfolio/AGENTS.md) before changing the restored founder narrative.
 
+<<<<<<< Updated upstream
 The October 2026 redesign supersedes the earlier English-only / no-founder-content instructions. The homepage is EN/PT; the full scientific portfolio is restored. All pages share Auto / Light / Dark behavior and static chrome generation.
+=======
+## What this repo is
+
+`aidbio-ai.github.io` — the public marketing site for AidBio (AI & data science for life sciences and agritech),
+served directly by GitHub Pages. There is no build step, no package manager, and no test suite: every page is a
+single self-contained `.html` file with inline `<style>` and `<script>`.
+
+- `index.html` — main marketing site (nav, hero, sections, footer; theme toggle logic inline in `<head>`).
+- `aidweather.html` — standalone page for the AidWeather project.
+- `assets/` — logomarks, favicon, hero network graphics (WebP/PNG). See table in `README.md` for what each file is.
+- `portfolio/` — a separate, self-contained static site (its own `README.md`, `AGENTS.md`, `index.html`, `pages/`,
+  `assets/`, `docs/`), tracked in git and merged into `main` — part of the deployed site. Treat it as an
+  independent project with its own rules (see below).
+
+## Running locally
+
+No build step required. Serve the directory root and open in a browser:
+
+```bash
+python -m http.server 8000
+```
+
+There is no linter, formatter, or automated test command configured in this repo — verify changes by opening the
+page in a browser (check both light and dark themes, and mobile width ~320px).
+
+## Architecture notes (top-level site)
+
+- **Theme system**: light/dark theme is resolved by an inline IIFE at the top of `<head>` in `index.html`
+  (before CSS loads, to avoid a flash of wrong theme). It reads `localStorage` key `aidbio-theme-preference`
+  (falling back to legacy key `aidbio-theme`), resolves `system` via `prefers-color-scheme`, and sets
+  `data-theme` + `color-scheme` on `<html>`. A later toggle control in the page calls into
+  `window.__aidbioTheme.applyTheme(...)`. If you add new pages, replicate this same inline snippet before any
+  stylesheet/content that depends on theme, not just a CSS media query.
+- **Design system**: visual identity (spectrum infinity logomark, 8-hue synesthetic palette, Newsreader /
+  Hanken Grotesk / IBM Plex Mono typography, Fibonacci spacing, light+dark themes) follows the external
+  `matiollipt/aidbio-design-system` repo — that repo is the source of truth for brand tokens; don't redefine them
+  ad hoc here without checking it.
+- Pages are long, single-file documents (2000+ lines for `index.html`) — sections are organized by HTML comments
+  and id-anchored `<section>` blocks; search for the relevant section heading/id rather than reading top to bottom.
+
+## `portfolio/` subproject
+
+This is a distinct narrative site ("why AidBio exists," told through founder Cleverson Carlos Matiolli's scientific
+trajectory) with its own strict content rules in `portfolio/AGENTS.md`. If you're asked to work inside `portfolio/`,
+read `portfolio/AGENTS.md` in full first — key constraints:
+
+- Narrative must follow: mechanism → regulatory systems → biological networks → data → computational models →
+  reusable scientific software → AidBio. Every included project/paper/visual must map to a step in that chain.
+- Never invent scientific claims, metrics, publications, roles, clients, citations, DOIs, or results. Distinguish
+  measured result vs. interpretation vs. inference vs. current software capability.
+- Numerical metrics must be sourced in `portfolio/docs/evidence-map.md`.
+- Reused paper figures require a documented redistribution licence in `portfolio/docs/figure-rights.md`; otherwise
+  make an original diagram explicitly labelled "Adapted from ...".
+- Must stay deployable as static GitHub Pages (no framework migration without documenting rationale in
+  `portfolio/README.md` and updating it).
+- Mobile width 320px must not overflow; keep semantic HTML and keyboard-accessible controls; JS enhancements must
+  degrade gracefully.
+
+Run locally the same way (`python -m http.server 8000` from inside `portfolio/`).
+
+## Domain, DNS, and email (aidbio.org)
+
+The custom domain `aidbio.org` is registered and DNS-managed on Cloudflare (Cloudflare Registrar + Cloudflare
+DNS), pointed at this repo's GitHub Pages hosting, with Cloudflare Email Routing forwarding `contact@aidbio.org`.
+This repo has no `CNAME` file to touch for that — DNS is managed entirely on Cloudflare's side, not in-repo.
+
+For anything involving DNS records, SPF/DKIM/DMARC, email forwarding rules, or registrar/WHOIS status, use the
+`aidbio-domain` Claude Code skill rather than guessing — it has the current zone setup and known gotchas (e.g.
+the Cloudflare API token in use is read-only; writes must go through the dashboard). Account IDs and other
+infra specifics are intentionally kept out of this public repo; see that skill instead.
+
+If the Cloudflare MCP tools (e.g. `mcp__plugin_cloudflare_cloudflare-api__*`) aren't loaded on a given machine —
+check with `ToolSearch("select:mcp__plugin_cloudflare_cloudflare-api__authenticate")` — install them by fetching
+and following `https://developers.cloudflare.com/agent-setup/prompt.md` (the official Cloudflare setup doc; it
+resolves to `claude plugin marketplace add cloudflare/skills` + `claude plugin install cloudflare@cloudflare` for
+Claude Code). Then run `/reload-plugins` to activate. See [[aidbio-domain]] skill and `~/aidbio/claude/README.md`
+for the read-only-token/OAuth-per-session details once the plugin is loaded.
+>>>>>>> Stashed changes
