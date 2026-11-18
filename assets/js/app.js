@@ -220,4 +220,23 @@
       else btn.textContent = translated('apps.copyfallback', 'Select and copy');
     });
   });
+  // Floating quick actions: hide while the contact section, footer or inline hero buttons are on screen. Without JS the bar stays visible.
+  var floatingCta = document.querySelector('.floating-cta');
+  var coverTargets = Array.prototype.slice.call(document.querySelectorAll('#contact, .footer'));
+  if (floatingCta && coverTargets.length) {
+    var updateFloatingCta = function () {
+      var limit = window.innerHeight - floatingCta.offsetHeight;
+      var covered = coverTargets.some(function (el) { return el.getBoundingClientRect().top < limit; });
+      // On wide screens the inline hero buttons are shown; avoid duplicating them while they are visible.
+      var inline = document.querySelector('.hero-ctas');
+      if (inline && inline.offsetParent !== null) {
+        var box = inline.getBoundingClientRect();
+        if (box.bottom > 0 && box.top < window.innerHeight) covered = true;
+      }
+      floatingCta.classList.toggle('is-hidden', covered);
+    };
+    window.addEventListener('scroll', updateFloatingCta, { passive: true });
+    window.addEventListener('resize', updateFloatingCta);
+    updateFloatingCta();
+  }
 })();
